@@ -1,0 +1,19 @@
+{
+  "latest": {
+    "margin": {
+      "date": null,
+      "ratio": null,
+      "balance": null
+    },
+    "futures": {
+      "date": null,
+      "ratio": null,
+      "foreign_net": null
+    }
+  },
+  "history": {
+    "margin": [],
+    "futures": []
+  },
+  "updated_at": "2025-12-26T16:29:47.096637"
+}

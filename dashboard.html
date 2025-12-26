@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TWSE Monitor - 台股市場脈動監控系統</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #121826;
+            --bg-card: #1a2235;
+            --accent-green: #00ff88;
+            --accent-cyan: #00d9ff;
+            --accent-red: #ff3366;
+            --accent-amber: #ffaa00;
+            --text-primary: #e8edf4;
+            --text-secondary: #7d8ba7;
+            --border-color: #2d3748;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Noto Sans TC', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 136, 0.03) 2px, rgba(0, 255, 136, 0.03) 4px);
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 頂部欄 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-green);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo .tw { color: var(--accent-green); }
+        .logo .se { color: var(--text-primary); }
+        .logo .monitor { color: var(--accent-cyan); font-size: 14px; margin-left: 10px; }
+
+        .status {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .status-label {
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .status-value {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* 主要指標卡片 */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-green);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            opacity: 1;
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metric-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .metric-date {
+            font-size: 11px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .metric-value-container {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .metric-value {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .metric-unit {
+            font-size: 32px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .metric-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: var(--bg-secondary);
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* 圖表區域 */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-title::before {
+            content: '▸';
+            color: var(--accent-cyan);
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        /* 底部資訊 */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .footer-warning {
+            color: var(--accent-amber);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* 閃爍動畫 */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        /* 響應式 */
+        @media (max-width: 768px) {
+            .metrics-grid,
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 56px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* Loading 狀態 */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            font-size: 18px;
+            color: var(--accent-green);
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* 數據解讀指南 */
+        .guide-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .guide-btn:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+        }
+
+        .guide-btn-icon {
+            font-size: 16px;
+        }
+
+        /* 彈出面板 */
+        .guide-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .guide-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .guide-panel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        .guide-panel-content {
+            position: relative;
+            max-width: 1400px;
+            max-height: 90vh;
+            margin: 5vh auto;
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-green);
+            border-radius: 12px;
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .guide-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 32px;
+            background: var(--bg-card);
+            border-bottom: 2px solid var(--accent-green);
+        }
+
+        .guide-panel-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-green);
+            letter-spacing: 2px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .guide-panel-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 32px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .guide-panel-close:hover {
+            background: var(--accent-red);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .guide-panel-body {
+            overflow-y: auto;
+            max-height: calc(90vh - 90px);
+            padding: 32px;
+        }
+
+        .guide-panel-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .guide-panel-body::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        .guide-panel-body::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .guide-grid-popup {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+        }
+
+        .guide-section {
+            margin: 40px 0;
+        }
+
+        .guide-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        .guide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .guide-card:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .guide-highlight {
+            grid-column: 1 / -1;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        .guide-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-icon {
+            font-size: 28px;
+        }
+
+        .guide-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .guide-intro {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .guide-content {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .level-item {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .level-item:hover {
+            transform: translateX(4px);
+        }
+
+        .level-danger {
+            border-left-color: var(--accent-red);
+        }
+
+        .level-warning {
+            border-left-color: var(--accent-amber);
+        }
+
+        .level-safe {
+            border-left-color: var(--accent-green);
+        }
+
+        .level-cold {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .level-info {
+            margin-left: 8px;
+        }
+
+        .level-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .level-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .level-action {
+            color: var(--accent-cyan);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* 提示列表 */
+        .tips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tip-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .tip-warning {
+            background: rgba(255, 170, 0, 0.05);
+            border: 1px solid var(--accent-amber);
+        }
+
+        .tip-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .tip-warning .tip-number {
+            background: var(--accent-amber);
+        }
+
+        .tip-text strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .tip-text p {
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .guide-grid,
+            .guide-grid-popup {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-panel-content {
+                margin: 2vh auto;
+                max-height: 96vh;
+            }
+
+            .guide-panel-body {
+                padding: 20px;
+            }
+
+            .guide-btn-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="tw">TW</span><span class="se">SE</span>
+                <span class="monitor">MARKET MONITOR</span>
+            </div>
+            <div class="status">
+                <button id="guideBtn" class="guide-btn">
+                    <span class="guide-btn-icon">📖</span>
+                    <span class="guide-btn-text">數據解讀</span>
+                </button>
+                <div class="status-item">
+                    <div class="status-label">STATUS</div>
+                    <div class="status-value">
+                        <span class="live-indicator"></span> LIVE
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-label">LAST UPDATE</div>
+                    <div class="status-value" id="lastUpdate">--:--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loadingScreen" class="loading">
+            初始化系統
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" style="display: none;">
+            <!-- Metrics -->
+            <div class="metrics-grid">
+                <!-- 融資使用率 -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">MARGIN UTILIZATION RATIO</div>
+                        <div class="metric-date" id="marginDate">2024/12/25</div>
+                    </div>
+                    <div class="metric-value-container">
+                        <div class="metric-value" id="marginRatio" style="color: var(--accent-green);">24.8</div>
+                        <div class="metric-unit">%</div>
+                    </div>
+                    <div class="metric-details">
+                        <div class="detail-item">
+                            <div class="detail-label">融資餘額</div>
+                            <div class="detail-value" id="marginBalance" style="color: var(--accent-cyan);">3,850億</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">市場狀態</div>
+                            <div class="detail-value" id="marginStatus" style="color: var(--accent-green);">✓ 正常</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 台指期多空比 -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">TX FUTURES LONG/SHORT RATIO</div>
+                        <div class="metric-date" id="futuresDate">2024/12/25</div>
+                    </div>
+                    <div class="metric-value-container">
+                        <div class="metric-value" id="futuresRatio" style="color: var(--accent-cyan);">1.15</div>
+                        <div class="metric-unit">: 1</div>
+                    </div>
+                    <div class="metric-details">
+                        <div class="detail-item">
+                            <div class="detail-label">外資淨部位</div>
+                            <div class="detail-value" id="foreignNet" style="color: var(--accent-green);">+12,500口</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">市場情緒</div>
+                            <div class="detail-value" id="sentiment" style="color: var(--accent-amber);">🟡 平衡</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">融資使用率趨勢 (30日)</div>
+                    <canvas id="marginChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">多空比趨勢 (30日)</div>
+                    <canvas id="futuresChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 數據解讀彈出面板 -->
+        <div id="guidePanel" class="guide-panel">
+            <div class="guide-panel-overlay" id="guidePanelOverlay"></div>
+            <div class="guide-panel-content">
+                <div class="guide-panel-header">
+                    <h2 class="guide-panel-title">📊 數據解讀指南</h2>
+                    <button class="guide-panel-close" id="guidePanelClose">✕</button>
+                </div>
+                
+                <div class="guide-panel-body">
+                    <div class="guide-grid-popup">
+                        <!-- 融資使用率 -->
+                        <div class="guide-card">
+                            <div class="guide-header">
+                                <span class="guide-icon">💰</span>
+                                <h3>融資使用率 Margin Ratio</h3>
+                            </div>
+                            <div class="guide-content">
+                                <p class="guide-intro">反映市場融資槓桿程度，是重要的市場情緒指標</p>
+                                
+                                <div class="level-item level-danger">
+                                    <div class="level-badge">🔴 ≥28%</div>
+                                    <div class="level-info">
+                                        <div class="level-title">高水位警戒</div>
+                                        <div class="level-desc">市場過熱，融資籌碼凌亂，短線回檔風險高</div>
+                                        <div class="level-action">→ 建議: 減碼、獲利了結、提高警覺</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-warning">
+                                    <div class="level-badge">🟠 25-28%</div>
+                                    <div class="level-info">
+                                        <div class="level-title">偏高區域</div>
+                                        <div class="level-desc">融資增溫，需注意是否過熱</div>
+                                        <div class="level-action">→ 建議: 謹慎操作、設好停利</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-safe">
+                                    <div class="level-badge">🟢 20-25%</div>
+                                    <div class="level-info">
+                                        <div class="level-title">正常健康</div>
+                                        <div class="level-desc">市場處於健康狀態，融資槓桿適中</div>
+                                        <div class="level-action">→ 建議: 正常操作、依策略進出</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-cold">
+                                    <div class="level-badge">🔵 <20%</div>
+                                    <div class="level-info">
+                                        <div class="level-title">低水位</div>
+                                        <div class="level-desc">市場冷清，可能接近底部區域</div>
+                                        <div class="level-action">→ 建議: 留意中長線佈局機會</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 台指期多空比 -->
+                        <div class="guide-card">
+                            <div class="guide-header">
+                                <span class="guide-icon">📈</span>
+                                <h3>台指期多空比 L/S Ratio</h3>
+                            </div>
+                            <div class="guide-content">
+                                <p class="guide-intro">三大法人留倉部位比例，反映機構投資人對後市看法</p>
+                                
+                                <div class="level-item level-safe">
+                                    <div class="level-badge">🟢 ≥1.2</div>
+                                    <div class="level-info">
+                                        <div class="level-title">偏多格局</div>
+                                        <div class="level-desc">法人做多意願強，看好後市</div>
+                                        <div class="level-action">→ 建議: 順勢操作、趨勢可能延續</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-warning">
+                                    <div class="level-badge">🟡 0.8-1.2</div>
+                                    <div class="level-info">
+                                        <div class="level-title">多空平衡</div>
+                                        <div class="level-desc">法人多空分歧，方向未明</div>
+                                        <div class="level-action">→ 建議: 等待方向明朗、減少操作</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-danger">
+                                    <div class="level-badge">🔴 <0.8</div>
+                                    <div class="level-info">
+                                        <div class="level-title">偏空格局</div>
+                                        <div class="level-desc">法人做空意願強，看淡後市</div>
+                                        <div class="level-action">→ 建議: 保守操作、注意風險控管</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 外資淨部位 -->
+                        <div class="guide-card">
+                            <div class="guide-header">
+                                <span class="guide-icon">🌍</span>
+                                <h3>外資淨部位 Foreign Net Position</h3>
+                            </div>
+                            <div class="guide-content">
+                                <p class="guide-intro">外資在台指期的多空淨部位，是市場重要風向球</p>
+                                
+                                <div class="level-item level-safe">
+                                    <div class="level-badge">📈 >15,000口</div>
+                                    <div class="level-info">
+                                        <div class="level-title">大幅做多</div>
+                                        <div class="level-desc">外資態度明確看多，趨勢力道強</div>
+                                        <div class="level-action">→ 建議: 順勢操作、留意反轉訊號</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-warning">
+                                    <div class="level-badge">⚖️ -5,000~15,000口</div>
+                                    <div class="level-info">
+                                        <div class="level-title">中性偏多/偏空</div>
+                                        <div class="level-desc">外資態度相對中性</div>
+                                        <div class="level-action">→ 建議: 觀察其他指標綜合判斷</div>
+                                    </div>
+                                </div>
+
+                                <div class="level-item level-danger">
+                                    <div class="level-badge">📉 <-15,000口</div>
+                                    <div class="level-info">
+                                        <div class="level-title">大幅做空</div>
+                                        <div class="level-desc">外資態度明確看空，壓力較大</div>
+                                        <div class="level-action">→ 建議: 謹慎保守、降低持股</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 綜合判斷 -->
+                        <div class="guide-card guide-highlight">
+                            <div class="guide-header">
+                                <span class="guide-icon">🎯</span>
+                                <h3>綜合判斷要點</h3>
+                            </div>
+                            <div class="guide-content">
+                                <div class="tips-list">
+                                    <div class="tip-item">
+                                        <span class="tip-number">1</span>
+                                        <div class="tip-text">
+                                            <strong>多指標交叉驗證</strong>
+                                            <p>單一指標可能誤判，建議融資+多空比+外資部位綜合判斷</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tip-item">
+                                        <span class="tip-number">2</span>
+                                        <div class="tip-text">
+                                            <strong>極端值反轉訊號</strong>
+                                            <p>融資超高+多空比極端值時，往往是反轉的訊號</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tip-item">
+                                        <span class="tip-number">3</span>
+                                        <div class="tip-text">
+                                            <strong>趨勢比絕對值重要</strong>
+                                            <p>關注數值的變化方向，連續上升/下降比單日數值更有參考性</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tip-item">
+                                        <span class="tip-number">4</span>
+                                        <div class="tip-text">
+                                            <strong>搭配技術分析</strong>
+                                            <p>這些是情緒指標，要配合K線、均線、支撐壓力等技術面一起看</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="tip-item tip-warning">
+                                        <span class="tip-number">⚠</span>
+                                        <div class="tip-text">
+                                            <strong>重要提醒</strong>
+                                            <p>本系統提供的是<strong>輔助參考指標</strong>，不是進出場訊號。投資決策需自行判斷，並做好風險控管。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>數據來源: 證券交易所 (TWSE) | 期貨交易所 (TAIFEX)</div>
+            <div class="footer-warning">
+                ⚠ 本系統數據僅供參考，不構成投資建議
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 模擬數據生成
+        function generateMockData() {
+            const today = new Date();
+            const marginHistory = [];
+            const futuresHistory = [];
+            const labels = [];
+
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = `${date.getMonth() + 1}/${date.getDate()}`;
+                labels.push(dateStr);
+
+                marginHistory.push((Math.random() * 4 + 23).toFixed(1));
+                futuresHistory.push((Math.random() * 0.3 + 0.95).toFixed(2));
+            }
+
+            return {
+                labels,
+                margin: {
+                    ratio: marginHistory[marginHistory.length - 1],
+                    balance: (Math.random() * 500 + 3500).toFixed(0),
+                    history: marginHistory
+                },
+                futures: {
+                    ratio: futuresHistory[futuresHistory.length - 1],
+                    foreignNet: Math.floor(Math.random() * 30000 - 10000),
+                    history: futuresHistory
+                }
+            };
+        }
+
+        // 更新數值顏色
+        function getMarginColor(ratio) {
+            const r = parseFloat(ratio);
+            if (r >= 28) return 'var(--accent-red)';
+            if (r >= 25) return 'var(--accent-amber)';
+            if (r >= 20) return 'var(--accent-green)';
+            return 'var(--accent-cyan)';
+        }
+
+        function getRatioColor(ratio) {
+            const r = parseFloat(ratio);
+            if (r >= 1.2) return 'var(--accent-green)';
+            if (r >= 0.8) return 'var(--accent-amber)';
+            return 'var(--accent-red)';
+        }
+
+        function getMarginStatus(ratio) {
+            const r = parseFloat(ratio);
+            if (r >= 28) return '⚠ 高水位';
+            if (r >= 25) return '📊 偏高';
+            if (r >= 20) return '✓ 正常';
+            return '📉 偏低';
+        }
+
+        function getSentiment(ratio) {
+            const r = parseFloat(ratio);
+            if (r >= 1.2) return '🟢 偏多';
+            if (r >= 0.8) return '🟡 平衡';
+            return '🔴 偏空';
+        }
+
+        // 初始化圖表
+        function initCharts(data) {
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(45, 55, 72, 0.3)' },
+                        ticks: { color: '#7d8ba7', font: { size: 10 } }
+                    },
+                    y: {
+                        grid: { color: 'rgba(45, 55, 72, 0.3)' },
+                        ticks: { color: '#7d8ba7', font: { size: 10 } }
+                    }
+                }
+            };
+
+            // 融資圖表
+            new Chart(document.getElementById('marginChart'), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.margin.history,
+                        borderColor: '#00ff88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        ...chartOptions.scales,
+                        y: { ...chartOptions.scales.y, min: 20, max: 30 }
+                    }
+                }
+            });
+
+            // 期貨圖表
+            new Chart(document.getElementById('futuresChart'), {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.futures.history,
+                        borderColor: '#00d9ff',
+                        backgroundColor: 'rgba(0, 217, 255, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    scales: {
+                        ...chartOptions.scales,
+                        y: { ...chartOptions.scales.y, min: 0.8, max: 1.3 }
+                    }
+                }
+            });
+        }
+
+        // 更新介面
+        function updateUI(data) {
+            // 更新融資數據
+            document.getElementById('marginRatio').textContent = data.margin.ratio;
+            document.getElementById('marginRatio').style.color = getMarginColor(data.margin.ratio);
+            document.getElementById('marginBalance').textContent = parseInt(data.margin.balance).toLocaleString() + '億';
+            document.getElementById('marginStatus').textContent = getMarginStatus(data.margin.ratio);
+            document.getElementById('marginStatus').style.color = getMarginColor(data.margin.ratio);
+
+            // 更新期貨數據
+            document.getElementById('futuresRatio').textContent = data.futures.ratio;
+            document.getElementById('futuresRatio').style.color = getRatioColor(data.futures.ratio);
+            const netSign = data.futures.foreignNet >= 0 ? '+' : '';
+            document.getElementById('foreignNet').textContent = netSign + data.futures.foreignNet.toLocaleString() + '口';
+            document.getElementById('foreignNet').style.color = data.futures.foreignNet >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+            document.getElementById('sentiment').textContent = getSentiment(data.futures.ratio);
+            document.getElementById('sentiment').style.color = getRatioColor(data.futures.ratio);
+
+            // 更新時間
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('zh-TW');
+        }
+
+        // 載入數據
+        async function loadData() {
+            try {
+                // 嘗試載入真實數據
+                const response = await fetch('./data/market_data.json');
+                if (response.ok) {
+                    const jsonData = await response.json();
+                    return jsonData;
+                }
+            } catch (error) {
+                console.log('使用模擬數據');
+            }
+            
+            // 使用模擬數據
+            return generateMockData();
+        }
+
+        // 初始化
+        window.addEventListener('load', async () => {
+            setTimeout(async () => {
+                const data = await loadData();
+                
+                updateUI(data);
+                initCharts(data);
+                
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // 彈出面板控制
+                const guideBtn = document.getElementById('guideBtn');
+                const guidePanel = document.getElementById('guidePanel');
+                const guidePanelClose = document.getElementById('guidePanelClose');
+                const guidePanelOverlay = document.getElementById('guidePanelOverlay');
+                
+                guideBtn.addEventListener('click', () => {
+                    guidePanel.classList.add('active');
+                });
+                
+                guidePanelClose.addEventListener('click', () => {
+                    guidePanel.classList.remove('active');
+                });
+                
+                guidePanelOverlay.addEventListener('click', () => {
+                    guidePanel.classList.remove('active');
+                });
+                
+                // ESC 鍵關閉
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && guidePanel.classList.contains('active')) {
+                        guidePanel.classList.remove('active');
+                    }
+                });
+                
+                // 每5分鐘重新載入
+                setInterval(async () => {
+                    const newData = await loadData();
+                    updateUI(newData);
+                }, 5 * 60 * 1000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
