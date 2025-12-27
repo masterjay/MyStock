@@ -10,12 +10,16 @@ from pathlib import Path
 
 from scraper_twse import TWSEScraper
 from scraper_taifex import TAIFEXScraper
+from scraper_us_sentiment import USFearGreedScraper
+from sentiment_tw import TWSentimentCalculator
 
 class DataCollector:
     def __init__(self, db_path='market_data.db'):
         self.db_path = db_path
         self.twse_scraper = TWSEScraper()
         self.taifex_scraper = TAIFEXScraper()
+        self.us_scraper = USFearGreedScraper()
+        self.tw_calculator = TWSentimentCalculator()
         self.init_database()
     
     def init_database(self):
@@ -313,6 +317,22 @@ class DataCollector:
         # 歷史數據
         history = self.get_historical_data(60)  # 60天
         
+        # 計算台股情緒指數
+        tw_sentiment = None
+        if latest['margin'] and latest['futures']:
+            margin_ratio = latest['margin'][4]  # margin_ratio
+            futures_ratio = latest['futures'][5]  # long_short_ratio
+            foreign_net = latest['futures'][6]  # foreign_net
+            
+            tw_sentiment = self.tw_calculator.calculate_sentiment(
+                margin_ratio, 
+                futures_ratio, 
+                foreign_net
+            )
+        
+        # 抓取美股情緒指數
+        us_sentiment = self.us_scraper.fetch_current_index()
+        
         export_data = {
             'latest': {
                 'margin': {
@@ -325,6 +345,10 @@ class DataCollector:
                     'ratio': latest['futures'][5] if latest['futures'] else None,
                     'foreign_net': latest['futures'][6] if latest['futures'] else None,
                 }
+            },
+            'sentiment': {
+                'taiwan': tw_sentiment,
+                'us': us_sentiment
             },
             'history': {
                 'margin': [
@@ -343,6 +367,11 @@ class DataCollector:
             json.dump(export_data, f, ensure_ascii=False, indent=2)
         
         print(f"✓ 數據已導出至 {output_dir}/market_data.json")
+        if tw_sentiment:
+            print(f"  台股情緒: {tw_sentiment['score']} - {tw_sentiment['rating']}")
+        if us_sentiment:
+            print(f"  美股情緒: {us_sentiment['score']} - {us_sentiment['rating']}")
+        
         return export_data
 
 def run_scheduler():
