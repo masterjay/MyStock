@@ -53,22 +53,6 @@
             position: relative;
         }
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), transparent);
-            animation: scanline 3s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
         .logo {
             font-size: 28px;
             font-weight: 800;
@@ -273,6 +257,26 @@
             animation: blink 2s ease-in-out infinite;
         }
 
+        /* 數據來源指示器 */
+        .data-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .data-indicator.real {
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        .data-indicator.mock {
+            background: var(--accent-amber);
+            box-shadow: 0 0 8px var(--accent-amber);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
         /* 響應式 */
         @media (max-width: 768px) {
             .metrics-grid,
@@ -309,6 +313,77 @@
             0%, 20% { content: '.'; }
             40% { content: '..'; }
             60%, 100% { content: '...'; }
+        }
+
+        /* 模擬數據警告 */
+        .mock-warning {
+            background: rgba(255, 170, 0, 0.15);
+            border: 2px solid var(--accent-amber);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mock-warning-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+        }
+
+        .mock-warning-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .mock-warning-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mock-warning-text strong {
+            color: var(--accent-amber);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .mock-warning-text span {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .mock-warning-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .mock-warning-close:hover {
+            background: var(--accent-amber);
+            color: var(--bg-primary);
         }
 
         /* 數據解讀指南 */
@@ -676,6 +751,13 @@
                     <span class="guide-btn-text">數據解讀</span>
                 </button>
                 <div class="status-item">
+                    <div class="status-label">DATA SOURCE</div>
+                    <div class="status-value" id="dataSource">
+                        <span class="data-indicator" id="dataIndicator"></span>
+                        <span id="dataSourceText">--</span>
+                    </div>
+                </div>
+                <div class="status-item">
                     <div class="status-label">STATUS</div>
                     <div class="status-value">
                         <span class="live-indicator"></span> LIVE
@@ -691,6 +773,18 @@
         <!-- Loading -->
         <div id="loadingScreen" class="loading">
             初始化系統
+        </div>
+
+        <!-- 模擬數據警告 -->
+        <div id="mockDataWarning" class="mock-warning" style="display: none;">
+            <div class="mock-warning-content">
+                <span class="mock-warning-icon">⚠️</span>
+                <div class="mock-warning-text">
+                    <strong>目前顯示模擬數據</strong>
+                    <span>請執行後端爬蟲以載入真實市場數據</span>
+                </div>
+                <button class="mock-warning-close" id="mockWarningClose">✕</button>
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -1087,6 +1181,23 @@
 
         // 更新介面
         function updateUI(data) {
+            // 更新數據來源指示器
+            const dataIndicator = document.getElementById('dataIndicator');
+            const dataSourceText = document.getElementById('dataSourceText');
+            const mockWarning = document.getElementById('mockDataWarning');
+            
+            if (data.isRealData) {
+                dataIndicator.className = 'data-indicator real';
+                dataSourceText.textContent = 'REAL DATA';
+                dataSourceText.style.color = 'var(--accent-green)';
+                mockWarning.style.display = 'none';
+            } else {
+                dataIndicator.className = 'data-indicator mock';
+                dataSourceText.textContent = 'MOCK DATA';
+                dataSourceText.style.color = 'var(--accent-amber)';
+                mockWarning.style.display = 'block';
+            }
+            
             // 更新融資數據
             document.getElementById('marginRatio').textContent = data.margin.ratio;
             document.getElementById('marginRatio').style.color = getMarginColor(data.margin.ratio);
@@ -1097,9 +1208,9 @@
             // 更新期貨數據
             document.getElementById('futuresRatio').textContent = data.futures.ratio;
             document.getElementById('futuresRatio').style.color = getRatioColor(data.futures.ratio);
-            const netSign = data.futures.foreignNet >= 0 ? '+' : '';
-            document.getElementById('foreignNet').textContent = netSign + data.futures.foreignNet.toLocaleString() + '口';
-            document.getElementById('foreignNet').style.color = data.futures.foreignNet >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+            const netSign = data.futures.foreign_net >= 0 ? '+' : '';
+            document.getElementById('foreignNet').textContent = netSign + data.futures.foreign_net.toLocaleString() + '口';
+            document.getElementById('foreignNet').style.color = data.futures.foreign_net >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
             document.getElementById('sentiment').textContent = getSentiment(data.futures.ratio);
             document.getElementById('sentiment').style.color = getRatioColor(data.futures.ratio);
 
@@ -1109,19 +1220,36 @@
 
         // 載入數據
         async function loadData() {
+            let isRealData = false;
+            let data = null;
+            
             try {
                 // 嘗試載入真實數據
                 const response = await fetch('./data/market_data.json');
                 if (response.ok) {
                     const jsonData = await response.json();
-                    return jsonData;
+                    // 如果數據有 latest 結構,提取出來
+                    if (jsonData.latest) {
+                        data = jsonData.latest;
+                    } else {
+                        data = jsonData;
+                    }
+                    isRealData = true;
+                    console.log('✓ 載入真實數據');
                 }
             } catch (error) {
                 console.log('使用模擬數據');
             }
             
             // 使用模擬數據
-            return generateMockData();
+            if (!isRealData) {
+                data = generateMockData();
+            }
+            
+            // 標記數據來源
+            data.isRealData = isRealData;
+            
+            return data;
         }
 
         // 初始化
@@ -1134,6 +1262,14 @@
                 
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
+                
+                // 警告橫幅關閉按鈕
+                const mockWarningClose = document.getElementById('mockWarningClose');
+                if (mockWarningClose) {
+                    mockWarningClose.addEventListener('click', () => {
+                        document.getElementById('mockDataWarning').style.display = 'none';
+                    });
+                }
                 
                 // 彈出面板控制
                 const guideBtn = document.getElementById('guideBtn');

@@ -59,11 +59,16 @@ class DataCollector:
         conn.close()
         print("Database initialized successfully")
     
-    def collect_daily_data(self):
-        """收集當日所有數據"""
-        date_str = datetime.now().strftime('%Y%m%d')
+    def collect_daily_data(self, target_date=None):
+        """收集指定日期的數據"""
+        if target_date is None:
+            target_date = self.get_last_trading_day()
+        
+        date_str = target_date.strftime('%Y%m%d')
+        date_slash = target_date.strftime('%Y/%m/%d')
+        
         print(f"\n{'='*50}")
-        print(f"開始收集 {date_str} 的數據")
+        print(f"開始收集 {date_str} ({target_date.strftime('%Y-%m-%d %A')}) 的數據")
         print(f"{'='*50}")
         
         # 1. 收集融資數據
@@ -83,8 +88,6 @@ class DataCollector:
                 print(f"✓ 融資使用率: {margin_result['margin_ratio']}%")
         
         # 2. 收集期貨數據
-        date_slash = datetime.now().strftime('%Y/%m/%d')
-        
         print("\n[3/4] 抓取台指期未平倉...")
         oi_data = self.taifex_scraper.get_futures_oi(date_slash)
         time.sleep(3)
@@ -109,6 +112,86 @@ class DataCollector:
             'margin': margin_result,
             'futures': futures_result
         }
+    
+    def collect_historical_data(self, days=30):
+        """收集過去 N 天的歷史數據"""
+        print(f"\n{'='*60}")
+        print(f"開始收集過去 {days} 天的歷史數據")
+        print(f"{'='*60}\n")
+        
+        success_count = 0
+        fail_count = 0
+        
+        today = datetime.now()
+        
+        for i in range(days):
+            target_date = today - timedelta(days=i)
+            
+            # 跳過週末
+            if not self.is_trading_day(target_date):
+                print(f"跳過 {target_date.strftime('%Y-%m-%d %A')} (週末)")
+                continue
+            
+            # 檢查是否已經有這天的數據
+            date_str = target_date.strftime('%Y%m%d')
+            if self.has_data(date_str):
+                print(f"已有 {date_str} 的數據，跳過")
+                continue
+            
+            try:
+                result = self.collect_daily_data(target_date)
+                if result['margin'] or result['futures']:
+                    success_count += 1
+                    print(f"✓ {date_str} 數據收集成功")
+                else:
+                    fail_count += 1
+                    print(f"✗ {date_str} 數據收集失敗")
+                
+                # 避免請求太頻繁
+                time.sleep(5)
+                
+            except Exception as e:
+                fail_count += 1
+                print(f"✗ {date_str} 發生錯誤: {e}")
+        
+        print(f"\n{'='*60}")
+        print(f"歷史數據收集完成")
+        print(f"成功: {success_count} 天 | 失敗: {fail_count} 天")
+        print(f"{'='*60}\n")
+    
+    def has_data(self, date_str):
+        """檢查是否已有該日期的數據(融資或期貨)"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT COUNT(*) FROM margin_data WHERE date = ?', (date_str,))
+        margin_count = cursor.fetchone()[0]
+        
+        cursor.execute('SELECT COUNT(*) FROM futures_data WHERE date = ?', (date_str,))
+        futures_count = cursor.fetchone()[0]
+        
+        conn.close()
+        
+        # 只要有一個有數據就跳過(避免重複抓取)
+        return margin_count > 0 or futures_count > 0
+    
+    def is_trading_day(self, date):
+        """簡單判斷是否為交易日 (排除週六日)"""
+        return date.weekday() < 5  # 0-4 是週一到週五
+    
+    def get_last_trading_day(self, from_date=None):
+        """取得最近的交易日"""
+        if from_date is None:
+            from_date = datetime.now()
+        
+        current = from_date
+        # 最多往回找 10 天
+        for i in range(10):
+            if self.is_trading_day(current):
+                return current
+            current = current - timedelta(days=1)
+        
+        return from_date  # 如果找不到就回傳原日期
     
     def save_margin_data(self, ratio_data, raw_data):
         """保存融資數據"""
@@ -234,7 +317,7 @@ class DataCollector:
             'latest': {
                 'margin': {
                     'date': latest['margin'][1] if latest['margin'] else None,
-                    'ratio': latest['margin'][3] if latest['margin'] else None,
+                    'ratio': latest['margin'][4] if latest['margin'] else None,  # margin_ratio 在第4欄
                     'balance': latest['margin'][2] if latest['margin'] else None,
                 },
                 'futures': {
@@ -266,12 +349,12 @@ def run_scheduler():
     """定時執行任務"""
     collector = DataCollector()
     
-    # 每天下午3點後執行
-    schedule.every().day.at("15:30").do(collector.collect_daily_data)
-    schedule.every().day.at("15:30").do(collector.export_to_json)
+    # 每天晚上8:30執行 (確保融資數據已公布)
+    schedule.every().day.at("20:30").do(collector.collect_daily_data)
+    schedule.every().day.at("20:30").do(collector.export_to_json)
     
     print("排程已啟動，等待執行...")
-    print("下次執行時間: 每日 15:30")
+    print("下次執行時間: 每日 20:30 (融資數據公布後)")
     
     while True:
         schedule.run_pending()
@@ -280,22 +363,40 @@ def run_scheduler():
 if __name__ == "__main__":
     collector = DataCollector()
     
-    # 立即執行一次
-    print("開始收集數據...")
-    result = collector.collect_daily_data()
+    print("\n台股監控系統 - 數據收集工具")
+    print("="*60)
+    print("選擇執行模式:")
+    print("1. 收集最近交易日的數據 (預設)")
+    print("2. 收集過去 30 天的歷史數據")
+    print("3. 收集過去 60 天的歷史數據")
+    print("4. 啟動定時任務 (每天 20:30 自動執行)")
+    print("="*60)
+    
+    choice = input("請選擇 (直接 Enter 使用選項 1): ").strip()
+    
+    if choice == "2":
+        collector.collect_historical_data(30)
+    elif choice == "3":
+        collector.collect_historical_data(60)
+    elif choice == "4":
+        run_scheduler()
+    else:
+        # 預設: 收集最近交易日
+        result = collector.collect_daily_data()
     
     # 導出 JSON
+    print("\n正在導出數據...")
     collector.export_to_json()
     
     # 顯示最新數據
     print("\n最新數據摘要:")
     print("-" * 50)
-    if result['margin']:
-        print(f"融資使用率: {result['margin']['margin_ratio']}%")
-    if result['futures']:
-        print(f"期貨多空比: {result['futures']['long_short_ratio']}")
-        print(f"外資淨部位: {result['futures']['foreign_net']:,} 口")
+    latest = collector.get_latest_data()
+    if latest['margin']:
+        print(f"融資使用率: {latest['margin'][3]}%")
+    if latest['futures']:
+        print(f"期貨多空比: {latest['futures'][5]}")
+        print(f"外資淨部位: {latest['futures'][6]:,} 口")
     
-    # 詢問是否啟動定時任務
-    print("\n是否要啟動定時任務? (y/n)")
-    # run_scheduler()  # 取消註解以啟動
+    print("\n✓ 完成! 可以開啟網站查看數據")
+
