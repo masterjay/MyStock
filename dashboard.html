@@ -1224,18 +1224,21 @@
             let data = null;
             
             try {
-                // 嘗試載入真實數據
-                const response = await fetch('./data/market_data.json');
+                // 加入時間戳防止快取
+                const timestamp = new Date().getTime();
+                const response = await fetch(`./data/market_data.json?t=${timestamp}`);
                 if (response.ok) {
                     const jsonData = await response.json();
                     // 如果數據有 latest 結構,提取出來
                     if (jsonData.latest) {
                         data = jsonData.latest;
+                        data.sentiment = jsonData.sentiment; // 保留情緒數據
+                        data.history = jsonData.history; // 保留歷史數據
                     } else {
                         data = jsonData;
                     }
                     isRealData = true;
-                    console.log('✓ 載入真實數據');
+                    console.log('✓ 載入真實數據', data);
                 }
             } catch (error) {
                 console.log('使用模擬數據');

@@ -211,7 +211,7 @@ class DataCollector:
             ''', (
                 ratio_data['date'],
                 ratio_data['margin_balance_billion'],
-                ratio_data['market_value_billion'],
+                ratio_data.get('margin_limit_billion', ratio_data.get('market_value_billion', 6000)),  # 相容新舊欄位名
                 ratio_data['margin_ratio'],
                 float(raw_data['margin_purchase']) / 1000,
                 float(raw_data['margin_sale']) / 1000,
