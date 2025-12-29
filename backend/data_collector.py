@@ -12,6 +12,7 @@ from scraper_twse import TWSEScraper
 from scraper_taifex import TAIFEXScraper
 from scraper_us_sentiment import USFearGreedScraper
 from sentiment_tw import TWSentimentCalculator
+from calculator_retail import RetailInvestorCalculator
 
 class DataCollector:
     def __init__(self, db_path='market_data.db'):
@@ -20,6 +21,7 @@ class DataCollector:
         self.taifex_scraper = TAIFEXScraper()
         self.us_scraper = USFearGreedScraper()
         self.tw_calculator = TWSentimentCalculator()
+        self.retail_calculator = RetailInvestorCalculator()
         self.init_database()
     
     def init_database(self):
@@ -54,6 +56,10 @@ class DataCollector:
                 foreign_net INTEGER,
                 trust_net INTEGER,
                 dealer_net INTEGER,
+                retail_long INTEGER,
+                retail_short INTEGER,
+                retail_net INTEGER,
+                retail_ratio REAL,
                 timestamp TEXT,
                 UNIQUE(date)
             )
@@ -104,6 +110,28 @@ class DataCollector:
             futures_result = self.taifex_scraper.calculate_long_short_ratio(positions_data)
             if futures_result and oi_data:
                 futures_result['open_interest'] = int(oi_data['open_interest'])
+                
+                # 計算散戶多空比
+                if 'total_long' in positions_data and 'total_short' in positions_data:
+                    retail_data = self.retail_calculator.calculate_retail_positions({
+                        'total_long': positions_data['total_long'],
+                        'total_short': positions_data['total_short'],
+                        'foreign_long': positions_data['foreign']['long'],
+                        'foreign_short': positions_data['foreign']['short'],
+                        'trust_long': positions_data['trusts']['long'],
+                        'trust_short': positions_data['trusts']['short'],
+                        'dealer_long': positions_data['dealers']['long'],
+                        'dealer_short': positions_data['dealers']['short']
+                    })
+                    
+                    # 加入散戶數據
+                    futures_result['retail_long'] = retail_data['retail_long']
+                    futures_result['retail_short'] = retail_data['retail_short']
+                    futures_result['retail_net'] = retail_data['retail_net']
+                    futures_result['retail_ratio'] = retail_data['retail_ratio']
+                    
+                    print(f"✓ 散戶多空比: {retail_data['retail_ratio']}")
+                
                 self.save_futures_data(futures_result)
                 print(f"✓ 多空比: {futures_result['long_short_ratio']}")
                 print(f"✓ 外資淨部位: {futures_result['foreign_net']:,} 口")
@@ -225,7 +253,7 @@ class DataCollector:
             conn.close()
     
     def save_futures_data(self, data):
-        """保存期貨數據"""
+        """保存期貨數據(含散戶)"""
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
         
@@ -233,8 +261,9 @@ class DataCollector:
             cursor.execute('''
                 INSERT OR REPLACE INTO futures_data 
                 (date, open_interest, total_long, total_short, long_short_ratio,
-                 foreign_net, trust_net, dealer_net, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 foreign_net, trust_net, dealer_net, 
+                 retail_long, retail_short, retail_net, retail_ratio, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 data['date'].replace('/', ''),
                 data['open_interest'],
@@ -244,6 +273,10 @@ class DataCollector:
                 data['foreign_net'],
                 data['trust_net'],
                 data['dealer_net'],
+                data.get('retail_long', 0),
+                data.get('retail_short', 0),
+                data.get('retail_net', 0),
+                data.get('retail_ratio', 0),
                 data['timestamp']
             ))
             conn.commit()
@@ -344,6 +377,10 @@ class DataCollector:
                     'date': latest['futures'][1] if latest['futures'] else None,
                     'ratio': latest['futures'][5] if latest['futures'] else None,
                     'foreign_net': latest['futures'][6] if latest['futures'] else None,
+                    'retail_long': latest['futures'][10] if latest['futures'] and len(latest['futures']) > 10 else None,
+                    'retail_short': latest['futures'][11] if latest['futures'] and len(latest['futures']) > 11 else None,
+                    'retail_net': latest['futures'][12] if latest['futures'] and len(latest['futures']) > 12 else None,
+                    'retail_ratio': latest['futures'][13] if latest['futures'] and len(latest['futures']) > 13 else None,
                 }
             },
             'sentiment': {

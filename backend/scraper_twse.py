@@ -66,7 +66,12 @@ class TWSEScraper:
     
     def get_market_value(self, date=None):
         """
-        獲取市值資料用於計算融資使用率
+        獲取融資限額資料用於計算融資使用率
+        
+        註: 融資使用率 = 融資餘額 / 融資限額
+        不是 融資餘額 / 市值
+        
+        台股融資限額約為 6,000億 (會隨著市場調整)
         """
         if date is None:
             date = datetime.now().strftime('%Y%m%d')
@@ -83,18 +88,13 @@ class TWSEScraper:
             data = response.json()
             
             if data.get('stat') == 'OK':
-                # 從 tables 中找大盤統計資訊
-                # 需要計算市值: 用成交金額當作市值的替代指標
-                # 或者我們直接用融資餘額除以一個固定的比例(如0.25)來估算
-                
-                # 暫時先回傳一個估算值
-                # 正確的市值需要從其他API獲取
-                # 根據台股平均市值約 60兆,融資餘額約 3.3兆
-                # 市值 ≈ 融資餘額 / 0.055 (約5.5%)
+                # 融資限額約為市值的 10% 左右
+                # 台股市值約 60兆,融資限額約 6,000億
+                # 這裡使用固定值,實際應從證交所取得最新限額
                 
                 return {
                     'date': date,
-                    'market_value': '600000',  # 暫定 60兆(億) = 600,000億
+                    'margin_limit': '6000',  # 融資限額 6,000億 (實際值應從API取得)
                     'timestamp': datetime.now().isoformat()
                 }
             
@@ -102,12 +102,19 @@ class TWSEScraper:
             return None
             
         except Exception as e:
-            print(f"Error fetching market value: {e}")
+            print(f"Error fetching margin limit: {e}")
             return None
     
     def calculate_margin_ratio(self, margin_data, market_data):
         """
         計算融資使用率
+        
+        融資使用率 = (融資餘額 / 融資限額) × 100%
+        
+        範例:
+        - 融資餘額: 3,400億
+        - 融資限額: 6,000億
+        - 使用率: 56.67%
         """
         try:
             # margin_balance 可能已經是億或仟元,需要判斷
@@ -118,17 +125,18 @@ class TWSEScraper:
             if margin_balance > 1000000:
                 margin_balance = margin_balance / 100000  # 仟元轉億
             
-            market_value = float(market_data.get('market_value', '0'))
+            # 使用融資限額而非市值
+            margin_limit = float(market_data.get('margin_limit', '6000'))
             
-            if market_value == 0:
+            if margin_limit == 0:
                 return None
             
-            ratio = (margin_balance / market_value) * 100
+            ratio = (margin_balance / margin_limit) * 100
             
             return {
                 'date': margin_data['date'],
                 'margin_balance_billion': round(margin_balance, 2),
-                'market_value_billion': round(market_value, 2),
+                'margin_limit_billion': round(margin_limit, 2),
                 'margin_ratio': round(ratio, 2),
                 'timestamp': datetime.now().isoformat()
             }
@@ -146,7 +154,7 @@ if __name__ == "__main__":
     
     time.sleep(3)  # 避免請求太快
     
-    print("\n正在抓取市值數據...")
+    print("\n正在抓取融資限額...")
     market = scraper.get_market_value()
     print(json.dumps(market, indent=2, ensure_ascii=False))
     
@@ -154,3 +162,7 @@ if __name__ == "__main__":
         print("\n計算融資使用率...")
         ratio = scraper.calculate_margin_ratio(margin, market)
         print(json.dumps(ratio, indent=2, ensure_ascii=False))
+        
+        print(f"\n融資餘額: {ratio['margin_balance_billion']}億")
+        print(f"融資限額: {ratio['margin_limit_billion']}億")
+        print(f"使用率: {ratio['margin_ratio']}%")

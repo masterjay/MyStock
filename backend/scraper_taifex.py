@@ -156,6 +156,27 @@ class TAIFEXScraper:
                 print("未找到有效的期貨數據")
                 return None
             
+            # 計算總多空口數 (法人 + 散戶)
+            # 注意: 這裡我們需要從期交所的「所有交易人」數據取得總口數
+            # 暫時先估算: 散戶約佔 30-40% 的市場
+            # 總口數 ≈ 法人口數 / 0.65 (假設法人佔65%)
+            institutional_long = (positions['foreign']['long'] + 
+                                 positions['dealers']['long'] + 
+                                 positions['trusts']['long'])
+            institutional_short = (positions['foreign']['short'] + 
+                                  positions['dealers']['short'] + 
+                                  positions['trusts']['short'])
+            
+            # 估算總口數 (實際應從API取得)
+            # 根據經驗,法人通常佔 60-70% 的未平倉量
+            estimated_total_long = int(institutional_long / 0.65)
+            estimated_total_short = int(institutional_short / 0.65)
+            
+            positions['total_long'] = estimated_total_long
+            positions['total_short'] = estimated_total_short
+            positions['institutional_long'] = institutional_long
+            positions['institutional_short'] = institutional_short
+            
             return positions
             
         except Exception as e:

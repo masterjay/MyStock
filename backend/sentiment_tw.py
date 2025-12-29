@@ -79,14 +79,14 @@ class TWSentimentCalculator:
         # 輸入的 ratio 已經是百分比小數形式 (例如 0.57 代表 0.57%)
         # 需要轉換成真正的百分比數值
         ratio_percent = ratio * 100
-
+        
         # 融資使用率越高 = 越貪婪
         # 40% 以下 = 極度恐慌 (0-25)
         # 40-50% = 恐慌 (25-45)
         # 50-55% = 中性 (45-55)
         # 55-60% = 貪婪 (55-75)
         # 60% 以上 = 極度貪婪 (75-100)
-
+        
         if ratio_percent < 40:
             return ratio_percent / 40 * 25
         elif ratio_percent < 50:
