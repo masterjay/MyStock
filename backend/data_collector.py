@@ -10,9 +10,14 @@ from pathlib import Path
 
 from scraper_twse import TWSEScraper
 from scraper_taifex import TAIFEXScraper
+from scraper_options import OptionsScraper
 from scraper_us_sentiment import USFearGreedScraper
 from sentiment_tw import TWSentimentCalculator
 from calculator_retail import RetailInvestorCalculator
+
+from turnover_collector import collect_turnover_data
+from turnover_analyzer import analyze_and_export
+from commodities_collector import collect_all_commodities
 
 class DataCollector:
     def __init__(self, db_path='market_data.db'):
@@ -22,6 +27,7 @@ class DataCollector:
         self.us_scraper = USFearGreedScraper()
         self.tw_calculator = TWSentimentCalculator()
         self.retail_calculator = RetailInvestorCalculator()
+        self.options_scraper = OptionsScraper()
         self.init_database()
     
     def init_database(self):
@@ -132,6 +138,18 @@ class DataCollector:
                     
                     print(f"✓ 散戶多空比: {retail_data['retail_ratio']}")
                 
+
+                # [5/5] 抓取選擇權 PCR
+                print('[5/5] 抓取選擇權 PCR...')
+                options_data = self.options_scraper.get_put_call_ratio(target_date)
+                if options_data:
+                    pcr_volume = options_data['pcr_volume']
+                    futures_result['pcr_volume'] = pcr_volume
+                    print(f'✓ PCR: {pcr_volume:.2f}')
+                else:
+                    futures_result['pcr_volume'] = None
+                    print('✗ 無法取得 PCR 數據')
+
                 self.save_futures_data(futures_result)
                 print(f"✓ 多空比: {futures_result['long_short_ratio']}")
                 print(f"✓ 外資淨部位: {futures_result['foreign_net']:,} 口")
@@ -139,6 +157,23 @@ class DataCollector:
         print(f"\n{'='*50}")
         print(f"數據收集完成: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"{'='*50}\n")
+        
+        # 收集周轉率數據
+        print("\n[6/7] 收集周轉率數據...")
+        try:
+            collect_turnover_data()
+            analyze_and_export()
+            print("✓ 周轉率數據收集完成")
+        except Exception as e:
+            print(f"✗ 周轉率收集失敗: {e}")
+        
+        # 收集商品期貨數據
+        print("\n[7/7] 收集商品期貨數據...")
+        try:
+            collect_all_commodities()
+            print("✓ 商品期貨數據收集完成")
+        except Exception as e:
+            print(f"✗ 商品期貨收集失敗: {e}")
         
         return {
             'margin': margin_result,
@@ -262,8 +297,8 @@ class DataCollector:
                 INSERT OR REPLACE INTO futures_data 
                 (date, open_interest, total_long, total_short, long_short_ratio,
                  foreign_net, trust_net, dealer_net, 
-                 retail_long, retail_short, retail_net, retail_ratio, timestamp)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 retail_long, retail_short, retail_net, retail_ratio, pcr_volume, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 data['date'].replace('/', ''),
                 data['open_interest'],
@@ -277,6 +312,7 @@ class DataCollector:
                 data.get('retail_short', 0),
                 data.get('retail_net', 0),
                 data.get('retail_ratio', 0),
+                data.get('pcr_volume', None),
                 data['timestamp']
             ))
             conn.commit()
@@ -356,11 +392,13 @@ class DataCollector:
             margin_ratio = latest['margin'][4]  # margin_ratio
             futures_ratio = latest['futures'][5]  # long_short_ratio
             foreign_net = latest['futures'][6]  # foreign_net
+            pcr_volume = latest['futures'][14] if len(latest['futures']) > 14 else None  # pcr_volume
             
             tw_sentiment = self.tw_calculator.calculate_sentiment(
                 margin_ratio, 
                 futures_ratio, 
-                foreign_net
+                foreign_net,
+                pcr_volume=pcr_volume
             )
         
         # 抓取美股情緒指數
@@ -377,10 +415,13 @@ class DataCollector:
                     'date': latest['futures'][1] if latest['futures'] else None,
                     'ratio': latest['futures'][5] if latest['futures'] else None,
                     'foreign_net': latest['futures'][6] if latest['futures'] else None,
+                    'trust_net': latest['futures'][7] if latest['futures'] and len(latest['futures']) > 7 else None,
+                    'dealer_net': latest['futures'][8] if latest['futures'] and len(latest['futures']) > 8 else None,
                     'retail_long': latest['futures'][10] if latest['futures'] and len(latest['futures']) > 10 else None,
                     'retail_short': latest['futures'][11] if latest['futures'] and len(latest['futures']) > 11 else None,
                     'retail_net': latest['futures'][12] if latest['futures'] and len(latest['futures']) > 12 else None,
                     'retail_ratio': latest['futures'][13] if latest['futures'] and len(latest['futures']) > 13 else None,
+                    'pcr_volume': latest['futures'][14] if latest['futures'] and len(latest['futures']) > 14 else None,
                 }
             },
             'sentiment': {

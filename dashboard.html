@@ -904,6 +904,8 @@
                         </div>
                     </div>
                 </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -1213,8 +1215,554 @@
         font-size: 20px;
     }
 }
+
+/* 雙情緒圓環 */
+.dual-gauge-section { margin-bottom: 40px; }
+.dual-gauge-header { text-align: center; margin-bottom: 30px; }
+.dual-gauge-header h2 {
+    font-size: 28px; font-weight: 800; margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.dual-gauge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.gauge-card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 16px; padding: 30px; position: relative; overflow: hidden;
+}
+.gauge-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.gauge-card.taiwan::before { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green)); }
+.gauge-card.usa::before { background: linear-gradient(90deg, #ea384d, #16c784); }
+.gauge-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.gauge-flag { font-size: 32px; }
+.gauge-card-title h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.gauge-card-title p { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+.fear-greed-gauge { position: relative; width: 100%; max-width: 280px; height: 200px; margin: 20px auto; }
+.gauge-arc { position: relative; width: 100%; height: 140px; overflow: hidden; }
+.gauge-background {
+    width: 280px; height: 140px; border-radius: 280px 280px 0 0;
+    background: linear-gradient(90deg, #ea384d 0%, #f5991c 20%, #ffd54f 40%, #93d258 60%, #16c784 100%);
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+}
+.gauge-inner {
+    width: 220px; height: 110px; border-radius: 220px 220px 0 0;
+    background: #161b22; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+}
+.gauge-needle {
+    width: 4px;
+    height: 22px;
+    background: #fff;
+    position: absolute;
+    bottom: 114px;
+    left: 50%;
+    margin-left: -2px;
+    transform-origin: 50% 114px;
+    transform: rotate(-90deg);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    z-index: 15;
+}
+.gauge-needle::after { content: ''; }
+.gauge-center-dot { display: none; }
+.gauge-labels {
+    position: absolute; width: 100%; bottom: 10px; display: flex; justify-content: space-between;
+    padding: 0 10px; font-size: 10px; color: var(--text-secondary);
+    text-transform: uppercase; font-weight: 600; letter-spacing: 1px;
+}
+.gauge-value { position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); text-align: center; }
+.gauge-score-large { font-size: 42px; font-weight: 900; line-height: 1; color: var(--text-primary); }
+.gauge-rating { font-size: 13px; font-weight: 700; text-transform: uppercase; margin-top: 4px; letter-spacing: 2px; }
+.tw-rating-extreme-pessimistic { color: #ea384d; }
+.tw-rating-pessimistic { color: #f5991c; }
+.tw-rating-neutral { color: #ffd54f; }
+.tw-rating-optimistic { color: #93d258; }
+.tw-rating-extreme-optimistic { color: #16c784; }
+.us-rating-extreme-fear { color: #ea384d; }
+.us-rating-fear { color: #f5991c; }
+.us-rating-neutral { color: #ffd54f; }
+.us-rating-greed { color: #93d258; }
+.us-rating-extreme-greed { color: #16c784; }
+.gauge-history { margin-top: 20px; padding: 15px; background: var(--bg-secondary); border-radius: 8px; }
+.gauge-history-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border-color);
+}
+.gauge-history-item:last-child { border-bottom: none; }
+.gauge-history-label { font-size: 12px; color: var(--text-secondary); }
+.gauge-history-value { display: flex; align-items: center; gap: 8px; }
+.gauge-history-score { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; }
+.gauge-history-badge {
+    padding: 2px 8px; border-radius: 4px; font-size: 10px;
+    font-weight: 700; text-transform: uppercase;
+}
+.badge-extreme-fear { background: rgba(234, 56, 77, 0.2); color: #ea384d; }
+.badge-fear { background: rgba(245, 153, 28, 0.2); color: #f5991c; }
+.badge-neutral { background: rgba(255, 213, 79, 0.2); color: #ffd54f; }
+.badge-greed { background: rgba(147, 210, 88, 0.2); color: #93d258; }
+.badge-extreme-greed { background: rgba(22, 199, 132, 0.2); color: #16c784; }
+@media (max-width: 1024px) { .dual-gauge-grid { grid-template-columns: 1fr; gap: 30px; } }
+
+
+/* ==================== 周轉率過熱監控 ==================== */
+.turnover-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.turnover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.turnover-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.turnover-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.turnover-stat-item {
+    text-align: center;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.turnover-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 5px;
+}
+
+.turnover-stat-value {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.stat-danger { color: #ff4757; }
+.stat-severe { color: #ff6348; }
+.stat-warning { color: #ffa502; }
+.stat-normal { color: #1dd1a1; }
+
+.turnover-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.turnover-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+}
+
+.turnover-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card-extreme-danger { border-color: #ff0000; }
+.card-severe { border-color: #ff4757; }
+.card-overheat { border-color: #ff6348; }
+.card-warning { border-color: #ffa502; }
+.card-new { border-color: #48dbfb; }
+
+.turnover-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.turnover-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.turnover-card-count {
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+}
+
+.turnover-stocks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.turnover-stock-item {
+    background: rgba(0,0,0,0.2);
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stock-code {
+    font-size: 14px;
+    font-weight: 700;
+    color: #48dbfb;
+    min-width: 60px;
+}
+
+.stock-name {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    min-width: 80px;
+}
+
+.stock-industry {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    padding: 2px 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+}
+
+.stock-metrics {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.stock-turnover {
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 70px;
+    text-align: right;
+}
+
+.turnover-danger { color: #ff4757; }
+.turnover-warning { color: #ffa502; }
+
+.stock-days {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.industry-analysis {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+}
+
+.industry-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.industry-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.industry-tag {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.industry-tag-hot {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%);
+    color: #fff;
+    font-weight: 600;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255,255,255,0.5);
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .turnover-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .turnover-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .turnover-stats {
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+
+
+    
+    .turnover-stats {
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+
+
+/* ==================== 商品期貨走勢 ==================== */
+.commodities-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.commodities-main-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.commodities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.commodity-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 3px solid;
+    margin-bottom: 20px;
+}
+
+.commodity-card.copper {
+    border-color: #ff9f43;
+}
+
+.commodity-card.gold {
+    border-color: #ffd700;
+}
+
+.commodity-card.oil {
+    border-color: #2d3436;
+}
+
+
+.commodity-card.steel {
+    border-color: #7f8c8d;
+}
+
+.commodity-title.steel { color: #95a5a6; }
+.commodity-header {
+    margin-bottom: 15px;
+}
+
+.commodity-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.commodity-title.copper { color: #ff9f43; }
+.commodity-title.gold { color: #ffd700; }
+.commodity-title.oil { color: #95a5a6; }
+
+.commodity-unit {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+}
+
+.commodity-price-info {
+    margin: 15px 0;
+}
+
+.commodity-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.commodity-change {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.commodity-change.positive {
+    background: rgba(29, 209, 161, 0.2);
+    color: #1dd1a1;
+}
+
+.commodity-change.negative {
+    background: rgba(255, 71, 87, 0.2);
+    color: #ff4757;
+}
+
+.commodity-chart {
+    height: 340px;
+    margin-top: 15px;
+}
+
+@media (max-width: 1200px) {
+    .commodities-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .commodity-chart {
+        height: 250px;
+    }
+}
+
 </style>
 
+
+        <!-- 市場情緒指標 -->
+        <div class="dual-gauge-section">
+            <div class="dual-gauge-header">
+                <h2>市場情緒指標</h2>
+            </div>
+            <div class="dual-gauge-grid">
+                <div class="gauge-card taiwan">
+                    <div class="gauge-card-header">
+                        <div class="gauge-flag">🇹🇼</div>
+                        <div class="gauge-card-title">
+                            <h3>台股情緒指數</h3>
+                            <p>Taiwan Sentiment Index</p>
+                        </div>
+                    </div>
+                    <div class="fear-greed-gauge">
+                        <div class="gauge-arc">
+                            <div class="gauge-background"></div>
+                            <div class="gauge-inner"></div>
+                            <div id="tw-gauge-needle" class="gauge-needle"></div>
+                            <div class="gauge-center-dot"></div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span>悲觀</span>
+                            <span>中性</span>
+                            <span>樂觀</span>
+                        </div>
+                        <div class="gauge-value">
+                            <div id="tw-gauge-score" class="gauge-score-large">--</div>
+                            <div id="tw-gauge-rating" class="gauge-rating">載入中...</div>
+                        </div>
+                    </div>
+                    <div class="gauge-history">
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">融資使用率</span>
+                            <div class="gauge-history-value">
+                                <span id="tw-margin-component" class="gauge-history-score">--</span>
+                            </div>
+                        </div>
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">期貨多空比</span>
+                            <div class="gauge-history-value">
+                                <span id="tw-futures-component" class="gauge-history-score">--</span>
+                            </div>
+                        </div>
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">外資淨部位</span>
+                            <div class="gauge-history-value">
+                                <span id="tw-foreign-component" class="gauge-history-score">--</span>
+                            </div>
+                        </div>
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">Put/Call Ratio</span>
+                            <div class="gauge-history-value">
+                                <span id="tw-pcr-value" class="gauge-history-score">--</span>
+                                <span id="tw-pcr-badge" class="gauge-history-badge">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gauge-card usa">
+                    <div class="gauge-card-header">
+                        <div class="gauge-flag">🇺🇸</div>
+                        <div class="gauge-card-title">
+                            <h3>美股恐慌貪婪指數</h3>
+                            <p>Fear & Greed Index</p>
+                        </div>
+                    </div>
+                    <div class="fear-greed-gauge">
+                        <div class="gauge-arc">
+                            <div class="gauge-background"></div>
+                            <div class="gauge-inner"></div>
+                            <div id="us-gauge-needle" class="gauge-needle"></div>
+                            <div class="gauge-center-dot"></div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span>FEAR</span>
+                            <span>NEUTRAL</span>
+                            <span>GREED</span>
+                        </div>
+                        <div class="gauge-value">
+                            <div id="us-gauge-score" class="gauge-score-large">--</div>
+                            <div id="us-gauge-rating" class="gauge-rating">Loading...</div>
+                        </div>
+                    </div>
+                    <div class="gauge-history">
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">Previous Close</span>
+                            <div class="gauge-history-value">
+                                <span id="us-prev-score" class="gauge-history-score">--</span>
+                                <span id="us-prev-badge" class="gauge-history-badge">--</span>
+                            </div>
+                        </div>
+                        <div class="gauge-history-item">
+                            <span class="gauge-history-label">Source</span>
+                            <div class="gauge-history-value">
+                                <span class="gauge-history-score" style="font-size: 11px;">CNN Business</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 <div class="metrics-grid">
                 <!-- 融資使用率 -->
@@ -1466,14 +2014,16 @@
 
         <!-- Footer -->
         <div class="footer">
-            <div>數據來源: 證券交易所 (TWSE) | 期貨交易所 (TAIFEX)</div>
+            <div></div>
             <div class="footer-warning">
-                ⚠ 本系統數據僅供參考，不構成投資建議
+                
+
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- v20260114230020 -->
     <script>
         // 模擬數據生成
         function generateMockData() {
@@ -1539,7 +2089,132 @@
         }
 
         // 初始化圖表
-        function initCharts(data) {
+        
+        // 載入周轉率數據
+        async function loadTurnoverData() {
+            try {
+                const response = await fetch('./data/turnover_analysis.json?t=' + new Date().getTime());
+                if (!response.ok) {
+                    console.log('周轉率數據尚未生成');
+                    return null;
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('載入周轉率數據失敗:', error);
+                return null;
+            }
+        }
+
+        // 更新周轉率監控區塊
+        function updateTurnoverMonitor(turnoverData) {
+            if (!turnoverData || !turnoverData.overheat_stocks) {
+                console.log('無周轉率數據');
+                return;
+            }
+
+            const stocks = turnoverData.overheat_stocks;
+            const stats = turnoverData.statistics;
+
+            // 更新統計數字
+            document.getElementById('stat-extreme').textContent = stocks.extreme_danger.length;
+            document.getElementById('stat-severe').textContent = stocks.severe.length;
+            document.getElementById('stat-warning').textContent = stocks.warning.length + stocks.overheat.length;
+            document.getElementById('stat-normal').textContent = stats.active + stats.normal;
+
+            // 更新各卡片
+            updateTurnoverCard('extreme', stocks.extreme_danger);
+            updateTurnoverCard('severe', stocks.severe);
+            updateTurnoverCard('overheat', stocks.overheat);
+            updateTurnoverCard('warning', stocks.warning);
+            updateTurnoverCard('new', stocks.new);
+            
+            // 更新活躍股和正常股
+            updateAllStocksCards(turnoverData);
+
+            // 更新產業分析
+            updateIndustryAnalysis(turnoverData.industry_stats);
+        }
+
+        // 更新單一卡片
+        function updateTurnoverCard(type, stockList) {
+            const card = document.getElementById(`card-${type}`);
+            const count = document.getElementById(`count-${type}`);
+            const list = document.getElementById(`list-${type}`);
+
+            if (stockList.length === 0) {
+                card.style.display = 'none';
+                return;
+            }
+
+            card.style.display = 'block';
+            count.textContent = stockList.length;
+            list.innerHTML = '';
+
+            stockList.forEach(stock => {
+                const item = document.createElement('div');
+                item.className = 'turnover-stock-item';
+                
+                const turnoverClass = stock.turnover_rate >= 20 ? 'turnover-danger' : 'turnover-warning';
+                
+                item.innerHTML = `
+                    <div class="stock-info">
+                        <span class="stock-code">${stock.code}</span>
+                        <span class="stock-name">${stock.name}</span>
+                        <span class="stock-industry">${stock.industry}</span>
+                    </div>
+                    <div class="stock-metrics">
+                        <span class="stock-turnover ${turnoverClass}">${stock.turnover_rate.toFixed(2)}%</span>
+                        <span class="stock-days">連續${stock.consecutive_days}天</span>
+                    </div>
+                `;
+                
+                list.appendChild(item);
+            });
+        }
+
+        // 更新產業分析
+        function updateIndustryAnalysis(industryStats) {
+            const container = document.getElementById('industry-list');
+            
+            if (!industryStats || industryStats.length === 0) {
+                container.innerHTML = '<div class="empty-state">暫無過熱產業</div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            
+            industryStats.forEach((stat, index) => {
+                const tag = document.createElement('div');
+                tag.className = index < 3 ? 'industry-tag industry-tag-hot' : 'industry-tag';
+                tag.innerHTML = `
+                    <span>${stat.industry}</span>
+                    <span style="font-weight: 700;">${stat.count}檔</span>
+                `;
+                container.appendChild(tag);
+            });
+        }
+
+        function initCharts(historyData) {
+            if (!historyData || !historyData.margin || !historyData.futures) {
+                console.warn('No history data for charts');
+                return;
+            }
+            
+            // 準備融資圖表數據
+            const marginLabels = historyData.margin.map(d => {
+                const str = d.date;
+                return str.slice(4,6) + '/' + str.slice(6,8);
+            }).reverse();
+            const marginValues = historyData.margin.map(d => d.ratio).reverse();
+            
+            // 準備期貨圖表數據
+            const futuresLabels = historyData.futures.map(d => {
+                const str = d.date;
+                return str.slice(4,6) + '/' + str.slice(6,8);
+            }).reverse();
+            const futuresValues = historyData.futures.map(d => d.ratio).reverse();
+            
             const chartOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -1562,9 +2237,9 @@
             new Chart(document.getElementById('marginChart'), {
                 type: 'line',
                 data: {
-                    labels: data.labels,
+                    labels: marginLabels,
                     datasets: [{
-                        data: data.margin.history,
+                        data: marginValues,
                         borderColor: '#00ff88',
                         backgroundColor: 'rgba(0, 255, 136, 0.1)',
                         borderWidth: 2,
@@ -1576,7 +2251,7 @@
                     ...chartOptions,
                     scales: {
                         ...chartOptions.scales,
-                        y: { ...chartOptions.scales.y, min: 20, max: 30 }
+                        y: { ...chartOptions.scales.y, min: 50, max: 60 }
                     }
                 }
             });
@@ -1585,9 +2260,9 @@
             new Chart(document.getElementById('futuresChart'), {
                 type: 'line',
                 data: {
-                    labels: data.labels,
+                    labels: futuresLabels,
                     datasets: [{
-                        data: data.futures.history,
+                        data: futuresValues,
                         borderColor: '#00d9ff',
                         backgroundColor: 'rgba(0, 217, 255, 0.1)',
                         borderWidth: 2,
@@ -1599,7 +2274,7 @@
                     ...chartOptions,
                     scales: {
                         ...chartOptions.scales,
-                        y: { ...chartOptions.scales.y, min: 0.8, max: 1.3 }
+                        y: { ...chartOptions.scales.y, min: 0.9, max: 1.05 }
                     }
                 }
             });
@@ -1630,13 +2305,27 @@
             document.getElementById('marginBalance').textContent = parseInt(data.margin.balance).toLocaleString() + '億';
             document.getElementById('marginStatus').textContent = getMarginStatus(data.margin.ratio);
             document.getElementById('marginStatus').style.color = getMarginColor(data.margin.ratio);
+            
+            // 更新融資日期
+            if (data.margin.date) {
+                const marginDate = data.margin.date;
+                const formatted = marginDate.substring(0,4) + '/' + marginDate.substring(4,6) + '/' + marginDate.substring(6,8);
+                document.getElementById('marginDate').textContent = formatted;
+            }
 
             // 更新期貨數據
             document.getElementById('futuresRatio').textContent = data.futures.ratio;
+            
+            // 更新期貨日期
+            if (data.futures.date) {
+                const futuresDate = data.futures.date;
+                const formatted = futuresDate.substring(0,4) + '/' + futuresDate.substring(4,6) + '/' + futuresDate.substring(6,8);
+                document.getElementById('futuresDate').textContent = formatted;
+            }
             document.getElementById('futuresRatio').style.color = getRatioColor(data.futures.ratio);
             const netSign = data.futures.foreign_net >= 0 ? '+' : '';
             document.getElementById('foreignNet').textContent = netSign + data.futures.foreign_net.toLocaleString() + '口';
-            document.getElementById('foreignNet').style.color = data.futures.foreign_net >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+            document.getElementById('foreignNet').style.color = data.futures.foreign_net >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
             document.getElementById('sentiment').textContent = getSentiment(data.futures.ratio);
             document.getElementById('sentiment').style.color = getRatioColor(data.futures.ratio);
 
@@ -1645,18 +2334,226 @@
         }
 
         // 載入數據
+        
+        // 更新活躍股和正常股
+        function updateAllStocksCards(turnoverData) {
+            if (!turnoverData) return;
+            
+            const activeStocks = turnoverData.active_stocks || [];
+            const normalStocks = turnoverData.normal_stocks || [];
+            
+            // 更新活躍股
+            const activeCard = document.getElementById('card-active');
+            const activeCount = document.getElementById('count-active');
+            const activeList = document.getElementById('list-active');
+            
+            if (activeStocks.length > 0) {
+                activeCard.style.display = 'block';
+                activeCount.textContent = activeStocks.length;
+                activeList.innerHTML = '';
+                
+                activeStocks.forEach(stock => {
+                    const item = document.createElement('div');
+                    item.className = 'turnover-stock-item';
+                    
+                    item.innerHTML = `
+                        <div class="stock-info">
+                            <span class="stock-code">${stock.code}</span>
+                            <span class="stock-name">${stock.name}</span>
+                            <span class="stock-industry">${stock.industry}</span>
+                        </div>
+                        <div class="stock-metrics">
+                            <span class="stock-turnover" style="color: #48dbfb;">${stock.turnover_rate.toFixed(2)}%</span>
+                            <span class="stock-days" style="background: rgba(72, 219, 251, 0.2);">活躍</span>
+                        </div>
+                    `;
+                    
+                    activeList.appendChild(item);
+                });
+            } else {
+                activeCard.style.display = 'none';
+            }
+            
+            // 更新正常股
+            const normalCard = document.getElementById('card-normal');
+            const normalCount = document.getElementById('count-normal');
+            const normalList = document.getElementById('list-normal');
+            
+            if (normalStocks.length > 0) {
+                normalCard.style.display = 'block';
+                normalCount.textContent = normalStocks.length;
+                normalList.innerHTML = '';
+                
+                normalStocks.forEach(stock => {
+                    const item = document.createElement('div');
+                    item.className = 'turnover-stock-item';
+                    
+                    item.innerHTML = `
+                        <div class="stock-info">
+                            <span class="stock-code">${stock.code}</span>
+                            <span class="stock-name">${stock.name}</span>
+                            <span class="stock-industry">${stock.industry}</span>
+                        </div>
+                        <div class="stock-metrics">
+                            <span class="stock-turnover" style="color: #1dd1a1;">${stock.turnover_rate.toFixed(2)}%</span>
+                            <span class="stock-days" style="background: rgba(29, 209, 161, 0.2);">正常</span>
+                        </div>
+                    `;
+                    
+                    normalList.appendChild(item);
+                });
+            } else {
+                normalCard.style.display = 'none';
+            }
+        }
+
+        
+        // 載入商品期貨數據
+        async function loadCommodityData(commodity) {
+            try {
+                const response = await fetch(`./data/${commodity}_futures.json?t=` + new Date().getTime());
+                if (!response.ok) {
+                    console.log(`${commodity} 數據尚未生成`);
+                    return null;
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error(`載入 ${commodity} 失敗:`, error);
+                return null;
+            }
+        }
+
+        // 更新商品期貨顯示
+        function updateCommodityDisplay(commodity, data, color, decimals = 2) {
+            if (!data || !data.history || data.history.length === 0) {
+                console.log(`無 ${commodity} 數據`);
+                return;
+            }
+
+            const history = data.history;
+            const currentPrice = data.current_price;
+            const previousClose = history[history.length - 2]?.close || history[history.length - 1]?.close;
+            const change = currentPrice - previousClose;
+            const changePercent = (change / previousClose) * 100;
+
+            // 更新價格
+            document.getElementById(`${commodity}-price`).textContent = `$${currentPrice.toFixed(decimals)}`;
+
+            // 更新漲跌
+            const changeElem = document.getElementById(`${commodity}-change`);
+            const changeText = `${change >= 0 ? '+' : ''}${change.toFixed(decimals)} (${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(2)}%)`;
+            changeElem.textContent = changeText;
+            changeElem.className = change >= 0 ? 'commodity-change positive' : 'commodity-change negative';
+
+            // 繪製圖表
+            drawCommodityChart(`${commodity}Chart`, history, color, data.name, decimals);
+        }
+
+        // 繪製商品期貨圖表
+        function drawCommodityChart(chartId, history, color, name, decimals = 2) {
+            const ctx = document.getElementById(chartId).getContext('2d');
+
+            const labels = history.map(d => {
+                const date = new Date(d.date);
+                return `${date.getMonth() + 1}/${date.getDate()}`;
+            });
+            const prices = history.map(d => d.close);
+
+            const firstPrice = prices[0];
+            const lastPrice = prices[prices.length - 1];
+            const trendColor = lastPrice >= firstPrice ? '#1dd1a1' : '#ff4757';
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: name,
+                        data: prices,
+                        borderColor: color,
+                        backgroundColor: color + '20',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 0,
+                        pointHoverRadius: 4,
+                        pointHoverBackgroundColor: color
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: color,
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    return `價格: $${context.parsed.y.toFixed(decimals)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255,255,255,0.1)', drawBorder: false },
+                            ticks: { color: 'rgba(255,255,255,0.5)', maxTicksLimit: 8, font: { size: 10 } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255,255,255,0.1)', drawBorder: false },
+                            ticks: {
+                                color: 'rgba(255,255,255,0.5)',
+                                font: { size: 10 },
+                                callback: function(value) {
+                                    return '$' + value.toFixed(decimals);
+                                }
+                            }
+                        }
+                    },
+                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
+                }
+            });
+        }
+
+        // 載入所有商品期貨
+        async function loadAllCommodities() {
+            const copperData = await loadCommodityData('copper');
+            const goldData = await loadCommodityData('gold');
+            const oilData = await loadCommodityData('oil');
+            const steelData = await loadCommodityData('steel');
+
+            if (copperData) updateCommodityDisplay('copper', copperData, '#ff9f43', 3);
+            if (goldData) updateCommodityDisplay('gold', goldData, '#ffd700', 2);
+            if (oilData) updateCommodityDisplay('oil', oilData, '#95a5a6', 2);
+            if (steelData) updateCommodityDisplay('steel', steelData, '#7f8c8d', 2);
+        }
+
         async function loadData() {
             let isRealData = false;
             let data = null;
             
             try {
                 // 嘗試載入真實數據
-                const response = await fetch('./data/market_data.json');
+                const response = await fetch('./data/market_data.json?t=' + new Date().getTime());
                 if (response.ok) {
                     const jsonData = await response.json();
-                    // 如果數據有 latest 結構,提取出來
+                    // 如果數據有 latest 結構,提取出來但保留 history
                     if (jsonData.latest) {
-                        data = jsonData.latest;
+                        // 使用完整的 jsonData,同時展開 latest 到頂層供 updateUI 使用
+                        data = {
+                            ...jsonData.latest,  // margin, futures 等
+                            latest: jsonData.latest,  // 保留 latest 結構供圓環使用
+                            history: jsonData.history,
+                            sentiment: jsonData.sentiment,
+                            updated_at: jsonData.updated_at
+                        };
                     } else {
                         data = jsonData;
                     }
@@ -1682,10 +2579,17 @@
         window.addEventListener('load', async () => {
             setTimeout(async () => {
                 const data = await loadData();
+                const turnoverData = await loadTurnoverData();
                 
                 updateUI(data);
+                updateTurnoverMonitor(turnoverData);
+                loadAllCommodities();
+                if (data.sentiment) {
+                    if (data.sentiment.taiwan) updateTaiwanGauge(data.sentiment.taiwan, data.latest);
+                    if (data.sentiment.us) updateUSGauge(data.sentiment.us);
+                }
                 if (data.futures) updateRetailBattle(data.futures);
-                initCharts(data);
+                if (data.history) initCharts(data.history);
                 
                 document.getElementById('loadingScreen').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
@@ -1748,14 +2652,19 @@ function updateRetailBattle(futuresData) {
     // 更新散戶圓環
     updateBattleGauge('retail', retailRatio);
     
-    // 更新散戶部位
-    document.getElementById('retail-long').textContent = retailLong.toLocaleString() + '口';
-    document.getElementById('retail-short').textContent = retailShort.toLocaleString() + '口';
+    // 更新散戶部位(多單紅、空單綠)
+    const longEl = document.getElementById('retail-long');
+    longEl.textContent = retailLong.toLocaleString() + '口';
+    longEl.style.color = 'var(--accent-red)';
+    
+    const shortEl = document.getElementById('retail-short');
+    shortEl.textContent = retailShort.toLocaleString() + '口';
+    shortEl.style.color = 'var(--accent-green)';
     
     const retailNetSign = retailNet >= 0 ? '+' : '';
     const retailNetElement = document.getElementById('retail-net');
     retailNetElement.textContent = retailNetSign + retailNet.toLocaleString() + '口';
-    retailNetElement.style.color = retailNet >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+    retailNetElement.style.color = retailNet >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
     
     // 散戶情緒解讀
     const interpretation = interpretRetailSentiment(retailRatio);
@@ -1773,22 +2682,33 @@ function updateRetailBattle(futuresData) {
     document.getElementById('foreign-net').textContent = 
         (foreignNet >= 0 ? '+' : '') + foreignNet.toLocaleString() + '口';
     document.getElementById('foreign-net').style.color = 
-        foreignNet >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+        foreignNet >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
     
-    // 暫時設定投信和自營商為 N/A (需要額外 API 數據)
-    document.getElementById('trust-net').textContent = 'N/A';
-    document.getElementById('dealer-net').textContent = 'N/A';
+    // 顯示投信和自營商數據
+    const trustNet = futuresData.trust_net || 0;
+    const dealerNet = futuresData.dealer_net || 0;
+    
+    document.getElementById('trust-net').textContent = 
+        (trustNet >= 0 ? '+' : '') + trustNet.toLocaleString() + '口';
+    document.getElementById('trust-net').style.color = 
+        trustNet >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+    
+    document.getElementById('dealer-net').textContent = 
+        (dealerNet >= 0 ? '+' : '') + dealerNet.toLocaleString() + '口';
+    document.getElementById('dealer-net').style.color = 
+        dealerNet >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
     
     // 法人多空比 (用總多空 - 散戶計算)
     const totalRatio = futuresData.ratio || 1;
     const institutionalRatio = totalRatio; // 簡化,實際需要從完整數據計算
     updateBattleGauge('institutional', institutionalRatio);
     
-    // 法人合計淨部位 (暫時只用外資)
+    // 法人合計淨部位
+    const institutionalNet = foreignNet + trustNet + dealerNet;
     document.getElementById('institutional-net').textContent = 
-        (foreignNet >= 0 ? '+' : '') + foreignNet.toLocaleString() + '口';
+        (institutionalNet >= 0 ? '+' : '') + institutionalNet.toLocaleString() + '口';
     document.getElementById('institutional-net').style.color = 
-        foreignNet >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+        institutionalNet >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
 }
 
 function updateBattleGauge(prefix, ratio) {
@@ -1866,6 +2786,275 @@ function getRetailColor(ratio) {
     return '#00d9ff';
 }
 
-        </script>
+        
+function updateTaiwanGauge(sentimentData, latest) {
+    console.log('updateTaiwanGauge called:', { sentimentData, latest });
+    if (!sentimentData) return;
+    const score = sentimentData.score || 0;
+    const components = sentimentData.components || {};
+    document.getElementById('tw-gauge-score').textContent = Math.round(score);
+    const angle = (score / 100) * 180 - 90;
+    const needleEl = document.getElementById('tw-gauge-needle');
+    if (needleEl) needleEl.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+    let rating, ratingClass;
+    if (score < 20) { rating = '極度悲觀'; ratingClass = 'tw-rating-extreme-pessimistic'; }
+    else if (score < 40) { rating = '悲觀'; ratingClass = 'tw-rating-pessimistic'; }
+    else if (score < 60) { rating = '中性'; ratingClass = 'tw-rating-neutral'; }
+    else if (score < 80) { rating = '樂觀'; ratingClass = 'tw-rating-optimistic'; }
+    else { rating = '極度樂觀'; ratingClass = 'tw-rating-extreme-optimistic'; }
+    const ratingEl = document.getElementById('tw-gauge-rating');
+    if (ratingEl) { ratingEl.textContent = rating; ratingEl.className = 'gauge-rating ' + ratingClass; }
+    if (latest && latest.margin && latest.margin.ratio != null) {
+        document.getElementById('tw-margin-component').textContent = latest.margin.ratio.toFixed(2) + '%';
+    }
+    if (latest && latest.futures && latest.futures.ratio != null) {
+        document.getElementById('tw-futures-component').textContent = latest.futures.ratio.toFixed(2);
+    }
+    if (latest && latest.futures && latest.futures.foreign_net != null) {
+        const net = latest.futures.foreign_net;
+        const foreignEl = document.getElementById('tw-foreign-component');
+        foreignEl.textContent = (net >= 0 ? '+' : '') + net.toLocaleString() + '口';
+        foreignEl.style.color = net >= 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+    }
+    if (latest && latest.futures && latest.futures.pcr_volume) {
+        const pcr = latest.futures.pcr_volume;
+        document.getElementById('tw-pcr-value').textContent = pcr.toFixed(2);
+        let pcrBadge, pcrClass;
+        if (pcr >= 1.5) { pcrBadge = '極度恐慌'; pcrClass = 'badge-extreme-fear'; }
+        else if (pcr >= 1.2) { pcrBadge = '恐慌'; pcrClass = 'badge-fear'; }
+        else if (pcr >= 0.8) { pcrBadge = '中性'; pcrClass = 'badge-neutral'; }
+        else if (pcr >= 0.6) { pcrBadge = '貪婪'; pcrClass = 'badge-greed'; }
+        else { pcrBadge = '極度貪婪'; pcrClass = 'badge-extreme-greed'; }
+        const badge = document.getElementById('tw-pcr-badge');
+        badge.textContent = pcrBadge;
+        badge.className = 'gauge-history-badge ' + pcrClass;
+    }
+}
+function updateUSGauge(sentimentData) {
+    if (!sentimentData) return;
+    const score = sentimentData.score || 0;
+    const previousScore = sentimentData.previous_close || 0;
+    document.getElementById('us-gauge-score').textContent = Math.round(score);
+    const angle = (score / 100) * 180 - 90;
+    const needleEl = document.getElementById('us-gauge-needle');
+    if (needleEl) needleEl.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+    let rating, ratingClass;
+    if (score < 20) { rating = 'Extreme Fear'; ratingClass = 'us-rating-extreme-fear'; }
+    else if (score < 40) { rating = 'Fear'; ratingClass = 'us-rating-fear'; }
+    else if (score < 60) { rating = 'Neutral'; ratingClass = 'us-rating-neutral'; }
+    else if (score < 75) { rating = 'Greed'; ratingClass = 'us-rating-greed'; }
+    else { rating = 'Extreme Greed'; ratingClass = 'us-rating-extreme-greed'; }
+    const ratingEl = document.getElementById('us-gauge-rating');
+    if (ratingEl) { ratingEl.textContent = rating; ratingEl.className = 'gauge-rating ' + ratingClass; }
+    if (previousScore) {
+        document.getElementById('us-prev-score').textContent = Math.round(previousScore);
+        const prevBadge = document.getElementById('us-prev-badge');
+        prevBadge.textContent = getUSRatingText(previousScore);
+        prevBadge.className = 'gauge-history-badge ' + getUSBadgeClass(previousScore);
+    }
+}
+function getUSRatingText(score) {
+    if (score < 20) return 'Extreme Fear';
+    if (score < 40) return 'Fear';
+    if (score < 60) return 'Neutral';
+    if (score < 75) return 'Greed';
+    return 'Extreme Greed';
+}
+function getUSBadgeClass(score) {
+    if (score < 20) return 'badge-extreme-fear';
+    if (score < 40) return 'badge-fear';
+    if (score < 60) return 'badge-neutral';
+    if (score < 75) return 'badge-greed';
+    return 'badge-extreme-greed';
+}
+
+</script>
+
+    <!-- 周轉率過熱監控 -->
+    <div class="turnover-section">
+        <div class="turnover-header">
+            <div class="turnover-title">
+                🔥 周轉率過熱監控
+                <span style="font-size: 14px; color: rgba(255,255,255,0.5);">成交量 TOP 20 熱門股追蹤</span>
+            </div>
+            <div class="turnover-stats">
+                <div class="turnover-stat-item">
+                    <div class="turnover-stat-label">極度危險</div>
+                    <div class="turnover-stat-value stat-danger" id="stat-extreme">0</div>
+                </div>
+                <div class="turnover-stat-item">
+                    <div class="turnover-stat-label">嚴重過熱</div>
+                    <div class="turnover-stat-value stat-severe" id="stat-severe">0</div>
+                </div>
+                <div class="turnover-stat-item">
+                    <div class="turnover-stat-label">需注意</div>
+                    <div class="turnover-stat-value stat-warning" id="stat-warning">0</div>
+                </div>
+                <div class="turnover-stat-item">
+                    <div class="turnover-stat-label">正常</div>
+                    <div class="turnover-stat-value stat-normal" id="stat-normal">20</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="turnover-grid">
+            <!-- 極度危險 -->
+            <div class="turnover-card card-extreme-danger" id="card-extreme" style="display: none;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🚨🚨🚨 極度危險 (≥5天)
+                    </div>
+                    <div class="turnover-card-count" id="count-extreme">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-extreme"></div>
+            </div>
+
+            <!-- 嚴重過熱 -->
+            <div class="turnover-card card-severe" id="card-severe" style="display: none;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🔴🔴 嚴重過熱 (4天)
+                    </div>
+                    <div class="turnover-card-count" id="count-severe">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-severe"></div>
+            </div>
+
+            <!-- 過熱 -->
+            <div class="turnover-card card-overheat" id="card-overheat" style="display: none;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🔴 過熱 (3天)
+                    </div>
+                    <div class="turnover-card-count" id="count-overheat">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-overheat"></div>
+            </div>
+
+            <!-- 警戒 -->
+            <div class="turnover-card card-warning" id="card-warning" style="display: none;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🟡 警戒 (2天)
+                    </div>
+                    <div class="turnover-card-count" id="count-warning">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-warning"></div>
+            </div>
+
+            <!-- 新上榜 -->
+            <div class="turnover-card card-new" id="card-new" style="display: none;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🆕 新上榜 (1天)
+                    </div>
+                    <div class="turnover-card-count" id="count-new">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-new"></div>
+            </div>
+
+            <!-- 活躍股 (5-10%) -->
+            <div class="turnover-card" id="card-active" style="display: block; border-color: #48dbfb;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🟦 活躍股 (5-10%)
+                    </div>
+                    <div class="turnover-card-count" id="count-active">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-active"></div>
+            </div>
+
+            <!-- 正常股 (<5%) -->
+            <div class="turnover-card" id="card-normal" style="display: block; border-color: #1dd1a1;">
+                <div class="turnover-card-header">
+                    <div class="turnover-card-title">
+                        🟢 正常股 (<5%)
+                    </div>
+                    <div class="turnover-card-count" id="count-normal">0</div>
+                </div>
+                <div class="turnover-stocks-list" id="list-normal"></div>
+            </div>
+        </div>
+
+        <!-- 產業分析 -->
+        <div class="industry-analysis">
+            <div class="industry-title">🏭 過熱產業分布</div>
+            <div class="industry-list" id="industry-list">
+                <div class="empty-state">暫無數據</div>
+
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <!-- 商品期貨走勢 -->
+    <div class="commodities-section">
+        <div class="commodities-main-title">📊 國際商品期貨 (120日走勢)</div>
+        
+        <div class="commodities-grid">
+            <!-- 銅 -->
+            <div class="commodity-card copper">
+                <div class="commodity-header">
+                    <div class="commodity-title copper">🔶 銅期貨</div>
+                    <div class="commodity-unit">COMEX Copper (HG=F) - USD/磅</div>
+                </div>
+                <div class="commodity-price-info">
+                    <div class="commodity-price" id="copper-price">$0.000</div>
+                    <div class="commodity-change" id="copper-change">--</div>
+                </div>
+                <div class="commodity-chart">
+                    <canvas id="copperChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 黃金 -->
+            <div class="commodity-card gold">
+                <div class="commodity-header">
+                    <div class="commodity-title gold">🥇 黃金期貨</div>
+                    <div class="commodity-unit">COMEX Gold (GC=F) - USD/盎司</div>
+                </div>
+                <div class="commodity-price-info">
+                    <div class="commodity-price" id="gold-price">$0.00</div>
+                    <div class="commodity-change" id="gold-change">--</div>
+                </div>
+                <div class="commodity-chart">
+                    <canvas id="goldChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 原油 -->
+            <div class="commodity-card oil">
+                <div class="commodity-header">
+                    <div class="commodity-title oil">🛢️ 原油期貨</div>
+                    <div class="commodity-unit">WTI Crude (CL=F) - USD/桶</div>
+                </div>
+                <div class="commodity-price-info">
+                    <div class="commodity-price" id="oil-price">$0.00</div>
+                    <div class="commodity-change" id="oil-change">--</div>
+                </div>
+                <div class="commodity-chart">
+                    <canvas id="oilChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 鋼鐵 -->
+            <div class="commodity-card steel">
+                <div class="commodity-header">
+                    <div class="commodity-title steel">🏗️ 鋼鐵期貨</div>
+                    <div class="commodity-unit">HRC Steel (HRC=F) - USD/噸</div>
+                </div>
+                <div class="commodity-price-info">
+                    <div class="commodity-price" id="steel-price">$0.00</div>
+                    <div class="commodity-change" id="steel-change">--</div>
+                </div>
+                <div class="commodity-chart">
+                    <canvas id="steelChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

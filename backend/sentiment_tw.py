@@ -11,7 +11,7 @@ class TWSentimentCalculator:
     def __init__(self):
         pass
     
-    def calculate_sentiment(self, margin_ratio, futures_ratio, foreign_net=0):
+    def calculate_sentiment(self, margin_ratio, futures_ratio, foreign_net=0, pcr_volume=None):
         """
         計算台股情緒指數 (0-100)
         
@@ -27,10 +27,18 @@ class TWSentimentCalculator:
                 'components': dict
             }
         """
-        # 各指標權重
-        margin_weight = 0.4
-        futures_weight = 0.4
-        foreign_weight = 0.2
+        # 各指標權重 (加入 PCR 後調整)
+        if pcr_volume is not None:
+            margin_weight = 0.25
+            futures_weight = 0.25
+            foreign_weight = 0.15
+            pcr_weight = 0.35  # PCR 最重要!
+        else:
+            # 沒有 PCR 時使用舊權重
+            margin_weight = 0.4
+            futures_weight = 0.4
+            foreign_weight = 0.2
+            pcr_weight = 0
         
         # 1. 融資使用率分數 (0-100)
         # 低融資 (<40%) = 恐慌, 高融資 (>60%) = 貪婪
@@ -44,12 +52,27 @@ class TWSentimentCalculator:
         # 大量做空 (< -20000) = 恐慌, 大量做多 (> +20000) = 貪婪
         foreign_score = self._calculate_foreign_score(foreign_net)
         
+        # 4. PCR 分數 (0-100) - 逆向指標!
+        # PCR 高 = 恐慌 (看跌), PCR 低 = 貪婪 (看漲)
+        if pcr_volume is not None:
+            pcr_score = self._calculate_pcr_score(pcr_volume)
+        else:
+            pcr_score = 50  # 預設中性
+        
         # 計算總分
-        total_score = (
-            margin_score * margin_weight +
-            futures_score * futures_weight +
-            foreign_score * foreign_weight
-        )
+        if pcr_volume is not None:
+            total_score = (
+                margin_score * margin_weight +
+                futures_score * futures_weight +
+                foreign_score * foreign_weight +
+                pcr_score * pcr_weight
+            )
+        else:
+            total_score = (
+                margin_score * margin_weight +
+                futures_score * futures_weight +
+                foreign_score * foreign_weight
+            )
         
         total_score = max(0, min(100, int(total_score)))
         
@@ -68,6 +91,10 @@ class TWSentimentCalculator:
                 'foreign': {
                     'score': int(foreign_score),
                     'weight': foreign_weight
+                },
+                'pcr': {
+                    'score': int(pcr_score) if pcr_volume is not None else None,
+                    'weight': pcr_weight
                 }
             }
         }
@@ -138,6 +165,35 @@ class TWSentimentCalculator:
         else:
             return 75 + min((net_position - 30000) / 30000 * 25, 25)
     
+
+    def _calculate_pcr_score(self, pcr):
+        """
+        計算 PCR 分數 (逆向指標!)
+        PCR 越高 = 越恐慌 (分數越低)
+        PCR 越低 = 越貪婪 (分數越高)
+        """
+        # PCR > 1.5 = 極度恐慌 (0-25分)
+        # PCR 1.2-1.5 = 恐慌 (25-45分)
+        # PCR 0.8-1.2 = 中性 (45-55分)
+        # PCR 0.6-0.8 = 貪婪 (55-75分)
+        # PCR < 0.6 = 極度貪婪 (75-100分)
+        
+        if pcr >= 1.5:
+            # 極度恐慌區
+            return max(0, 25 - (pcr - 1.5) / 0.5 * 25)
+        elif pcr >= 1.2:
+            # 恐慌區
+            return 25 + (1.5 - pcr) / 0.3 * 20
+        elif pcr >= 0.8:
+            # 中性區
+            return 45 + (1.2 - pcr) / 0.4 * 10
+        elif pcr >= 0.6:
+            # 貪婪區
+            return 55 + (0.8 - pcr) / 0.2 * 20
+        else:
+            # 極度貪婪區
+            return 75 + min((0.6 - pcr) / 0.2 * 25, 25)
+
     def _get_rating(self, score):
         """根據分數返回評級"""
         if score <= 24:
