@@ -3196,15 +3196,15 @@
             }
         }
 
-        // 根據外資買賣超獲取顏色類別 (單位:億)
-        function getHeatmapColor(foreignNet) {
-            if (foreignNet >= 100) return 'hm-strong-up';     // >= 100億
-            if (foreignNet >= 30) return 'hm-up';             // 30~100億
-            if (foreignNet >= 10) return 'hm-slight-up';      // 10~30億
-            if (foreignNet >= -10) return 'hm-flat';          // -10~10億
-            if (foreignNet >= -30) return 'hm-slight-down';   // -30~-10億
-            if (foreignNet >= -100) return 'hm-down';         // -100~-30億
-            return 'hm-strong-down';                           // <= -100億
+        // 根據漲跌幅獲取顏色類別
+        function getHeatmapColor(change) {
+            if (change >= 3) return 'hm-strong-up';
+            if (change >= 1) return 'hm-up';
+            if (change >= 0.3) return 'hm-slight-up';
+            if (change >= -0.3) return 'hm-flat';
+            if (change >= -1) return 'hm-slight-down';
+            if (change >= -3) return 'hm-down';
+            return 'hm-strong-down';
         }
 
         // 更新產業熱圖
@@ -3214,36 +3214,21 @@
             const container = document.getElementById('heatmap-grid');
             if (!container) return;
             
-            // 已按外資買賣超排序
-            const industries = data.industries;
-            
-            container.innerHTML = industries.map(industry => {
-                const colorClass = getHeatmapColor(industry.foreign_net);
-                const changeSign = industry.avg_change >= 0 ? '+' : '';
-                const netSign = industry.foreign_net >= 0 ? '+' : '';
-                
-                // 格式化金額顯示
-                let netDisplay;
-                const absNet = Math.abs(industry.foreign_net);
-                if (absNet >= 100) {
-                    netDisplay = industry.foreign_net.toFixed(0);
-                } else if (absNet >= 10) {
-                    netDisplay = industry.foreign_net.toFixed(1);
-                } else {
-                    netDisplay = industry.foreign_net.toFixed(2);
-                }
+            container.innerHTML = data.industries.map(industry => {
+                const colorClass = getHeatmapColor(industry.avg_change);
+                const sign = industry.avg_change >= 0 ? '+' : '';
                 
                 return `
                     <div class="industry-block ${colorClass}">
                         <div class="block-name">${industry.industry}</div>
-                        <div class="block-change">${changeSign}${industry.avg_change}%</div>
+                        <div class="block-change">${sign}${industry.avg_change}%</div>
                         <div class="block-stats">
                             <div class="block-stat">
-                                <span>外資</span>
-                                <span class="block-stat-value">${netSign}${netDisplay}億</span>
+                                <span>上漲比</span>
+                                <span class="block-stat-value">${industry.up_ratio}%</span>
                             </div>
                             <div class="block-stat">
-                                <span>TOP50檔數</span>
+                                <span>檔數</span>
                                 <span class="block-stat-value">${industry.stock_count}</span>
                             </div>
                         </div>
@@ -3462,7 +3447,7 @@
     
     <!-- 產業熱圖 -->
     <div class="industry-heatmap-section">
-        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序</div>
+        <div class="heatmap-title">🎨 產業熱圖 - 資金流向一目了然</div>
         <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
 

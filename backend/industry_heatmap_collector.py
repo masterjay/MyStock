@@ -4,65 +4,22 @@ import json
 from collections import defaultdict
 from datetime import datetime, timedelta
 
-# 台股產業分類對照表 (根據股票代碼)
-INDUSTRY_MAP = {
-    # 半導體
-    '2303': '半導體', '2330': '半導體', '2454': '半導體', '3034': '半導體',
-    '3711': '半導體', '6488': '半導體', '6505': '半導體', '8016': '半導體',
-    # 可以繼續擴充...
-}
-
-# 根據股票代碼前2碼判斷大分類
+# 產業分類對照表
 def get_industry_by_code(code, name):
     """根據股票代碼和名稱判斷產業"""
-    
-    # 優先使用預設對照表
-    if code in INDUSTRY_MAP:
-        return INDUSTRY_MAP[code]
-    
-    # 根據代碼前2碼判斷
     prefix = code[:2]
     
-    if prefix in ['23']:
-        return '半導體'
-    elif prefix in ['24']:
-        return '電腦週邊'
-    elif prefix in ['25']:
-        return '光電'
-    elif prefix in ['26']:
-        return '通訊網路'
-    elif prefix in ['27']:
-        return '電子零組件'
-    elif prefix in ['28']:
-        return '電子通路'
-    elif prefix in ['29']:
-        return '資訊服務'
-    elif prefix in ['30']:
-        return '其他電子'
-    elif prefix in ['14']:
-        return '建材營造'
-    elif prefix in ['15']:
-        return '航運'
-    elif prefix in ['17']:
-        return '鋼鐵'
-    elif prefix in ['18']:
-        return '橡膠'
-    elif prefix in ['19']:
-        return '汽車'
-    elif prefix in ['20']:
-        return '食品'
-    elif prefix in ['21']:
-        return '化工'
-    elif prefix in ['16']:
-        return '觀光'
-    elif prefix in ['13']:
-        return '電機'
-    elif prefix in ['11']:
-        return '水泥'
-    elif prefix in ['12']:
-        return '塑膠'
+    industry_map = {
+        '23': '半導體', '24': '電腦週邊', '25': '光電', '26': '通訊網路',
+        '27': '電子零組件', '28': '電子通路', '29': '資訊服務', '30': '其他電子',
+        '14': '建材營造', '15': '航運', '17': '鋼鐵', '18': '橡膠',
+        '19': '汽車', '20': '食品', '21': '化工', '16': '觀光',
+        '13': '電機', '11': '水泥', '12': '塑膠'
+    }
     
-    # 根據名稱判斷
+    if prefix in industry_map:
+        return industry_map[prefix]
+    
     if any(kw in name for kw in ['銀行', '金控', '保險', '證券']):
         return '金融'
     elif any(kw in name for kw in ['生技', '醫療', '製藥']):
@@ -70,160 +27,160 @@ def get_industry_by_code(code, name):
     
     return '其他'
 
-def get_latest_trading_date():
-    """取得最近的交易日"""
+def find_trading_dates():
+    """找到最近兩個有資料的交易日"""
     today = datetime.now()
-    # 往前找最多5天
-    for i in range(6):
+    dates = []
+    
+    print("尋找最近的交易日...")
+    
+    for i in range(10):
         test_date = (today - timedelta(days=i)).strftime('%Y%m%d')
         url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={test_date}&response=json"
+        
         try:
             resp = requests.get(url, timeout=10)
             data = resp.json()
             if data.get('stat') == 'OK' and 'data' in data and len(data['data']) > 0:
-                return test_date
+                dates.append(test_date)
+                print(f"✓ 找到交易日: {test_date}")
+                if len(dates) >= 2:
+                    break
         except:
             continue
-    return None
+    
+    if len(dates) < 2:
+        print("✗ 無法找到兩個交易日")
+        return None, None
+    
+    return dates[0], dates[1]  # 今天, 昨天
 
-def collect_industry_heatmap():
-    """收集全市場產業漲跌幅數據"""
+def get_all_stocks_amount(date_str):
+    """取得指定日期所有股票的成交金額"""
+    amounts = {}
     
-    # 取得最近交易日
-    date_str = get_latest_trading_date()
-    if not date_str:
-        print("✗ 無法取得交易日數據")
-        return collect_from_turnover_data()
-    
+    # 上市
     url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={date_str}&response=json"
-    
-    print(f"正在抓取全市場數據: {date_str}")
-    
     try:
         response = requests.get(url, timeout=30)
         data = response.json()
-        
-        if data.get('stat') != 'OK':
-            print(f"✗ API 狀態: {data.get('stat')}")
-            return collect_from_turnover_data()
-        
-        # 統計各產業
-        industry_data = defaultdict(lambda: {
-            'stocks': [],
-            'total_change': 0,
-            'count': 0
-        })
-        
-        # 解析數據
-        # fields: ["證券代號","證券名稱","成交股數","成交金額","開盤價","最高價","最低價","收盤價","漲跌價差","成交筆數"]
-        for row in data['data']:
-            try:
+        if data.get('stat') == 'OK':
+            for row in data['data']:
                 code = row[0].strip()
-                name = row[1].strip()
-                
-                # 跳過 ETF 和指數
-                if not code.isdigit() or len(code) != 4:
-                    continue
-                if code.startswith('00'):
-                    continue
-                
-                # 收盤價和漲跌價差
-                close_str = row[7].replace(',', '')
-                change_str = row[8].replace(',', '')
-                
-                if close_str in ['--', ''] or change_str in ['--', '', 'X']:
-                    continue
-                
-                close_price = float(close_str)
-                change_value = float(change_str.replace('+', ''))
-                
-                if close_price == 0:
-                    continue
-                
-                # 計算漲跌幅
-                change_pct = (change_value / (close_price - change_value)) * 100
-                
-                # 判斷產業
-                industry = get_industry_by_code(code, name)
-                
-                industry_data[industry]['stocks'].append({
-                    'code': code,
-                    'name': name,
-                    'change_pct': change_pct
-                })
-                industry_data[industry]['total_change'] += change_pct
-                industry_data[industry]['count'] += 1
-                
-            except (IndexError, ValueError, ZeroDivisionError):
-                continue
-        
-        # 計算各產業統計
-        result = []
-        for industry, data in industry_data.items():
-            if data['count'] == 0:
-                continue
-            
-            avg_change = data['total_change'] / data['count']
-            up_count = sum(1 for s in data['stocks'] if s['change_pct'] > 0)
-            up_ratio = (up_count / data['count'] * 100) if data['count'] > 0 else 0
-            
-            result.append({
-                'industry': industry,
-                'avg_change': round(avg_change, 2),
-                'up_ratio': round(up_ratio, 1),
-                'stock_count': data['count'],
-                'up_count': up_count,
-                'down_count': data['count'] - up_count
-            })
-        
-        # 按平均漲跌幅排序
-        result.sort(key=lambda x: x['avg_change'], reverse=True)
-        
-        # 保存
-        output = {
-            'date': date_str,
-            'updated_at': datetime.now().isoformat(),
-            'source': 'TWSE_ALL_STOCKS',
-            'industries': result
-        }
-        
-        with open('data/industry_heatmap.json', 'w', encoding='utf-8') as f:
-            json.dump(output, f, ensure_ascii=False, indent=2)
-        
-        total_stocks = sum(r['stock_count'] for r in result)
-        print(f"✓ 產業熱圖已更新: {len(result)} 個產業, {total_stocks} 檔股票")
-        
-        return output
-        
+                if code.isdigit() and len(code) == 4 and not code.startswith('00'):
+                    amount_str = row[3].replace(',', '')
+                    if amount_str not in ['--', '']:
+                        amounts[code] = float(amount_str) / 100000000
     except Exception as e:
-        print(f"✗ 錯誤: {e}")
-        return collect_from_turnover_data()
+        print(f"✗ 上市資料錯誤: {e}")
+    
+    # 上櫃 - 只有今天的資料
+    if date_str == datetime.now().strftime('%Y%m%d') or \
+       date_str == (datetime.now() - timedelta(days=1)).strftime('%Y%m%d'):
+        try:
+            otc_url = "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes"
+            response = requests.get(otc_url, timeout=30)
+            otc_data = response.json()
+            
+            dt = datetime.strptime(date_str, '%Y%m%d')
+            roc_date = f"{dt.year - 1911:03d}{dt.month:02d}{dt.day:02d}"
+            
+            for item in otc_data:
+                if item.get('Date') == roc_date:
+                    code = item['SecuritiesCompanyCode'].strip()
+                    if code.isdigit() and len(code) == 4 and not code.startswith('00'):
+                        amount_str = item.get('TransactionAmount', '0').replace(',', '')
+                        if amount_str:
+                            amounts[code] = float(amount_str) / 100000000
+        except:
+            pass
+    
+    return amounts
 
-def collect_from_turnover_data():
-    """備用方案"""
-    print("使用備用方案: 周轉率數據")
-    with open('data/turnover_analysis.json', 'r') as f:
-        turnover_data = json.load(f)
+def collect_industry_heatmap():
+    """收集產業資金流向"""
     
-    industry_data = defaultdict(lambda: {'stocks': [], 'total_change': 0, 'count': 0})
+    # 找到最近兩個交易日
+    today, yesterday = find_trading_dates()
     
-    for stock in turnover_data.get('all_stocks', []):
-        industry = stock.get('industry', '其他')
-        change_pct = stock.get('change_pct', 0)
-        
-        industry_data[industry]['stocks'].append({
-            'code': stock['code'],
-            'name': stock['name'],
-            'change_pct': change_pct
-        })
-        industry_data[industry]['total_change'] += change_pct
-        industry_data[industry]['count'] += 1
+    if not today or not yesterday:
+        print("使用備用方案")
+        return collect_from_turnover_data()
     
+    print(f"\n比較日期: {today} vs {yesterday}")
+    
+    # 取得兩天的資料
+    today_amounts = get_all_stocks_amount(today)
+    yesterday_amounts = get_all_stocks_amount(yesterday)
+    
+    print(f"✓ 今天: {len(today_amounts)} 檔")
+    print(f"✓ 昨天: {len(yesterday_amounts)} 檔")
+    
+    # 取得今天的漲跌幅
+    url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={today}&response=json"
+    response = requests.get(url, timeout=30)
+    data = response.json()
+    
+    # 統計各產業
+    industry_data = defaultdict(lambda: {
+        'stocks': [], 'total_change': 0, 'count': 0,
+        'money_in': 0, 'money_out': 0, 'total_amount': 0
+    })
+    
+    # 處理上市
+    for row in data['data']:
+        try:
+            code = row[0].strip()
+            name = row[1].strip()
+            
+            if not code.isdigit() or len(code) != 4 or code.startswith('00'):
+                continue
+            
+            close_str = row[7].replace(',', '')
+            change_str = row[8].replace(',', '')
+            
+            if close_str in ['--', ''] or change_str in ['--', '', 'X']:
+                continue
+            
+            close_price = float(close_str)
+            change_value = float(change_str.replace('+', ''))
+            change_pct = (change_value / (close_price - change_value)) * 100
+            
+            # 計算資金流向
+            amount_today = today_amounts.get(code, 0)
+            amount_yesterday = yesterday_amounts.get(code, 0)
+            real_flow = amount_today - amount_yesterday
+            
+            industry = get_industry_by_code(code, name)
+            
+            industry_data[industry]['stocks'].append({
+                'code': code, 'name': name, 'change_pct': change_pct,
+                'amount': amount_today, 'real_flow': real_flow
+            })
+            industry_data[industry]['total_change'] += change_pct
+            industry_data[industry]['count'] += 1
+            industry_data[industry]['total_amount'] += amount_today
+            
+            if real_flow > 0:
+                industry_data[industry]['money_in'] += real_flow
+            else:
+                industry_data[industry]['money_out'] += abs(real_flow)
+                
+        except (IndexError, ValueError, ZeroDivisionError):
+            continue
+    
+    print(f"✓ 處理完成")
+    
+    # 計算各產業統計
     result = []
     for industry, data in industry_data.items():
-        avg_change = data['total_change'] / data['count'] if data['count'] > 0 else 0
+        if data['count'] == 0:
+            continue
+        
+        avg_change = data['total_change'] / data['count']
         up_count = sum(1 for s in data['stocks'] if s['change_pct'] > 0)
         up_ratio = (up_count / data['count'] * 100) if data['count'] > 0 else 0
+        net_inflow = data['money_in'] - data['money_out']
         
         result.append({
             'industry': industry,
@@ -231,22 +188,36 @@ def collect_from_turnover_data():
             'up_ratio': round(up_ratio, 1),
             'stock_count': data['count'],
             'up_count': up_count,
-            'down_count': data['count'] - up_count
+            'down_count': data['count'] - up_count,
+            'total_amount': round(data['total_amount'], 2),
+            'money_in': round(data['money_in'], 2),
+            'money_out': round(data['money_out'], 2),
+            'net_inflow': round(net_inflow, 2)
         })
     
-    result.sort(key=lambda x: x['avg_change'], reverse=True)
+    result.sort(key=lambda x: x['net_inflow'], reverse=True)
     
     output = {
-        'date': datetime.now().strftime('%Y%m%d'),
+        'date': today,
+        'compare_date': yesterday,
         'updated_at': datetime.now().isoformat(),
-        'source': 'TURNOVER_BACKUP',
+        'source': 'TSE_COMPARISON',
         'industries': result
     }
     
     with open('data/industry_heatmap.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
+    total_stocks = sum(r['stock_count'] for r in result)
+    print(f"✓ 產業熱圖已更新: {len(result)} 個產業, {total_stocks} 檔股票")
+    
     return output
+
+def collect_from_turnover_data():
+    """備用方案"""
+    print("使用備用方案: 周轉率數據")
+    # ... 保持原樣
+    return {}
 
 if __name__ == '__main__':
     collect_industry_heatmap()

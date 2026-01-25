@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+import json
+from collections import defaultdict
+from datetime import datetime
+
+# 產業分類 (與 industry_heatmap_collector 相同)
+def get_industry_by_code(code, name):
+    """根據股票代碼和名稱判斷產業"""
+    prefix = code[:2]
+    
+    industry_map = {
+        '23': '半導體', '24': '電腦週邊', '25': '光電', '26': '通訊網路',
+        '27': '電子零組件', '28': '電子通路', '29': '資訊服務', '30': '其他電子',
+        '14': '建材營造', '15': '航運', '17': '鋼鐵', '18': '橡膠',
+        '19': '汽車', '20': '食品', '21': '化工', '16': '觀光',
+        '13': '電機', '11': '水泥', '12': '塑膠'
+    }
+    
+    if prefix in industry_map:
+        return industry_map[prefix]
+    
+    if any(kw in name for kw in ['銀行', '金控', '保險', '證券']):
+        return '金融'
+    elif any(kw in name for kw in ['生技', '醫療', '製藥']):
+        return '生技醫療'
+    
+    return '其他'
+
+def collect_industry_foreign_flow():
+    """統計各產業的外資買賣超"""
+    
+    # 載入外資 TOP 50
+    with open('data/foreign_top_stocks.json', 'r') as f:
+        foreign_data = json.load(f)
+    
+    # 載入完整市場資料 (取得股價漲跌)
+    with open('data/turnover_analysis.json', 'r') as f:
+        market_data = json.load(f)
+    
+    # 建立股價對照表
+    price_map = {}
+    for stock in market_data.get('all_stocks', []):
+        price_map[stock['code']] = {
+            'change_pct': stock.get('change_pct', 0),
+            'industry': stock.get('industry', '其他')
+        }
+    
+    # 統計各產業
+    industry_stats = defaultdict(lambda: {
+        'foreign_net': 0,       # 外資淨買超 (千元)
+        'foreign_buy': 0,       # 外資買入
+        'foreign_sell': 0,      # 外資賣出
+        'stock_count': 0,       # 上榜檔數
+        'total_change': 0,      # 總漲跌幅
+        'stocks': []
+    })
+    
+    # 處理買超
+    for stock in foreign_data['top_buy']:
+        code = stock['code']
+        name = stock['name']
+        foreign_net = stock['foreign_net'] / 100000  # 千元轉億元
+        
+        # 取得產業和漲跌
+        if code in price_map:
+            industry = price_map[code]['industry']
+            change_pct = price_map[code]['change_pct']
+        else:
+            industry = get_industry_by_code(code, name)
+            change_pct = 0
+        
+        industry_stats[industry]['foreign_net'] += foreign_net
+        industry_stats[industry]['foreign_buy'] += stock['foreign_buy'] / 100000
+        industry_stats[industry]['foreign_sell'] += stock['foreign_sell'] / 100000
+        industry_stats[industry]['stock_count'] += 1
+        industry_stats[industry]['total_change'] += change_pct
+        industry_stats[industry]['stocks'].append({
+            'code': code,
+            'name': name,
+            'net': foreign_net
+        })
+    
+    # 處理賣超
+    for stock in foreign_data['top_sell']:
+        code = stock['code']
+        name = stock['name']
+        foreign_net = stock['foreign_net'] / 100000  # 千元轉億元 (負值)
+        
+        if code in price_map:
+            industry = price_map[code]['industry']
+            change_pct = price_map[code]['change_pct']
+        else:
+            industry = get_industry_by_code(code, name)
+            change_pct = 0
+        
+        # 如果該產業已經在統計中,累加;否則創建
+        industry_stats[industry]['foreign_net'] += foreign_net
+        industry_stats[industry]['foreign_buy'] += stock['foreign_buy'] / 100000
+        industry_stats[industry]['foreign_sell'] += stock['foreign_sell'] / 100000
+        industry_stats[industry]['stock_count'] += 1
+        industry_stats[industry]['total_change'] += change_pct
+        industry_stats[industry]['stocks'].append({
+            'code': code,
+            'name': name,
+            'net': foreign_net
+        })
+    
+    # 整理結果
+    result = []
+    for industry, data in industry_stats.items():
+        if data['stock_count'] == 0:
+            continue
+        
+        avg_change = data['total_change'] / data['stock_count']
+        
+        result.append({
+            'industry': industry,
+            'foreign_net': round(data['foreign_net'], 2),
+            'foreign_buy': round(data['foreign_buy'], 2),
+            'foreign_sell': round(data['foreign_sell'], 2),
+            'stock_count': data['stock_count'],
+            'avg_change': round(avg_change, 2)
+        })
+    
+    # 按外資淨買超排序
+    result.sort(key=lambda x: x['foreign_net'], reverse=True)
+    
+    # 保存
+    output = {
+        'updated_at': datetime.now().isoformat(),
+        'date': foreign_data['date'],
+        'industries': result
+    }
+    
+    with open('data/industry_heatmap.json', 'w', encoding='utf-8') as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+    
+    print(f"✓ 產業外資流向已更新: {len(result)} 個產業")
+    
+    # 顯示統計
+    print("\n外資買超 TOP 5:")
+    for ind in result[:5]:
+        print(f"  {ind['industry']:12s} {ind['foreign_net']:+8.2f}億 ({ind['stock_count']}檔)")
+    
+    print("\n外資賣超 TOP 5:")
+    for ind in sorted(result, key=lambda x: x['foreign_net'])[:5]:
+        print(f"  {ind['industry']:12s} {ind['foreign_net']:+8.2f}億 ({ind['stock_count']}檔)")
+    
+    return output
+
+if __name__ == '__main__':
+    collect_industry_foreign_flow()

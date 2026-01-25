@@ -1,175 +1,150 @@
 {
+  "updated_at": "2026-01-25T15:26:50.463749",
   "date": "20260125",
-  "updated_at": "2026-01-25T14:19:40.234920",
-  "source": "TWSE_ALL_STOCKS",
   "industries": [
     {
-      "industry": "生技醫療",
-      "avg_change": 0.85,
-      "up_ratio": 42.9,
-      "stock_count": 7,
-      "up_count": 3,
-      "down_count": 4
-    },
-    {
-      "industry": "食品",
-      "avg_change": 0.71,
-      "up_ratio": 62.1,
-      "stock_count": 29,
-      "up_count": 18,
-      "down_count": 11
-    },
-    {
-      "industry": "電腦週邊",
-      "avg_change": 0.5,
-      "up_ratio": 50.0,
-      "stock_count": 72,
-      "up_count": 36,
-      "down_count": 36
-    },
-    {
-      "industry": "其他",
-      "avg_change": 0.4,
-      "up_ratio": 48.2,
-      "stock_count": 512,
-      "up_count": 247,
-      "down_count": 265
-    },
-    {
-      "industry": "資訊服務",
-      "avg_change": 0.34,
-      "up_ratio": 60.0,
-      "stock_count": 15,
-      "up_count": 9,
-      "down_count": 6
-    },
-    {
-      "industry": "觀光",
-      "avg_change": 0.31,
-      "up_ratio": 35.7,
-      "stock_count": 14,
-      "up_count": 5,
-      "down_count": 9
-    },
-    {
-      "industry": "建材營造",
-      "avg_change": 0.24,
-      "up_ratio": 31.2,
-      "stock_count": 48,
-      "up_count": 15,
-      "down_count": 33
-    },
-    {
-      "industry": "塑膠",
-      "avg_change": 0.1,
-      "up_ratio": 40.0,
-      "stock_count": 20,
-      "up_count": 8,
-      "down_count": 12
-    },
-    {
-      "industry": "化工",
-      "avg_change": 0.02,
-      "up_ratio": 45.5,
-      "stock_count": 11,
-      "up_count": 5,
-      "down_count": 6
-    },
-    {
-      "industry": "半導體",
-      "avg_change": -0.01,
-      "up_ratio": 38.8,
-      "stock_count": 67,
-      "up_count": 26,
-      "down_count": 41
-    },
-    {
-      "industry": "電子通路",
-      "avg_change": -0.03,
-      "up_ratio": 32.1,
-      "stock_count": 28,
-      "up_count": 9,
-      "down_count": 19
-    },
-    {
-      "industry": "電機",
-      "avg_change": -0.13,
-      "up_ratio": 36.0,
-      "stock_count": 25,
-      "up_count": 9,
-      "down_count": 16
-    },
-    {
-      "industry": "鋼鐵",
-      "avg_change": -0.18,
-      "up_ratio": 42.9,
-      "stock_count": 35,
-      "up_count": 15,
-      "down_count": 20
-    },
-    {
-      "industry": "水泥",
-      "avg_change": -0.24,
-      "up_ratio": 0.0,
-      "stock_count": 7,
-      "up_count": 0,
-      "down_count": 7
-    },
-    {
-      "industry": "其他電子",
-      "avg_change": -0.24,
-      "up_ratio": 41.1,
-      "stock_count": 56,
-      "up_count": 23,
-      "down_count": 33
+      "industry": "光電",
+      "foreign_net": 1297.04,
+      "foreign_buy": 4122.28,
+      "foreign_sell": 2825.24,
+      "stock_count": 6,
+      "avg_change": -0.51
     },
     {
       "industry": "電子零組件",
-      "avg_change": -0.53,
-      "up_ratio": 26.7,
-      "stock_count": 15,
-      "up_count": 4,
-      "down_count": 11
+      "foreign_net": 489.12,
+      "foreign_buy": 1847.88,
+      "foreign_sell": 1358.76,
+      "stock_count": 9,
+      "avg_change": 3.0
     },
     {
-      "industry": "光電",
-      "avg_change": -0.69,
-      "up_ratio": 14.3,
-      "stock_count": 28,
-      "up_count": 4,
-      "down_count": 24
+      "industry": "電機",
+      "foreign_net": 425.5,
+      "foreign_buy": 999.68,
+      "foreign_sell": 574.18,
+      "stock_count": 5,
+      "avg_change": 0.28
     },
     {
-      "industry": "汽車",
-      "avg_change": -0.7,
-      "up_ratio": 0.0,
-      "stock_count": 6,
-      "up_count": 0,
-      "down_count": 6
+      "industry": "電腦週邊",
+      "foreign_net": 243.75,
+      "foreign_buy": 1511.25,
+      "foreign_sell": 1267.51,
+      "stock_count": 8,
+      "avg_change": 0.18
     },
     {
-      "industry": "航運",
-      "avg_change": -0.8,
-      "up_ratio": 28.2,
-      "stock_count": 39,
-      "up_count": 11,
-      "down_count": 28
+      "industry": "綠能環保",
+      "foreign_net": 164.57,
+      "foreign_buy": 315.57,
+      "foreign_sell": 151.0,
+      "stock_count": 1,
+      "avg_change": -1.94
     },
     {
       "industry": "橡膠",
-      "avg_change": -1.19,
-      "up_ratio": 28.6,
-      "stock_count": 7,
-      "up_count": 2,
-      "down_count": 5
+      "foreign_net": 159.09,
+      "foreign_buy": 179.34,
+      "foreign_sell": 20.25,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "食品",
+      "foreign_net": 152.72,
+      "foreign_buy": 356.78,
+      "foreign_sell": 204.06,
+      "stock_count": 3,
+      "avg_change": 2.28
+    },
+    {
+      "industry": "觀光",
+      "foreign_net": 50.5,
+      "foreign_buy": 191.86,
+      "foreign_sell": 141.36,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "其他電子",
+      "foreign_net": 19.67,
+      "foreign_buy": 310.3,
+      "foreign_sell": 290.62,
+      "stock_count": 4,
+      "avg_change": -0.93
+    },
+    {
+      "industry": "其他",
+      "foreign_net": 4.12,
+      "foreign_buy": 886.95,
+      "foreign_sell": 882.83,
+      "stock_count": 16,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "化工",
+      "foreign_net": -18.38,
+      "foreign_buy": 36.45,
+      "foreign_sell": 54.82,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "水泥",
+      "foreign_net": -24.21,
+      "foreign_buy": 48.29,
+      "foreign_sell": 72.5,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "塑膠",
+      "foreign_net": -34.91,
+      "foreign_buy": 26.91,
+      "foreign_sell": 61.82,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "電器電纜",
+      "foreign_net": -67.74,
+      "foreign_buy": 192.27,
+      "foreign_sell": 260.01,
+      "stock_count": 1,
+      "avg_change": -9.2
+    },
+    {
+      "industry": "航運",
+      "foreign_net": -83.7,
+      "foreign_buy": 170.01,
+      "foreign_sell": 253.71,
+      "stock_count": 1,
+      "avg_change": 0.0
+    },
+    {
+      "industry": "電子通路",
+      "foreign_net": -215.25,
+      "foreign_buy": 1138.64,
+      "foreign_sell": 1353.89,
+      "stock_count": 11,
+      "avg_change": 0.0
     },
     {
       "industry": "通訊網路",
-      "avg_change": -1.38,
-      "up_ratio": 4.2,
-      "stock_count": 24,
-      "up_count": 1,
-      "down_count": 23
+      "foreign_net": -331.19,
+      "foreign_buy": 627.28,
+      "foreign_sell": 958.47,
+      "stock_count": 9,
+      "avg_change": 1.1
+    },
+    {
+      "industry": "半導體",
+      "foreign_net": -546.79,
+      "foreign_buy": 4607.17,
+      "foreign_sell": 5153.96,
+      "stock_count": 21,
+      "avg_change": -0.51
     }
   ]
 }

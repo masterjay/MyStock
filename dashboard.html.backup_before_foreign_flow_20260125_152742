@@ -3196,15 +3196,15 @@
             }
         }
 
-        // 根據外資買賣超獲取顏色類別 (單位:億)
-        function getHeatmapColor(foreignNet) {
-            if (foreignNet >= 100) return 'hm-strong-up';     // >= 100億
-            if (foreignNet >= 30) return 'hm-up';             // 30~100億
-            if (foreignNet >= 10) return 'hm-slight-up';      // 10~30億
-            if (foreignNet >= -10) return 'hm-flat';          // -10~10億
-            if (foreignNet >= -30) return 'hm-slight-down';   // -30~-10億
-            if (foreignNet >= -100) return 'hm-down';         // -100~-30億
-            return 'hm-strong-down';                           // <= -100億
+        // 根據淨流入獲取顏色類別 (單位:億)
+        function getHeatmapColor(netInflow) {
+            if (netInflow >= 5) return 'hm-strong-up';       // >= 5億
+            if (netInflow >= 1) return 'hm-up';              // 1~5億
+            if (netInflow >= 0.3) return 'hm-slight-up';     // 0.3~1億
+            if (netInflow >= -0.3) return 'hm-flat';         // -0.3~0.3億
+            if (netInflow >= -1) return 'hm-slight-down';    // -1~-0.3億
+            if (netInflow >= -5) return 'hm-down';           // -5~-1億
+            return 'hm-strong-down';                          // <= -5億
         }
 
         // 更新產業熱圖
@@ -3214,23 +3214,23 @@
             const container = document.getElementById('heatmap-grid');
             if (!container) return;
             
-            // 已按外資買賣超排序
-            const industries = data.industries;
+            // 按淨流入排序
+            const sorted = [...data.industries].sort((a, b) => b.net_inflow - a.net_inflow);
             
-            container.innerHTML = industries.map(industry => {
-                const colorClass = getHeatmapColor(industry.foreign_net);
+            container.innerHTML = sorted.map(industry => {
+                const colorClass = getHeatmapColor(industry.net_inflow);
                 const changeSign = industry.avg_change >= 0 ? '+' : '';
-                const netSign = industry.foreign_net >= 0 ? '+' : '';
+                const flowSign = industry.net_inflow >= 0 ? '+' : '';
                 
                 // 格式化金額顯示
-                let netDisplay;
-                const absNet = Math.abs(industry.foreign_net);
-                if (absNet >= 100) {
-                    netDisplay = industry.foreign_net.toFixed(0);
-                } else if (absNet >= 10) {
-                    netDisplay = industry.foreign_net.toFixed(1);
+                let flowDisplay;
+                const absFlow = Math.abs(industry.net_inflow);
+                if (absFlow >= 10) {
+                    flowDisplay = industry.net_inflow.toFixed(1);  // >= 10億顯示1位小數
+                } else if (absFlow >= 1) {
+                    flowDisplay = industry.net_inflow.toFixed(2);  // >= 1億顯示2位小數
                 } else {
-                    netDisplay = industry.foreign_net.toFixed(2);
+                    flowDisplay = industry.net_inflow.toFixed(2);  // < 1億顯示2位小數
                 }
                 
                 return `
@@ -3239,11 +3239,11 @@
                         <div class="block-change">${changeSign}${industry.avg_change}%</div>
                         <div class="block-stats">
                             <div class="block-stat">
-                                <span>外資</span>
-                                <span class="block-stat-value">${netSign}${netDisplay}億</span>
+                                <span>淨流入</span>
+                                <span class="block-stat-value">${flowSign}${flowDisplay}億</span>
                             </div>
                             <div class="block-stat">
-                                <span>TOP50檔數</span>
+                                <span>檔數</span>
                                 <span class="block-stat-value">${industry.stock_count}</span>
                             </div>
                         </div>
@@ -3462,7 +3462,7 @@
     
     <!-- 產業熱圖 -->
     <div class="industry-heatmap-section">
-        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序</div>
+        <div class="heatmap-title">💰 產業資金流向 - 淨流入排序</div>
         <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
 
