@@ -20,6 +20,7 @@ from turnover_collector import collect_turnover_data
 from turnover_analyzer import analyze_and_export
 from commodities_collector import collect_all_commodities
 from foreign_top_stocks_collector import collect_foreign_top_stocks
+from industry_heatmap_collector import collect_industry_heatmap
 
 class DataCollector:
     def __init__(self, db_path='market_data.db'):

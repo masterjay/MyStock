@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產業熱圖 Demo - 兩種版本</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #0a0e1a;
+            color: #fff;
+            padding: 40px;
+        }
+        
+        h1 { text-align: center; margin-bottom: 50px; color: #00ff88; }
+        h2 { margin: 40px 0 20px; color: #00d9ff; }
+        
+        /* ========== 版本A: 表格式 ========== */
+        .heatmap-table-version {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+        }
+        
+        .heatmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1a2235;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .heatmap-table th {
+            background: #2d3748;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .heatmap-table td {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            border: 2px solid #0a0e1a;
+        }
+        
+        .industry-cell {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .industry-cell:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+        
+        .industry-name {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .industry-change {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+        
+        .industry-ratio {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        /* 顏色 - 紅漲綠跌 */
+        .cell-strong-up { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .cell-up { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .cell-slight-up { background: linear-gradient(135deg, #f87171 0%, #ef4444 100%); }
+        .cell-flat { background: linear-gradient(135deg, #4b5563 0%, #374151 100%); }
+        .cell-slight-down { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
+        .cell-down { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .cell-strong-down { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+        
+        /* ========== 版本B: 區塊熱圖 ========== */
+        .heatmap-blocks-version {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        
+        .industry-block {
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .industry-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .industry-block:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .industry-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .block-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .block-change {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+        
+        .block-stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+        
+        .block-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .block-stat-value {
+            font-weight: 700;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 產業熱圖 Demo - 兩種版本比較</h1>
+    
+    <!-- 版本A: 表格式 -->
+    <div class="heatmap-table-version">
+        <h2>版本A: 表格式 (類似你的參考圖)</h2>
+        <table class="heatmap-table">
+            <thead>
+                <tr>
+                    <th colspan="5">台股產業熱度圖 (當日收盤)</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- 動態填充 -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 版本B: 區塊熱圖 -->
+    <div class="heatmap-blocks-version">
+        <h2>版本B: 區塊熱圖 (視覺化更強)</h2>
+        <div class="heatmap-grid" id="blocks-container">
+            <!-- 動態填充 -->
+        </div>
+    </div>
+
+    <script>
+        // 載入數據
+        async function loadData() {
+            const response = await fetch('./backend/data/industry_heatmap.json?t=' + new Date().getTime());
+            return await response.json();
+        }
+        
+        // 根據漲跌幅獲取顏色類別
+        function getColorClass(change) {
+            if (change >= 3) return 'strong-up';
+            if (change >= 1) return 'up';
+            if (change >= 0.3) return 'slight-up';
+            if (change >= -0.3) return 'flat';
+            if (change >= -1) return 'slight-down';
+            if (change >= -3) return 'down';
+            return 'strong-down';
+        }
+        
+        // 渲染版本A: 表格式
+        function renderTableVersion(data) {
+            const tbody = document.getElementById('table-body');
+            const industries = data.industries;
+            
+            // 每5個產業一行
+            let html = '<tr>';
+            industries.forEach((industry, idx) => {
+                const colorClass = 'cell-' + getColorClass(industry.avg_change);
+                const sign = industry.avg_change >= 0 ? '+' : '';
+                
+                html += `
+                    <td class="industry-cell ${colorClass}">
+                        <div class="industry-name">${industry.industry}</div>
+                        <div class="industry-change">${sign}${industry.avg_change}%</div>
+                        <div class="industry-ratio">${industry.up_ratio}% ↑</div>
+                    </td>
+                `;
+                
+                if ((idx + 1) % 5 === 0 && idx < industries.length - 1) {
+                    html += '</tr><tr>';
+                }
+            });
+            html += '</tr>';
+            
+            tbody.innerHTML = html;
+        }
+        
+        // 渲染版本B: 區塊熱圖
+        function renderBlocksVersion(data) {
+            const container = document.getElementById('blocks-container');
+            
+            container.innerHTML = data.industries.map(industry => {
+                const colorClass = 'cell-' + getColorClass(industry.avg_change);
+                const sign = industry.avg_change >= 0 ? '+' : '';
+                
+                return `
+                    <div class="industry-block ${colorClass}">
+                        <div class="block-name">${industry.industry}</div>
+                        <div class="block-change">${sign}${industry.avg_change}%</div>
+                        <div class="block-stats">
+                            <div class="block-stat">
+                                <span>上漲比</span>
+                                <span class="block-stat-value">${industry.up_ratio}%</span>
+                            </div>
+                            <div class="block-stat">
+                                <span>檔數</span>
+                                <span class="block-stat-value">${industry.stock_count}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // 初始化
+        window.addEventListener('load', async () => {
+            const data = await loadData();
+            renderTableVersion(data);
+            renderBlocksVersion(data);
+        });
+    </script>
+</body>
+</html>

@@ -3183,61 +3183,6 @@
             });
         }
 
-        
-        // 載入產業熱圖
-        async function loadIndustryHeatmap() {
-            try {
-                const response = await fetch('./backend/data/industry_heatmap.json?t=' + new Date().getTime());
-                if (!response.ok) return null;
-                return await response.json();
-            } catch (error) {
-                console.error('載入產業熱圖失敗:', error);
-                return null;
-            }
-        }
-
-        // 根據漲跌幅獲取顏色類別
-        function getHeatmapColor(change) {
-            if (change >= 3) return 'hm-strong-up';
-            if (change >= 1) return 'hm-up';
-            if (change >= 0.3) return 'hm-slight-up';
-            if (change >= -0.3) return 'hm-flat';
-            if (change >= -1) return 'hm-slight-down';
-            if (change >= -3) return 'hm-down';
-            return 'hm-strong-down';
-        }
-
-        // 更新產業熱圖
-        function updateIndustryHeatmap(data) {
-            if (!data || !data.industries) return;
-            
-            const container = document.getElementById('heatmap-grid');
-            if (!container) return;
-            
-            container.innerHTML = data.industries.map(industry => {
-                const colorClass = getHeatmapColor(industry.avg_change);
-                const sign = industry.avg_change >= 0 ? '+' : '';
-                
-                return `
-                    <div class="industry-block ${colorClass}">
-                        <div class="block-name">${industry.industry}</div>
-                        <div class="block-change">${sign}${industry.avg_change}%</div>
-                        <div class="block-stats">
-                            <div class="block-stat">
-                                <span>上漲比</span>
-                                <span class="block-stat-value">${industry.up_ratio}%</span>
-                            </div>
-                            <div class="block-stat">
-                                <span>檔數</span>
-                                <span class="block-stat-value">${industry.stock_count}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-
         // 載入三大法人買賣金額
         async function loadInstitutionalMoney() {
             try {
@@ -3356,10 +3301,6 @@
                 updateTurnoverMonitor(turnoverData);
                 loadAllCommodities();
                 
-                // 載入產業熱圖
-                const heatmapData = await loadIndustryHeatmap();
-                if (heatmapData) updateIndustryHeatmap(heatmapData);
-                
                 // 載入三大法人
                 const institutionalData = await loadInstitutionalMoney();
                 if (institutionalData) updateInstitutionalMoney(institutionalData);
@@ -3444,14 +3385,7 @@
 
         
     
-    
-    <!-- 產業熱圖 -->
-    <div class="industry-heatmap-section">
-        <div class="heatmap-title">🎨 產業熱圖 - 資金流向一目了然</div>
-        <div class="heatmap-grid" id="heatmap-grid"></div>
-    </div>
-
-<!-- 三大法人買賣金額統計 -->
+    <!-- 三大法人買賣金額統計 -->
     <div class="institutional-money-section">
         <div class="institutional-money-title">💰 三大法人買賣金額統計</div>
         <table class="institutional-table">
@@ -3972,102 +3906,4 @@
 .limit-price { width: 80px; font-size: 14px; text-align: right; }
 .limit-card.up .limit-price { color: #ff4757; }
 .limit-card.down .limit-price { color: #1dd1a1; }
-
-
-/* ==================== 產業熱圖 ==================== */
-.industry-heatmap-section {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 30px;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.heatmap-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.heatmap-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-}
-
-.industry-block {
-    padding: 25px 15px;
-    border-radius: 12px;
-    text-align: center;
-    transition: all 0.3s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.industry-block::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.industry-block:hover::before {
-    transform: translateX(100%);
-}
-
-.industry-block:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.block-name {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-.block-change {
-    font-size: 28px;
-    font-weight: 800;
-    margin: 10px 0;
-}
-
-.block-stats {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 12px;
-    font-size: 12px;
-}
-
-.block-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.block-stat-value {
-    font-weight: 700;
-    font-size: 14px;
-}
-
-/* 顏色 - 紅漲綠跌 */
-.hm-strong-up { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
-.hm-up { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
-.hm-slight-up { background: linear-gradient(135deg, #f87171 0%, #ef4444 100%); }
-.hm-flat { background: linear-gradient(135deg, #4b5563 0%, #374151 100%); }
-.hm-slight-down { background: linear-gradient(135deg, #34d399 0%, #10b981 100%); }
-.hm-down { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
-.hm-strong-down { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
-
-@media (max-width: 768px) {
-    .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-    </style>
+</style>

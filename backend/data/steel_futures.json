@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-01-24T20:00:23.605654",
+  "updated_at": "2026-01-25T13:49:49.302620",
   "symbol": "HRC=F",
   "name": "熱軋鋼捲期貨",
   "name_en": "Hot Rolled Coil Steel Futures",
@@ -841,11 +841,11 @@
       "close": 943.0
     },
     {
-      "date": "2026-01-23",
-      "open": 943.0,
+      "date": "2026-01-24",
+      "open": 927.0,
       "high": 944.0,
       "low": 942.0,
-      "close": 942.0
+      "close": 964.0
     }
   ]
 }

@@ -1,0 +1,175 @@
+{
+  "date": "20260125",
+  "updated_at": "2026-01-25T14:19:40.234920",
+  "source": "TWSE_ALL_STOCKS",
+  "industries": [
+    {
+      "industry": "生技醫療",
+      "avg_change": 0.85,
+      "up_ratio": 42.9,
+      "stock_count": 7,
+      "up_count": 3,
+      "down_count": 4
+    },
+    {
+      "industry": "食品",
+      "avg_change": 0.71,
+      "up_ratio": 62.1,
+      "stock_count": 29,
+      "up_count": 18,
+      "down_count": 11
+    },
+    {
+      "industry": "電腦週邊",
+      "avg_change": 0.5,
+      "up_ratio": 50.0,
+      "stock_count": 72,
+      "up_count": 36,
+      "down_count": 36
+    },
+    {
+      "industry": "其他",
+      "avg_change": 0.4,
+      "up_ratio": 48.2,
+      "stock_count": 512,
+      "up_count": 247,
+      "down_count": 265
+    },
+    {
+      "industry": "資訊服務",
+      "avg_change": 0.34,
+      "up_ratio": 60.0,
+      "stock_count": 15,
+      "up_count": 9,
+      "down_count": 6
+    },
+    {
+      "industry": "觀光",
+      "avg_change": 0.31,
+      "up_ratio": 35.7,
+      "stock_count": 14,
+      "up_count": 5,
+      "down_count": 9
+    },
+    {
+      "industry": "建材營造",
+      "avg_change": 0.24,
+      "up_ratio": 31.2,
+      "stock_count": 48,
+      "up_count": 15,
+      "down_count": 33
+    },
+    {
+      "industry": "塑膠",
+      "avg_change": 0.1,
+      "up_ratio": 40.0,
+      "stock_count": 20,
+      "up_count": 8,
+      "down_count": 12
+    },
+    {
+      "industry": "化工",
+      "avg_change": 0.02,
+      "up_ratio": 45.5,
+      "stock_count": 11,
+      "up_count": 5,
+      "down_count": 6
+    },
+    {
+      "industry": "半導體",
+      "avg_change": -0.01,
+      "up_ratio": 38.8,
+      "stock_count": 67,
+      "up_count": 26,
+      "down_count": 41
+    },
+    {
+      "industry": "電子通路",
+      "avg_change": -0.03,
+      "up_ratio": 32.1,
+      "stock_count": 28,
+      "up_count": 9,
+      "down_count": 19
+    },
+    {
+      "industry": "電機",
+      "avg_change": -0.13,
+      "up_ratio": 36.0,
+      "stock_count": 25,
+      "up_count": 9,
+      "down_count": 16
+    },
+    {
+      "industry": "鋼鐵",
+      "avg_change": -0.18,
+      "up_ratio": 42.9,
+      "stock_count": 35,
+      "up_count": 15,
+      "down_count": 20
+    },
+    {
+      "industry": "水泥",
+      "avg_change": -0.24,
+      "up_ratio": 0.0,
+      "stock_count": 7,
+      "up_count": 0,
+      "down_count": 7
+    },
+    {
+      "industry": "其他電子",
+      "avg_change": -0.24,
+      "up_ratio": 41.1,
+      "stock_count": 56,
+      "up_count": 23,
+      "down_count": 33
+    },
+    {
+      "industry": "電子零組件",
+      "avg_change": -0.53,
+      "up_ratio": 26.7,
+      "stock_count": 15,
+      "up_count": 4,
+      "down_count": 11
+    },
+    {
+      "industry": "光電",
+      "avg_change": -0.69,
+      "up_ratio": 14.3,
+      "stock_count": 28,
+      "up_count": 4,
+      "down_count": 24
+    },
+    {
+      "industry": "汽車",
+      "avg_change": -0.7,
+      "up_ratio": 0.0,
+      "stock_count": 6,
+      "up_count": 0,
+      "down_count": 6
+    },
+    {
+      "industry": "航運",
+      "avg_change": -0.8,
+      "up_ratio": 28.2,
+      "stock_count": 39,
+      "up_count": 11,
+      "down_count": 28
+    },
+    {
+      "industry": "橡膠",
+      "avg_change": -1.19,
+      "up_ratio": 28.6,
+      "stock_count": 7,
+      "up_count": 2,
+      "down_count": 5
+    },
+    {
+      "industry": "通訊網路",
+      "avg_change": -1.38,
+      "up_ratio": 4.2,
+      "stock_count": 24,
+      "up_count": 1,
+      "down_count": 23
+    }
+  ]
+}
