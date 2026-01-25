@@ -1,0 +1,59 @@
+{
+  "latest": {
+    "margin": {
+      "date": "20251226",
+      "ratio": 0.57,
+      "balance": 3403.37
+    },
+    "futures": {
+      "date": "20251226",
+      "ratio": 0.98,
+      "foreign_net": -23476
+    }
+  },
+  "sentiment": {
+    "taiwan": {
+      "score": 51,
+      "rating": "中性",
+      "components": {
+        "margin": {
+          "score": 62,
+          "weight": 0.4
+        },
+        "futures": {
+          "score": 49,
+          "weight": 0.4
+        },
+        "foreign": {
+          "score": 31,
+          "weight": 0.2
+        }
+      }
+    },
+    "us": {
+      "score": 55.5142857142857,
+      "rating": "greed",
+      "previous_close": 57.7428571428571,
+      "previous_week": 49.6857142857143,
+      "previous_month": 17.657142857142862,
+      "timestamp": "2025-12-26T23:59:48+00:00"
+    }
+  },
+  "history": {
+    "margin": [
+      {
+        "date": "20251226",
+        "ratio": 0.57,
+        "balance": 3403.37
+      }
+    ],
+    "futures": [
+      {
+        "date": "20251226",
+        "ratio": 0.98,
+        "foreign_net": -23476
+      }
+    ]
+  },
+  "updated_at": "2025-12-27T13:44:23.205850"
+}

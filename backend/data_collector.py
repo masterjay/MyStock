@@ -15,9 +15,11 @@ from scraper_us_sentiment import USFearGreedScraper
 from sentiment_tw import TWSentimentCalculator
 from calculator_retail import RetailInvestorCalculator
 
+from market_breadth_collector import get_market_momentum, get_market_breadth
 from turnover_collector import collect_turnover_data
 from turnover_analyzer import analyze_and_export
 from commodities_collector import collect_all_commodities
+from foreign_top_stocks_collector import collect_foreign_top_stocks
 
 class DataCollector:
     def __init__(self, db_path='market_data.db'):
@@ -174,6 +176,15 @@ class DataCollector:
             print("✓ 商品期貨數據收集完成")
         except Exception as e:
             print(f"✗ 商品期貨收集失敗: {e}")
+        
+        
+        # 收集外資買賣超排行
+        print("\n[8/8] 收集外資買賣超排行...")
+        try:
+            collect_foreign_top_stocks()
+            print("✓ 外資買賣超排行收集完成")
+        except Exception as e:
+            print(f"✗ 外資買賣超收集失敗: {e}")
         
         return {
             'margin': margin_result,
@@ -386,8 +397,62 @@ class DataCollector:
         # 歷史數據
         history = self.get_historical_data(60)  # 60天
         
-        # 計算台股情緒指數
+        # 計算台股情緒指數 (v2.0 CNN-style)
         tw_sentiment = None
+        
+        # 取得價格類指標
+        momentum_data = None
+        breadth_data = None
+        
+        try:
+            # 取得市場廣度數據
+            breadth_raw = get_market_breadth()
+            if breadth_raw:
+                breadth_data = {
+                    'up_count': breadth_raw['up_count'],
+                    'down_count': breadth_raw['down_count'],
+                    'up_ratio': breadth_raw['up_ratio']
+                }
+                # 用漲停/跌停當價格強度指標
+                strength_data = {
+                    'new_highs': breadth_raw.get('up_limit', 0),
+                    'new_lows': breadth_raw.get('down_limit', 0)
+                }
+            
+            # 取得動能數據 (從 market_breadth 表取歷史)
+            momentum_raw = get_market_momentum()
+            if momentum_raw:
+                import sqlite3
+                conn = sqlite3.connect(self.db_path)
+                cursor = conn.cursor()
+                cursor.execute("SELECT taiex_close FROM market_breadth WHERE taiex_close IS NOT NULL ORDER BY date DESC LIMIT 60")
+                closes = [row[0] for row in cursor.fetchall()]
+                conn.close()
+                
+                if len(closes) >= 5:
+                    ma20 = sum(closes[:min(20, len(closes))]) / min(20, len(closes))
+                    ma60 = sum(closes) / len(closes)
+                    momentum_data = {
+                        'close': momentum_raw['close'],
+                        'ma20': ma20,
+                        'ma60': ma60,
+                        'change': momentum_raw.get('change', 0)
+                    }
+                else:
+                    # 數據不足時用漲跌幅估算
+                    change = momentum_raw.get('change', 0)
+                    close = momentum_raw['close']
+                    # 假設昨收 = 今收 - 漲跌
+                    yesterday = close - change
+                    momentum_data = {
+                        'close': close,
+                        'ma20': yesterday,  # 暫用昨收代替
+                        'ma60': yesterday,
+                        'change': change
+                    }
+        except Exception as e:
+            print(f"  ⚠ 價格指標取得失敗: {e}")
+        
         if latest['margin'] and latest['futures']:
             margin_ratio = latest['margin'][4]  # margin_ratio
             futures_ratio = latest['futures'][5]  # long_short_ratio
@@ -395,10 +460,13 @@ class DataCollector:
             pcr_volume = latest['futures'][14] if len(latest['futures']) > 14 else None  # pcr_volume
             
             tw_sentiment = self.tw_calculator.calculate_sentiment(
-                margin_ratio, 
-                futures_ratio, 
-                foreign_net,
-                pcr_volume=pcr_volume
+                margin_ratio=margin_ratio, 
+                futures_ratio=futures_ratio, 
+                foreign_net=foreign_net,
+                pcr_volume=pcr_volume,
+                momentum_data=momentum_data,
+                breadth_data=breadth_data,
+                strength_data=strength_data
             )
         
         # 抓取美股情緒指數

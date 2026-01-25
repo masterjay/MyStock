@@ -1,0 +1,400 @@
+{
+  "latest": {
+    "margin": {
+      "date": "20260123",
+      "ratio": 62.68,
+      "balance": 3760.77
+    },
+    "futures": {
+      "date": "20260123",
+      "ratio": 0.96,
+      "foreign_net": -22666,
+      "trust_net": 24763,
+      "dealer_net": -4346,
+      "retail_long": 28915,
+      "retail_short": 30126,
+      "retail_net": -1211,
+      "retail_ratio": 0.96,
+      "pcr_volume": 1.25
+    }
+  },
+  "sentiment": {
+    "taiwan": {
+      "score": 54,
+      "rating": "中性",
+      "components": {
+        "momentum": {
+          "score": 56,
+          "weight": 0.2,
+          "desc": "價格動能"
+        },
+        "breadth": {
+          "score": 31,
+          "weight": 0.15,
+          "desc": "市場廣度"
+        },
+        "strength": {
+          "score": 93,
+          "weight": 0.1,
+          "desc": "新高低比"
+        },
+        "margin": {
+          "score": 81,
+          "weight": 0.15,
+          "desc": "融資使用率"
+        },
+        "futures": {
+          "score": 48,
+          "weight": 0.15,
+          "desc": "期貨多空比"
+        },
+        "foreign": {
+          "score": 32,
+          "weight": 0.1,
+          "desc": "外資淨部位"
+        },
+        "pcr": {
+          "score": 41,
+          "weight": 0.15,
+          "desc": "Put/Call比"
+        }
+      },
+      "available_weight": 100.0
+    },
+    "us": {
+      "score": 52.3714285714286,
+      "rating": "neutral",
+      "previous_close": 51.8,
+      "previous_week": 55.3428571428571,
+      "previous_month": 57.7142857142857,
+      "timestamp": "2026-01-23T23:59:55+00:00"
+    }
+  },
+  "history": {
+    "margin": [
+      {
+        "date": "20260123",
+        "ratio": 62.68,
+        "balance": 3760.77
+      },
+      {
+        "date": "20260116",
+        "ratio": 60.57,
+        "balance": 3633.92
+      },
+      {
+        "date": "20260113",
+        "ratio": 59.27,
+        "balance": 3556.39
+      },
+      {
+        "date": "20260109",
+        "ratio": 58.58,
+        "balance": 3514.93
+      },
+      {
+        "date": "20260107",
+        "ratio": 59.51,
+        "balance": 3570.59
+      },
+      {
+        "date": "20251231",
+        "ratio": 57.23,
+        "balance": 3434.1
+      },
+      {
+        "date": "20251230",
+        "ratio": 56.89,
+        "balance": 3413.68
+      },
+      {
+        "date": "20251229",
+        "ratio": 56.65,
+        "balance": 3398.87
+      },
+      {
+        "date": "20251226",
+        "ratio": 0.57,
+        "balance": 3403.37
+      },
+      {
+        "date": "20251224",
+        "ratio": 56.48,
+        "balance": 3389.03
+      },
+      {
+        "date": "20251223",
+        "ratio": 56.26,
+        "balance": 3375.88
+      },
+      {
+        "date": "20251222",
+        "ratio": 55.87,
+        "balance": 3351.96
+      },
+      {
+        "date": "20251219",
+        "ratio": 55.55,
+        "balance": 3333.09
+      },
+      {
+        "date": "20251218",
+        "ratio": 55.4,
+        "balance": 3323.8
+      },
+      {
+        "date": "20251217",
+        "ratio": 55.36,
+        "balance": 3321.75
+      },
+      {
+        "date": "20251216",
+        "ratio": 54.8,
+        "balance": 3287.89
+      },
+      {
+        "date": "20251215",
+        "ratio": 55.31,
+        "balance": 3318.59
+      },
+      {
+        "date": "20251212",
+        "ratio": 54.89,
+        "balance": 3293.5
+      },
+      {
+        "date": "20251211",
+        "ratio": 54.45,
+        "balance": 3266.72
+      },
+      {
+        "date": "20251210",
+        "ratio": 54.62,
+        "balance": 3276.95
+      },
+      {
+        "date": "20251209",
+        "ratio": 54.48,
+        "balance": 3268.84
+      },
+      {
+        "date": "20251208",
+        "ratio": 54.12,
+        "balance": 3247.39
+      },
+      {
+        "date": "20251205",
+        "ratio": 53.82,
+        "balance": 3229.17
+      },
+      {
+        "date": "20251204",
+        "ratio": 53.8,
+        "balance": 3228.26
+      },
+      {
+        "date": "20251203",
+        "ratio": 53.57,
+        "balance": 3214.25
+      },
+      {
+        "date": "20251202",
+        "ratio": 53.29,
+        "balance": 3197.37
+      },
+      {
+        "date": "20251201",
+        "ratio": 53.23,
+        "balance": 3193.6
+      }
+    ],
+    "futures": [
+      {
+        "date": "20260123",
+        "ratio": 0.96,
+        "foreign_net": -22666
+      },
+      {
+        "date": "20260122",
+        "ratio": 0.94,
+        "foreign_net": -24293
+      },
+      {
+        "date": "20260121",
+        "ratio": 0.94,
+        "foreign_net": -24473
+      },
+      {
+        "date": "20260120",
+        "ratio": 0.92,
+        "foreign_net": -32675
+      },
+      {
+        "date": "20260119",
+        "ratio": 0.91,
+        "foreign_net": -33726
+      },
+      {
+        "date": "20260116",
+        "ratio": 0.91,
+        "foreign_net": -33249
+      },
+      {
+        "date": "20260115",
+        "ratio": 0.87,
+        "foreign_net": -35130
+      },
+      {
+        "date": "20260114",
+        "ratio": 0.88,
+        "foreign_net": -33957
+      },
+      {
+        "date": "20260113",
+        "ratio": 0.92,
+        "foreign_net": -30117
+      },
+      {
+        "date": "20260112",
+        "ratio": 0.95,
+        "foreign_net": -26892
+      },
+      {
+        "date": "20260109",
+        "ratio": 0.95,
+        "foreign_net": -26583
+      },
+      {
+        "date": "20260108",
+        "ratio": 0.96,
+        "foreign_net": -26047
+      },
+      {
+        "date": "20260107",
+        "ratio": 0.93,
+        "foreign_net": -29422
+      },
+      {
+        "date": "20260101",
+        "ratio": 0.98,
+        "foreign_net": -25059
+      },
+      {
+        "date": "20251231",
+        "ratio": 0.98,
+        "foreign_net": -25059
+      },
+      {
+        "date": "20251230",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251229",
+        "ratio": 0.99,
+        "foreign_net": -22173
+      },
+      {
+        "date": "20251226",
+        "ratio": 0.98,
+        "foreign_net": -23476
+      },
+      {
+        "date": "20251225",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251224",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251223",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251222",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251219",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251218",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251217",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251216",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251215",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251212",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251211",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251210",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251209",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251208",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251205",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251204",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251203",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251202",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      },
+      {
+        "date": "20251201",
+        "ratio": 0.96,
+        "foreign_net": -26259
+      }
+    ]
+  },
+  "updated_at": "2026-01-24T20:00:27.437009"
+}

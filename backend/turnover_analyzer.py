@@ -1,110 +1,166 @@
 #!/usr/bin/env python3
-import sqlite3, json
+# -*- coding: utf-8 -*-
+"""
+周轉率分析器 v2.1
+支援周轉率 + 爆量倍數雙重篩選
+新增股價、漲跌%輸出
+"""
+
+import sqlite3
+import json
 from datetime import datetime
 
 def get_consecutive_overheat_days(stock_code, days=7):
+    """計算連續過熱天數"""
     conn = sqlite3.connect('market_data.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT date, turnover_rate FROM turnover_history WHERE stock_code = ? ORDER BY date DESC LIMIT ?', (stock_code, days))
-    records = cursor.fetchall()
+    cursor.execute('''
+        SELECT date, turnover_rate FROM turnover_history 
+        WHERE stock_code = ? ORDER BY date DESC LIMIT ?
+    ''', (stock_code, days))
+    rows = cursor.fetchall()
     conn.close()
+    
     consecutive = 0
-    for date, rate in records:
-        if rate >= 15: consecutive += 1
-        else: break
+    for row in rows:
+        if row[1] >= 15:
+            consecutive += 1
+        else:
+            break
     return consecutive
 
-def get_all_stocks_classified():
-    conn = sqlite3.connect('market_data.db')
-    cursor = conn.cursor()
-    today = datetime.now().strftime('%Y%m%d')
-    cursor.execute('SELECT stock_code, stock_name, industry, turnover_rate, volume FROM turnover_history WHERE date = ? ORDER BY volume DESC', (today,))
-    all_stocks, active_stocks, normal_stocks = [], [], []
-    for row in cursor.fetchall():
-        code, name, industry, rate, volume = row
-        stock_data = {'code': code, 'name': name, 'industry': industry, 'turnover_rate': rate, 'volume': volume}
-        all_stocks.append(stock_data)
-        if rate < 15:
-            if 10 <= rate < 15: active_stocks.append(stock_data)
-            elif 5 <= rate < 10: active_stocks.append(stock_data)
-            elif rate < 5: normal_stocks.append(stock_data)
-    conn.close()
-    return {'all': all_stocks, 'active': active_stocks, 'normal': normal_stocks}
-
-def get_all_stocks_classified():
-    """取得所有股票並分類"""
+def analyze_and_export():
+    """分析並導出 JSON"""
     conn = sqlite3.connect('market_data.db')
     cursor = conn.cursor()
     
     today = datetime.now().strftime('%Y%m%d')
     
-    # 取得今日所有股票
+    # 取得今日全部數據 (加入 close_price, change_pct)
     cursor.execute('''
-        SELECT stock_code, stock_name, industry, turnover_rate, volume
+        SELECT stock_code, stock_name, industry, turnover_rate, volume, surge_5d, surge_20d, surge_type, close_price, change_pct
         FROM turnover_history 
-        WHERE date = ?
-        ORDER BY volume DESC
+        WHERE date = ? 
+        ORDER BY turnover_rate DESC
     ''', (today,))
     
     all_stocks = []
-    active_stocks = []  # 5-10%
-    normal_stocks = []  # <5%
-    
     for row in cursor.fetchall():
-        code, name, industry, rate, volume = row
+        code, name, industry, rate, volume, surge_5d, surge_20d, surge_type, close_price, change_pct = row
+        consecutive_days = get_consecutive_overheat_days(code, 7) if rate >= 15 else 0
         
-        stock_data = {
+        # 判斷主標籤（優先級：超級爆量 > 強爆量 > 短線異動 > 中線放量 > 過熱 > 活躍）
+        if surge_type == "super":
+            main_tag = "超級爆量"
+        elif surge_type == "both":
+            main_tag = "強爆量"
+        elif surge_type == "short":
+            main_tag = "短線異動"
+        elif surge_type == "mid":
+            main_tag = "中線放量"
+        elif consecutive_days >= 3:
+            main_tag = "過熱"
+        elif rate >= 10:
+            main_tag = "活躍"
+        else:
+            main_tag = None
+        
+        # 判斷標籤
+        tags = []
+        if rate >= 15:
+            tags.append('高周轉')
+        if surge_5d and surge_5d >= 3:
+            tags.append('爆量')
+        
+        all_stocks.append({
             'code': code,
             'name': name,
-            'industry': industry,
+            'industry': industry or '其他',
             'turnover_rate': rate,
-            'volume': volume
-        }
-        
-        all_stocks.append(stock_data)
-        
-        # 分類 (非過熱股票)
-        if rate < 15:
-            if 5 <= rate < 10:
-                active_stocks.append(stock_data)
-            elif rate < 5:
-                normal_stocks.append(stock_data)
+            'volume': volume,
+            'surge_5d': surge_5d,
+            'surge_20d': surge_20d,
+            'surge_type': surge_type,
+            'consecutive_days': consecutive_days,
+            'tags': tags,
+            'main_tag': main_tag,
+            'close_price': close_price,
+            'change_pct': change_pct
+        })
     
-    conn.close()
+    # 分類
+    # 過熱: 周轉率 >= 15%
+    overheat_stocks = [s for s in all_stocks if s['turnover_rate'] >= 15]
     
-    return {
-        'all': all_stocks,
-        'active': active_stocks,
-        'normal': normal_stocks
-    }
-
-def analyze_and_export():
-    conn = sqlite3.connect('market_data.db')
-    cursor = conn.cursor()
-    today = datetime.now().strftime('%Y%m%d')
-    cursor.execute('SELECT stock_code, stock_name, industry, turnover_rate, volume FROM turnover_history WHERE date = ? AND turnover_rate >= 15 ORDER BY turnover_rate DESC', (today,))
-    overheat_stocks = []
-    for row in cursor.fetchall():
-        code, name, industry, rate, volume = row
-        consecutive_days = get_consecutive_overheat_days(code, 7)
-        overheat_stocks.append({'code': code, 'name': name, 'industry': industry, 'turnover_rate': rate, 'volume': volume, 'consecutive_days': consecutive_days})
+    # 依連續天數分級
     extreme_danger = [s for s in overheat_stocks if s['consecutive_days'] >= 5]
     severe = [s for s in overheat_stocks if s['consecutive_days'] == 4]
     overheat = [s for s in overheat_stocks if s['consecutive_days'] == 3]
     warning = [s for s in overheat_stocks if s['consecutive_days'] == 2]
     new = [s for s in overheat_stocks if s['consecutive_days'] == 1]
-    cursor.execute('SELECT industry, COUNT(*) FROM turnover_history WHERE date = ? AND turnover_rate >= 15 GROUP BY industry ORDER BY COUNT(*) DESC', (today,))
-    industry_stats = [{'industry': i, 'count': c} for i, c in cursor.fetchall()]
-    cursor.execute('SELECT COUNT(CASE WHEN turnover_rate >= 15 THEN 1 END), COUNT(CASE WHEN turnover_rate >= 10 AND turnover_rate < 15 THEN 1 END), COUNT(CASE WHEN turnover_rate >= 5 AND turnover_rate < 10 THEN 1 END), COUNT(CASE WHEN turnover_rate < 5 THEN 1 END) FROM turnover_history WHERE date = ?', (today,))
-    row = cursor.fetchone()
-    stats = {'overheat': row[0], 'warning': row[1], 'active': row[2], 'normal': row[3]}
+    
+    # 爆量股 (>= 3倍，但不在過熱榜)
+    surge_only = [s for s in all_stocks if s['surge_5d'] and s['surge_5d'] >= 3 and s['turnover_rate'] < 15]
+    
+    # 活躍股 (10-15%)
+    active = [s for s in all_stocks if 10 <= s['turnover_rate'] < 15]
+    
+    # 統計
+    stats = {
+        'overheat': len(overheat_stocks),
+        'surge': len([s for s in all_stocks if s['surge_5d'] and s['surge_5d'] >= 3]),
+        'both': len([s for s in all_stocks if s['turnover_rate'] >= 15 and s['surge_5d'] and s['surge_5d'] >= 3]),
+        'active': len(active),
+        'total': len(all_stocks)
+    }
+    
+    # 產業統計 (統計 TOP 50 全部，顯示資金流向)
+    cursor.execute('''
+        SELECT industry, COUNT(*), 
+               SUM(CASE WHEN turnover_rate >= 15 THEN 1 ELSE 0 END) as overheat_count,
+               ROUND(AVG(turnover_rate), 2) as avg_rate
+        FROM turnover_history 
+        WHERE date = ? 
+        GROUP BY industry 
+        ORDER BY COUNT(*) DESC
+    ''', (today,))
+    industry_stats = [{
+        'industry': row[0] or '其他', 
+        'count': row[1],
+        'overheat': row[2],
+        'avg_rate': row[3]
+    } for row in cursor.fetchall()]
+    
     conn.close()
-    all_classified = get_all_stocks_classified()
-    output = {'updated_at': datetime.now().isoformat(), 'statistics': stats, 'overheat_stocks': {'extreme_danger': extreme_danger, 'severe': severe, 'overheat': overheat, 'warning': warning, 'new': new}, 'industry_stats': industry_stats, 'all_stocks': all_classified['all'], 'active_stocks': all_classified['active'], 'normal_stocks': all_classified['normal']}
+    
+    # 組合輸出
+    output = {
+        'updated_at': datetime.now().isoformat(),
+        'statistics': stats,
+        'overheat_stocks': {
+            'extreme_danger': extreme_danger,
+            'severe': severe,
+            'overheat': overheat,
+            'warning': warning,
+            'new': new
+        },
+        'surge_stocks': surge_only,
+        'active_stocks': active,
+        'all_stocks': all_stocks,  # 完整列表供前端使用
+        'industry_stats': industry_stats
+    }
+    
+    # 寫入 JSON
     with open('data/turnover_analysis.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    print(f"✓ 完成: {len(overheat_stocks)}檔過熱, {len(all_classified['active'])}檔活躍, {len(all_classified['normal'])}檔正常")
-    return output
+    
+    print(f"✓ 分析完成:")
+    print(f"   高周轉 (>=15%): {stats['overheat']} 檔")
+    print(f"   爆量 (>=3倍): {stats['surge']} 檔")
+    print(f"   兩者皆是: {stats['both']} 檔")
+    print(f"   活躍 (10-15%): {stats['active']} 檔")
+    
+    return True
 
 if __name__ == '__main__':
     analyze_and_export()
