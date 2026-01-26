@@ -3535,6 +3535,10 @@
     
     
     <!-- 產業熱圖 -->
+    <div class="industry-heatmap-section">
+        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序</div>
+        <div class="heatmap-grid" id="heatmap-grid"></div>
+    </div>
 
 <!-- 三大法人買賣金額統計 -->
     <div class="institutional-money-section">
@@ -3563,7 +3567,7 @@
             <!-- 買超 -->
             <div class="foreign-card buy">
                 <div class="foreign-card-title">
-                    🔴 外資買超
+                    🟢 外資買超
                 </div>
                 <div class="foreign-list" id="foreign-buy-list">
                     <!-- 動態填充 -->
@@ -3573,7 +3577,7 @@
             <!-- 賣超 -->
             <div class="foreign-card sell">
                 <div class="foreign-card-title">
-                    🟢 外資賣超
+                    🔴 外資賣超
                 </div>
                 <div class="foreign-list" id="foreign-sell-list">
                     <!-- 動態填充 -->
@@ -3602,10 +3606,6 @@
                 <div class="limit-list" id="limit-down-list"></div>
             </div>
         </div>
-    </div>
-    <div class="industry-heatmap-section">
-        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序</div>
-        <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
 
 
@@ -3919,8 +3919,8 @@
     padding: 20px;
 }
 
-.foreign-card.buy { border-top: 3px solid #ef4444; }
-.foreign-card.sell { border-top: 3px solid #10b981; }
+.foreign-card.buy { border-top: 3px solid #1dd1a1; }
+.foreign-card.sell { border-top: 3px solid #ff4757; }
 
 .foreign-card-title {
     font-size: 20px;
@@ -3928,8 +3928,8 @@
     margin-bottom: 15px;
 }
 
-.foreign-card.buy .foreign-card-title { color: #ef4444; }
-.foreign-card.sell .foreign-card-title { color: #10b981; }
+.foreign-card.buy .foreign-card-title { color: #1dd1a1; }
+.foreign-card.sell .foreign-card-title { color: #ff4757; }
 
 .foreign-item {
     display: flex;
@@ -3972,8 +3972,8 @@
     min-width: 100px;
 }
 
-.foreign-card.buy .foreign-amount { color: #ef4444; }
-.foreign-card.sell .foreign-amount { color: #10b981; }
+.foreign-card.buy .foreign-amount { color: #1dd1a1; }
+.foreign-card.sell .foreign-amount { color: #ff4757; }
 
 @media (max-width: 768px) {
     .foreign-grid { grid-template-columns: 1fr; }
