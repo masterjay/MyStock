@@ -1681,9 +1681,6 @@
 .commodity-card.gold {
     border-color: #ffd700;
 }
-.commodity-card.silver {
-    border-color: #c0c0c0;
-}
 
 .commodity-card.oil {
     border-color: #2d3436;
@@ -1708,7 +1705,6 @@
     gap: 8px;
 }
 
-.commodity-title.silver { color: #c0c0c0; }
 .commodity-title.copper { color: #ff9f43; }
 .commodity-title.gold { color: #ffd700; }
 .commodity-title.oil { color: #95a5a6; }
@@ -2832,11 +2828,9 @@
         async function loadAllCommodities() {
             const copperData = await loadCommodityData('copper');
             const goldData = await loadCommodityData('gold');
-            const silverData = await loadCommodityData('silver');
             const oilData = await loadCommodityData('oil');
             const steelData = await loadCommodityData('steel');
 
-            if (silverData) updateCommodityDisplay('silver', silverData, '#c0c0c0', 2);
             if (copperData) updateCommodityDisplay('copper', copperData, '#ff9f43', 3);
             if (goldData) updateCommodityDisplay('gold', goldData, '#ffd700', 2);
             if (oilData) updateCommodityDisplay('oil', oilData, '#95a5a6', 2);
@@ -3718,20 +3712,6 @@
                 </div>
                 <div class="commodity-chart">
                     <canvas id="goldChart"></canvas>
-                </div>
-            </div>
-            <!-- 白銀 -->
-            <div class="commodity-card silver">
-                <div class="commodity-header">
-                    <div class="commodity-title silver">🥈 白銀期貨</div>
-                    <div class="commodity-unit">COMEX Silver (SI=F) - USD/盎司</div>
-                </div>
-                <div class="commodity-price-info">
-                    <div class="commodity-price" id="silver-price">$0.00</div>
-                    <div class="commodity-change" id="silver-change">--</div>
-                </div>
-                <div class="commodity-chart">
-                    <canvas id="silverChart"></canvas>
                 </div>
             </div>
 

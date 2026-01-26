@@ -25,13 +25,6 @@ COMMODITIES = {
         'unit': 'USD/oz',
         'table': 'gold_futures'
     },
-    'silver': {
-        'symbol': 'SI=F',
-        'name': 'COMEX 白銀期貨',
-        'name_en': 'Silver Futures',
-        'unit': 'USD/oz',
-        'table': 'silver_futures'
-    },
     'oil': {
         'symbol': 'CL=F',
         'name': 'WTI 原油期貨',
