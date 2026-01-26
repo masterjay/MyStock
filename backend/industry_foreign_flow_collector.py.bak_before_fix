@@ -1,55 +1,6 @@
 #!/usr/bin/env python3
 import json
 from collections import defaultdict
-
-def get_price_changes():
-    """從TWSE取得所有股票的漲跌幅"""
-    from datetime import datetime
-    import requests
-    
-    today = datetime.now().strftime('%Y%m%d')
-    url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={today}&response=json"
-    
-    try:
-        response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
-        data = response.json()
-        
-        price_map = {}
-        for row in data.get('data', []):
-            try:
-                code = row[0].strip()
-                if not code.isdigit() or len(code) != 4:
-                    continue
-                    
-                close_price = float(row[7].replace(',', ''))
-                change_str = row[8].replace(',', '').strip()
-                
-                # 處理漲跌符號
-                if change_str.startswith('+'):
-                    change_value = float(change_str[1:])
-                elif change_str.startswith('-'):
-                    change_value = -float(change_str[1:])
-                elif change_str == 'X':
-                    change_value = 0
-                else:
-                    change_value = float(change_str) if change_str else 0
-                
-                if close_price - change_value != 0:
-                    change_pct = (change_value / (close_price - change_value)) * 100
-                else:
-                    change_pct = 0
-                    
-                price_map[code] = round(change_pct, 2)
-                
-            except (IndexError, ValueError, ZeroDivisionError):
-                continue
-                
-        return price_map
-        
-    except Exception as e:
-        print(f"取得漲跌幅失敗: {e}")
-        return {}
-
 from datetime import datetime
 
 def get_industry_by_code(code, name):
@@ -58,7 +9,7 @@ def get_industry_by_code(code, name):
         '23': '半導體', '24': '電腦週邊', '25': '光電', '26': '通訊網路',
         '27': '電子零組件', '28': '電子通路', '29': '資訊服務', '30': '其他電子',
         '14': '建材營造', '15': '航運', '17': '鋼鐵', '18': '橡膠',
-        '19': '汽車', '20': '鋼鐵', '12': '食品', '21': '化工', '16': '觀光',
+        '19': '汽車', '20': '食品', '21': '化工', '16': '觀光',
         '13': '電機', '11': '水泥', '12': '塑膠'
     }
     if prefix in industry_map:
@@ -75,9 +26,12 @@ def collect_industry_foreign_flow():
     with open('data/turnover_analysis.json', 'r') as f:
         market_data = json.load(f)
     
-    # 直接從TWSE取得漲跌幅
-    price_changes = get_price_changes()
-    print(f"✓ 已取得 {len(price_changes)} 檔股票漲跌幅")
+    price_map = {}
+    for stock in market_data.get('all_stocks', []):
+        price_map[stock['code']] = {
+            'change_pct': stock.get('change_pct', 0),
+            'industry': stock.get('industry', '其他')
+        }
     
     industry_stats = defaultdict(lambda: {
         'foreign_net': 0, 'foreign_buy': 0, 'foreign_sell': 0,
@@ -89,9 +43,9 @@ def collect_industry_foreign_flow():
         name = stock['name']
         foreign_net = stock['foreign_net'] / 100000
         
-        if code in price_changes:
-            change_pct = price_changes[code]
-            industry = get_industry_by_code(code, name)
+        if code in price_map:
+            industry = price_map[code]['industry']
+            change_pct = price_map[code]['change_pct']
         else:
             industry = get_industry_by_code(code, name)
             change_pct = 0
@@ -112,9 +66,9 @@ def collect_industry_foreign_flow():
         name = stock['name']
         foreign_net = stock['foreign_net'] / 100000
         
-        if code in price_changes:
-            change_pct = price_changes[code]
-            industry = get_industry_by_code(code, name)
+        if code in price_map:
+            industry = price_map[code]['industry']
+            change_pct = price_map[code]['change_pct']
         else:
             industry = get_industry_by_code(code, name)
             change_pct = 0

@@ -41,25 +41,16 @@ try:
         print("✗ 數據收集失敗")
         sys.exit(1)
     
-    # 2. 收集三大法人買賣金額
-    print("\n[額外收集] 三大法人買賣金額統計...")
-    try:
-        import institutional_money_collector
-        institutional_money_collector.main()
-        print("✓ 三大法人買賣金額收集完成")
-    except Exception as e:
-        print(f"✗ 三大法人買賣金額收集失敗: {e}")
-    
-    # 3. 收集漲停跌停股
+    # 2. 收集漲停跌停股
     print("\n[額外收集] 漲停跌停股...")
     try:
-        import limit_updown_collector
-        limit_updown_collector.main()
+        from limit_updown_collector import collect_limit_updown
+        collect_limit_updown()
         print("✓ 漲停跌停股收集完成")
     except Exception as e:
         print(f"✗ 漲停跌停股收集失敗: {e}")
     
-    # 4. 收集產業外資流向
+    # 3. 收集產業外資流向
     print("\n[額外收集] 產業外資流向...")
     try:
         from industry_foreign_flow_collector import collect_industry_foreign_flow

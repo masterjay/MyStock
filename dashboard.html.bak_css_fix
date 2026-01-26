@@ -3264,7 +3264,7 @@
                             ${industry.stocks.map(stock => {
                                 const netSign = stock.net >= 0 ? '+' : '';
                                 const chgSign = stock.change_pct >= 0 ? '+' : '';
-                                const netClass = stock.net >= 0 ? 'text-red' : 'text-green';
+                                const netClass = stock.net >= 0 ? 'text-green' : 'text-red';
                                 const chgClass = stock.change_pct >= 0 ? 'text-red' : 'text-green';
                                 return `
                                     <tr>
@@ -4161,15 +4161,15 @@
 
 .industry-block.expanded {
     grid-column: 1 / -1;
-    background: rgba(51, 65, 85, 0.3) !important;
-    border: 2px solid #475569;
-    padding: 30px;
-    max-height: none;
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 .industry-detail {
     display: none;
-    margin-top: 25px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255,255,255,0.2);
 }
 
 .industry-block.expanded .industry-detail {
@@ -4177,134 +4177,75 @@
 }
 
 .detail-title {
-    font-size: 18px;
+    margin-bottom: 15px;
     font-weight: 600;
-    color: #e2e8f0;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #475569;
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+    padding: 8px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
 }
 
-/* 摘要卡片 */
-.detail-summary-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.summary-card {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 15px 20px;
+.stock-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px;
+    margin: 6px 0;
+    background: rgba(255,255,255,0.08);
     border-radius: 8px;
-    border: 1px solid #475569;
-}
-
-.summary-card-label {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-bottom: 8px;
-}
-
-.summary-card-value {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.summary-card-value.positive { color: #ef4444; }
-.summary-card-value.negative { color: #10b981; }
-
-/* 股票明細表格 */
-.industry-detail-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(30, 41, 59, 0.5);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.industry-detail-table thead {
-    background: rgba(71, 85, 105, 0.5);
-}
-
-.industry-detail-table thead th {
-    color: #cbd5e1;
     font-size: 14px;
-    font-weight: 600;
-    padding: 15px 12px;
-    text-align: left;
-    border-bottom: 2px solid #475569;
+    transition: all 0.2s;
 }
 
-.industry-detail-table thead th:nth-child(1) { 
-    width: 12%; 
-    text-align: center;
+.stock-item:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateX(3px);
 }
 
-.industry-detail-table thead th:nth-child(2) { 
-    width: 28%;
-}
-
-.industry-detail-table thead th:nth-child(3) { 
-    width: 30%; 
-    text-align: right;
-}
-
-.industry-detail-table thead th:nth-child(4) { 
-    width: 30%; 
-    text-align: right;
-}
-
-.industry-detail-table tbody tr {
-    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
-    transition: background 0.15s;
-}
-
-.industry-detail-table tbody tr:hover {
-    background: rgba(71, 85, 105, 0.3);
-}
-
-.industry-detail-table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.industry-detail-table tbody td {
-    padding: 14px 12px;
-    font-size: 15px;
-    color: #e2e8f0;
-}
-
-.industry-detail-table .td-code {
-    text-align: center;
-    color: #60a5fa;
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
+.stock-code {
+    width: 80px;
+    color: #48dbfb;
+    font-weight: 700;
     font-size: 15px;
 }
 
-.industry-detail-table .td-name {
-    color: #f1f5f9;
+.stock-name {
+    flex: 1;
+    color: rgba(255,255,255,0.95);
     font-weight: 500;
 }
 
-.industry-detail-table .td-foreign {
+.stock-foreign {
+    width: 120px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 15px;
+    color: #ffd700;
+}
+
+.stock-change {
+    width: 90px;
     text-align: right;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
 }
 
-.industry-detail-table .td-change {
-    text-align: right;
-    font-weight: 600;
-    font-size: 15px;
+.change-up { color: #ff4757; }
+.change-down { color: #1dd1a1; }
+
+/* 展開區塊的滾動條 */
+.industry-block.expanded::-webkit-scrollbar {
+    width: 8px;
 }
 
-.industry-detail-table .text-green { 
-    color: #10b981 !important; 
+.industry-block.expanded::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
 }
 
-.industry-detail-table .text-red { 
-    color: #ef4444 !important; 
+.industry-block.expanded::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
 }
 
 .industry-block.expanded::-webkit-scrollbar-thumb:hover {

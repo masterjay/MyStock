@@ -3214,13 +3214,15 @@
             const container = document.getElementById('heatmap-grid');
             if (!container) return;
             
+            // 已按外資買賣超排序
             const industries = data.industries;
             
-            container.innerHTML = industries.map((industry, idx) => {
+            container.innerHTML = industries.map(industry => {
                 const colorClass = getHeatmapColor(industry.foreign_net);
                 const changeSign = industry.avg_change >= 0 ? '+' : '';
                 const netSign = industry.foreign_net >= 0 ? '+' : '';
                 
+                // 格式化金額顯示
                 let netDisplay;
                 const absNet = Math.abs(industry.foreign_net);
                 if (absNet >= 100) {
@@ -3231,56 +3233,8 @@
                     netDisplay = industry.foreign_net.toFixed(2);
                 }
                 
-                // 股票明細
-                const stocksHtml = industry.stocks ? `
-                    <div class="detail-summary-cards">
-                        <div class="summary-card">
-                            <div class="summary-card-label">股票數量</div>
-                            <div class="summary-card-value">${industry.stock_count}檔</div>
-                        </div>
-                        <div class="summary-card">
-                            <div class="summary-card-label">外資買賣超</div>
-                            <div class="summary-card-value ${industry.foreign_net >= 0 ? 'positive' : 'negative'}">
-                                ${industry.foreign_net >= 0 ? '+' : ''}${industry.foreign_net.toFixed(2)}億
-                            </div>
-                        </div>
-                        <div class="summary-card">
-                            <div class="summary-card-label">平均漲跌幅</div>
-                            <div class="summary-card-value ${industry.avg_change >= 0 ? 'positive' : 'negative'}">
-                                ${industry.avg_change >= 0 ? '+' : ''}${industry.avg_change}%
-                            </div>
-                        </div>
-                    </div>
-                    <table class="industry-detail-table">
-                        <thead>
-                            <tr>
-                                <th>代號</th>
-                                <th>股票名稱</th>
-                                <th>外資買賣超</th>
-                                <th>漲跌幅</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${industry.stocks.map(stock => {
-                                const netSign = stock.net >= 0 ? '+' : '';
-                                const chgSign = stock.change_pct >= 0 ? '+' : '';
-                                const netClass = stock.net >= 0 ? 'text-red' : 'text-green';
-                                const chgClass = stock.change_pct >= 0 ? 'text-red' : 'text-green';
-                                return `
-                                    <tr>
-                                        <td class="td-code">${stock.code}</td>
-                                        <td class="td-name">${stock.name}</td>
-                                        <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}億</td>
-                                        <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
-                                    </tr>
-                                `;
-                            }).join('')}
-                        </tbody>
-                    </table>
-                ` : '';
-                
                 return `
-                    <div class="industry-block ${colorClass}" onclick="toggleIndustry(event, ${idx})">
+                    <div class="industry-block ${colorClass}">
                         <div class="block-name">${industry.industry}</div>
                         <div class="block-change">${changeSign}${industry.avg_change}%</div>
                         <div class="block-stats">
@@ -3293,29 +3247,9 @@
                                 <span class="block-stat-value">${industry.stock_count}</span>
                             </div>
                         </div>
-                        <div class="industry-detail">
-                            <div class="detail-title">📋 ${industry.industry} - 外資 TOP 50 股票明細</div>
-                            ${stocksHtml}
-                        </div>
                     </div>
                 `;
             }).join('');
-        }
-        
-        // 切換產業展開/收合
-        function toggleIndustry(event, index) {
-            const blocks = document.querySelectorAll('.industry-block');
-            const clicked = blocks[index];
-            
-            // 收合其他
-            blocks.forEach((block, i) => {
-                if (i !== index) {
-                    block.classList.remove('expanded');
-                }
-            });
-            
-            // 切換當前
-            clicked.classList.toggle('expanded');
         }
 
 
@@ -4149,166 +4083,6 @@
 
 @media (max-width: 768px) {
     .heatmap-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-    
-
-/* 產業展開明細 */
-.industry-block {
-    cursor: pointer;
-    position: relative;
-}
-
-.industry-block.expanded {
-    grid-column: 1 / -1;
-    background: rgba(51, 65, 85, 0.3) !important;
-    border: 2px solid #475569;
-    padding: 30px;
-    max-height: none;
-}
-
-.industry-detail {
-    display: none;
-    margin-top: 25px;
-}
-
-.industry-block.expanded .industry-detail {
-    display: block;
-}
-
-.detail-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #e2e8f0;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #475569;
-}
-
-/* 摘要卡片 */
-.detail-summary-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.summary-card {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 15px 20px;
-    border-radius: 8px;
-    border: 1px solid #475569;
-}
-
-.summary-card-label {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-bottom: 8px;
-}
-
-.summary-card-value {
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.summary-card-value.positive { color: #ef4444; }
-.summary-card-value.negative { color: #10b981; }
-
-/* 股票明細表格 */
-.industry-detail-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: rgba(30, 41, 59, 0.5);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.industry-detail-table thead {
-    background: rgba(71, 85, 105, 0.5);
-}
-
-.industry-detail-table thead th {
-    color: #cbd5e1;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 15px 12px;
-    text-align: left;
-    border-bottom: 2px solid #475569;
-}
-
-.industry-detail-table thead th:nth-child(1) { 
-    width: 12%; 
-    text-align: center;
-}
-
-.industry-detail-table thead th:nth-child(2) { 
-    width: 28%;
-}
-
-.industry-detail-table thead th:nth-child(3) { 
-    width: 30%; 
-    text-align: right;
-}
-
-.industry-detail-table thead th:nth-child(4) { 
-    width: 30%; 
-    text-align: right;
-}
-
-.industry-detail-table tbody tr {
-    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
-    transition: background 0.15s;
-}
-
-.industry-detail-table tbody tr:hover {
-    background: rgba(71, 85, 105, 0.3);
-}
-
-.industry-detail-table tbody tr:last-child {
-    border-bottom: none;
-}
-
-.industry-detail-table tbody td {
-    padding: 14px 12px;
-    font-size: 15px;
-    color: #e2e8f0;
-}
-
-.industry-detail-table .td-code {
-    text-align: center;
-    color: #60a5fa;
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
-    font-size: 15px;
-}
-
-.industry-detail-table .td-name {
-    color: #f1f5f9;
-    font-weight: 500;
-}
-
-.industry-detail-table .td-foreign {
-    text-align: right;
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.industry-detail-table .td-change {
-    text-align: right;
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.industry-detail-table .text-green { 
-    color: #10b981 !important; 
-}
-
-.industry-detail-table .text-red { 
-    color: #ef4444 !important; 
-}
-
-.industry-block.expanded::-webkit-scrollbar-thumb:hover {
-    background: rgba(255,255,255,0.5);
 }
 
     </style>
