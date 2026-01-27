@@ -3814,13 +3814,14 @@
                 const netSign = industry.foreign_net >= 0 ? '+' : '';
                 
                 let netDisplay;
-                const absNet = Math.abs(industry.foreign_net);
+                const foreignNet = industry.foreign_net || 0;
+                const absNet = Math.abs(foreignNet);
                 if (absNet >= 100) {
-                    netDisplay = industry.foreign_net.toFixed(0);
+                    netDisplay = foreignNet.toFixed(0);
                 } else if (absNet >= 10) {
-                    netDisplay = industry.foreign_net.toFixed(1);
+                    netDisplay = foreignNet.toFixed(1);
                 } else {
-                    netDisplay = industry.foreign_net.toFixed(2);
+                    netDisplay = foreignNet.toFixed(2);
                 }
                 
                 // 股票明細

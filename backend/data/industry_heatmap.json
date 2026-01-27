@@ -1,14 +1,12 @@
 {
-  "updated_at": "2026-01-27T20:00:44.218173",
+  "updated_at": "2026-01-27T21:12:08.734573",
   "date": "20260127",
   "industries": [
     {
-      "industry": "電子通路",
-      "foreign_net": 445.54,
-      "foreign_buy": 1692.89,
-      "foreign_sell": 1247.35,
-      "stock_count": 11,
-      "avg_change": -0.13,
+      "industry": "金融保險",
+      "foreign_net": 484.69,
+      "stock_count": 13,
+      "avg_change": -0.27,
       "stocks": [
         {
           "code": "2887",
@@ -53,10 +51,22 @@
           "change_pct": -0.45
         },
         {
+          "code": "8039",
+          "name": "台虹",
+          "net": 24.89,
+          "change_pct": -1.82
+        },
+        {
           "code": "2887I",
           "name": "台新新光辛特",
           "net": 15.69,
           "change_pct": 0
+        },
+        {
+          "code": "8070",
+          "name": "長華*",
+          "net": 14.26,
+          "change_pct": -0.2
         },
         {
           "code": "2892",
@@ -79,12 +89,10 @@
       ]
     },
     {
-      "industry": "通訊網路",
-      "foreign_net": 283.66,
-      "foreign_buy": 422.83,
-      "foreign_sell": 139.17,
-      "stock_count": 3,
-      "avg_change": 0.22,
+      "industry": "航運業",
+      "foreign_net": 313.14,
+      "stock_count": 2,
+      "avg_change": 2.32,
       "stocks": [
         {
           "code": "2610",
@@ -93,33 +101,19 @@
           "change_pct": 1.78
         },
         {
-          "code": "2606",
-          "name": "裕民",
-          "net": 15.93,
-          "change_pct": -0.47
-        },
-        {
-          "code": "2646",
-          "name": "星宇航空",
-          "net": -28.45,
-          "change_pct": -0.65
+          "code": "1560",
+          "name": "中砂",
+          "net": 16.96,
+          "change_pct": 2.86
         }
       ]
     },
     {
-      "industry": "其他",
-      "foreign_net": 254.39,
-      "foreign_buy": 3554.52,
-      "foreign_sell": 3300.13,
-      "stock_count": 26,
-      "avg_change": -0.66,
+      "industry": "生技醫療業",
+      "foreign_net": 145.22,
+      "stock_count": 5,
+      "avg_change": 2.39,
       "stocks": [
-        {
-          "code": "3481",
-          "name": "群創",
-          "net": 591.07,
-          "change_pct": -6.11
-        },
         {
           "code": "6209",
           "name": "今國光",
@@ -133,34 +127,10 @@
           "change_pct": 2.98
         },
         {
-          "code": "4927",
-          "name": "泰鼎-KY",
-          "net": 33.92,
-          "change_pct": -4.3
-        },
-        {
           "code": "6446",
           "name": "藥華藥",
           "net": 33.87,
           "change_pct": 9.39
-        },
-        {
-          "code": "8039",
-          "name": "台虹",
-          "net": 24.89,
-          "change_pct": -1.82
-        },
-        {
-          "code": "3149",
-          "name": "正達",
-          "net": 19.89,
-          "change_pct": -4.53
-        },
-        {
-          "code": "3702",
-          "name": "大聯大",
-          "net": 19.88,
-          "change_pct": 1.26
         },
         {
           "code": "6282",
@@ -169,190 +139,138 @@
           "change_pct": -8.5
         },
         {
-          "code": "5876",
-          "name": "上海商銀",
-          "net": 14.59,
-          "change_pct": -1.12
-        },
-        {
-          "code": "8070",
-          "name": "長華*",
-          "net": 14.26,
-          "change_pct": -0.2
-        },
-        {
-          "code": "6919",
-          "name": "康霈*",
-          "net": 12.68,
-          "change_pct": 4.4
-        },
-        {
-          "code": "9904",
-          "name": "寶成",
-          "net": 12.61,
-          "change_pct": -0.8
-        },
-        {
-          "code": "5521",
-          "name": "工信",
-          "net": -23.04,
-          "change_pct": -1.12
-        },
-        {
           "code": "6443",
           "name": "元晶",
           "net": -24.5,
           "change_pct": 0.73
-        },
-        {
-          "code": "3711",
-          "name": "日月光投控",
-          "net": -24.72,
-          "change_pct": -1.76
-        },
-        {
-          "code": "6415",
-          "name": "矽力*-KY",
-          "net": -25.26,
-          "change_pct": 9.94
-        },
-        {
-          "code": "3704",
-          "name": "合勤控",
-          "net": -30.42,
-          "change_pct": 0.0
-        },
-        {
-          "code": "3714",
-          "name": "富采",
-          "net": -30.65,
-          "change_pct": -1.06
-        },
-        {
-          "code": "9105",
-          "name": "泰金寶-DR",
-          "net": -33.87,
-          "change_pct": -1.14
-        },
-        {
-          "code": "3706",
-          "name": "神達",
-          "net": -36.89,
-          "change_pct": -1.69
-        },
-        {
-          "code": "3694",
-          "name": "海華",
-          "net": -54.19,
-          "change_pct": -3.28
-        },
-        {
-          "code": "8131",
-          "name": "福懋科",
-          "net": -60.24,
-          "change_pct": -4.92
-        },
-        {
-          "code": "6153",
-          "name": "嘉聯益",
-          "net": -92.33,
-          "change_pct": -8.89
-        },
-        {
-          "code": "8422",
-          "name": "可寧衛*",
-          "net": -110.11,
-          "change_pct": -0.62
-        },
-        {
-          "code": "3231",
-          "name": "緯創",
-          "net": -112.9,
-          "change_pct": -1.47
         }
       ]
     },
     {
-      "industry": "航運",
-      "foreign_net": 51.86,
-      "foreign_buy": 71.87,
-      "foreign_sell": 20.01,
+      "industry": "電機機械",
+      "foreign_net": 106.66,
       "stock_count": 2,
-      "avg_change": 0.32,
+      "avg_change": -2.17,
       "stocks": [
+        {
+          "code": "2371",
+          "name": "大同",
+          "net": 71.75,
+          "change_pct": -2.12
+        },
         {
           "code": "1513",
           "name": "中興電",
           "net": 34.91,
           "change_pct": -2.21
-        },
-        {
-          "code": "1560",
-          "name": "中砂",
-          "net": 16.96,
-          "change_pct": 2.86
         }
       ]
     },
     {
-      "industry": "電機",
-      "foreign_net": 27.87,
-      "foreign_buy": 1669.5,
-      "foreign_sell": 1641.63,
-      "stock_count": 7,
-      "avg_change": 0.46,
+      "industry": "電腦及週邊設備業",
+      "foreign_net": 95.48,
+      "stock_count": 13,
+      "avg_change": 1.0,
       "stocks": [
         {
-          "code": "1301",
-          "name": "台塑",
-          "net": 114.83,
-          "change_pct": 4.51
+          "code": "2327",
+          "name": "國巨*",
+          "net": 78.95,
+          "change_pct": 2.79
         },
         {
-          "code": "1326",
-          "name": "台化",
-          "net": 57.13,
-          "change_pct": 4.11
+          "code": "2486",
+          "name": "一詮",
+          "net": 73.29,
+          "change_pct": 9.91
         },
         {
-          "code": "1313",
-          "name": "聯成",
-          "net": 13.23,
-          "change_pct": 3.18
+          "code": "2382",
+          "name": "廣達",
+          "net": 51.13,
+          "change_pct": 0.17
         },
         {
-          "code": "1314",
-          "name": "中石化",
-          "net": -23.39,
-          "change_pct": -1.2
+          "code": "2324",
+          "name": "仁寶",
+          "net": 25.83,
+          "change_pct": 0.16
         },
         {
-          "code": "1304",
-          "name": "台聚",
-          "net": -26.71,
-          "change_pct": -1.2
+          "code": "2419",
+          "name": "仲琦",
+          "net": 19.87,
+          "change_pct": 9.98
         },
         {
-          "code": "1312",
-          "name": "國喬",
-          "net": -33.61,
-          "change_pct": -3.61
+          "code": "2317",
+          "name": "鴻海",
+          "net": 18.14,
+          "change_pct": 0.67
         },
         {
-          "code": "1303",
-          "name": "南亞",
-          "net": -73.62,
-          "change_pct": -2.57
+          "code": "2485",
+          "name": "兆赫",
+          "net": 13.96,
+          "change_pct": -0.13
+        },
+        {
+          "code": "2492",
+          "name": "華新科",
+          "net": 13.91,
+          "change_pct": 2.01
+        },
+        {
+          "code": "2402",
+          "name": "毅嘉",
+          "net": -23.26,
+          "change_pct": -0.53
+        },
+        {
+          "code": "2451",
+          "name": "創見",
+          "net": -27.31,
+          "change_pct": -4.55
+        },
+        {
+          "code": "2377",
+          "name": "微星",
+          "net": -45.51,
+          "change_pct": -1.92
+        },
+        {
+          "code": "2498",
+          "name": "宏達電",
+          "net": -46.52,
+          "change_pct": -2.83
+        },
+        {
+          "code": "2489",
+          "name": "瑞軒",
+          "net": -57.0,
+          "change_pct": -2.69
+        }
+      ]
+    },
+    {
+      "industry": "機械",
+      "foreign_net": 60.84,
+      "stock_count": 1,
+      "avg_change": 4.06,
+      "stocks": [
+        {
+          "code": "2049",
+          "name": "上銀",
+          "net": 60.84,
+          "change_pct": 4.06
         }
       ]
     },
     {
       "industry": "其他電子",
-      "foreign_net": 17.25,
-      "foreign_buy": 561.44,
-      "foreign_sell": 544.18,
-      "stock_count": 6,
-      "avg_change": 3.87,
+      "foreign_net": 49.72,
+      "stock_count": 5,
+      "avg_change": 3.39,
       "stocks": [
         {
           "code": "3036",
@@ -379,12 +297,6 @@
           "change_pct": 0.19
         },
         {
-          "code": "3037",
-          "name": "欣興",
-          "net": -32.47,
-          "change_pct": 6.31
-        },
-        {
           "code": "3006",
           "name": "晶豪科",
           "net": -50.42,
@@ -393,10 +305,118 @@
       ]
     },
     {
-      "industry": "橡膠",
+      "industry": "觀光事業",
+      "foreign_net": 31.04,
+      "stock_count": 1,
+      "avg_change": 2.46,
+      "stocks": [
+        {
+          "code": "1608",
+          "name": "華榮",
+          "net": 31.04,
+          "change_pct": 2.46
+        }
+      ]
+    },
+    {
+      "industry": "光電業",
+      "foreign_net": 14.7,
+      "stock_count": 5,
+      "avg_change": -4.73,
+      "stocks": [
+        {
+          "code": "3481",
+          "name": "群創",
+          "net": 591.07,
+          "change_pct": -6.11
+        },
+        {
+          "code": "2520",
+          "name": "冠德",
+          "net": -25.01,
+          "change_pct": -2.93
+        },
+        {
+          "code": "2408",
+          "name": "南亞科",
+          "net": -62.85,
+          "change_pct": -3.15
+        },
+        {
+          "code": "2515",
+          "name": "中工",
+          "net": -220.95,
+          "change_pct": -6.21
+        },
+        {
+          "code": "2409",
+          "name": "友達",
+          "net": -267.56,
+          "change_pct": -5.25
+        }
+      ]
+    },
+    {
+      "industry": "塑膠工業",
+      "foreign_net": 14.5,
+      "stock_count": 3,
+      "avg_change": 0.25,
+      "stocks": [
+        {
+          "code": "1301",
+          "name": "台塑",
+          "net": 114.83,
+          "change_pct": 4.51
+        },
+        {
+          "code": "1304",
+          "name": "台聚",
+          "net": -26.71,
+          "change_pct": -1.2
+        },
+        {
+          "code": "1303",
+          "name": "南亞",
+          "net": -73.62,
+          "change_pct": -2.57
+        }
+      ]
+    },
+    {
+      "industry": "化學工業",
+      "foreign_net": 13.37,
+      "stock_count": 4,
+      "avg_change": 0.62,
+      "stocks": [
+        {
+          "code": "1326",
+          "name": "台化",
+          "net": 57.13,
+          "change_pct": 4.11
+        },
+        {
+          "code": "1313",
+          "name": "聯成",
+          "net": 13.23,
+          "change_pct": 3.18
+        },
+        {
+          "code": "1314",
+          "name": "中石化",
+          "net": -23.39,
+          "change_pct": -1.2
+        },
+        {
+          "code": "1312",
+          "name": "國喬",
+          "net": -33.61,
+          "change_pct": -3.61
+        }
+      ]
+    },
+    {
+      "industry": "橡膠工業",
       "foreign_net": -24.09,
-      "foreign_buy": 23.21,
-      "foreign_sell": 47.3,
       "stock_count": 1,
       "avg_change": -3.78,
       "stocks": [
@@ -411,8 +431,6 @@
     {
       "industry": "建材營造",
       "foreign_net": -27.46,
-      "foreign_buy": 37.8,
-      "foreign_sell": 65.26,
       "stock_count": 1,
       "avg_change": -2.58,
       "stocks": [
@@ -425,41 +443,115 @@
       ]
     },
     {
-      "industry": "觀光",
-      "foreign_net": -99.44,
-      "foreign_buy": 289.79,
-      "foreign_sell": 389.23,
-      "stock_count": 2,
-      "avg_change": 1.73,
+      "industry": "食品工業",
+      "foreign_net": -31.24,
+      "stock_count": 1,
+      "avg_change": -1.76,
       "stocks": [
         {
-          "code": "1608",
-          "name": "華榮",
-          "net": 31.04,
-          "change_pct": 2.46
-        },
-        {
-          "code": "1605",
-          "name": "華新",
-          "net": -130.48,
-          "change_pct": 1.0
+          "code": "2014",
+          "name": "中鴻",
+          "net": -31.24,
+          "change_pct": -1.76
         }
       ]
     },
     {
-      "industry": "鋼鐵",
-      "foreign_net": -101.12,
-      "foreign_buy": 418.3,
-      "foreign_sell": 519.42,
-      "stock_count": 5,
-      "avg_change": 1.15,
+      "industry": "通信網路業",
+      "foreign_net": -66.72,
+      "stock_count": 3,
+      "avg_change": -1.47,
       "stocks": [
         {
-          "code": "2049",
-          "name": "上銀",
-          "net": 60.84,
-          "change_pct": 4.06
+          "code": "2606",
+          "name": "裕民",
+          "net": 15.93,
+          "change_pct": -0.47
         },
+        {
+          "code": "2646",
+          "name": "星宇航空",
+          "net": -28.45,
+          "change_pct": -0.65
+        },
+        {
+          "code": "3694",
+          "name": "海華",
+          "net": -54.19,
+          "change_pct": -3.28
+        }
+      ]
+    },
+    {
+      "industry": "水泥工業",
+      "foreign_net": -131.47,
+      "stock_count": 1,
+      "avg_change": -0.76,
+      "stocks": [
+        {
+          "code": "1101",
+          "name": "台泥",
+          "net": -131.47,
+          "change_pct": -0.76
+        }
+      ]
+    },
+    {
+      "industry": "電子零組件業",
+      "foreign_net": -142.47,
+      "stock_count": 7,
+      "avg_change": -1.2,
+      "stocks": [
+        {
+          "code": "4927",
+          "name": "泰鼎-KY",
+          "net": 33.92,
+          "change_pct": -4.3
+        },
+        {
+          "code": "3702",
+          "name": "大聯大",
+          "net": 19.88,
+          "change_pct": 1.26
+        },
+        {
+          "code": "5876",
+          "name": "上海商銀",
+          "net": 14.59,
+          "change_pct": -1.12
+        },
+        {
+          "code": "3704",
+          "name": "合勤控",
+          "net": -30.42,
+          "change_pct": 0.0
+        },
+        {
+          "code": "3714",
+          "name": "富采",
+          "net": -30.65,
+          "change_pct": -1.06
+        },
+        {
+          "code": "3706",
+          "name": "神達",
+          "net": -36.89,
+          "change_pct": -1.69
+        },
+        {
+          "code": "3231",
+          "name": "緯創",
+          "net": -112.9,
+          "change_pct": -1.47
+        }
+      ]
+    },
+    {
+      "industry": "鋼鐵工業",
+      "foreign_net": -261.2,
+      "stock_count": 4,
+      "avg_change": 1.12,
+      "stocks": [
         {
           "code": "2027",
           "name": "大成鋼",
@@ -473,10 +565,10 @@
           "change_pct": 4.07
         },
         {
-          "code": "2014",
-          "name": "中鴻",
-          "net": -31.24,
-          "change_pct": -1.76
+          "code": "1605",
+          "name": "華新",
+          "net": -130.48,
+          "change_pct": 1.0
         },
         {
           "code": "2002",
@@ -487,28 +579,60 @@
       ]
     },
     {
-      "industry": "水泥",
-      "foreign_net": -131.47,
-      "foreign_buy": 82.85,
-      "foreign_sell": 214.32,
-      "stock_count": 1,
-      "avg_change": -0.76,
+      "industry": "其他",
+      "foreign_net": -294.3,
+      "stock_count": 7,
+      "avg_change": -1.87,
       "stocks": [
         {
-          "code": "1101",
-          "name": "台泥",
-          "net": -131.47,
-          "change_pct": -0.76
+          "code": "6919",
+          "name": "康霈*",
+          "net": 12.68,
+          "change_pct": 4.4
+        },
+        {
+          "code": "9904",
+          "name": "寶成",
+          "net": 12.61,
+          "change_pct": -0.8
+        },
+        {
+          "code": "5521",
+          "name": "工信",
+          "net": -23.04,
+          "change_pct": -1.12
+        },
+        {
+          "code": "9105",
+          "name": "泰金寶-DR",
+          "net": -33.87,
+          "change_pct": -1.14
+        },
+        {
+          "code": "8131",
+          "name": "福懋科",
+          "net": -60.24,
+          "change_pct": -4.92
+        },
+        {
+          "code": "6153",
+          "name": "嘉聯益",
+          "net": -92.33,
+          "change_pct": -8.89
+        },
+        {
+          "code": "8422",
+          "name": "可寧衛*",
+          "net": -110.11,
+          "change_pct": -0.62
         }
       ]
     },
     {
-      "industry": "半導體",
-      "foreign_net": -204.11,
-      "foreign_buy": 4973.91,
-      "foreign_sell": 5178.02,
+      "industry": "半導體業",
+      "foreign_net": -495.57,
       "stock_count": 21,
-      "avg_change": 0.44,
+      "avg_change": 0.91,
       "stocks": [
         {
           "code": "2303",
@@ -517,34 +641,10 @@
           "change_pct": 9.96
         },
         {
-          "code": "2327",
-          "name": "國巨*",
-          "net": 78.95,
-          "change_pct": 2.79
-        },
-        {
-          "code": "2371",
-          "name": "大同",
-          "net": 71.75,
-          "change_pct": -2.12
-        },
-        {
           "code": "2330",
           "name": "台積電",
           "net": 67.04,
           "change_pct": 1.42
-        },
-        {
-          "code": "2382",
-          "name": "廣達",
-          "net": 51.13,
-          "change_pct": 0.17
-        },
-        {
-          "code": "2324",
-          "name": "仁寶",
-          "net": 25.83,
-          "change_pct": 0.16
         },
         {
           "code": "2368",
@@ -559,16 +659,34 @@
           "change_pct": 10.0
         },
         {
-          "code": "2317",
-          "name": "鴻海",
-          "net": 18.14,
-          "change_pct": 0.67
+          "code": "3149",
+          "name": "正達",
+          "net": 19.89,
+          "change_pct": -4.53
+        },
+        {
+          "code": "2454",
+          "name": "聯發科",
+          "net": 14.02,
+          "change_pct": 0.28
         },
         {
           "code": "2393",
           "name": "億光",
           "net": -24.72,
           "change_pct": -2.6
+        },
+        {
+          "code": "3711",
+          "name": "日月光投控",
+          "net": -24.72,
+          "change_pct": -1.76
+        },
+        {
+          "code": "6415",
+          "name": "矽力*-KY",
+          "net": -25.26,
+          "change_pct": 9.94
         },
         {
           "code": "2329",
@@ -583,16 +701,22 @@
           "change_pct": -3.35
         },
         {
+          "code": "3037",
+          "name": "欣興",
+          "net": -32.47,
+          "change_pct": 6.31
+        },
+        {
           "code": "2356",
           "name": "英業達",
           "net": -39.71,
           "change_pct": -2.26
         },
         {
-          "code": "2377",
-          "name": "微星",
-          "net": -45.51,
-          "change_pct": -1.92
+          "code": "2412",
+          "name": "中華電",
+          "net": -42.63,
+          "change_pct": -0.75
         },
         {
           "code": "2323",
@@ -635,110 +759,6 @@
           "name": "旺宏",
           "net": -336.48,
           "change_pct": 0.0
-        }
-      ]
-    },
-    {
-      "industry": "光電",
-      "foreign_net": -245.96,
-      "foreign_buy": 85.6,
-      "foreign_sell": 331.56,
-      "stock_count": 2,
-      "avg_change": -4.57,
-      "stocks": [
-        {
-          "code": "2520",
-          "name": "冠德",
-          "net": -25.01,
-          "change_pct": -2.93
-        },
-        {
-          "code": "2515",
-          "name": "中工",
-          "net": -220.95,
-          "change_pct": -6.21
-        }
-      ]
-    },
-    {
-      "industry": "電腦週邊",
-      "foreign_net": -392.09,
-      "foreign_buy": 1204.55,
-      "foreign_sell": 1596.64,
-      "stock_count": 12,
-      "avg_change": 0.19,
-      "stocks": [
-        {
-          "code": "2486",
-          "name": "一詮",
-          "net": 73.29,
-          "change_pct": 9.91
-        },
-        {
-          "code": "2419",
-          "name": "仲琦",
-          "net": 19.87,
-          "change_pct": 9.98
-        },
-        {
-          "code": "2454",
-          "name": "聯發科",
-          "net": 14.02,
-          "change_pct": 0.28
-        },
-        {
-          "code": "2485",
-          "name": "兆赫",
-          "net": 13.96,
-          "change_pct": -0.13
-        },
-        {
-          "code": "2492",
-          "name": "華新科",
-          "net": 13.91,
-          "change_pct": 2.01
-        },
-        {
-          "code": "2402",
-          "name": "毅嘉",
-          "net": -23.26,
-          "change_pct": -0.53
-        },
-        {
-          "code": "2451",
-          "name": "創見",
-          "net": -27.31,
-          "change_pct": -4.55
-        },
-        {
-          "code": "2412",
-          "name": "中華電",
-          "net": -42.63,
-          "change_pct": -0.75
-        },
-        {
-          "code": "2498",
-          "name": "宏達電",
-          "net": -46.52,
-          "change_pct": -2.83
-        },
-        {
-          "code": "2489",
-          "name": "瑞軒",
-          "net": -57.0,
-          "change_pct": -2.69
-        },
-        {
-          "code": "2408",
-          "name": "南亞科",
-          "net": -62.85,
-          "change_pct": -3.15
-        },
-        {
-          "code": "2409",
-          "name": "友達",
-          "net": -267.56,
-          "change_pct": -5.25
         }
       ]
     }
