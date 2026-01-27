@@ -3234,27 +3234,33 @@
             
             function showRetailInfo() {
                 document.getElementById('retailInfoOverlay').style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
             
 
             
             function showMarginInfo() {
                 document.getElementById('marginInfoOverlay').style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
             
             function hideMarginInfo() {
                 document.getElementById('marginInfoOverlay').style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
             
             function showFuturesInfo() {
                 document.getElementById('futuresInfoOverlay').style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
             
             function hideFuturesInfo() {
                 document.getElementById('futuresInfoOverlay').style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
             function hideRetailInfo() {
                 document.getElementById('retailInfoOverlay').style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
 
         function updateUI(data) {
@@ -4062,19 +4068,23 @@
                 
                 guideBtn.addEventListener('click', () => {
                     guidePanel.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
                 
                 guidePanelClose.addEventListener('click', () => {
                     guidePanel.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
                 
                 guidePanelOverlay.addEventListener('click', () => {
                     guidePanel.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
                 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && guidePanel.classList.contains('active')) {
                         guidePanel.classList.remove('active');
+                        document.body.style.overflow = 'auto';
                     }
                 });
                 
@@ -4088,12 +4098,14 @@
                     sentimentInfoBtn.addEventListener('click', function() {
                         sentimentPopupOverlay.style.display = 'block';
                         sentimentPopup.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
                     });
                 }
                 
                 function closeSentimentPopup() {
                     sentimentPopupOverlay.style.display = 'none';
                     sentimentPopup.style.display = 'none';
+                    document.body.style.overflow = 'auto';
                 }
                 
                 if (sentimentPopupClose) sentimentPopupClose.addEventListener('click', closeSentimentPopup);
@@ -4610,8 +4622,8 @@
 .inst-name { color: rgba(255,255,255,0.9); font-weight: 600; }
 .inst-buy { color: #48dbfb; }
 .inst-sell { color: #ff9ff3; }
-.inst-diff-positive { color: #1dd1a1; font-weight: 600; }
-.inst-diff-negative { color: #ff4757; font-weight: 600; }
+.inst-diff-positive { color: #ef4444; font-weight: 600; }
+.inst-diff-negative { color: #10b981; font-weight: 600; }
 .inst-total-row { background: rgba(255,255,255,0.08) !important; font-weight: 700; }
 
 .inst-ratio {
