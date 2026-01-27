@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-01-27T14:26:37.115057",
+  "updated_at": "2026-01-27T20:00:44.238625",
   "history": [
     {
       "date": "20251216",
@@ -235,11 +235,11 @@
     },
     {
       "date": "20260127",
-      "retail_long": 25000,
-      "retail_short": 27000,
-      "retail_ratio": 0.93,
-      "net_pct": -3.85,
-      "futures_oi": 100000
+      "retail_long": 28751,
+      "retail_short": 30036,
+      "retail_ratio": 0.96,
+      "net_pct": -2.19,
+      "futures_oi": 109177
     }
   ]
 }
