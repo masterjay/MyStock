@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-01-26T21:52:00.538995",
+  "updated_at": "2026-01-27T00:48:48.059079",
   "symbol": "GC=F",
   "name": "COMEX 黃金期貨",
   "name_en": "Gold Futures",
   "unit": "USD/oz",
   "currency": "USD",
-  "current_price": 5066.0,
+  "current_price": 5069.7,
   "history": [
     {
       "date": "2025-08-05",
@@ -841,11 +841,11 @@
       "close": 4976.2001953125
     },
     {
-      "date": "2026-01-26",
+      "date": "2026-01-27",
       "open": 5013.39990234375,
       "high": 5107.89990234375,
       "low": 5002.0,
-      "close": 5066.0
+      "close": 5069.7001953125
     }
   ]
 }

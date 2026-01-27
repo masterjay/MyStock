@@ -191,12 +191,9 @@
         }
 
         /* 圖表區域 */
-        .retail-chart-full {
-            grid-column: 1 / -1;
-        }
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -419,7 +416,23 @@
         }
 
         /* 彈出面板 */
+        .guide-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
 
+        .guide-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
             to { opacity: 1; }
         }
 
@@ -1140,134 +1153,6 @@
     .weight-chart { flex-direction: column; }
     .sentiment-popup { width: 95%; }
 }
-
-/* 散戶多空比說明彈窗 */
-.retail-info-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    animation: fadeIn 0.2s ease;
-}
-
-.retail-info-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(100, 116, 139, 0.3);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.retail-info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(100, 116, 139, 0.3);
-}
-
-.retail-info-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.retail-info-close {
-    font-size: 28px;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1;
-    padding: 5px 10px;
-}
-
-.retail-info-close:hover {
-    color: #ef4444;
-    transform: rotate(90deg);
-}
-
-.retail-info-section {
-    margin-bottom: 25px;
-}
-
-.retail-info-section-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #60a5fa;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.retail-info-content {
-    color: #cbd5e1;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.retail-info-content strong {
-    color: #e2e8f0;
-}
-
-.retail-signal-box {
-    background: rgba(100, 116, 139, 0.2);
-    border-radius: 8px;
-    padding: 12px 15px;
-    margin: 8px 0;
-    border-left: 3px solid;
-}
-
-.retail-signal-box.bullish {
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
-}
-
-.retail-signal-box.bearish {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-.retail-signal-box.neutral {
-    border-color: #64748b;
-    background: rgba(100, 116, 139, 0.1);
-}
-
-.retail-formula {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 12px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    color: #fbbf24;
-    font-size: 13px;
-    margin: 10px 0;
-}
-
 </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
 <style>
@@ -1891,134 +1776,6 @@
     color: #fff;
     margin-bottom: 15px;
 }
-
-/* 散戶多空比說明彈窗 */
-.retail-info-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    animation: fadeIn 0.2s ease;
-}
-
-.retail-info-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(100, 116, 139, 0.3);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.retail-info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(100, 116, 139, 0.3);
-}
-
-.retail-info-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.retail-info-close {
-    font-size: 28px;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1;
-    padding: 5px 10px;
-}
-
-.retail-info-close:hover {
-    color: #ef4444;
-    transform: rotate(90deg);
-}
-
-.retail-info-section {
-    margin-bottom: 25px;
-}
-
-.retail-info-section-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #60a5fa;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.retail-info-content {
-    color: #cbd5e1;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.retail-info-content strong {
-    color: #e2e8f0;
-}
-
-.retail-signal-box {
-    background: rgba(100, 116, 139, 0.2);
-    border-radius: 8px;
-    padding: 12px 15px;
-    margin: 8px 0;
-    border-left: 3px solid;
-}
-
-.retail-signal-box.bullish {
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
-}
-
-.retail-signal-box.bearish {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-.retail-signal-box.neutral {
-    border-color: #64748b;
-    background: rgba(100, 116, 139, 0.1);
-}
-
-.retail-formula {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 12px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    color: #fbbf24;
-    font-size: 13px;
-    margin: 10px 0;
-}
-
 </style>
 </head>
 <body>
@@ -2365,97 +2122,22 @@
             <!-- Charts -->
             <div class="charts-grid">
                 <div class="chart-card">
-                    <div class="chart-title">
-                        融資使用率趨勢 (30日)
-                        <span class="info-icon" onclick="showMarginInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
-                    </div>
+                    <div class="chart-title">融資使用率趨勢 (30日)</div>
                     <canvas id="marginChart"></canvas>
                 </div>
                 <div class="chart-card">
-                    <div class="chart-title">
-                        多空比趨勢 (30日)
-                        <span class="info-icon" onclick="showFuturesInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
-                    </div>
+                    <div class="chart-title">多空比趨勢 (30日)</div>
                     <canvas id="futuresChart"></canvas>
                 </div>
-                <div class="chart-card retail-chart-full">
-                    <div class="chart-title">
-                        微台指散戶多空比 (30日)
-                        <span class="info-icon" onclick="showRetailInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
-                    </div>
+                <div class="chart-card">
+                    <div class="chart-title">微台指散戶多空比 (90日)</div>
                     <canvas id="retailChart"></canvas>
                 </div>
             </div>
         </div>
 
-    <!-- 散戶多空比說明彈窗 -->
-    <div id="retailInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideRetailInfo()">
-        <div class="retail-info-panel" onclick="event.stopPropagation()">
-            <div class="retail-info-header">
-                <div class="retail-info-title">📊 微台指散戶多空比指標</div>
-                <span class="retail-info-close" onclick="hideRetailInfo()">×</span>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📐 計算方式</div>
-                <div class="retail-info-content">
-                    <div class="retail-formula">
-                        淨多空比 = (散戶多單 - 散戶空單) / (散戶多單 + 散戶空單) × 100%
-                    </div>
-                    <strong>散戶部位</strong> = 台指期貨總未平倉 - 三大法人部位
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📊 數值意義</div>
-                <div class="retail-info-content">
-                    • <strong style="color: #ef4444;">正值（紅色）</strong>：散戶多單 > 空單，偏向看多<br>
-                    • <strong style="color: #10b981;">負值（綠色）</strong>：散戶空單 > 多單，偏向看空<br>
-                    • <strong>絕對值越大</strong>：情緒越極端（±6%以上為極端）
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">🔄 反指標理論</div>
-                <div class="retail-info-content">
-                    散戶往往在關鍵時刻站錯邊：
-
-                    <div class="retail-signal-box bullish">
-                        <strong>🟢 散戶極度看空（-6% 以下）</strong><br>
-                        → 可能接近市場低點<br>
-                        → 注意突破訊號，準備進場
-                    </div>
-
-                    <div class="retail-signal-box bearish">
-                        <strong>🔴 散戶極度看多（+6% 以上）</strong><br>
-                        → 可能接近市場高點<br>
-                        → 注意風險訊號，考慮減碼
-                    </div>
-
-                    <div class="retail-signal-box neutral">
-                        <strong>⚪ 散戶中性（-3% 到 +3%）</strong><br>
-                        → 市場情緒正常<br>
-                        → 依技術面操作
-                    </div>
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>配合技術分析</strong>：不單獨作為進出場依據<br>
-                    2. <strong>觀察極端值</strong>：特別注意±6%以上的情況<br>
-                    3. <strong>趨勢確認</strong>：等待價格突破配合進場<br>
-                    4. <strong>風險控管</strong>：設定停損，分批建倉
-                </div>
-            </div>
-        </div>
-    </div>
-
         <!-- 數據解讀彈出面板 -->
-        <div id="guidePanel" class="guide-panel" style="display: none;">
-
-
+        <div id="guidePanel" class="guide-panel">
             <div class="guide-panel-overlay" id="guidePanelOverlay"></div>
             <div class="guide-panel-content">
                 <div class="guide-panel-header">
@@ -2482,17 +2164,6 @@
                                         <div class="level-action">→ 建議: 減碼、獲利了結、提高警覺</div>
                                     </div>
                                 </div>
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
-                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
-                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
-                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
-                </div>
-            </div>
-        </div>
-    </div>
 
                                 <div class="level-item level-warning">
                                     <div class="level-badge">🟠 25-28%</div>
@@ -2653,133 +2324,6 @@
                 </div>
             </div>
         </div>
-
-
-    <!-- 融資使用率說明彈窗 -->
-    <div id="marginInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideMarginInfo()">
-        <div class="retail-info-panel" onclick="event.stopPropagation()">
-            <div class="retail-info-header">
-                <div class="retail-info-title">💰 融資使用率指標</div>
-                <span class="retail-info-close" onclick="hideMarginInfo()">×</span>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📐 計算方式</div>
-                <div class="retail-info-content">
-                    <div class="retail-formula">
-                        融資使用率 = 融資餘額 / 整體市場市值 × 100%
-                    </div>
-                    反映散戶使用融資買股票的程度
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📊 數值意義</div>
-                <div class="retail-info-content">
-                    • <strong>40%以下</strong>：融資水位低，市場偏保守<br>
-                    • <strong>40-50%</strong>：融資水位適中<br>
-                    • <strong>50-60%</strong>：融資偏高，需注意<br>
-                    • <strong>60%以上</strong>：融資過高，風險提升
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">⚠️ 風險判讀</div>
-                <div class="retail-info-content">
-                    <div class="retail-signal-box bullish">
-                        <strong>🟢 融資使用率低（< 45%）</strong><br>
-                        → 市場籌碼乾淨<br>
-                        → 上漲空間較大
-                    </div>
-
-                    <div class="retail-signal-box bearish">
-                        <strong>🔴 融資使用率高（> 60%）</strong><br>
-                        → 槓桿過高，賣壓沉重<br>
-                        → 回檔時易引發斷頭賣壓
-                    </div>
-
-                    <div class="retail-signal-box neutral">
-                        <strong>⚪ 融資使用率適中（45-60%）</strong><br>
-                        → 市場正常運作<br>
-                        → 依趨勢操作
-                    </div>
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
-                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
-                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
-                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 期貨多空比說明彈窗 -->
-    <div id="futuresInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideFuturesInfo()">
-        <div class="retail-info-panel" onclick="event.stopPropagation()">
-            <div class="retail-info-header">
-                <div class="retail-info-title">📈 期貨多空比指標</div>
-                <span class="retail-info-close" onclick="hideFuturesInfo()">×</span>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📐 計算方式</div>
-                <div class="retail-info-content">
-                    <div class="retail-formula">
-                        多空比 = 總多單部位 / 總空單部位
-                    </div>
-                    包含散戶 + 三大法人的總體部位
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📊 數值意義</div>
-                <div class="retail-info-content">
-                    • <strong>> 1.0</strong>：市場多單 > 空單，偏多<br>
-                    • <strong>= 1.0</strong>：多空平衡<br>
-                    • <strong>< 1.0</strong>：市場空單 > 多單，偏空<br>
-                    • <strong>極端值</strong>：> 1.2 或 < 0.8 需注意
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">🎯 操作策略</div>
-                <div class="retail-info-content">
-                    <div class="retail-signal-box bullish">
-                        <strong>🟢 多空比偏低（< 0.9）</strong><br>
-                        → 空單過多，軋空風險高<br>
-                        → 若出現上漲，力道可能很強
-                    </div>
-
-                    <div class="retail-signal-box bearish">
-                        <strong>🔴 多空比偏高（> 1.1）</strong><br>
-                        → 多單過多，獲利了結壓力<br>
-                        → 若回檔，賣壓可能較重
-                    </div>
-
-                    <div class="retail-signal-box neutral">
-                        <strong>⚪ 多空比平衡（0.9-1.1）</strong><br>
-                        → 市場處於平衡狀態<br>
-                        → 等待方向明朗
-                    </div>
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 進階觀察</div>
-                <div class="retail-info-content">
-                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
-                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
-                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
-                    4. <strong>結算效應</strong>：每月第三週三需注意
-                </div>
-            </div>
-        </div>
-    </div>
 
         <!-- Footer -->
         <div class="footer">
@@ -3139,7 +2683,7 @@
             });
         }
 
-            // 繪製散戶多空比圖表（單一柱狀圖 + 期貨折線）
+            // 繪製散戶多空比圖表
             async function drawRetailChart() {
                 try {
                     const response = await fetch('./backend/data/retail_ratio_history.json?t=' + new Date().getTime());
@@ -3155,11 +2699,10 @@
                         return date.substring(4,6) + '/' + date.substring(6,8);
                     });
                     
-                    // 散戶淨多空百分比
-                    const netPcts = history.map(d => d.net_pct);
-                    
-                    // 期貨未平倉量（簡化顯示）
-                    const futuresPrices = history.map(d => d.futures_oi / 100);
+                    // 做多百分比（正值）
+                    const longPcts = history.map(d => d.long_pct);
+                    // 做空百分比（負值）
+                    const shortPcts = history.map(d => d.short_pct);
                     
                     new Chart(document.getElementById('retailChart'), {
                         type: 'bar',
@@ -3167,10 +2710,17 @@
                             labels: labels,
                             datasets: [
                                 {
-                                    label: '微台指散戶多空比',
-                                    data: netPcts,
-                                    backgroundColor: netPcts.map(v => v >= 0 ? 'rgba(239, 68, 68, 0.7)' : 'rgba(16, 185, 129, 0.7)'),
-                                    borderColor: netPcts.map(v => v >= 0 ? '#ef4444' : '#10b981'),
+                                    label: '散戶做多',
+                                    data: longPcts,
+                                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                                    borderColor: '#ef4444',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label: '散戶做空',
+                                    data: shortPcts,
+                                    backgroundColor: 'rgba(16, 185, 129, 0.7)',
+                                    borderColor: '#10b981',
                                     borderWidth: 1
                                 }
                             ]
@@ -3189,37 +2739,33 @@
                                     backgroundColor: 'rgba(0,0,0,0.8)',
                                     callbacks: {
                                         label: function(context) {
+                                            const value = Math.abs(context.parsed.y);
                                             const idx = context.dataIndex;
                                             const ratio = history[idx].retail_ratio;
-                                            const value = context.parsed.y;
-                                            return '淨多空: ' + value.toFixed(1) + '% (多空比: ' + ratio.toFixed(2) + ')';
+                                            return context.dataset.label + ': ' + value.toFixed(1) + '% (多空比: ' + ratio.toFixed(2) + ')';
                                         }
                                     }
                                 }
                             },
                             scales: {
                                 x: {
+                                    stacked: false,
                                     grid: { color: 'rgba(45, 55, 72, 0.3)' },
                                     ticks: { 
                                         color: '#7d8ba7', 
                                         font: { size: 9 },
-                                        maxTicksLimit: 20
+                                        maxTicksLimit: 15
                                     }
                                 },
                                 y: {
+                                    stacked: false,
                                     grid: { color: 'rgba(45, 55, 72, 0.3)' },
                                     ticks: { 
                                         color: '#7d8ba7',
                                         font: { size: 10 },
                                         callback: function(value) {
-                                            return value + '%';
+                                            return Math.abs(value) + '%';
                                         }
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: '散戶淨多空比例',
-                                        color: '#7d8ba7',
-                                        font: { size: 11 }
                                     }
                                 }
                             }
@@ -3231,31 +2777,6 @@
             }
             
             drawRetailChart();
-            
-            function showRetailInfo() {
-                document.getElementById('retailInfoOverlay').style.display = 'block';
-            }
-            
-
-            
-            function showMarginInfo() {
-                document.getElementById('marginInfoOverlay').style.display = 'block';
-            }
-            
-            function hideMarginInfo() {
-                document.getElementById('marginInfoOverlay').style.display = 'none';
-            }
-            
-            function showFuturesInfo() {
-                document.getElementById('futuresInfoOverlay').style.display = 'block';
-            }
-            
-            function hideFuturesInfo() {
-                document.getElementById('futuresInfoOverlay').style.display = 'none';
-            }
-            function hideRetailInfo() {
-                document.getElementById('retailInfoOverlay').style.display = 'none';
-            }
 
         function updateUI(data) {
             const dataIndicator = document.getElementById('dataIndicator');
@@ -4911,132 +4432,4 @@
     background: rgba(255,255,255,0.5);
 }
 
-    
-/* 散戶多空比說明彈窗 */
-.retail-info-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    animation: fadeIn 0.2s ease;
-}
-
-.retail-info-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(100, 116, 139, 0.3);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.retail-info-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(100, 116, 139, 0.3);
-}
-
-.retail-info-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
-}
-
-.retail-info-close {
-    font-size: 28px;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1;
-    padding: 5px 10px;
-}
-
-.retail-info-close:hover {
-    color: #ef4444;
-    transform: rotate(90deg);
-}
-
-.retail-info-section {
-    margin-bottom: 25px;
-}
-
-.retail-info-section-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #60a5fa;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.retail-info-content {
-    color: #cbd5e1;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.retail-info-content strong {
-    color: #e2e8f0;
-}
-
-.retail-signal-box {
-    background: rgba(100, 116, 139, 0.2);
-    border-radius: 8px;
-    padding: 12px 15px;
-    margin: 8px 0;
-    border-left: 3px solid;
-}
-
-.retail-signal-box.bullish {
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
-}
-
-.retail-signal-box.bearish {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-.retail-signal-box.neutral {
-    border-color: #64748b;
-    background: rgba(100, 116, 139, 0.1);
-}
-
-.retail-formula {
-    background: rgba(30, 41, 59, 0.8);
-    padding: 12px;
-    border-radius: 6px;
-    font-family: 'Courier New', monospace;
-    color: #fbbf24;
-    font-size: 13px;
-    margin: 10px 0;
-}
-
-</style>
+    </style>

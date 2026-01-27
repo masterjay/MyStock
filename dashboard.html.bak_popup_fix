@@ -419,7 +419,24 @@
         }
 
         /* 彈出面板 */
+        .guide-panel {
+    display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
 
+        .guide-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
             to { opacity: 1; }
         }
 
@@ -2389,7 +2406,7 @@
         </div>
 
     <!-- 散戶多空比說明彈窗 -->
-    <div id="retailInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideRetailInfo()">
+    <div id="retailInfoOverlay" class="retail-info-overlay" onclick="hideRetailInfo()">
         <div class="retail-info-panel" onclick="event.stopPropagation()">
             <div class="retail-info-header">
                 <div class="retail-info-title">📊 微台指散戶多空比指標</div>
@@ -2453,9 +2470,161 @@
     </div>
 
         <!-- 數據解讀彈出面板 -->
-        <div id="guidePanel" class="guide-panel" style="display: none;">
+        <div id="guidePanel" class="guide-panel">
 
+    <!-- 融資使用率說明彈窗 -->
+    <div id="marginInfoOverlay" class="retail-info-overlay" onclick="hideMarginInfo()">
+        <div class="retail-info-panel" onclick="event.stopPropagation()">
+            <div class="retail-info-header">
+                <div class="retail-info-title">💰 融資使用率指標</div>
+                <span class="retail-info-close" onclick="hideMarginInfo()">×</span>
+            </div>
 
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">📐 計算方式</div>
+                <div class="retail-info-content">
+                    <div class="retail-formula">
+                        融資使用率 = 融資餘額 / 整體市場市值 × 100%
+                    </div>
+                    反映散戶使用融資買股票的程度
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">📊 數值意義</div>
+                <div class="retail-info-content">
+                    • <strong>40%以下</strong>：融資水位低，市場偏保守<br>
+                    • <strong>40-50%</strong>：融資水位適中<br>
+                    • <strong>50-60%</strong>：融資偏高，需注意<br>
+                    • <strong>60%以上</strong>：融資過高，風險提升
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">⚠️ 風險判讀</div>
+                <div class="retail-info-content">
+                    <div class="retail-signal-box bullish">
+                        <strong>🟢 融資使用率低（< 45%）</strong><br>
+                        → 市場籌碼乾淨<br>
+                        → 上漲空間較大
+                    </div>
+
+                    <div class="retail-signal-box bearish">
+                        <strong>🔴 融資使用率高（> 60%）</strong><br>
+                        → 槓桿過高，賣壓沉重<br>
+                        → 回檔時易引發斷頭賣壓
+                    </div>
+
+                    <div class="retail-signal-box neutral">
+                        <strong>⚪ 融資使用率適中（45-60%）</strong><br>
+                        → 市場正常運作<br>
+                        → 依趨勢操作
+                    </div>
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 使用建議</div>
+                <div class="retail-info-content">
+                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
+                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
+                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
+                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 期貨多空比說明彈窗 -->
+    <div id="futuresInfoOverlay" class="retail-info-overlay" onclick="hideFuturesInfo()">
+        <div class="retail-info-panel" onclick="event.stopPropagation()">
+            <div class="retail-info-header">
+                <div class="retail-info-title">📈 期貨多空比指標</div>
+                <span class="retail-info-close" onclick="hideFuturesInfo()">×</span>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">📐 計算方式</div>
+                <div class="retail-info-content">
+                    <div class="retail-formula">
+                        多空比 = 總多單部位 / 總空單部位
+                    </div>
+                    包含散戶 + 三大法人的總體部位
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">📊 數值意義</div>
+                <div class="retail-info-content">
+                    • <strong>> 1.0</strong>：市場多單 > 空單，偏多<br>
+                    • <strong>= 1.0</strong>：多空平衡<br>
+                    • <strong>< 1.0</strong>：市場空單 > 多單，偏空<br>
+                    • <strong>極端值</strong>：> 1.2 或 < 0.8 需注意
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">🎯 操作策略</div>
+                <div class="retail-info-content">
+                    <div class="retail-signal-box bullish">
+                        <strong>🟢 多空比偏低（< 0.9）</strong><br>
+                        → 空單過多，軋空風險高<br>
+                        → 若出現上漲，力道可能很強
+                    </div>
+
+                    <div class="retail-signal-box bearish">
+                        <strong>🔴 多空比偏高（> 1.1）</strong><br>
+                        → 多單過多，獲利了結壓力<br>
+                        → 若回檔，賣壓可能較重
+                    </div>
+
+                    <div class="retail-signal-box neutral">
+                        <strong>⚪ 多空比平衡（0.9-1.1）</strong><br>
+                        → 市場處於平衡狀態<br>
+                        → 等待方向明朗
+                    </div>
+                </div>
+            </div>
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 進階觀察</div>
+                <div class="retail-info-content">
+                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
+                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
+                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
+                    4. <strong>結算效應</strong>：每月第三週三需注意
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 使用建議</div>
+                <div class="retail-info-content">
+                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
+                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
+                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
+                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 進階觀察</div>
+                <div class="retail-info-content">
+                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
+                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
+                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
+                    4. <strong>結算效應</strong>：每月第三週三需注意
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="guide-panel-overlay" id="guidePanelOverlay"></div>
             <div class="guide-panel-content">
                 <div class="guide-panel-header">
@@ -2482,17 +2651,6 @@
                                         <div class="level-action">→ 建議: 減碼、獲利了結、提高警覺</div>
                                     </div>
                                 </div>
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
-                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
-                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
-                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
-                </div>
-            </div>
-        </div>
-    </div>
 
                                 <div class="level-item level-warning">
                                     <div class="level-badge">🟠 25-28%</div>
@@ -2653,133 +2811,6 @@
                 </div>
             </div>
         </div>
-
-
-    <!-- 融資使用率說明彈窗 -->
-    <div id="marginInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideMarginInfo()">
-        <div class="retail-info-panel" onclick="event.stopPropagation()">
-            <div class="retail-info-header">
-                <div class="retail-info-title">💰 融資使用率指標</div>
-                <span class="retail-info-close" onclick="hideMarginInfo()">×</span>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📐 計算方式</div>
-                <div class="retail-info-content">
-                    <div class="retail-formula">
-                        融資使用率 = 融資餘額 / 整體市場市值 × 100%
-                    </div>
-                    反映散戶使用融資買股票的程度
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📊 數值意義</div>
-                <div class="retail-info-content">
-                    • <strong>40%以下</strong>：融資水位低，市場偏保守<br>
-                    • <strong>40-50%</strong>：融資水位適中<br>
-                    • <strong>50-60%</strong>：融資偏高，需注意<br>
-                    • <strong>60%以上</strong>：融資過高，風險提升
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">⚠️ 風險判讀</div>
-                <div class="retail-info-content">
-                    <div class="retail-signal-box bullish">
-                        <strong>🟢 融資使用率低（< 45%）</strong><br>
-                        → 市場籌碼乾淨<br>
-                        → 上漲空間較大
-                    </div>
-
-                    <div class="retail-signal-box bearish">
-                        <strong>🔴 融資使用率高（> 60%）</strong><br>
-                        → 槓桿過高，賣壓沉重<br>
-                        → 回檔時易引發斷頭賣壓
-                    </div>
-
-                    <div class="retail-signal-box neutral">
-                        <strong>⚪ 融資使用率適中（45-60%）</strong><br>
-                        → 市場正常運作<br>
-                        → 依趨勢操作
-                    </div>
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
-                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
-                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
-                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 期貨多空比說明彈窗 -->
-    <div id="futuresInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideFuturesInfo()">
-        <div class="retail-info-panel" onclick="event.stopPropagation()">
-            <div class="retail-info-header">
-                <div class="retail-info-title">📈 期貨多空比指標</div>
-                <span class="retail-info-close" onclick="hideFuturesInfo()">×</span>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📐 計算方式</div>
-                <div class="retail-info-content">
-                    <div class="retail-formula">
-                        多空比 = 總多單部位 / 總空單部位
-                    </div>
-                    包含散戶 + 三大法人的總體部位
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">📊 數值意義</div>
-                <div class="retail-info-content">
-                    • <strong>> 1.0</strong>：市場多單 > 空單，偏多<br>
-                    • <strong>= 1.0</strong>：多空平衡<br>
-                    • <strong>< 1.0</strong>：市場空單 > 多單，偏空<br>
-                    • <strong>極端值</strong>：> 1.2 或 < 0.8 需注意
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">🎯 操作策略</div>
-                <div class="retail-info-content">
-                    <div class="retail-signal-box bullish">
-                        <strong>🟢 多空比偏低（< 0.9）</strong><br>
-                        → 空單過多，軋空風險高<br>
-                        → 若出現上漲，力道可能很強
-                    </div>
-
-                    <div class="retail-signal-box bearish">
-                        <strong>🔴 多空比偏高（> 1.1）</strong><br>
-                        → 多單過多，獲利了結壓力<br>
-                        → 若回檔，賣壓可能較重
-                    </div>
-
-                    <div class="retail-signal-box neutral">
-                        <strong>⚪ 多空比平衡（0.9-1.1）</strong><br>
-                        → 市場處於平衡狀態<br>
-                        → 等待方向明朗
-                    </div>
-                </div>
-            </div>
-
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 進階觀察</div>
-                <div class="retail-info-content">
-                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
-                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
-                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
-                    4. <strong>結算效應</strong>：每月第三週三需注意
-                </div>
-            </div>
-        </div>
-    </div>
 
         <!-- Footer -->
         <div class="footer">

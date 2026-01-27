@@ -24,7 +24,7 @@ from industry_foreign_flow_collector import collect_industry_foreign_flow
 from industry_heatmap_collector import collect_industry_heatmap
 
 class DataCollector:
-    def __init__(self, db_path='market_data.db'):
+    def __init__(self, db_path='data/market_data.db'):
         self.db_path = db_path
         self.twse_scraper = TWSEScraper()
         self.taifex_scraper = TAIFEXScraper()

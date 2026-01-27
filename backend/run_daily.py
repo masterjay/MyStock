@@ -67,6 +67,15 @@ try:
         print("✓ 產業外資流向收集完成")
     except Exception as e:
         print(f"✗ 產業外資流向收集失敗: {e}")
+
+    # 5. 收集散戶多空比歷史
+    print("\n[額外收集] 散戶多空比歷史...")
+    try:
+        from retail_ratio_collector import collect_retail_ratio_history
+        collect_retail_ratio_history()
+        print("✓ 散戶多空比歷史收集完成")
+    except Exception as e:
+        print(f"✗ 散戶多空比歷史收集失敗: {e}")
         
 except Exception as e:
     print(f"✗ 執行錯誤: {e}")

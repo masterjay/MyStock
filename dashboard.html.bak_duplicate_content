@@ -2455,7 +2455,57 @@
         <!-- 數據解讀彈出面板 -->
         <div id="guidePanel" class="guide-panel" style="display: none;">
 
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 使用建議</div>
+                <div class="retail-info-content">
+                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
+                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
+                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
+                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
+                </div>
+            </div>
+        </div>
+    </div>
 
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 進階觀察</div>
+                <div class="retail-info-content">
+                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
+                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
+                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
+                    4. <strong>結算效應</strong>：每月第三週三需注意
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 使用建議</div>
+                <div class="retail-info-content">
+                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
+                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
+                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
+                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+            <div class="retail-info-section">
+                <div class="retail-info-section-title">💡 進階觀察</div>
+                <div class="retail-info-content">
+                    1. <strong>配合外資部位</strong>：外資大幅做多/空時特別注意<br>
+                    2. <strong>趨勢轉折</strong>：極端值往往是轉折訊號<br>
+                    3. <strong>量價配合</strong>：多空比+成交量+價格方向<br>
+                    4. <strong>結算效應</strong>：每月第三週三需注意
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="guide-panel-overlay" id="guidePanelOverlay"></div>
             <div class="guide-panel-content">
                 <div class="guide-panel-header">
@@ -2482,17 +2532,6 @@
                                         <div class="level-action">→ 建議: 減碼、獲利了結、提高警覺</div>
                                     </div>
                                 </div>
-            <div class="retail-info-section">
-                <div class="retail-info-section-title">💡 使用建議</div>
-                <div class="retail-info-content">
-                    1. <strong>觀察趨勢</strong>：持續上升需警戒<br>
-                    2. <strong>配合指數</strong>：高檔+高融資=危險訊號<br>
-                    3. <strong>低檔進場</strong>：融資低+指數低=好時機<br>
-                    4. <strong>融資斷頭</strong>：大跌時融資戶被迫賣出
-                </div>
-            </div>
-        </div>
-    </div>
 
                                 <div class="level-item level-warning">
                                     <div class="level-badge">🟠 25-28%</div>
