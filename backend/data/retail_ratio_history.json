@@ -1,245 +1,525 @@
 {
-  "updated_at": "2026-01-27T20:00:44.238625",
-  "history": [
-    {
-      "date": "20251216",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251217",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251218",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251219",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251222",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251223",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251224",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251225",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251229",
-      "retail_long": 33012,
-      "retail_short": 33373,
-      "retail_ratio": 0.99,
-      "net_pct": -0.54,
-      "futures_oi": 123288
-    },
-    {
-      "date": "20251230",
-      "retail_long": 31517,
-      "retail_short": 32875,
-      "retail_ratio": 0.96,
-      "net_pct": -2.11,
-      "futures_oi": 119587
-    },
-    {
-      "date": "20251231",
-      "retail_long": 31005,
-      "retail_short": 31749,
-      "retail_ratio": 0.98,
-      "net_pct": -1.19,
-      "futures_oi": 116545
-    },
-    {
-      "date": "20260101",
-      "retail_long": 31005,
-      "retail_short": 31749,
-      "retail_ratio": 0.98,
-      "net_pct": -1.19,
-      "futures_oi": 116545
-    },
-    {
-      "date": "20260102",
-      "retail_long": 27877,
-      "retail_short": 29839,
-      "retail_ratio": 0.93,
-      "net_pct": -3.4,
-      "futures_oi": 107188
-    },
-    {
-      "date": "20260105",
-      "retail_long": 27877,
-      "retail_short": 29839,
-      "retail_ratio": 0.93,
-      "net_pct": -3.4,
-      "futures_oi": 107188
-    },
-    {
-      "date": "20260106",
-      "retail_long": 27877,
-      "retail_short": 29839,
-      "retail_ratio": 0.93,
-      "net_pct": -3.4,
-      "futures_oi": 107188
-    },
-    {
-      "date": "20260107",
-      "retail_long": 32034,
-      "retail_short": 34469,
-      "retail_ratio": 0.93,
-      "net_pct": -3.66,
-      "futures_oi": 123508
-    },
-    {
-      "date": "20260108",
-      "retail_long": 31717,
-      "retail_short": 33113,
-      "retail_ratio": 0.96,
-      "net_pct": -2.15,
-      "futures_oi": 120401
-    },
-    {
-      "date": "20260109",
-      "retail_long": 31938,
-      "retail_short": 33672,
-      "retail_ratio": 0.95,
-      "net_pct": -2.64,
-      "futures_oi": 121848
-    },
-    {
-      "date": "20260112",
-      "retail_long": 32265,
-      "retail_short": 33838,
-      "retail_ratio": 0.95,
-      "net_pct": -2.38,
-      "futures_oi": 122765
-    },
-    {
-      "date": "20260113",
-      "retail_long": 32419,
-      "retail_short": 35235,
-      "retail_ratio": 0.92,
-      "net_pct": -4.16,
-      "futures_oi": 125644
-    },
-    {
-      "date": "20260114",
-      "retail_long": 32980,
-      "retail_short": 37353,
-      "retail_ratio": 0.88,
-      "net_pct": -6.22,
-      "futures_oi": 130621
-    },
-    {
-      "date": "20260115",
-      "retail_long": 33728,
-      "retail_short": 38666,
-      "retail_ratio": 0.87,
-      "net_pct": -6.82,
-      "futures_oi": 134447
-    },
-    {
-      "date": "20260116",
-      "retail_long": 34987,
-      "retail_short": 38416,
-      "retail_ratio": 0.91,
-      "net_pct": -4.67,
-      "futures_oi": 136321
-    },
-    {
-      "date": "20260119",
-      "retail_long": 33628,
-      "retail_short": 37061,
-      "retail_ratio": 0.91,
-      "net_pct": -4.86,
-      "futures_oi": 131280
-    },
-    {
-      "date": "20260120",
-      "retail_long": 32884,
-      "retail_short": 35696,
-      "retail_ratio": 0.92,
-      "net_pct": -4.1,
-      "futures_oi": 127364
-    },
-    {
-      "date": "20260121",
-      "retail_long": 28250,
-      "retail_short": 30139,
-      "retail_ratio": 0.94,
-      "net_pct": -3.24,
-      "futures_oi": 108438
-    },
-    {
-      "date": "20260122",
-      "retail_long": 28290,
-      "retail_short": 30121,
-      "retail_ratio": 0.94,
-      "net_pct": -3.13,
-      "futures_oi": 108479
-    },
-    {
-      "date": "20260123",
-      "retail_long": 28915,
-      "retail_short": 30126,
-      "retail_ratio": 0.96,
-      "net_pct": -2.05,
-      "futures_oi": 109649
-    },
-    {
-      "date": "20260126",
-      "retail_long": 27877,
-      "retail_short": 29839,
-      "retail_ratio": 0.93,
-      "net_pct": -3.4,
-      "futures_oi": 107188
-    },
-    {
-      "date": "20260127",
-      "retail_long": 28751,
-      "retail_short": 30036,
-      "retail_ratio": 0.96,
-      "net_pct": -2.19,
-      "futures_oi": 109177
-    }
-  ]
+  "updated_at": "2026-02-13T21:51:31.641037",
+  "mxf": {
+    "name": "微型台指期貨 (MXF)",
+    "description": "散戶參與度高，更能反映散戶情緒",
+    "history": [
+      {
+        "date": "20251229",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20251230",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20251231",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260101",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260102",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260105",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260106",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260107",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260108",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260109",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260112",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260113",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260114",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260115",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260116",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260119",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260120",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260121",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260122",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260123",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260126",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260127",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260128",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260129",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260130",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260202",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260203",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260204",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260205",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      },
+      {
+        "date": "20260206",
+        "retail_long": 31553,
+        "retail_short": 41953,
+        "retail_ratio": -21.22,
+        "total_oi": 49004,
+        "close_price": 0.0,
+        "foreign_net": 3707
+      }
+    ]
+  },
+  "tx": {
+    "name": "台指期貨 (TX)",
+    "description": "法人為主，反映機構態度",
+    "history": [
+      {
+        "date": "20260102",
+        "retail_long": 27877,
+        "retail_short": 29839,
+        "retail_ratio": 0.93,
+        "open_interest": 107188,
+        "foreign_net": -26527
+      },
+      {
+        "date": "20260105",
+        "retail_long": 27877,
+        "retail_short": 29839,
+        "retail_ratio": 0.93,
+        "open_interest": 107188,
+        "foreign_net": -26527
+      },
+      {
+        "date": "20260106",
+        "retail_long": 27877,
+        "retail_short": 29839,
+        "retail_ratio": 0.93,
+        "open_interest": 107188,
+        "foreign_net": -26527
+      },
+      {
+        "date": "20260107",
+        "retail_long": 32034,
+        "retail_short": 34469,
+        "retail_ratio": 0.93,
+        "open_interest": 123508,
+        "foreign_net": -29422
+      },
+      {
+        "date": "20260108",
+        "retail_long": 31717,
+        "retail_short": 33113,
+        "retail_ratio": 0.96,
+        "open_interest": 120401,
+        "foreign_net": -26047
+      },
+      {
+        "date": "20260109",
+        "retail_long": 31938,
+        "retail_short": 33672,
+        "retail_ratio": 0.95,
+        "open_interest": 121848,
+        "foreign_net": -26583
+      },
+      {
+        "date": "20260112",
+        "retail_long": 32265,
+        "retail_short": 33838,
+        "retail_ratio": 0.95,
+        "open_interest": 122765,
+        "foreign_net": -26892
+      },
+      {
+        "date": "20260113",
+        "retail_long": 32419,
+        "retail_short": 35235,
+        "retail_ratio": 0.92,
+        "open_interest": 125644,
+        "foreign_net": -30117
+      },
+      {
+        "date": "20260114",
+        "retail_long": 32980,
+        "retail_short": 37353,
+        "retail_ratio": 0.88,
+        "open_interest": 130621,
+        "foreign_net": -33957
+      },
+      {
+        "date": "20260115",
+        "retail_long": 33728,
+        "retail_short": 38666,
+        "retail_ratio": 0.87,
+        "open_interest": 134447,
+        "foreign_net": -35130
+      },
+      {
+        "date": "20260116",
+        "retail_long": 34987,
+        "retail_short": 38416,
+        "retail_ratio": 0.91,
+        "open_interest": 136321,
+        "foreign_net": -33249
+      },
+      {
+        "date": "20260119",
+        "retail_long": 33628,
+        "retail_short": 37061,
+        "retail_ratio": 0.91,
+        "open_interest": 131280,
+        "foreign_net": -33726
+      },
+      {
+        "date": "20260120",
+        "retail_long": 32884,
+        "retail_short": 35696,
+        "retail_ratio": 0.92,
+        "open_interest": 127364,
+        "foreign_net": -32675
+      },
+      {
+        "date": "20260121",
+        "retail_long": 28250,
+        "retail_short": 30139,
+        "retail_ratio": 0.94,
+        "open_interest": 108438,
+        "foreign_net": -24473
+      },
+      {
+        "date": "20260122",
+        "retail_long": 28290,
+        "retail_short": 30121,
+        "retail_ratio": 0.94,
+        "open_interest": 108479,
+        "foreign_net": -24293
+      },
+      {
+        "date": "20260123",
+        "retail_long": 28915,
+        "retail_short": 30126,
+        "retail_ratio": 0.96,
+        "open_interest": 109649,
+        "foreign_net": -22666
+      },
+      {
+        "date": "20260126",
+        "retail_long": 27877,
+        "retail_short": 29839,
+        "retail_ratio": 0.93,
+        "open_interest": 107188,
+        "foreign_net": -26527
+      },
+      {
+        "date": "20260127",
+        "retail_long": 28751,
+        "retail_short": 30036,
+        "retail_ratio": 0.96,
+        "open_interest": 109177,
+        "foreign_net": -25318
+      },
+      {
+        "date": "20260128",
+        "retail_long": 28863,
+        "retail_short": 31042,
+        "retail_ratio": 0.93,
+        "open_interest": 111255,
+        "foreign_net": -27932
+      },
+      {
+        "date": "20260129",
+        "retail_long": 29231,
+        "retail_short": 33078,
+        "retail_ratio": 0.88,
+        "open_interest": 115719,
+        "foreign_net": -32702
+      },
+      {
+        "date": "20260130",
+        "retail_long": 29272,
+        "retail_short": 33310,
+        "retail_ratio": 0.88,
+        "open_interest": 116227,
+        "foreign_net": -32670
+      },
+      {
+        "date": "20260202",
+        "retail_long": 31590,
+        "retail_short": 32700,
+        "retail_ratio": 0.97,
+        "open_interest": 119398,
+        "foreign_net": -27673
+      },
+      {
+        "date": "20260203",
+        "retail_long": 32379,
+        "retail_short": 32963,
+        "retail_ratio": 0.98,
+        "open_interest": 121351,
+        "foreign_net": -26496
+      },
+      {
+        "date": "20260204",
+        "retail_long": 33047,
+        "retail_short": 32807,
+        "retail_ratio": 1.01,
+        "open_interest": 122301,
+        "foreign_net": -25699
+      },
+      {
+        "date": "20260205",
+        "retail_long": 34161,
+        "retail_short": 33182,
+        "retail_ratio": 1.03,
+        "open_interest": 125068,
+        "foreign_net": -26743
+      },
+      {
+        "date": "20260206",
+        "retail_long": 33214,
+        "retail_short": 32122,
+        "retail_ratio": 1.03,
+        "open_interest": 121340,
+        "foreign_net": -25102
+      },
+      {
+        "date": "20260209",
+        "retail_long": 33832,
+        "retail_short": 32429,
+        "retail_ratio": 1.04,
+        "open_interest": 123058,
+        "foreign_net": -23585
+      },
+      {
+        "date": "20260210",
+        "retail_long": 37010,
+        "retail_short": 36725,
+        "retail_ratio": 1.01,
+        "open_interest": 136937,
+        "foreign_net": -24884
+      },
+      {
+        "date": "20260211",
+        "retail_long": 37569,
+        "retail_short": 37903,
+        "retail_ratio": 0.99,
+        "open_interest": 140163,
+        "foreign_net": -27665
+      },
+      {
+        "date": "20260212",
+        "retail_long": 37569,
+        "retail_short": 37903,
+        "retail_ratio": 0.99,
+        "open_interest": 140163,
+        "foreign_net": -27665
+      }
+    ]
+  }
 }

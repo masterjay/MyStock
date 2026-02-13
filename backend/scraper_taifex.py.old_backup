@@ -1,0 +1,621 @@
+"""
+期交所微台指散戶多空比數據爬蟲
+資料來源: 臺灣期貨交易所 (TAIFEX)
+
+需要兩個資料來源:
+1. 三大法人期貨部位 (futContractsDate) → 法人多空口數
+2. 每日行情表 (futDailyMarketReport) → 全市場未平倉量 (OI)
+
+散戶多空比公式 (與 WantGoo 玩股網一致):
+  散戶做多 = 全市場OI - (自營多 + 投信多 + 外資多)
+  散戶做空 = 全市場OI - (自營空 + 投信空 + 外資空)
+  散戶多空比(%) = (散戶做多 - 散戶做空) / 全市場OI × 100
+"""
+import requests
+import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+import io
+import time
+import re
+
+
+class TAIFEXScraper:
+    def __init__(self):
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept-Language': 'zh-TW,zh;q=0.9,en;q=0.8',
+        }
+        # 商品名稱 ↔ 代碼對照
+        self.product_map = {
+            'MXF': '微型臺指',
+            'MTX': '小型臺指',
+            'TX':  '臺股期貨',
+        }
+
+    # =========================================================================
+    # 1. 三大法人期貨部位
+    # =========================================================================
+    def get_institutional_positions(self, date=None, commodity_id='MXF', debug=False):
+        """
+        獲取三大法人期貨部位 (使用 pandas.read_html 解析)
+        
+        Args:
+            date: 格式 'YYYY/MM/DD'，預設今天
+            commodity_id: 'MXF' / 'MTX' / 'TX'
+            debug: 是否顯示除錯訊息
+            
+        Returns:
+            dict: {dealers, trusts, foreign, net_institutional} 各含 long, short, net
+        """
+        if date is None:
+            date = datetime.now().strftime('%Y/%m/%d')
+        
+        product_name = self.product_map.get(commodity_id, '微型臺指')
+        url = "https://www.taifex.com.tw/cht/3/futContractsDate"
+        params = {
+            'queryStartDate': date,
+            'queryEndDate': date,
+        }
+
+        try:
+            resp = requests.get(url, params=params, headers=self.headers, timeout=30)
+            resp.raise_for_status()
+            
+            # 用 pandas 解析所有表格
+            dfs = pd.read_html(io.StringIO(resp.text))
+            
+            if debug:
+                print(f"找到 {len(dfs)} 個表格")
+                for i, df in enumerate(dfs):
+                    print(f"  表格 {i}: {df.shape}")
+            
+            # 找包含三大法人資料的表格 (通常是最大的或含有「自營商」的)
+            target_df = None
+            for df in dfs:
+                df_str = df.to_string()
+                if '自營商' in df_str and product_name in df_str:
+                    target_df = df
+                    break
+            
+            if target_df is None:
+                # 退而求其次：找含有自營商的最大表格
+                for df in dfs:
+                    if '自營商' in df.to_string():
+                        target_df = df
+                        break
+            
+            if target_df is None:
+                if debug:
+                    print(f"找不到含有 '{product_name}' 的表格")
+                return None
+            
+            if debug:
+                print(f"\n目標表格 shape: {target_df.shape}")
+                print(f"欄位: {list(target_df.columns)}")
+            
+            return self._parse_positions_df(target_df, product_name, debug)
+            
+        except Exception as e:
+            print(f"抓取三大法人部位失敗: {e}")
+            if debug:
+                import traceback
+                traceback.print_exc()
+            return None
+
+    def _parse_positions_df(self, df, product_name, debug=False):
+        """
+        從 DataFrame 中解析指定商品的三大法人部位
+        
+        期交所 futContractsDate 表格結構:
+        每個商品有3列資料 (自營商、投信、外資及陸資)
+        欄位: 契約/商品 | 身份別 | 多方-口數 | 多方-契約金額 | 空方-口數 | 空方-契約金額 | 
+              多空淨額-口數 | 多空淨額-契約金額 | ...
+        """
+        result = {
+            'dealers': {'long': 0, 'short': 0, 'net': 0},
+            'trusts':  {'long': 0, 'short': 0, 'net': 0},
+            'foreign': {'long': 0, 'short': 0, 'net': 0},
+            'net_institutional': {'long': 0, 'short': 0, 'net': 0},
+        }
+        
+        # 將 DataFrame 轉為字串矩陣方便搜尋
+        df_reset = df.reset_index(drop=True)
+        
+        # 逐列搜尋
+        found_product = False
+        identity_map = {
+            '自營商': 'dealers',
+            '投信': 'trusts',
+            '外資及陸資': 'foreign',
+            '外資': 'foreign',
+        }
+        parsed_count = 0
+        
+        for idx in range(len(df_reset)):
+            row = df_reset.iloc[idx]
+            row_str = ' '.join([str(v) for v in row.values])
+            
+            # 檢查此列是否包含目標商品名稱
+            if product_name in row_str:
+                found_product = True
+                if debug:
+                    print(f"\n列 {idx} 包含 '{product_name}': {row_str[:100]}")
+            
+            if not found_product:
+                continue
+            
+            # 檢查身份別
+            matched_identity = None
+            for key_str, identity_key in identity_map.items():
+                if key_str in row_str:
+                    matched_identity = identity_key
+                    break
+            
+            if matched_identity is None:
+                # 如果已經解析了一些身份，又遇到非身份列，可能是下個商品了
+                if parsed_count > 0:
+                    # 檢查是否是新的商品
+                    for pname in self.product_map.values():
+                        if pname in row_str and pname != product_name:
+                            found_product = False
+                            break
+                continue
+            
+            # 提取數字
+            numbers = []
+            for v in row.values:
+                s = str(v).replace(',', '').replace('，', '').strip()
+                try:
+                    numbers.append(int(s))
+                except ValueError:
+                    try:
+                        numbers.append(int(float(s)))
+                    except ValueError:
+                        continue
+            
+            if debug:
+                print(f"  {matched_identity}: numbers={numbers}")
+            
+            # 數字順序（期交所表格）:
+            # [序號], 多方口數, 多方金額, 空方口數, 空方金額, 多空淨口數, 多空淨金額
+            # 但第一列有序號+商品，後續列可能沒有
+            # 我們找到至少2個數字即可 (多方口數, 空方口數)
+            if len(numbers) >= 2:
+                # 根據位置推斷: 通常第一個大數是多方口數，第三個是空方口數
+                # 但如果有序號（小數字1-50），要跳過
+                # 策略: 過濾掉序號（<100 的數字且排在最前面）
+                filtered = numbers
+                if filtered[0] < 100 and len(filtered) > 2:
+                    filtered = filtered[1:]  # 移除序號
+                
+                if len(filtered) >= 4:
+                    long_contracts = filtered[0]   # 多方口數
+                    short_contracts = filtered[2]   # 空方口數 (跳過金額)
+                elif len(filtered) >= 2:
+                    long_contracts = filtered[0]
+                    short_contracts = filtered[1]
+                else:
+                    continue
+                
+                result[matched_identity]['long'] = long_contracts
+                result[matched_identity]['short'] = short_contracts
+                result[matched_identity]['net'] = long_contracts - short_contracts
+                parsed_count += 1
+                
+                if debug:
+                    print(f"  → {matched_identity}: 多={long_contracts}, 空={short_contracts}, 淨={long_contracts - short_contracts}")
+            
+            if parsed_count >= 3:
+                break
+        
+        if parsed_count == 0:
+            print(f"找不到 '{product_name}' 的法人部位數據")
+            return None
+        
+        # 計算合計
+        for key in ['long', 'short', 'net']:
+            result['net_institutional'][key] = (
+                result['dealers'][key] +
+                result['trusts'][key] +
+                result['foreign'][key]
+            )
+        
+        return result
+
+    # =========================================================================
+    # 2. 每日行情表 - 全市場未平倉量 (使用 pd.read_html)
+    # =========================================================================
+    def get_market_oi(self, date=None, commodity_id='MXF', debug=False):
+        """
+        獲取全市場未平倉量 + 近月收盤價
+        
+        Args:
+            date: 格式 'YYYY/MM/DD'
+            commodity_id: 'MXF' / 'MTX' / 'TX'
+            debug: 除錯訊息
+            
+        Returns:
+            dict: {total_oi, close_price}
+        """
+        if date is None:
+            date = datetime.now().strftime('%Y/%m/%d')
+
+        # 方法1: 用 HTML 行情表
+        result = self._get_oi_from_html(date, commodity_id, debug)
+        if result:
+            return result
+        
+        if debug:
+            print("HTML 解析失敗，嘗試 CSV 方式...")
+        
+        # 方法2: 用 CSV 下載 (備用)
+        return self._get_oi_from_csv(date, commodity_id, debug)
+
+    def _get_oi_from_html(self, date, commodity_id, debug=False):
+        """從 HTML 行情表取得 OI"""
+        url = "https://www.taifex.com.tw/cht/3/futDailyMarketReport"
+        
+        # 這個頁面用 POST
+        payload = {
+            'queryStartDate': date,
+            'queryEndDate': date,
+            'commodity_id': commodity_id,
+            'MarketCode': '0',  # 0=一般交易時段
+            'commodity_idt': commodity_id,
+        }
+
+        try:
+            resp = requests.post(url, data=payload, headers=self.headers, timeout=30)
+            resp.raise_for_status()
+            
+            dfs = pd.read_html(io.StringIO(resp.text))
+            
+            if debug:
+                print(f"\n行情表找到 {len(dfs)} 個表格")
+            
+            # 找包含「未沖銷契約」的表格
+            target_df = None
+            for df in dfs:
+                df_str = df.to_string()
+                if '未沖銷' in df_str or '未沖銷契約' in df_str:
+                    target_df = df
+                    break
+            
+            if target_df is None and dfs:
+                # 用最大的表格
+                target_df = max(dfs, key=lambda d: d.shape[0] * d.shape[1])
+            
+            if target_df is None:
+                return None
+            
+            if debug:
+                print(f"目標表格: {target_df.shape}")
+                print(target_df.head())
+            
+            # 解析: 加總所有月份的未沖銷契約量
+            total_oi = 0
+            close_price = 0
+            
+            for idx in range(len(target_df)):
+                row = target_df.iloc[idx]
+                row_str = ' '.join([str(v) for v in row.values])
+                
+                # 跳過標題列
+                if '契約' in row_str and '到期' in row_str:
+                    continue
+                if 'nan' == str(row.values[0]).strip().lower():
+                    continue
+                
+                numbers = []
+                for v in row.values:
+                    s = str(v).replace(',', '').strip()
+                    try:
+                        numbers.append(float(s))
+                    except ValueError:
+                        continue
+                
+                if len(numbers) < 5:
+                    continue
+                
+                # 期貨行情表欄位順序:
+                # 契約 | 到期月份 | 開盤價 | 最高 | 最低 | 收盤(最後成交價) | 漲跌 | 漲跌% |
+                # 成交量(盤後) | 成交量(一般) | 成交量(合計) | 結算價 | 未沖銷契約量 | ...
+                
+                # 未沖銷契約量通常是倒數幾個欄位中的一個正整數
+                # 最安全: 找 DataFrame 中名為「未沖銷契約量」的欄
+                # 但因為 multi-level header，我們直接用最後幾個數字
+                
+                # 取收盤價 (第一個有效數據列的收盤價)
+                if close_price == 0 and len(numbers) >= 4:
+                    # 收盤價通常是第4個數字 (開盤/最高/最低/收盤)
+                    close_price = numbers[3]
+                
+                # OI 通常是最後一個大數字
+                if len(numbers) >= 2:
+                    # 找最後一個整數型的數字作為 OI
+                    oi_candidate = int(numbers[-1]) if numbers[-1] == int(numbers[-1]) else 0
+                    if oi_candidate > 0:
+                        total_oi += oi_candidate
+            
+            if total_oi > 0:
+                return {
+                    'date': date,
+                    'commodity_id': commodity_id,
+                    'total_oi': total_oi,
+                    'close_price': close_price,
+                }
+            return None
+
+        except Exception as e:
+            if debug:
+                print(f"HTML 行情表解析失敗: {e}")
+                import traceback
+                traceback.print_exc()
+            return None
+
+    def _get_oi_from_csv(self, date, commodity_id='MXF', debug=False):
+        """
+        從期交所 CSV/Excel 下載取得 OI (備用方案)
+        URL: https://www.taifex.com.tw/cht/3/futDailyMarketExcel
+        """
+        url = "https://www.taifex.com.tw/cht/3/futDailyMarketExcel"
+        params = {
+            'queryStartDate': date,
+            'queryEndDate': date,
+            'commodity_id': commodity_id,
+        }
+
+        try:
+            resp = requests.get(url, params=params, headers=self.headers, timeout=30)
+            resp.raise_for_status()
+            
+            # 嘗試不同編碼
+            for encoding in ['big5', 'cp950', 'utf-8']:
+                try:
+                    content = resp.content.decode(encoding)
+                    break
+                except (UnicodeDecodeError, LookupError):
+                    continue
+            else:
+                content = resp.content.decode('utf-8', errors='replace')
+
+            lines = content.strip().split('\n')
+            
+            if debug:
+                print(f"\nCSV 共 {len(lines)} 列，前 3 列:")
+                for line in lines[:3]:
+                    print(f"  {line[:150]}")
+            
+            total_oi = 0
+            close_price = 0
+            
+            for line in lines:
+                if '契約' in line or '到期' in line or line.strip() == '':
+                    continue
+                
+                fields = [f.strip().replace('"', '').replace(',', '') for f in line.split(',')]
+                if len(fields) < 10:
+                    continue
+                
+                try:
+                    # 只處理一般交易時段
+                    session = fields[-1].strip() if len(fields) > 12 else ''
+                    if session == '盤後':
+                        continue
+                    
+                    # 收盤價 (欄位6)
+                    price_str = fields[6].strip()
+                    if close_price == 0 and price_str and price_str != '-':
+                        try:
+                            close_price = float(price_str)
+                        except ValueError:
+                            pass
+                    
+                    # 未沖銷契約數 (欄位11 或接近最後的欄位)
+                    oi_str = fields[11].strip() if len(fields) > 11 else '0'
+                    oi = int(oi_str) if oi_str and oi_str != '-' else 0
+                    total_oi += oi
+                    
+                    if debug:
+                        month = fields[2].strip() if len(fields) > 2 else ''
+                        print(f"  月份={month}, 收盤={price_str}, OI={oi}")
+                        
+                except (ValueError, IndexError) as e:
+                    if debug:
+                        print(f"  CSV 解析錯誤: {e}")
+                    continue
+
+            if total_oi > 0:
+                return {
+                    'date': date,
+                    'commodity_id': commodity_id,
+                    'total_oi': total_oi,
+                    'close_price': close_price,
+                }
+            return None
+
+        except Exception as e:
+            print(f"CSV 行情抓取失敗: {e}")
+            return None
+
+    # =========================================================================
+    # 3. 核心: 計算散戶多空比
+    # =========================================================================
+    def get_retail_ratio(self, date=None, commodity_id='MXF', debug=False):
+        """
+        計算散戶多空比 (主要 API)
+        
+        Args:
+            date: 格式 'YYYY/MM/DD'，預設今天
+            commodity_id: 'MXF' (微型臺指) / 'MTX' (小型臺指) / 'TX' (臺股期貨)
+            debug: 除錯模式
+            
+        Returns:
+            dict: {
+                date, close_price, total_oi,
+                retail_long, retail_short, retail_net, retail_ratio,
+                institutional_net, dealers, trusts, foreign
+            }
+        """
+        if date is None:
+            date = datetime.now().strftime('%Y/%m/%d')
+        
+        product_name = self.product_map.get(commodity_id, '微型臺指')
+
+        if debug:
+            print(f"=== 計算 {product_name}({commodity_id}) 散戶多空比 ({date}) ===")
+
+        # Step 1: 三大法人部位
+        positions = self.get_institutional_positions(date, commodity_id, debug)
+        if not positions:
+            print(f"[{date}] 無法取得三大法人部位")
+            return None
+
+        # Step 2: 全市場未平倉量
+        oi_data = self.get_market_oi(date, commodity_id, debug)
+        if not oi_data:
+            print(f"[{date}] 無法取得全市場未平倉量")
+            return None
+
+        total_oi = oi_data['total_oi']
+        close_price = oi_data['close_price']
+        inst = positions['net_institutional']
+
+        # Step 3: 計算散戶部位
+        retail_long  = total_oi - inst['long']
+        retail_short = total_oi - inst['short']
+        retail_net   = retail_long - retail_short  # = -inst['net']
+        
+        retail_ratio = (retail_net / total_oi * 100) if total_oi > 0 else 0
+
+        result = {
+            'date': date,
+            'close_price': close_price,
+            'total_oi': total_oi,
+            'retail_long': retail_long,
+            'retail_short': retail_short,
+            'retail_net': retail_net,
+            'retail_ratio': round(retail_ratio, 2),
+            'institutional_net': inst['net'],
+            'dealers': positions['dealers'],
+            'trusts': positions['trusts'],
+            'foreign': positions['foreign'],
+            'commodity_id': commodity_id,
+            'product_name': product_name,
+            'timestamp': datetime.now().isoformat(),
+        }
+
+        if debug:
+            print(f"\n{'='*50}")
+            print(f"日期: {date}")
+            print(f"收盤價: {close_price}")
+            print(f"全市場OI: {total_oi:,}")
+            print(f"自營商: 多={positions['dealers']['long']:,}  空={positions['dealers']['short']:,}  淨={positions['dealers']['net']:,}")
+            print(f"投信  : 多={positions['trusts']['long']:,}  空={positions['trusts']['short']:,}  淨={positions['trusts']['net']:,}")
+            print(f"外資  : 多={positions['foreign']['long']:,}  空={positions['foreign']['short']:,}  淨={positions['foreign']['net']:,}")
+            print(f"法人合計: 多={inst['long']:,}  空={inst['short']:,}  淨={inst['net']:,}")
+            print(f"散戶做多: {retail_long:,}")
+            print(f"散戶做空: {retail_short:,}")
+            print(f"散戶多空比: {retail_ratio:.2f}%")
+            print(f"{'='*50}")
+
+        return result
+
+    # =========================================================================
+    # 4. 批量抓取歷史數據
+    # =========================================================================
+    def get_retail_ratio_history(self, days=30, commodity_id='MXF', debug=False):
+        """
+        批量抓取歷史散戶多空比
+        
+        Args:
+            days: 要取得的交易日數
+            commodity_id: 商品代碼
+            debug: 除錯模式
+            
+        Returns:
+            list of dicts, 按日期由舊到新排序
+        """
+        results = []
+        current_date = datetime.now()
+        attempts = 0
+        max_attempts = days * 2 + 10  # 預留假日
+        
+        while len(results) < days and attempts < max_attempts:
+            check_date = current_date - timedelta(days=attempts)
+            attempts += 1
+            
+            # 跳過週末
+            if check_date.weekday() >= 5:
+                continue
+            
+            date_str = check_date.strftime('%Y/%m/%d')
+            
+            data = self.get_retail_ratio(date_str, commodity_id, debug=False)
+            
+            if data and data['total_oi'] > 0:
+                results.append(data)
+                if debug:
+                    print(f"[{date_str}] ✓ 散戶多空比: {data['retail_ratio']}% (OI={data['total_oi']:,})")
+            else:
+                if debug:
+                    print(f"[{date_str}] ✗ 無數據")
+            
+            # 避免請求過快被封
+            time.sleep(0.3)
+        
+        results.sort(key=lambda x: x['date'])
+        return results
+
+    # =========================================================================
+    # 5. 舊介面相容 (get_futures_oi)
+    # =========================================================================
+    def get_futures_oi(self, date=None, debug=False):
+        """
+        相容舊介面: 直接回傳散戶多空比結果
+        """
+        return self.get_retail_ratio(date, 'MXF', debug)
+
+
+# =========================================================================
+# 主程式: 測試 + 驗證
+# =========================================================================
+if __name__ == '__main__':
+    scraper = TAIFEXScraper()
+    
+    print("=" * 60)
+    print("微台指散戶多空比爬蟲 - 測試")
+    print("=" * 60)
+    
+    # 測試: 用已知數據驗證
+    # 2026/02/11 官方數據:
+    #   收盤價=33691, 散戶做多=29462, 散戶做空=39862
+    #   散戶多空比 = (29462-39862) / ? × 100 = -22.17%
+    #   反推 OI = (39862-29462) / 0.2217 ≈ 46909
+    
+    test_dates = ['2026/02/11', '2026/02/10', '2026/02/09']
+    
+    for test_date in test_dates:
+        print(f"\n{'='*60}")
+        print(f"測試日期: {test_date}")
+        print(f"{'='*60}")
+        
+        result = scraper.get_retail_ratio(test_date, 'MXF', debug=True)
+        
+        if result:
+            print(f"\n結果摘要:")
+            print(f"  散戶做多: {result['retail_long']:,}")
+            print(f"  散戶做空: {result['retail_short']:,}")
+            print(f"  散戶多空比: {result['retail_ratio']}%")
+        else:
+            print("  → 無法取得數據")
+    
+    # 驗證對照
+    print(f"\n{'='*60}")
+    print("預期對照 (來自官方數據截圖):")
+    print("  02/11: 散戶多=29462, 散戶空=39862, 多空比=-22.17%")
+    print("  02/10: 散戶多=31431, 散戶空=45449, 多空比=-27.43%")
+    print("  02/09: 散戶多=36202, 散戶空=41673, 多空比=-10.99%")
+    print(f"{'='*60}")

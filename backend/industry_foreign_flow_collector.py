@@ -1,166 +1,157 @@
-#!/usr/bin/env python3
+"""
+產業外資流向收集器 v3
+使用股票主檔進行正確的產業分類
+"""
+import requests
 import json
-from collections import defaultdict
+from datetime import datetime, timedelta
+import sqlite3
 
-def get_price_changes():
-    """從TWSE取得所有股票的漲跌幅"""
-    from datetime import datetime
-    import requests
+def get_stock_master():
+    """從資料庫讀取股票主檔"""
+    conn = sqlite3.connect('data/market_data.db')
+    cursor = conn.cursor()
     
-    today = datetime.now().strftime('%Y%m%d')
-    url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={today}&response=json"
+    cursor.execute('SELECT stock_id, stock_name, industry FROM stock_master')
+    rows = cursor.fetchall()
+    conn.close()
     
-    try:
-        response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=30)
-        data = response.json()
-        
-        price_map = {}
-        for row in data.get('data', []):
-            try:
-                code = row[0].strip()
-                if not code.isdigit() or len(code) != 4:
-                    continue
-                    
-                close_price = float(row[7].replace(',', ''))
-                change_str = row[8].replace(',', '').strip()
-                
-                # 處理漲跌符號
-                if change_str.startswith('+'):
-                    change_value = float(change_str[1:])
-                elif change_str.startswith('-'):
-                    change_value = -float(change_str[1:])
-                elif change_str == 'X':
-                    change_value = 0
-                else:
-                    change_value = float(change_str) if change_str else 0
-                
-                if close_price - change_value != 0:
-                    change_pct = (change_value / (close_price - change_value)) * 100
-                else:
-                    change_pct = 0
-                    
-                price_map[code] = round(change_pct, 2)
-                
-            except (IndexError, ValueError, ZeroDivisionError):
-                continue
-                
-        return price_map
-        
-    except Exception as e:
-        print(f"取得漲跌幅失敗: {e}")
-        return {}
-
-from datetime import datetime
-
-def get_industry_by_code(code, name):
-    prefix = code[:2]
-    industry_map = {
-        '23': '半導體', '24': '電腦週邊', '25': '光電', '26': '通訊網路',
-        '27': '電子零組件', '28': '電子通路', '29': '資訊服務', '30': '其他電子',
-        '14': '建材營造', '15': '航運', '17': '鋼鐵', '18': '橡膠',
-        '19': '汽車', '20': '鋼鐵', '12': '食品', '21': '化工', '16': '觀光',
-        '13': '電機', '11': '水泥', '12': '塑膠'
-    }
-    if prefix in industry_map:
-        return industry_map[prefix]
-    if any(kw in name for kw in ['銀行', '金控', '保險', '證券']):
-        return '金融'
-    elif any(kw in name for kw in ['生技', '醫療', '製藥']):
-        return '生技醫療'
-    return '其他'
+    # 建立股票代碼 -> 產業對照表
+    stock_industry = {}
+    for stock_id, stock_name, industry in rows:
+        stock_industry[stock_id] = industry or '其他'
+    
+    return stock_industry
 
 def collect_industry_foreign_flow():
-    with open('data/foreign_top_stocks.json', 'r') as f:
-        foreign_data = json.load(f)
-    with open('data/turnover_analysis.json', 'r') as f:
-        market_data = json.load(f)
+    """收集產業外資流向"""
+    print("\n=== 產業外資流向收集器 v3 ===\n")
     
-    # 直接從TWSE取得漲跌幅
-    price_changes = get_price_changes()
-    print(f"✓ 已取得 {len(price_changes)} 檔股票漲跌幅")
+    # 1. 讀取股票主檔
+    print("[1/4] 讀取股票主檔...")
+    stock_industry = get_stock_master()
+    print(f"  ✓ 已載入 {len(stock_industry)} 檔股票分類")
     
-    industry_stats = defaultdict(lambda: {
-        'foreign_net': 0, 'foreign_buy': 0, 'foreign_sell': 0,
-        'stock_count': 0, 'total_change': 0, 'stocks': []
-    })
+    # 2. 取得外資買賣超資料
+    print("\n[2/4] 取得外資買賣超...")
     
-    for stock in foreign_data['top_buy']:
-        code = stock['code']
-        name = stock['name']
-        foreign_net = stock['foreign_net'] / 100000
+    # 嘗試最近幾天
+    foreign_data = None
+    target_date = None
+    
+    for days_ago in range(10):
+        date = (datetime.now() - timedelta(days=days_ago)).strftime('%Y%m%d')
         
-        if code in price_changes:
-            change_pct = price_changes[code]
-            industry = get_industry_by_code(code, name)
-        else:
-            industry = get_industry_by_code(code, name)
-            change_pct = 0
+        url = f"https://www.twse.com.tw/rwd/zh/fund/T86?date={date}&selectType=ALL&response=json"
+        headers = {'User-Agent': 'Mozilla/5.0'}
         
-        industry_stats[industry]['foreign_net'] += foreign_net
-        industry_stats[industry]['foreign_buy'] += stock['foreign_buy'] / 100000
-        industry_stats[industry]['foreign_sell'] += stock['foreign_sell'] / 100000
-        industry_stats[industry]['stock_count'] += 1
-        industry_stats[industry]['total_change'] += change_pct
-        industry_stats[industry]['stocks'].append({
-            'code': code, 'name': name,
-            'net': round(foreign_net, 2),
-            'change_pct': round(change_pct, 2)
-        })
+        try:
+            resp = requests.get(url, headers=headers, timeout=30)
+            data = resp.json()
+            
+            if data.get('stat') == 'OK' and data.get('data'):
+                foreign_data = data['data']
+                target_date = date
+                print(f"  ✓ 使用 {date} 的資料")
+                break
+        except:
+            continue
     
-    for stock in foreign_data['top_sell']:
-        code = stock['code']
-        name = stock['name']
-        foreign_net = stock['foreign_net'] / 100000
-        
-        if code in price_changes:
-            change_pct = price_changes[code]
-            industry = get_industry_by_code(code, name)
-        else:
-            industry = get_industry_by_code(code, name)
-            change_pct = 0
-        
-        industry_stats[industry]['foreign_net'] += foreign_net
-        industry_stats[industry]['foreign_buy'] += stock['foreign_buy'] / 100000
-        industry_stats[industry]['foreign_sell'] += stock['foreign_sell'] / 100000
-        industry_stats[industry]['stock_count'] += 1
-        industry_stats[industry]['total_change'] += change_pct
-        industry_stats[industry]['stocks'].append({
-            'code': code, 'name': name,
-            'net': round(foreign_net, 2),
-            'change_pct': round(change_pct, 2)
-        })
+    if not foreign_data:
+        print("  ✗ 無法取得外資資料")
+        return
     
-    result = []
-    for industry, data in industry_stats.items():
-        if data['stock_count'] == 0:
+    # 3. 依產業彙總
+    print("\n[3/4] 依產業彙總...")
+    
+    industry_summary = {}
+    processed = 0
+    
+    for row in foreign_data:
+        if len(row) < 5:
             continue
         
-        avg_change = data['total_change'] / data['stock_count']
-        stocks_detail = sorted(data['stocks'], key=lambda x: x['net'], reverse=True)
+        code = row[0].strip()
         
-        result.append({
-            'industry': industry,
-            'foreign_net': round(data['foreign_net'], 2),
-            'foreign_buy': round(data['foreign_buy'], 2),
-            'foreign_sell': round(data['foreign_sell'], 2),
-            'stock_count': data['stock_count'],
-            'avg_change': round(avg_change, 2),
-            'stocks': stocks_detail
-        })
+        # 只處理 4 位數字的股票
+        if len(code) != 4 or not code.isdigit():
+            continue
+        
+        # 取得產業分類
+        industry = stock_industry.get(code, '其他')
+        
+        # 外資買賣超（單位：千股）
+        try:
+            buy = float(row[3].replace(',', '')) if row[3] != '--' else 0
+            sell = float(row[4].replace(',', '')) if row[4] != '--' else 0
+            net = buy - sell
+        except:
+            continue
+        
+        # 累加到產業
+        if industry not in industry_summary:
+            industry_summary[industry] = {
+                'buy': 0,
+                'sell': 0,
+                'net': 0,
+                'stocks': []
+            }
+        
+        industry_summary[industry]['buy'] += buy
+        industry_summary[industry]['sell'] += sell
+        industry_summary[industry]['net'] += net
+        industry_summary[industry]['stocks'].append(code)
+        
+        processed += 1
     
-    result.sort(key=lambda x: x['foreign_net'], reverse=True)
+    print(f"  ✓ 已處理 {processed} 檔股票")
+    print(f"  ✓ 涵蓋 {len(industry_summary)} 個產業")
     
+    # 4. 輸出結果
+    print("\n[4/4] 輸出結果...")
+    
+    # 排序（依外資淨買超）
+    sorted_industries = sorted(
+        industry_summary.items(),
+        key=lambda x: x[1]['net'],
+        reverse=True
+    )
+    
+    # 顯示 Top 10
+    print("\n外資買超 Top 10:")
+    for i, (industry, data) in enumerate(sorted_industries[:10], 1):
+        net_billion = data['net'] / 1000  # 轉換為億
+        print(f"  {i:2d}. {industry:12s}: {net_billion:+8.2f} 億 ({len(data['stocks'])} 檔)")
+    
+    print("\n外資賣超 Top 10:")
+    for i, (industry, data) in enumerate(sorted_industries[-10:][::-1], 1):
+        net_billion = data['net'] / 1000
+        print(f"  {i:2d}. {industry:12s}: {net_billion:+8.2f} 億 ({len(data['stocks'])} 檔)")
+    
+    # 輸出 JSON
     output = {
+        'date': target_date,
         'updated_at': datetime.now().isoformat(),
-        'date': foreign_data['date'],
-        'industries': result
+        'industries': {
+            industry: {
+                'buy': round(data['buy'] / 1000, 2),  # 轉為億
+                'sell': round(data['sell'] / 1000, 2),
+                'net': round(data['net'] / 1000, 2),
+                'stock_count': len(data['stocks'])
+            }
+            for industry, data in industry_summary.items()
+        }
     }
     
-    with open('data/industry_heatmap.json', 'w', encoding='utf-8') as f:
+    with open('data/industry_foreign_flow.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
-    print(f"✓ 產業外資流向已更新: {len(result)} 個產業")
-    return output
+    print(f"\n✓ 已輸出至 data/industry_foreign_flow.json")
+    
+    print("\n" + "="*60)
+    print("✓ 產業外資流向收集完成!")
+    print("="*60)
 
 if __name__ == '__main__':
     collect_industry_foreign_flow()
+

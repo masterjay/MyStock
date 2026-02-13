@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-每日自動執行腳本
+每日自動執行腳本 v2.0
+支援 TX + MXF 雙期貨資料源
 由 launchd 定時呼叫
 """
 import sys
@@ -16,25 +17,28 @@ os.chdir(script_dir)
 Path('logs').mkdir(exist_ok=True)
 
 print(f"\n{'='*60}")
-print(f"台股監控 - 每日自動執行")
+print(f"台股監控 v2.0 - 每日自動執行 (TX + MXF)")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"{'='*60}\n")
 
 try:
-    # 1. 導入資料收集器
-    from data_collector import DataCollector
+    # 1. 導入資料收集器 v2
+    from data_collector_v2 import DataCollector
     
     # 執行資料收集
     collector = DataCollector()
     
-    print("開始收集當日數據...")
+    print("開始收集當日數據 (TX + MXF)...")
     result = collector.collect_daily_data()
     
     if result:
-        print("✓ 數據收集成功")
+        print("\n✓ 數據收集成功")
+        print(f"  • TX 大台: {'✓' if result.get('tx_futures') else '✗'}")
+        print(f"  • MXF 微台: {'✓' if result.get('mxf_futures') else '✗'}")
+        print(f"  • 融資: {'✓' if result.get('margin') else '✗'}")
         
         # 導出 JSON
-        print("導出數據到 JSON...")
+        print("\n導出數據到 JSON...")
         collector.export_to_json()
         print("✓ 完成!")
     else:
@@ -68,12 +72,12 @@ try:
     except Exception as e:
         print(f"✗ 產業外資流向收集失敗: {e}")
 
-    # 5. 收集散戶多空比歷史
-    print("\n[額外收集] 散戶多空比歷史...")
+    # 5. 收集散戶多空比歷史 (更新為讀取 MXF)
+    print("\n[額外收集] 微台指散戶多空比歷史...")
     try:
-        from retail_ratio_collector import collect_retail_ratio_history
-        collect_retail_ratio_history()
-        print("✓ 散戶多空比歷史收集完成")
+        from retail_ratio_collector_v2 import collect_mxf_ratio_history
+        collect_mxf_ratio_history()
+        print("✓ 微台指散戶多空比歷史收集完成")
     except Exception as e:
         print(f"✗ 散戶多空比歷史收集失敗: {e}")
         

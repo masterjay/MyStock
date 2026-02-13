@@ -1,55 +1,55 @@
 {
   "latest": {
     "margin": {
-      "date": "20260123",
-      "ratio": 62.68,
-      "balance": 3760.77
+      "date": "20260206",
+      "ratio": 62.33,
+      "balance": 3739.91
     },
     "futures": {
-      "date": "20260127",
-      "ratio": 0.96,
-      "foreign_net": -25318,
-      "trust_net": 25767,
-      "dealer_net": -2836,
-      "retail_long": 28751,
-      "retail_short": 30036,
-      "retail_net": -1285,
-      "retail_ratio": 0.96,
+      "date": "20260212",
+      "ratio": 0.99,
+      "foreign_net": -27665,
+      "trust_net": 28915,
+      "dealer_net": -1871,
+      "retail_long": 37569,
+      "retail_short": 37903,
+      "retail_net": -334,
+      "retail_ratio": 0.99,
       "pcr_volume": 1.25
     }
   },
   "sentiment": {
     "taiwan": {
-      "score": 52,
-      "rating": "中性",
+      "score": 58,
+      "rating": "貪婪",
       "components": {
         "momentum": {
-          "score": 57,
+          "score": 66,
           "weight": 0.2,
           "desc": "價格動能"
         },
         "breadth": {
-          "score": 17,
+          "score": 63,
           "weight": 0.15,
           "desc": "市場廣度"
         },
         "strength": {
-          "score": 100,
+          "score": 75,
           "weight": 0.1,
           "desc": "新高低比"
         },
         "margin": {
-          "score": 81,
+          "score": 80,
           "weight": 0.15,
           "desc": "融資使用率"
         },
         "futures": {
-          "score": 48,
+          "score": 49,
           "weight": 0.15,
           "desc": "期貨多空比"
         },
         "foreign": {
-          "score": 29,
+          "score": 27,
           "weight": 0.1,
           "desc": "外資淨部位"
         },
@@ -62,16 +62,26 @@
       "available_weight": 100.0
     },
     "us": {
-      "score": 55.7142857142857,
-      "rating": "greed",
-      "previous_close": 55.4,
-      "previous_week": 46.3714285714286,
-      "previous_month": 52.5428571428571,
-      "timestamp": "2026-01-27T11:41:46+00:00"
+      "score": 49.2,
+      "rating": "neutral",
+      "previous_close": 48.9714285714286,
+      "previous_week": 34.2367346938776,
+      "previous_month": 58.5714285714286,
+      "timestamp": "2026-02-12T11:39:46+00:00"
     }
   },
   "history": {
     "margin": [
+      {
+        "date": "20260206",
+        "ratio": 62.33,
+        "balance": 3739.91
+      },
+      {
+        "date": "20260130",
+        "ratio": 63.98,
+        "balance": 3838.93
+      },
       {
         "date": "20260123",
         "ratio": 62.68,
@@ -309,6 +319,66 @@
       }
     ],
     "futures": [
+      {
+        "date": "20260212",
+        "ratio": 0.99,
+        "foreign_net": -27665
+      },
+      {
+        "date": "20260211",
+        "ratio": 0.99,
+        "foreign_net": -27665
+      },
+      {
+        "date": "20260210",
+        "ratio": 1.01,
+        "foreign_net": -24884
+      },
+      {
+        "date": "20260209",
+        "ratio": 1.04,
+        "foreign_net": -23585
+      },
+      {
+        "date": "20260206",
+        "ratio": 1.03,
+        "foreign_net": -25102
+      },
+      {
+        "date": "20260205",
+        "ratio": 1.03,
+        "foreign_net": -26743
+      },
+      {
+        "date": "20260204",
+        "ratio": 1.01,
+        "foreign_net": -25699
+      },
+      {
+        "date": "20260203",
+        "ratio": 0.98,
+        "foreign_net": -26496
+      },
+      {
+        "date": "20260202",
+        "ratio": 0.97,
+        "foreign_net": -27673
+      },
+      {
+        "date": "20260130",
+        "ratio": 0.88,
+        "foreign_net": -32670
+      },
+      {
+        "date": "20260129",
+        "ratio": 0.88,
+        "foreign_net": -32702
+      },
+      {
+        "date": "20260128",
+        "ratio": 0.93,
+        "foreign_net": -27932
+      },
       {
         "date": "20260127",
         "ratio": 0.96,
@@ -548,58 +618,8 @@
         "date": "20251121",
         "ratio": 0.93,
         "foreign_net": -26527
-      },
-      {
-        "date": "20251120",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251119",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251118",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251117",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251114",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251113",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251112",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251111",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251110",
-        "ratio": 0.93,
-        "foreign_net": -26527
-      },
-      {
-        "date": "20251107",
-        "ratio": 0.93,
-        "foreign_net": -26527
       }
     ]
   },
-  "updated_at": "2026-01-27T20:00:41.207843"
+  "updated_at": "2026-02-12T20:00:30.714230"
 }

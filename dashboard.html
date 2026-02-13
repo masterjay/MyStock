@@ -2380,7 +2380,7 @@
                 </div>
                 <div class="chart-card retail-chart-full">
                     <div class="chart-title">
-                        微台指散戶多空比 (30日)
+                        微台指散戶多空比 (MXF) - 30日
                         <span class="info-icon" onclick="showRetailInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
                     </div>
                     <canvas id="retailChart"></canvas>
@@ -2392,7 +2392,7 @@
     <div id="retailInfoOverlay" class="retail-info-overlay" style="display: none;" onclick="hideRetailInfo()">
         <div class="retail-info-panel" onclick="event.stopPropagation()">
             <div class="retail-info-header">
-                <div class="retail-info-title">📊 微台指散戶多空比指標</div>
+                <div class="retail-info-title">📊 微台指 (MXF) 散戶多空比指標</div>
                 <span class="retail-info-close" onclick="hideRetailInfo()">×</span>
             </div>
 
@@ -3142,36 +3142,47 @@
             // 繪製散戶多空比圖表（單一柱狀圖 + 期貨折線）
             async function drawRetailChart() {
                 try {
-                    const response = await fetch('./backend/data/retail_ratio_history.json?t=' + new Date().getTime());
-                    if (!response.ok) return;
+                    const response = await fetch('./backend/data/futures_data.json?t=' + new Date().getTime());
+                    if (!response.ok) {
+                        console.error('無法載入 futures_data.json');
+                        return;
+                    }
                     
                     const data = await response.json();
-                    const history = data.history || [];
+                    const mxfHistory = data.history.mxf || [];
+                    const txHistory = data.history.tx || [];
                     
-                    if (history.length === 0) return;
+                    if (mxfHistory.length === 0) {
+                        console.warn('MXF 數據為空');
+                        return;
+                    }
                     
-                    const labels = history.map(d => {
+                    // 準備標籤
+                    const labels = mxfHistory.map(d => {
                         const date = d.date;
                         return date.substring(4,6) + '/' + date.substring(6,8);
                     });
                     
-                    // 散戶淨多空百分比
-                    const netPcts = history.map(d => d.net_pct);
+                    // MXF 散戶多空比
+                    const mxfRatios = mxfHistory.map(d => d.retail_ratio);
                     
-                    // 期貨未平倉量（簡化顯示）
-                    const futuresPrices = history.map(d => d.futures_oi / 100);
-                    
+                    // 創建圖表
                     new Chart(document.getElementById('retailChart'), {
                         type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [
                                 {
-                                    label: '微台指散戶多空比',
-                                    data: netPcts,
-                                    backgroundColor: netPcts.map(v => v >= 0 ? 'rgba(239, 68, 68, 0.7)' : 'rgba(16, 185, 129, 0.7)'),
-                                    borderColor: netPcts.map(v => v >= 0 ? '#ef4444' : '#10b981'),
-                                    borderWidth: 1
+                                    label: 'MXF 微台指散戶多空比',
+                                    data: mxfRatios,
+                                    backgroundColor: mxfRatios.map(v => 
+                                        v >= 0 ? 'rgba(239, 68, 68, 0.7)' : 'rgba(16, 185, 129, 0.7)'
+                                    ),
+                                    borderColor: mxfRatios.map(v => 
+                                        v >= 0 ? '#ef4444' : '#10b981'
+                                    ),
+                                    borderWidth: 1,
+                                    order: 1
                                 }
                             ]
                         },
@@ -3181,18 +3192,63 @@
                             plugins: {
                                 legend: {
                                     display: true,
-                                    labels: { color: '#7d8ba7', font: { size: 11 } }
+                                    labels: { 
+                                        color: '#7d8ba7', 
+                                        font: { size: 11 },
+                                        generateLabels: function(chart) {
+                                            const original = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                            // 添加說明
+                                            original.push({
+                                                text: '正值=散戶偏多 | 負值=散戶偏空',
+                                                fillStyle: 'transparent',
+                                                strokeStyle: 'transparent',
+                                                fontColor: '#94a3b8',
+                                                fontStyle: 'italic'
+                                            });
+                                            return original;
+                                        }
+                                    }
                                 },
                                 tooltip: {
                                     mode: 'index',
                                     intersect: false,
-                                    backgroundColor: 'rgba(0,0,0,0.8)',
+                                    backgroundColor: 'rgba(0,0,0,0.85)',
+                                    titleColor: '#fff',
+                                    bodyColor: '#fff',
                                     callbacks: {
+                                        title: function(context) {
+                                            const idx = context[0].dataIndex;
+                                            return '日期: ' + mxfHistory[idx].date;
+                                        },
                                         label: function(context) {
                                             const idx = context.dataIndex;
-                                            const ratio = history[idx].retail_ratio;
-                                            const value = context.parsed.y;
-                                            return '淨多空: ' + value.toFixed(1) + '% (多空比: ' + ratio.toFixed(2) + ')';
+                                            const item = mxfHistory[idx];
+                                            return [
+                                                '散戶多空比: ' + item.retail_ratio.toFixed(2) + '%',
+                                                '散戶做多: ' + item.retail_long.toLocaleString() + ' 口',
+                                                '散戶做空: ' + item.retail_short.toLocaleString() + ' 口',
+                                                '未平倉量: ' + item.total_oi.toLocaleString() + ' 口'
+                                            ];
+                                        }
+                                    }
+                                },
+                                annotation: {
+                                    annotations: {
+                                        zeroline: {
+                                            type: 'line',
+                                            yMin: 0,
+                                            yMax: 0,
+                                            borderColor: '#475569',
+                                            borderWidth: 2,
+                                            borderDash: [5, 5],
+                                            label: {
+                                                content: '平衡線',
+                                                display: true,
+                                                position: 'end',
+                                                backgroundColor: 'rgba(71, 85, 105, 0.8)',
+                                                color: '#fff',
+                                                font: { size: 10 }
+                                            }
                                         }
                                     }
                                 }
@@ -3203,7 +3259,7 @@
                                     ticks: { 
                                         color: '#7d8ba7', 
                                         font: { size: 9 },
-                                        maxTicksLimit: 20
+                                        maxTicksLimit: 15
                                     }
                                 },
                                 y: {
@@ -3212,12 +3268,12 @@
                                         color: '#7d8ba7',
                                         font: { size: 10 },
                                         callback: function(value) {
-                                            return value + '%';
+                                            return value.toFixed(1) + '%';
                                         }
                                     },
                                     title: {
                                         display: true,
-                                        text: '散戶淨多空比例',
+                                        text: '散戶多空比 (%)',
                                         color: '#7d8ba7',
                                         font: { size: 11 }
                                     }
@@ -3225,8 +3281,23 @@
                             }
                         }
                     });
+                    
+                    // 顯示最新數值
+                    if (data.latest && data.latest.mxf_futures) {
+                        const latest = data.latest.mxf_futures;
+                        console.log('最新 MXF 數據:', latest);
+                        
+                        // 更新頁面顯示（如果有對應的元素）
+                        const mxfRatioElement = document.getElementById('mxfRetailRatio');
+                        if (mxfRatioElement) {
+                            mxfRatioElement.textContent = latest.retail_ratio.toFixed(2) + '%';
+                            mxfRatioElement.style.color = latest.retail_ratio >= 0 ? 
+                                'var(--accent-green)' : 'var(--accent-red)';
+                        }
+                    }
+                    
                 } catch (error) {
-                    console.error('載入散戶數據失敗:', error);
+                    console.error('載入 MXF 數據失敗:', error);
                 }
             }
             

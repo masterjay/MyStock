@@ -1,0 +1,286 @@
+"""
+期交所台指期多空比數據爬蟲
+資料來源: 期貨交易所
+改用 HTML 解析 (因期交所API回傳HTML非JSON)
+"""
+import requests
+from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+
+class TAIFEXScraper:
+    def __init__(self):
+        self.base_url = "https://www.taifex.com.tw/cht/3"
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
+    
+    def get_institutional_positions(self, date=None, debug=False):
+        """
+        獲取三大法人部位 (從HTML解析)
+        date: 格式 'YYYY/MM/DD'
+        debug: 是否顯示除錯訊息
+        """
+        if date is None:
+            date = datetime.now().strftime('%Y/%m/%d')
+        
+        url = "https://www.taifex.com.tw/cht/3/futContractsDate"
+        params = {
+            'queryStartDate': date,
+            'queryEndDate': date,
+        }
+        
+        try:
+            response = requests.get(url, params=params, headers=self.headers, timeout=30)
+            response.raise_for_status()
+            
+            if debug:
+                print(f"\n回應狀態碼: {response.status_code}")
+                print(f"回應長度: {len(response.text)} 字元")
+                # 儲存 HTML 以便檢查
+                with open('debug_taifex.html', 'w', encoding='utf-8') as f:
+                    f.write(response.text)
+                print("已儲存 HTML 到 debug_taifex.html")
+            
+            # 解析 HTML
+            soup = BeautifulSoup(response.text, 'lxml')
+            
+            # 找到資料表格 - 嘗試多種方式
+            table = soup.find('table', {'class': 'table_f'})
+            if not table:
+                # 嘗試其他可能的 class
+                table = soup.find('table', {'class': 'table_a'})
+            if not table:
+                # 嘗試找任何表格
+                tables = soup.find_all('table')
+                if debug:
+                    print(f"\n找到 {len(tables)} 個表格")
+                    for i, t in enumerate(tables):
+                        print(f"表格 {i}: class={t.get('class')}, id={t.get('id')}")
+                if tables:
+                    table = tables[0]  # 使用第一個表格
+            
+            if not table:
+                print("找不到資料表格")
+                return None
+            
+            rows = table.find_all('tr')
+            
+            if debug:
+                print(f"\n表格有 {len(rows)} 列")
+                print("\n前 3 列內容:")
+                for i, row in enumerate(rows[:3]):
+                    cols = row.find_all(['td', 'th'])
+                    print(f"列 {i}: {len(cols)} 欄")
+                    for j, col in enumerate(cols[:5]):
+                        print(f"  欄 {j}: {col.get_text(strip=True)}")
+                
+                # 顯示所有包含「臺股」的列
+                print(f"\n所有包含「臺股」或「TX」的列:")
+                for i, row in enumerate(rows):
+                    cols = row.find_all('td')
+                    if len(cols) < 3:
+                        continue
+                    row_text = ' '.join([col.get_text(strip=True) for col in cols[:5]])
+                    if '臺股' in row_text or 'TX' in row_text or '台股' in row_text:
+                        print(f"\n列 {i}: 商品={cols[1].get_text(strip=True) if len(cols) > 1 else ''}, 身份={cols[2].get_text(strip=True) if len(cols) > 2 else ''}")
+            
+            # 解析表格數據
+            positions = {
+                'date': date,
+                'dealers': {'long': 0, 'short': 0},  # 自營商
+                'trusts': {'long': 0, 'short': 0},   # 投信
+                'foreign': {'long': 0, 'short': 0},  # 外資
+                'timestamp': datetime.now().isoformat()
+            }
+            
+            # 找到臺股期貨的起始列
+            taiwan_futures_start = -1
+            for i, row in enumerate(rows):
+                cols = row.find_all('td')
+                if len(cols) >= 3:
+                    product = cols[1].get_text(strip=True) if len(cols) > 1 else ''
+                    if '臺股期貨' in product:
+                        taiwan_futures_start = i
+                        break
+            
+            if taiwan_futures_start == -1:
+                print("找不到臺股期貨")
+                return None
+            
+            if debug:
+                print(f"\n臺股期貨從列 {taiwan_futures_start} 開始")
+            
+            # 處理臺股期貨的三列 (自營商、投信、外資)
+            for offset in range(3):
+                row_idx = taiwan_futures_start + offset
+                if row_idx >= len(rows):
+                    break;               
+                cols = rows[row_idx].find_all('td')
+                
+                if offset == 0:
+                    # 第一列: 自營商 (15欄)
+                    # 欄9=多方未平倉, 欄11=空方未平倉
+                    if len(cols) >= 12:
+                        trader = cols[2].get_text(strip=True)
+                        long_oi = cols[9].get_text(strip=True).replace(',', '')
+                        short_oi = cols[11].get_text(strip=True).replace(',', '')
+                        positions['dealers']['long'] = int(long_oi) if long_oi else 0
+                        positions['dealers']['short'] = int(short_oi) if short_oi else 0
+                        if debug:
+                            print(f"列{row_idx} {trader}: 多={long_oi}, 空={short_oi}")
+                else:
+                    # 第二、三列: 投信、外資 (13欄,沒有序號和商品名稱)
+                    # 欄7=多方未平倉, 欄9=空方未平倉
+                    if len(cols) >= 10:
+                        trader = cols[0].get_text(strip=True)
+                        long_oi = cols[7].get_text(strip=True).replace(',', '')
+                        short_oi = cols[9].get_text(strip=True).replace(',', '')
+                        
+                        if '投信' in trader:
+                            positions['trusts']['long'] = int(long_oi) if long_oi else 0
+                            positions['trusts']['short'] = int(short_oi) if short_oi else 0
+                        elif '外資' in trader:
+                            positions['foreign']['long'] = int(long_oi) if long_oi else 0
+                            positions['foreign']['short'] = int(short_oi) if short_oi else 0
+                        
+                        if debug:
+                            print(f"列{row_idx} {trader}: 多={long_oi}, 空={short_oi}")
+            
+            # 檢查是否有抓到數據
+            total = (positions['foreign']['long'] + positions['foreign']['short'] + 
+                    positions['dealers']['long'] + positions['dealers']['short'] +
+                    positions['trusts']['long'] + positions['trusts']['short'])
+            
+            if total == 0:
+                print("未找到有效的期貨數據")
+                return None
+            
+            # 計算總多空口數 (法人 + 散戶)
+            # 注意: 這裡我們需要從期交所的「所有交易人」數據取得總口數
+            # 暫時先估算: 散戶約佔 30-40% 的市場
+            # 總口數 ≈ 法人口數 / 0.65 (假設法人佔65%)
+            institutional_long = (positions['foreign']['long'] + 
+                                 positions['dealers']['long'] + 
+                                 positions['trusts']['long'])
+            institutional_short = (positions['foreign']['short'] + 
+                                  positions['dealers']['short'] + 
+                                  positions['trusts']['short'])
+            
+            # 估算總口數 (實際應從API取得)
+            # 根據經驗,法人通常佔 60-70% 的未平倉量
+            estimated_total_long = int(institutional_long / 0.65)
+            estimated_total_short = int(institutional_short / 0.65)
+            
+            positions['total_long'] = estimated_total_long
+            positions['total_short'] = estimated_total_short
+            positions['institutional_long'] = institutional_long
+            positions['institutional_short'] = institutional_short
+            
+            return positions
+            
+        except Exception as e:
+            print(f"Error fetching institutional positions: {e}")
+            if debug:
+                import traceback
+                traceback.print_exc()
+            return None
+    
+    def get_futures_oi(self, date=None):
+        """
+        獲取台指期未平倉量
+        """
+        if date is None:
+            date = datetime.now().strftime('%Y/%m/%d')
+        
+        # 使用 institutional positions 的資料即可
+        positions_data = self.get_institutional_positions(date)
+        
+        if positions_data:
+            # 計算總未平倉 (三大法人多單+空單的總和)
+            total_oi = (
+                positions_data['dealers']['long'] + positions_data['dealers']['short'] +
+                positions_data['trusts']['long'] + positions_data['trusts']['short'] +
+                positions_data['foreign']['long'] + positions_data['foreign']['short']
+            )
+            
+            return {
+                'date': date,
+                'contract': 'TX',
+                'open_interest': str(total_oi),
+                'timestamp': datetime.now().isoformat()
+            }
+        
+        return None
+    
+    def calculate_long_short_ratio(self, positions_data):
+        """
+        計算多空比
+        """
+        if not positions_data:
+            return None
+        
+        try:
+            # 計算三大法人總多單、總空單
+            total_long = (
+                positions_data['dealers']['long'] +
+                positions_data['trusts']['long'] +
+                positions_data['foreign']['long']
+            )
+            
+            total_short = (
+                positions_data['dealers']['short'] +
+                positions_data['trusts']['short'] +
+                positions_data['foreign']['short']
+            )
+            
+            # 計算多空比
+            if total_short == 0:
+                ratio = 0
+            else:
+                ratio = round(total_long / total_short, 2)
+            
+            # 計算各法人淨部位
+            foreign_net = positions_data['foreign']['long'] - positions_data['foreign']['short']
+            trust_net = positions_data['trusts']['long'] - positions_data['trusts']['short']
+            dealer_net = positions_data['dealers']['long'] - positions_data['dealers']['short']
+            
+            return {
+                'date': positions_data['date'].replace('/', ''),
+                'total_long': total_long,
+                'total_short': total_short,
+                'long_short_ratio': ratio,
+                'foreign_net': foreign_net,
+                'trust_net': trust_net,
+                'dealer_net': dealer_net,
+                'timestamp': datetime.now().isoformat()
+            }
+            
+        except Exception as e:
+            print(f"Error calculating long/short ratio: {e}")
+            return None
+
+# 測試用
+if __name__ == "__main__":
+    scraper = TAIFEXScraper()
+    
+    print("測試期交所爬蟲...")
+    print("="*50)
+    
+    # 測試抓取三大法人部位
+    date = "2025/12/20"
+    print(f"\n測試日期: {date}")
+    
+    positions = scraper.get_institutional_positions(date, debug=True)
+    if positions:
+        print("\n三大法人部位:")
+        print(f"外資 - 多: {positions['foreign']['long']:,}, 空: {positions['foreign']['short']:,}")
+        print(f"投信 - 多: {positions['trusts']['long']:,}, 空: {positions['trusts']['short']:,}")
+        print(f"自營 - 多: {positions['dealers']['long']:,}, 空: {positions['dealers']['short']:,}")
+        
+        # 計算多空比
+        ratio_data = scraper.calculate_long_short_ratio(positions)
+        if ratio_data:
+            print(f"\n多空比: {ratio_data['long_short_ratio']}")
+            print(f"外資淨部位: {ratio_data['foreign_net']:,} 口")
+    else:
+        print("無法取得數據")
