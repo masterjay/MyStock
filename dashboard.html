@@ -3815,7 +3815,7 @@
 
             buyList.innerHTML = '';
             data.top_buy.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net);
+                const amount = Math.abs(stock.net);
                 const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
                 
                 const item = document.createElement('div');
@@ -3831,7 +3831,7 @@
 
             sellList.innerHTML = '';
             data.top_sell.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net);
+                const amount = Math.abs(stock.net);
                 const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
                 
                 const item = document.createElement('div');
