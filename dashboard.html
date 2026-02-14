@@ -2917,7 +2917,7 @@
                 
                 tr.innerHTML = `
                     <td>${idx + 1}</td>
-                    <td><span class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></span><span class="stock-name">${stock.name}</span></td>
+                    <td><span class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></span><span class="stock-name">${stock.name}</span></td>
                     <td class="stock-price">${stock.close_price ? stock.close_price.toFixed(2) : "-"}</td>
                     <td class="stock-change ${stock.change_pct >= 0 ? "change-up" : "change-down"}">${stock.change_pct != null && stock.change_pct !== undefined ? (stock.change_pct >= 0 ? "+" : "") + stock.change_pct.toFixed(2) + "%" : "-"}</td>
                     <td>${stock.industry || '-'}</td>
@@ -3822,7 +3822,7 @@
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">+${amountText}</div>
                 `;
@@ -3838,7 +3838,7 @@
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">-${amountText}</div>
                 `;
@@ -3932,7 +3932,7 @@
                                 const chgClass = stock.change_pct >= 0 ? 'text-red' : 'text-green';
                                 return `
                                     <tr>
-                                        <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></td>
+                                        <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></td>
                                         <td class="td-name">${stock.name}</td>
                                         <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}萬張</td>
                                         <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
@@ -4020,7 +4020,7 @@
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
@@ -4033,7 +4033,7 @@
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
