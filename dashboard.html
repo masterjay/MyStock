@@ -2917,7 +2917,7 @@
                 
                 tr.innerHTML = `
                     <td>${idx + 1}</td>
-                    <td><span class="stock-code">${stock.code}</span><span class="stock-name">${stock.name}</span></td>
+                    <td><span class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></span><span class="stock-name">${stock.name}</span></td>
                     <td class="stock-price">${stock.close_price ? stock.close_price.toFixed(2) : "-"}</td>
                     <td class="stock-change ${stock.change_pct >= 0 ? "change-up" : "change-down"}">${stock.change_pct != null && stock.change_pct !== undefined ? (stock.change_pct >= 0 ? "+" : "") + stock.change_pct.toFixed(2) + "%" : "-"}</td>
                     <td>${stock.industry || '-'}</td>
@@ -3822,7 +3822,7 @@
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code">${stock.code}</div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">+${amountText}</div>
                 `;
@@ -3838,7 +3838,7 @@
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code">${stock.code}</div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">-${amountText}</div>
                 `;
@@ -3932,7 +3932,7 @@
                                 const chgClass = stock.change_pct >= 0 ? 'text-red' : 'text-green';
                                 return `
                                     <tr>
-                                        <td class="td-code">${stock.code}</td>
+                                        <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></td>
                                         <td class="td-name">${stock.name}</td>
                                         <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}萬張</td>
                                         <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
@@ -4020,7 +4020,7 @@
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code">${stock.code}</div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
@@ -4033,7 +4033,7 @@
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code">${stock.code}</div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
@@ -5123,4 +5123,40 @@
     margin: 10px 0;
 }
 
+
+/* 股票代號連結樣式 */
+.stock-link {
+    color: #4A9EFF;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+/* 漲跌停、周轉率股票代號連結 */
+.limit-code .stock-link,
+.stock-code .stock-link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: inherit;
+}
+
+.limit-code .stock-link:hover,
+.stock-code .stock-link:hover {
+    color: #4A9EFF;
+    text-decoration: underline;
+}
+
+
+.stock-link:hover {
+    color: #6BB6FF;
+    text-decoration: underline;
+}
+
+.foreign-code .stock-link {
+    color: inherit;
+}
+
+.foreign-code .stock-link:hover {
+    color: #4A9EFF;
+}
 </style>
