@@ -3861,13 +3861,13 @@
 
         // 根據外資買賣超獲取顏色類別 (單位:億)
         function getHeatmapColor(foreignNet) {
-            if (foreignNet >= 10000) return 'hm-strong-up';     // >= 1萬萬張
-            if (foreignNet >= 5000) return 'hm-up';             // 5000~1萬萬張
-            if (foreignNet >= 1000) return 'hm-slight-up';      // 1000~5000萬張
-            if (foreignNet >= -1000) return 'hm-flat';          // -1000~1000萬張
-            if (foreignNet >= -5000) return 'hm-slight-down';   // -5000~-1000萬張
-            if (foreignNet >= -10000) return 'hm-down';         // -1萬~-5000萬張
-            return 'hm-strong-down';                            // <= -1萬萬張
+            if (foreignNet >= 100) return 'hm-strong-up';     // >= 100億
+            if (foreignNet >= 30) return 'hm-up';             // 30~100億
+            if (foreignNet >= 10) return 'hm-slight-up';      // 10~30億
+            if (foreignNet >= -10) return 'hm-flat';          // -10~10億
+            if (foreignNet >= -30) return 'hm-slight-down';   // -30~-10億
+            if (foreignNet >= -100) return 'hm-down';         // -100~-30億
+            return 'hm-strong-down';                           // <= -100億
         }
 
         // 更新產業熱圖
@@ -3879,7 +3879,7 @@
             
             const industries = data.industries;
             
-            container.innerHTML = Object.entries(industries).map(([industryName, industry], idx) => {
+            container.innerHTML = industries.map((industry, idx) => {
                 const colorClass = getHeatmapColor(industry.foreign_net);
                 const changeSign = industry.avg_change >= 0 ? '+' : '';
                 const netSign = industry.foreign_net >= 0 ? '+' : '';
@@ -3896,7 +3896,7 @@
                 }
                 
                 // 股票明細
-                const stocksHtml = industry.top_stocks ? `
+                const stocksHtml = industry.stocks ? `
                     <div class="detail-summary-cards">
                         <div class="summary-card">
                             <div class="summary-card-label">股票數量</div>
@@ -3905,7 +3905,7 @@
                         <div class="summary-card">
                             <div class="summary-card-label">外資買賣超</div>
                             <div class="summary-card-value ${industry.foreign_net >= 0 ? 'positive' : 'negative'}">
-                                ${industry.foreign_net >= 0 ? '+' : ''}${industry.foreign_net.toFixed(2)}萬張
+                                ${industry.foreign_net >= 0 ? '+' : ''}${industry.foreign_net.toFixed(2)}億
                             </div>
                         </div>
                         <div class="summary-card">
@@ -3925,7 +3925,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            ${industry.top_stocks.map(stock => {
+                            ${industry.stocks.map(stock => {
                                 const netSign = stock.net >= 0 ? '+' : '';
                                 const chgSign = stock.change_pct >= 0 ? '+' : '';
                                 const netClass = stock.net >= 0 ? 'text-red' : 'text-green';
@@ -3934,7 +3934,7 @@
                                     <tr>
                                         <td class="td-code">${stock.code}</td>
                                         <td class="td-name">${stock.name}</td>
-                                        <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}萬張</td>
+                                        <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}億</td>
                                         <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
                                     </tr>
                                 `;
@@ -3950,7 +3950,7 @@
                         <div class="block-stats">
                             <div class="block-stat">
                                 <span>外資</span>
-                                <span class="block-stat-value">${netSign}${netDisplay}萬張</span>
+                                <span class="block-stat-value">${netSign}${netDisplay}億</span>
                             </div>
                             <div class="block-stat">
                                 <span>TOP50檔數</span>
