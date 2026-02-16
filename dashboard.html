@@ -282,7 +282,21 @@
         }
 
         /* 響應式 */
-        
+        @media (max-width: 768px) {
+            .metrics-grid,
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-value {
+                font-size: 56px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
 
         /* Loading 狀態 */
         .loading {
@@ -690,7 +704,25 @@
             margin: 0;
         }
 
-        
+        @media (max-width: 768px) {
+            .guide-grid,
+            .guide-grid-popup {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-panel-content {
+                margin: 2vh auto;
+                max-height: 96vh;
+            }
+
+            .guide-panel-body {
+                padding: 20px 0px;
+            }
+
+            .guide-btn-text {
+                display: none;
+            }
+        }
     
 /* 情緒指標進度條 v2.0 */
 .sentiment-components {
@@ -1104,7 +1136,10 @@
     height: 12px;
     border-radius: 50%;
 }
-
+@media (max-width: 600px) {
+    .weight-chart { flex-direction: column; }
+    .sentiment-popup { width: 95%; }
+}
 
 /* 散戶多空比說明彈窗 */
 .retail-info-overlay {
@@ -1238,80 +1273,630 @@
         /* ==================== 手機版響應式修正 ==================== */
         
         /* 平板以下 (< 768px) */
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+                padding: 12px 0px;
+            }
         
+            /* 頭部調整 */
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px 0;
+                align-items: flex-start;
+            }
+        
+            .logo {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+        
+            .logo .monitor {
+                font-size: 12px;
+                margin-left: 8px;
+            }
+        
+            .status {
+                flex-direction: row;
+                gap: 12px;
+                font-size: 10px;
+                width: 100%;
+                justify-content: space-between;
+            }
+        
+            /* 指標卡片 - 改為單欄 */
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-bottom: 20px;
+            }
+        
+            .metric-card {
+                padding: 16px;
+            }
+        
+            .metric-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+        
+            .metric-title {
+                font-size: 12px;
+            }
+        
+            .metric-date {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+        
+            /* 數值顯示 - 縮小 */
+            .metric-value {
+                font-size: 48px;
+                letter-spacing: -1px;
+            }
+        
+            .metric-unit {
+                font-size: 24px;
+            }
+        
+            .metric-value-container {
+                margin-bottom: 16px;
+            }
+        
+            /* 詳細資訊 - 保持兩欄但縮小間距 */
+            .metric-details {
+                gap: 8px;
+            }
+        
+            .detail-item {
+                padding: 10px;
+            }
+        
+            .detail-label {
+                font-size: 10px;
+            }
+        
+            .detail-value {
+                font-size: 14px;
+            }
+        
+            /* 圖表區域 - 改為單欄 */
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        
+            .retail-chart-full {
+                grid-column: 1;
+            }
+        
+            /* 圖表卡片內部調整 */
+            .chart-card {
+                padding: 16px;
+            }
+        
+            .chart-header {
+                margin-bottom: 12px;
+            }
+        
+            .chart-title {
+                font-size: 12px;
+            }
+        
+            .info-icon {
+                width: 16px;
+                height: 16px;
+                font-size: 11px;
+            }
+        
+            /* Canvas 容器 - 確保不超出 */
+            .chart-container {
+                position: relative;
+                height: 250px;
+                width: 100%;
+                overflow: hidden;
+            }
+        
+            /* 確保 canvas 不超出容器 */
+            .chart-container canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+        }
         
         /* 小手機 (< 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 8px;
+            }
         
+            .header {
+                padding: 12px 0;
+                margin-bottom: 16px;
+            }
+        
+            .logo {
+                font-size: 18px;
+            }
+        
+            .logo .monitor {
+                display: block;
+                margin-left: 0;
+                margin-top: 4px;
+            }
+        
+            .status {
+                font-size: 9px;
+                gap: 8px;
+            }
+        
+            .metrics-grid {
+                gap: 12px;
+            }
+        
+            .metric-card {
+                padding: 12px;
+            }
+        
+            .metric-value {
+                font-size: 36px;
+            }
+        
+            .metric-unit {
+                font-size: 18px;
+            }
+        
+            .metric-details {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        
+            .detail-item {
+                padding: 8px;
+            }
+        
+            .detail-value {
+                font-size: 13px;
+            }
+        
+            .charts-grid {
+                gap: 12px;
+            }
+        
+            .chart-card {
+                padding: 12px;
+            }
+        
+            .chart-container {
+                height: 200px;
+            }
+        }
         
         /* 通用修正 - 防止所有元素超出螢幕 */
+        @media (max-width: 768px) {
+            * {
+                max-width: 100%;
+            }
         
+            img, canvas, video, iframe {
+                max-width: 100%;
+                height: auto;
+            }
+        
+            /* 防止表格超出 */
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        
+            /* 防止長文字撐開容器 */
+            .metric-value, .detail-value, .chart-title {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+        }
 
 /* 漲跌停區塊 - 手機版改為上下排列 */
-
+@media (max-width: 768px) {
+    .limit-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+    
+    .limit-card {
+        width: 100%;
+    }
+}
 
 /* 小手機進一步優化 */
-
+@media (max-width: 480px) {
+    .limit-grid {
+        gap: 12px;
+    }
+    
+    .limit-section-wrapper {
+        padding: 12px;
+    }
+    
+    .limit-main-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+}
 
 /* 國際商品期貨 - 手機版改為單欄 */
+@media (max-width: 768px) {
+    .commodities-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+    
+    .commodity-card {
+        width: 100%;
+    }
+    
+    .commodity-chart-container {
+        height: 250px;
+    }
+}
 
-
-
+@media (max-width: 480px) {
+    .commodities-grid {
+        gap: 12px;
+    }
+    
+    .commodities-section {
+        padding: 12px;
+    }
+    
+    .commodities-main-title {
+        font-size: 16px;
+    }
+    
+    .commodity-chart-container {
+        height: 200px;
+    }
+    
+    .commodity-price {
+        font-size: 28px;
+    }
+}
 
 /* ==================== 週轉率表格 - 手機版優化 ==================== */
-
+@media (max-width: 768px) {
+    /* 隱藏次要欄位: 產業(5), 標籤(8) */
+    .turnover-table th:nth-child(5),
+    .turnover-table th:nth-child(8),
+    .turnover-table td:nth-child(5),
+    .turnover-table td:nth-child(8) {
+        display: none;
+    }
+    
+    /* 縮小表格字體 */
+    .turnover-table {
+        font-size: 11px;
+    }
+    
+    /* 調整欄位寬度 */
+    .turnover-table th,
+    .turnover-table td {
+        padding: 8px 4px;
+    }
+    
+    .turnover-table th:nth-child(1),
+    .turnover-table td:nth-child(1) {
+        width: 8%;  /* # */
+    }
+    
+    .turnover-table th:nth-child(2),
+    .turnover-table td:nth-child(2) {
+        width: 20%;  /* 股票 */
+        font-size: 10px;
+    }
+    
+    .turnover-table th:nth-child(3),
+    .turnover-table td:nth-child(3) {
+        width: 18%;  /* 股價 */
+    }
+    
+    .turnover-table th:nth-child(4),
+    .turnover-table td:nth-child(4) {
+        width: 18%;  /* 漲跌 */
+    }
+    
+    .turnover-table th:nth-child(6),
+    .turnover-table td:nth-child(6) {
+        width: 18%;  /* 周轉率 */
+    }
+    
+    .turnover-table th:nth-child(7),
+    .turnover-table td:nth-child(7) {
+        width: 18%;  /* 爆量分析 */
+        font-size: 9px;
+    }
+    
+    /* 標題區域優化 */
+    .turnover-header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .turnover-title {
+        font-size: 16px;
+    }
+    
+    /* 統計區域改為 2x2 網格 */
+    .turnover-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .turnover-stat-item {
+        padding: 10px;
+    }
+    
+    .turnover-stat-label {
+        font-size: 10px;
+    }
+    
+    .turnover-stat-value {
+        font-size: 18px;
+    }
+}
 
 /* 小手機進一步優化 */
-
+@media (max-width: 480px) {
+    /* 再隱藏爆量分析欄位 */
+    .turnover-table th:nth-child(7),
+    .turnover-table td:nth-child(7) {
+        display: none;
+    }
+    
+    /* 調整剩餘欄位寬度 */
+    .turnover-table th:nth-child(2),
+    .turnover-table td:nth-child(2) {
+        width: 28%;  /* 股票 */
+    }
+    
+    .turnover-table th:nth-child(3),
+    .turnover-table td:nth-child(3) {
+        width: 22%;  /* 股價 */
+    }
+    
+    .turnover-table th:nth-child(4),
+    .turnover-table td:nth-child(4) {
+        width: 22%;  /* 漲跌 */
+    }
+    
+    .turnover-table th:nth-child(6),
+    .turnover-table td:nth-child(6) {
+        width: 20%;  /* 周轉率 */
+    }
+    
+    .turnover-table {
+        font-size: 10px;
+    }
+    
+    .turnover-table th,
+    .turnover-table td {
+        padding: 6px 2px;
+    }
+}
 
 /* 手機版減少左右留白 */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    
+    body {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
 
-
-
+@media (max-width: 420px) {
+    .container {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+}
 
 /* ==================== 修正所有 section 的手機版寬度 ==================== */
+@media (max-width: 768px) {
+    /* 移除 section 的最大寬度限制和過大 padding */
+    .foreign-section,
+    .limit-section-wrapper,
+    .turnover-section,
+    .commodities-section {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 16px 8px !important;
+        margin-top: 20px !important;
+    }
+    
+    /* container 也要調整 */
+    .container {
+        max-width: 100% !important;
+        padding: 12px 6px !important;
+    }
+    
+    /* 外資項目內部 */
+    .foreign-item {
+        padding: 10px 6px !important;
+        gap: 4px;
+    }
+}
 
-
-
+@media (max-width: 420px) {
+    .foreign-section,
+    .limit-section-wrapper,
+    .turnover-section,
+    .commodities-section {
+        padding: 12px 4px !important;
+        margin-top: 16px !important;
+    }
+    
+    .container {
+        padding: 8px 4px !important;
+    }
+    
+    .foreign-item {
+        padding: 8px 4px !important;
+        gap: 2px;
+    }
+}
 
 /* ==================== 外資卡片手機版 padding 修正 ==================== */
+@media (max-width: 768px) {
+    .foreign-card {
+        padding: 12px 6px !important;
+        border-radius: 8px;
+    }
+    
+    .foreign-card-title {
+        font-size: 16px !important;
+        margin-bottom: 10px !important;
+    }
+}
 
-
-
+@media (max-width: 420px) {
+    .foreign-card {
+        padding: 10px 4px !important;
+    }
+    
+    .foreign-card-title {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+}
 
 /* ==================== 精確修正限制寬度的元素 ==================== */
+@media (max-width: 768px) {
+    /* 週轉率區塊 - 移除 850px 限制 */
+    .turnover-single-wrap {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* guide-panel-content - 移除 1400px 限制 */
+    .guide-panel-content {
+        max-width: 100% !important;
+        padding: 12px 6px !important;
+    }
+    
+    /* legend-dot - 移除 600px 限制 */
+    .legend-dot {
+        max-width: 100% !important;
+    }
+}
 
-
-
+@media (max-width: 420px) {
+    .turnover-single-wrap,
+    .guide-panel-content {
+        padding: 8px 4px !important;
+    }
+}
 
 /* ==================== 外資產業詳細表格 - 手機版優化 ==================== */
+@media (max-width: 768px) {
+    /* 表格整體設定 */
+    .industry-detail-table {
+        font-size: 11px !important;
+    }
+    
+    /* 表頭縮小 padding 和字體 */
+    .industry-detail-table thead th {
+        font-size: 11px !important;
+        padding: 10px 4px !important;
+    }
+    
+    /* tbody 縮小 padding 和字體 */
+    .industry-detail-table tbody td {
+        padding: 10px 4px !important;
+        font-size: 11px !important;
+    }
+    
+    /* 各欄位縮小字體 */
+    .industry-detail-table .td-code {
+        font-size: 11px !important;
+    }
+    
+    .industry-detail-table .td-foreign {
+        font-size: 11px !important;
+    }
+    
+    .industry-detail-table .td-change {
+        font-size: 11px !important;
+    }
+    
+    /* 調整欄位寬度比例 */
+    .industry-detail-table thead th:nth-child(1) { width: 13% !important; }
+    .industry-detail-table thead th:nth-child(2) { width: 21% !important; }
+    .industry-detail-table thead th:nth-child(3) { width: 32% !important; }
+    .industry-detail-table thead th:nth-child(4) { width: 33% !important; }
+}
 
-
-
+@media (max-width: 420px) {
+    .industry-detail-table {
+        font-size: 10px !important;
+    }
+    
+    .industry-detail-table thead th {
+        font-size: 10px !important;
+        padding: 8px 3px !important;
+    }
+    
+    .industry-detail-table tbody td {
+        padding: 8px 3px !important;
+        font-size: 10px !important;
+    }
+    
+    .industry-detail-table .td-code,
+    .industry-detail-table .td-foreign,
+    .industry-detail-table .td-change {
+        font-size: 10px !important;
+    }
+}
 
 /* ==================== 表頭文字換行修正 ==================== */
-
+@media (max-width: 768px) {
+    .industry-detail-table thead th {
+        font-size: 10px !important;
+        padding: 8px 3px !important;
+        white-space: normal !important;
+        word-break: keep-all !important;
+        line-height: 1.4 !important;
+        vertical-align: middle !important;
+    }
+}
 
 /* ==================== 最終覆蓋 - 手機版極小 margin/padding ==================== */
-
-
-
-
-/* ==================== 手機版 CSS - 統一乾淨版本 ==================== */
 @media (max-width: 768px) {
-    /* === 基礎容器 === */
+    /* 最優先級的容器設定 */
     body {
         margin: 0 !important;
         padding: 0 !important;
     }
     
     .container {
-        max-width: 100% !important;
+        max-width: 100vw !important;
         width: 100% !important;
         margin: 0 !important;
-        padding: 12px 0px !important;
+        padding: 8px 2px !important;
     }
     
-    /* === 所有卡片和區塊 === */
+    /* 所有卡片和區塊 */
     .metric-card,
     .chart-card,
     .foreign-section,
@@ -1323,48 +1908,12 @@
     .retail-chart-section {
         margin-left: 0 !important;
         margin-right: 0 !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
-    
-    /* === 外資買賣超 === */
-    .foreign-item {
-        padding: 10px 6px !important;
-        gap: 4px;
-    }
-    
-    .foreign-rank { width: 30px; font-size: 12px; }
-    .foreign-code { width: 65px; font-size: 12px; }
-    .foreign-name { flex: 0 1 70px; font-size: 11px; }
-    .foreign-amount { flex: 1 1 auto; font-size: 11px; }
-    
-    /* === 產業詳細表格 === */
-    .industry-detail-table {
-        font-size: 11px !important;
-        width: 100% !important;
-        table-layout: fixed !important;
-    }
-    
-    .industry-detail-table thead th,
-    .industry-detail-table tbody td {
-        padding: 8px 2px !important;
-    }
-    
-    .industry-detail-table thead th:nth-child(1) { width: 13% !important; }
-    .industry-detail-table thead th:nth-child(2) { width: 21% !important; }
-    .industry-detail-table thead th:nth-child(3) { width: 33% !important; }
-    .industry-detail-table thead th:nth-child(4) { width: 33% !important; }
-    
-    /* === 其他調整 === */
-    .limit-grid,
-    .commodities-grid {
-        grid-template-columns: 1fr !important;
     }
 }
 
 @media (max-width: 420px) {
     .container {
-        padding: 8px 0px !important;
+        padding: 6px 1px !important;
     }
 }
 </style>
