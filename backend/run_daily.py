@@ -22,7 +22,7 @@ print(f"{'='*60}\n")
 
 try:
     # 1. 主要數據收集器
-    print("[1/7] 收集主要數據 (TX + MXF)...")
+    print("[1/9] 收集主要數據 (TX + MXF)...")
     try:
         from data_collector_v2 import DataCollector
         collector = DataCollector()
@@ -37,7 +37,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 2. 三大法人買賣金額
-    print("\n[2/7] 收集三大法人買賣金額...")
+    print("\n[2/9] 收集三大法人買賣金額...")
     try:
         import institutional_money_collector
         institutional_money_collector.main()
@@ -46,7 +46,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 3. 漲停跌停股
-    print("\n[3/7] 收集漲停跌停股...")
+    print("\n[3/9] 收集漲停跌停股...")
     try:
         import limit_updown_collector
         limit_updown_collector.main()
@@ -55,7 +55,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 4. 外資買賣超排行（新增）
-    print("\n[4/7] 收集外資買賣超 Top 50...")
+    print("\n[4/9] 收集外資買賣超 Top 50...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'foreign_with_price_v2.py'], 
@@ -68,7 +68,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 5. 產業外資流向
-    print("\n[5/7] 收集產業外資流向...")
+    print("\n[5/9] 收集產業外資流向...")
     try:
         from industry_foreign_flow_collector import collect_industry_foreign_flow
         collect_industry_foreign_flow()
@@ -77,20 +77,26 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 6. 產業熱力圖（新增）
-    print("\n[6/7] 更新產業熱力圖...")
+    print("\n[6/9] 更新產業熱力圖...")
     try:
         import subprocess
-        result = subprocess.run(['python3', 'fix_to_wan_zhang_with_change.py'], 
+        result = subprocess.run(['python3', 'industry_heatmap_collector.py'], 
                               capture_output=True, text=True, timeout=30)
         if result.returncode == 0:
-            print("  ✓ 完成")
+            # 後處理：合併外資數據
+            result2 = subprocess.run(["python3", "fix_to_wan_zhang_with_change.py"], 
+                                    capture_output=True, text=True, timeout=30)
+            if result2.returncode == 0:
+                print("  ✓ 完成 (含外資合併)")
+            else:
+                print(f"  △ 熱力圖OK但外資合併失敗: {result2.stderr}")
         else:
             print(f"  ✗ 失敗: {result.stderr}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
     # 7. MXF 散戶多空比歷史
-    print("\n[7/7] 收集 MXF 散戶多空比歷史...")
+    print("\n[7/9] 收集 MXF 散戶多空比歷史...")
     try:
         from retail_ratio_collector_v2 import collect_mxf_ratio_history
         collect_mxf_ratio_history()

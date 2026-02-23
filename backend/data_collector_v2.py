@@ -288,8 +288,8 @@ class DataCollector:
             VALUES (?, ?, ?, ?, ?, ?, ?)
         ''', (
             margin_result['date'],
-            margin_result['margin_balance'],
-            margin_result['market_value'],
+            margin_result['margin_balance_billion'],
+            margin_result['margin_limit_billion'],
             margin_result['margin_ratio'],
             margin_data.get('margin_purchase', 0),
             margin_data.get('margin_sale', 0),

@@ -37,32 +37,53 @@ def get_industry_by_code(code, name):
     return '其他'
 
 def find_trading_dates():
-    """找到最近兩個有資料的交易日"""
+    """找到最近兩個有資料的交易日（使用 FMTQIK 月成交資訊）"""
+    import time
     today = datetime.now()
-    dates = []
+    trading_days = []
     
     print("尋找最近的交易日...")
     
-    for i in range(10):
-        test_date = (today - timedelta(days=i)).strftime('%Y%m%d')
-        url = f"https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL?date={test_date}&response=json"
+    # 搜尋最近兩個月的交易日
+    for month_offset in range(3):
+        check_date = today - timedelta(days=30 * month_offset)
+        date_str = check_date.strftime('%Y%m%d')
         
+        url = f"https://www.twse.com.tw/rwd/zh/afterTrading/FMTQIK?date={date_str}&response=json"
         try:
+            if month_offset > 0:
+                time.sleep(1)
             resp = requests.get(url, timeout=10)
             data = resp.json()
-            if data.get('stat') == 'OK' and 'data' in data and len(data['data']) > 0:
-                dates.append(test_date)
-                print(f"✓ 找到交易日: {test_date}")
-                if len(dates) >= 2:
-                    break
-        except:
-            continue
+            if data.get('stat') == 'OK' and 'data' in data:
+                for row in data['data']:
+                    # 民國日期轉西元: 115/02/23 -> 20260223
+                    roc_date = row[0].strip()
+                    parts = roc_date.split('/')
+                    if len(parts) == 3:
+                        y = int(parts[0]) + 1911
+                        m = int(parts[1])
+                        d = int(parts[2])
+                        western = f"{y}{m:02d}{d:02d}"
+                        # 只取今天以前（含今天）的
+                        if western <= today.strftime('%Y%m%d'):
+                            trading_days.append(western)
+        except Exception as e:
+            print(f"  ✗ 取得月資料錯誤: {e}")
     
-    if len(dates) < 2:
-        print("✗ 無法找到兩個交易日")
+    # 排序取最近兩天
+    trading_days = sorted(set(trading_days), reverse=True)
+    
+    if len(trading_days) >= 2:
+        print(f"✓ 今日交易日: {trading_days[0]}")
+        print(f"✓ 前一交易日: {trading_days[1]}")
+        return trading_days[0], trading_days[1]
+    elif len(trading_days) == 1:
+        print(f"✓ 只找到一個交易日: {trading_days[0]}")
+        return trading_days[0], None
+    else:
+        print("✗ 無法找到交易日")
         return None, None
-    
-    return dates[0], dates[1]  # 今天, 昨天
 
 def get_all_stocks_amount(date_str):
     """取得指定日期所有股票的成交金額"""
