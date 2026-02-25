@@ -5329,13 +5329,21 @@
             const wasExpanded = clicked.classList.contains("expanded");
             clicked.classList.toggle("expanded");
             
-            if (!wasExpanded) {
-                // 展開：scroll 到此卡片頂部
-                setTimeout(() => clicked.scrollIntoView({ behavior: "auto", block: "start" }), 100);
-            } else {
-                // 收回：scroll 到此卡片頂部
-                setTimeout(() => clicked.scrollIntoView({ behavior: "auto", block: "center" }), 100);
-            }
+            setTimeout(() => {
+                const rect = clicked.getBoundingClientRect();
+                const target = window.scrollY + rect.top - 10;
+                const start = window.scrollY;
+                const dist = target - start;
+                const dur = 200;
+                let t0 = null;
+                function step(ts) {
+                    if (!t0) t0 = ts;
+                    const p = Math.min((ts - t0) / dur, 1);
+                    window.scrollTo(0, start + dist * p * (2 - p));
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }, 50);
         }
 
 
