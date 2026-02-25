@@ -4095,46 +4095,6 @@
             <div class="footer-warning"></div>
         </div>
     </div>
-
-        // 產業明細表格排序
-        function sortIndustryStocks(th, field) {
-            const table = th.closest("table");
-            const tbody = table.querySelector("tbody");
-            const rows = Array.from(tbody.querySelectorAll("tr"));
-            
-            /* 判斷排序方向 */
-            const allThs = table.querySelectorAll("th.sortable");
-            allThs.forEach(h => { if (h !== th) { h.classList.remove("sort-asc","sort-desc"); h.querySelector(".sort-icon").textContent = "⇅"; } });
-            
-            let dir;
-            if (th.classList.contains("sort-asc")) {
-                th.classList.remove("sort-asc");
-                th.classList.add("sort-desc");
-                th.querySelector(".sort-icon").textContent = "▼";
-                dir = "desc";
-            } else if (th.classList.contains("sort-desc")) {
-                th.classList.remove("sort-desc");
-                th.querySelector(".sort-icon").textContent = "⇅";
-                dir = null;
-            } else {
-                th.classList.add("sort-asc");
-                th.querySelector(".sort-icon").textContent = "▲";
-                dir = "asc";
-            }
-            
-            /* 取得欄位 index */
-            const colIdx = field === "net" ? 2 : 3;
-            
-            /* 排序 */
-            rows.sort((a, b) => {
-                const aVal = parseFloat(a.cells[colIdx].textContent.replace(/[^\d.\-]/g, "")) || 0;
-                const bVal = parseFloat(b.cells[colIdx].textContent.replace(/[^\d.\-]/g, "")) || 0;
-                if (!dir) return 0;
-                return dir === "asc" ? aVal - bVal : bVal - aVal;
-            });
-            
-            rows.forEach(r => tbody.appendChild(r));
-        }
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // ============================================
