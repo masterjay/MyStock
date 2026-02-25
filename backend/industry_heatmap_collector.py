@@ -5,36 +5,32 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 # 產業分類對照表
+# 從資料庫讀取產業分類
+_stock_industry_cache = None
+
+def get_stock_industry_map():
+    """從 stock_master 資料庫讀取正確的產業分類"""
+    global _stock_industry_cache
+    if _stock_industry_cache is not None:
+        return _stock_industry_cache
+    
+    import sqlite3
+    try:
+        conn = sqlite3.connect('data/market_data.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT stock_id, industry FROM stock_master')
+        _stock_industry_cache = {row[0]: row[1] or "其他" for row in cursor.fetchall()}
+        conn.close()
+        print(f"  ✓ 已載入 {len(_stock_industry_cache)} 檔股票產業分類")
+    except Exception as e:
+        print(f"  ✗ 讀取 stock_master 失敗: {e}")
+        _stock_industry_cache = {}
+    return _stock_industry_cache
+
 def get_industry_by_code(code, name):
-    """根據股票代碼和名稱判斷產業"""
-    prefix = code[:2]
-    
-    industry_map = {
-        '23': '半導體', '24': '電腦週邊', '25': '光電', '26': '通訊網路',
-        '27': '電子零組件', '28': '電子通路', '29': '資訊服務', '30': '其他電子',
-        '31': '半導體', '32': '電腦週邊', '33': '電腦週邊', '34': '光電',
-        '35': '電子零組件', '36': '通訊網路', '37': '電子零組件', '38': '電子零組件',
-        '39': '其他電子', '40': '生技醫療', '41': '生技醫療', '42': '半導體',
-        '43': '電腦週邊', '44': '電子零組件', '45': '電子零組件', '46': '電子零組件',
-        '47': '電腦週邊', '48': '電子零組件', '49': '電子零組件',
-        '14': '建材營造', '15': '航運', '17': '鋼鐵', '18': '橡膠',
-        '19': '汽車', '20': '食品', '21': '化工', '16': '觀光',
-        '13': '電機', '11': '水泥', '12': '塑膠',
-        '50': '電子通路', '51': '貿易百貨', '52': '貿易百貨', '53': '貿易百貨',
-        '54': '貿易百貨', '55': '貿易百貨', '56': '文化創意', '57': '油電燃氣',
-        '61': '其他電子', '62': '生技醫療', '63': '其他電子', '64': '生技醫療',
-        '65': '生技醫療', '66': '其他電子', '80': '金融', '91': '其他'
-    }
-    
-    if prefix in industry_map:
-        return industry_map[prefix]
-    
-    if any(kw in name for kw in ['銀行', '金控', '保險', '證券']):
-        return '金融'
-    elif any(kw in name for kw in ['生技', '醫療', '製藥', '藥華', '藥品']):
-        return '生技醫療'
-    
-    return '其他'
+    """從資料庫取得股票的產業分類"""
+    stock_map = get_stock_industry_map()
+    return stock_map.get(code, "其他")
 
 def find_trading_dates():
     """找到最近兩個有資料的交易日（使用 FMTQIK 月成交資訊）"""
