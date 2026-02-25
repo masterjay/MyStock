@@ -5156,14 +5156,14 @@
         }
 
         // 根據外資買賣超獲取顏色類別 (單位:億)
-        function getHeatmapColor(foreignNet) {
-            if (foreignNet >= 50) return 'hm-strong-up';     // >= 50萬張     // >= 1萬萬張
-            if (foreignNet >= 20) return 'hm-up';              // 20~50萬張             // 5000~1萬萬張
-            if (foreignNet >= 5) return 'hm-slight-up';       // 5~20萬張      // 1000~5000萬張
-            if (foreignNet >= -5) return 'hm-flat';          // -5~5萬張          // -1000~1000萬張
-            if (foreignNet >= -20) return 'hm-slight-down';  // -20~-5萬張   // -5000~-1000萬張
-            if (foreignNet >= -50) return 'hm-down';         // -50~-20萬張         // -1萬~-5000萬張
-            return 'hm-strong-down';                            // <= -1萬萬張
+        function getHeatmapColor(change) {
+            if (change >= 3) return 'hm-strong-up';
+            if (change >= 1.5) return 'hm-up';
+            if (change >= 0.5) return 'hm-slight-up';
+            if (change >= -0.5) return 'hm-flat';
+            if (change >= -1.5) return 'hm-slight-down';
+            if (change >= -3) return 'hm-down';
+            return 'hm-strong-down';
         }
 
         // 更新產業熱圖
@@ -5175,8 +5175,8 @@
             
             const industries = data.industries;
             
-            container.innerHTML = Object.entries(industries).map(([industryName, industry], idx) => {
-                const colorClass = getHeatmapColor(industry.foreign_net);
+            container.innerHTML = Object.entries(industries).sort((a, b) => b[1].avg_change - a[1].avg_change).map(([industryName, industry], idx) => {
+                const colorClass = getHeatmapColor(industry.avg_change);
                 const changeSign = industry.avg_change >= 0 ? '+' : '';
                 const netSign = industry.foreign_net >= 0 ? '+' : '';
                 
