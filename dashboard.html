@@ -5326,7 +5326,16 @@
             });
             
             // 切換當前
-            clicked.classList.toggle('expanded');
+            const wasExpanded = clicked.classList.contains("expanded");
+            clicked.classList.toggle("expanded");
+            
+            if (!wasExpanded) {
+                // 展開：scroll 到此卡片頂部
+                setTimeout(() => clicked.scrollIntoView({ behavior: "auto", block: "start" }), 100);
+            } else {
+                // 收回：scroll 到此卡片頂部
+                setTimeout(() => clicked.scrollIntoView({ behavior: "auto", block: "center" }), 100);
+            }
         }
 
 
