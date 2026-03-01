@@ -1,14 +1,14 @@
 {
   "latest": {
     "mxf_futures": {
-      "date": "20260225",
+      "date": "20260227",
       "close_price": 0.0,
-      "total_oi": 30844,
-      "retail_long": 19697,
-      "retail_short": 26569,
-      "retail_net": -6872,
-      "retail_ratio": -22.28,
-      "foreign_net": 3779
+      "total_oi": 29124,
+      "retail_long": 18671,
+      "retail_short": 25015,
+      "retail_net": -6344,
+      "retail_ratio": -21.78,
+      "foreign_net": 4988
     },
     "tx_futures": {
       "date": "20260212",
@@ -23,24 +23,6 @@
   },
   "history": {
     "mxf": [
-      {
-        "date": "20260101",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260102",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
       {
         "date": "20260105",
         "retail_ratio": -21.22,
@@ -292,6 +274,24 @@
         "close_price": 0.0,
         "total_oi": 30844,
         "foreign_net": 3779
+      },
+      {
+        "date": "20260226",
+        "retail_ratio": -21.78,
+        "retail_long": 18671,
+        "retail_short": 25015,
+        "close_price": 0.0,
+        "total_oi": 29124,
+        "foreign_net": 4988
+      },
+      {
+        "date": "20260227",
+        "retail_ratio": -21.78,
+        "retail_long": 18671,
+        "retail_short": 25015,
+        "close_price": 0.0,
+        "total_oi": 29124,
+        "foreign_net": 4988
       }
     ],
     "tx": [
@@ -447,5 +447,5 @@
       }
     ]
   },
-  "updated_at": "2026-02-25T20:30:19.378184"
+  "updated_at": "2026-03-01T19:00:24.004813"
 }

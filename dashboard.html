@@ -3382,7 +3382,68 @@
         <!-- Main Content -->
         <div id="mainContent" style="display: none;">
             <!-- 散戶對決區塊 -->
-            <div class="retail-battle-section">
+            
+        <!-- MACD 訊號股清單 -->
+        <div class="macd-signal-section" id="macd-signal-section">
+            <div class="macd-signal-header">
+                <div class="macd-signal-title">
+                    <span class="pulse-dot"></span>
+                    &#x1F3AF; MACD 訊號股
+                </div>
+                <div>
+                    <span class="macd-signal-count" id="macd-signal-count">載入中...</span>
+                </div>
+            </div>
+            <div class="macd-signal-meta" id="macd-signal-meta"></div>
+            <div class="macd-controls" id="macd-controls">
+                <div class="macd-filter-group">
+                    <span class="macd-filter-label">星等:</span>
+                    <button class="macd-filter-btn active" data-filter="star" data-value="all">全部</button>
+                    <button class="macd-filter-btn" data-filter="star" data-value="5">5⭐</button>
+                    <button class="macd-filter-btn" data-filter="star" data-value="4">4⭐+</button>
+                    <button class="macd-filter-btn" data-filter="star" data-value="3">3⭐+</button>
+                </div>
+                <div class="macd-divider"></div>
+                <div class="macd-filter-group">
+                    <span class="macd-filter-label">類型:</span>
+                    <button class="macd-filter-btn active" data-filter="type" data-value="all">全部</button>
+                    <button class="macd-filter-btn" data-filter="type" data-value="長線">長線</button>
+                    <button class="macd-filter-btn" data-filter="type" data-value="短線">短線</button>
+                </div>
+                <div class="macd-divider"></div>
+                <div class="macd-filter-group">
+                    <span class="macd-filter-label">狀態:</span>
+                    <button class="macd-filter-btn active" data-filter="status" data-value="all">全部</button>
+                    <button class="macd-filter-btn" data-filter="status" data-value="已金叉">已金叉</button>
+                    <button class="macd-filter-btn" data-filter="status" data-value="即將金叉">即將金叉</button>
+                    <button class="macd-filter-btn" data-filter="status" data-value="柱體縮小中">柱體縮小</button>
+                </div>
+                <div class="macd-divider"></div>
+                <div class="macd-filter-group">
+                    <span class="macd-filter-label">來源:</span>
+                    <button class="macd-filter-btn active" data-filter="source" data-value="all">全部</button>
+                    <button class="macd-filter-btn" data-filter="source" data-value="外資買超">外資買超</button>
+                    <button class="macd-filter-btn" data-filter="source" data-value="週轉率">週轉率</button>
+                    <button class="macd-filter-btn" data-filter="source" data-value="產業外資">產業外資</button>
+                </div>
+                <div class="macd-divider"></div>
+                <div class="macd-filter-group">
+                    <span class="macd-filter-label">排序:</span>
+                    <select class="macd-sort-select" id="macd-sort-select">
+                        <option value="strength_desc">訊號強度 高→低</option>
+                        <option value="price_desc">股價 高→低</option>
+                        <option value="price_asc">股價 低→高</option>
+                        <option value="dif_asc">DIF距0軸 近→遠</option>
+                        <option value="vol_asc">量縮比 小→大</option>
+                    </select>
+                </div>
+            </div>
+            <div class="macd-signal-grid" id="macd-signal-grid">
+                <div class="macd-signal-empty">載入中...</div>
+            </div>
+        </div>
+
+<div class="retail-battle-section">
                 <div class="section-header">
                     <h2>散戶 vs 法人對決</h2>
                     <p class="section-subtitle">散戶多空比 - 逆向指標</p>
@@ -5423,6 +5484,7 @@
                 
                 updateUI(data);
                 updateTurnoverMonitor(turnoverData);
+                loadMacdSignals();
                 loadAllCommodities();
                 
                 // 載入產業熱圖
@@ -5552,7 +5614,129 @@
             
             rows.forEach(r => tbody.appendChild(r));
         }
-    </script>
+    
+// ========== MACD 訊號股載入 ==========
+var _macdSignals = [];
+var _macdFilters = { star: 'all', type: 'all', status: 'all', source: 'all' };
+var _macdSort = 'strength_desc';
+
+async function loadMacdSignals() {
+    try {
+        var response = await fetch('./backend/data/macd_signal_stocks.json?t=' + new Date().getTime());
+        if (!response.ok) {
+            document.getElementById('macd-signal-grid').innerHTML = '<div class="macd-signal-empty">尚未產生訊號資料</div>';
+            document.getElementById('macd-signal-count').textContent = '0 檔';
+            return;
+        }
+        var data = await response.json();
+        _macdSignals = data.signals || [];
+        
+        var meta = document.getElementById('macd-signal-meta');
+        meta.textContent = '掃描日期: ' + (data.scan_date || '') + ' | 掃描 ' + (data.total_scanned || 0) + ' 檔 | MACD(' + ((data.config || {}).macd_params || '12,26,9') + ')';
+        
+        renderMacdSignals();
+        initMacdControls();
+    } catch (error) {
+        console.error('MACD error:', error);
+        document.getElementById('macd-signal-grid').innerHTML = '<div class="macd-signal-empty">載入失敗</div>';
+    }
+}
+
+function initMacdControls() {
+    // 過濾按鈕
+    document.querySelectorAll('.macd-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var filterType = this.getAttribute('data-filter');
+            var value = this.getAttribute('data-value');
+            _macdFilters[filterType] = value;
+            // 同組按鈕切換 active
+            document.querySelectorAll('.macd-filter-btn[data-filter="' + filterType + '"]').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            renderMacdSignals();
+        });
+    });
+    // 排序下拉
+    var sortSelect = document.getElementById('macd-sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            _macdSort = this.value;
+            renderMacdSignals();
+        });
+    }
+}
+
+function renderMacdSignals() {
+    var filtered = _macdSignals.filter(function(s) {
+        if (_macdFilters.star !== 'all' && s.signal_strength < parseInt(_macdFilters.star)) return false;
+        if (_macdFilters.type !== 'all' && s.trade_type !== _macdFilters.type) return false;
+        if (_macdFilters.status !== 'all' && s.cross_status !== _macdFilters.status) return false;
+        if (_macdFilters.source !== 'all' && (s.source || '').indexOf(_macdFilters.source) === -1) return false;
+        return true;
+    });
+    
+    // 排序
+    filtered.sort(function(a, b) {
+        switch (_macdSort) {
+            case 'strength_desc': return b.signal_strength - a.signal_strength || a.dif_pct - b.dif_pct;
+            case 'price_desc': return b.price - a.price;
+            case 'price_asc': return a.price - b.price;
+            case 'dif_asc': return a.dif_pct - b.dif_pct;
+            case 'vol_asc': return a.volume_ratio - b.volume_ratio;
+            default: return 0;
+        }
+    });
+    
+    document.getElementById('macd-signal-count').textContent = filtered.length + ' / ' + _macdSignals.length + ' 檔';
+    
+    var grid = document.getElementById('macd-signal-grid');
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div class="macd-signal-empty">無符合篩選條件的股票</div>';
+        return;
+    }
+    
+    grid.innerHTML = filtered.map(function(s) {
+        var stars = '';
+        for (var i = 0; i < (s.signal_strength || 1); i++) stars += '\u2B50';
+        var typeClass = s.trade_type === '長線' ? 'macd-badge-type-long' : 'macd-badge-type-short';
+        var yahooUrl = 'https://tw.stock.yahoo.com/quote/' + s.code + '.TW/technical-analysis';
+        return '<div class="macd-signal-card" data-url="' + yahooUrl + '">' +
+            '<div class="macd-card-top">' +
+                '<div>' +
+                    '<div class="macd-card-code">' +
+                        '<a href="' + yahooUrl + '" target="_blank" onclick="event.stopPropagation()">' + s.code + '</a> ' +
+                        '<span class="macd-card-name">' + s.name + '</span>' +
+                    '</div>' +
+                    '<div class="macd-card-badges">' +
+                        '<span class="macd-badge macd-badge-cross">' + s.cross_status + '</span>' +
+                        '<span class="macd-badge ' + typeClass + '">' + s.trade_type + '</span>' +
+                        '<span class="macd-badge macd-badge-source">' + (s.source || '') + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div style="text-align:right">' +
+                    '<div class="macd-card-price">' + s.price.toFixed(2) + '</div>' +
+                    '<div class="macd-card-stars">' + stars + '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="macd-card-metrics">' +
+                '<div class="macd-metric"><div class="macd-metric-label">DIF距0軸</div><div class="macd-metric-value">' + s.dif_pct.toFixed(3) + '%</div></div>' +
+                '<div class="macd-metric"><div class="macd-metric-label">量縮比</div><div class="macd-metric-value">' + s.volume_ratio.toFixed(2) + '</div></div>' +
+                '<div class="macd-metric"><div class="macd-metric-label">柱狀體</div><div class="macd-metric-value" style="color:' + (s.histogram >= 0 ? '#e94560' : '#4ecdc4') + '">' + s.histogram.toFixed(4) + '</div></div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+    
+    // 綁定點擊
+    grid.querySelectorAll('.macd-signal-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+            window.open(this.getAttribute('data-url'), '_blank');
+        });
+    });
+}
+
+
+</script>
 
         </div>
 
@@ -7194,4 +7378,214 @@
     text-align: center;
     font-size: 12px;
 }
+
+/* ========== MACD 訊號區塊 ========== */
+
+/* MACD 過濾排序列 */
+.macd-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+}
+.macd-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.macd-filter-label {
+    font-size: 11px;
+    color: #888;
+    white-space: nowrap;
+}
+.macd-filter-btn {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+.macd-filter-btn:hover {
+    border-color: #e94560;
+    color: #fff;
+}
+.macd-filter-btn.active {
+    background: #e94560;
+    border-color: #e94560;
+    color: #fff;
+}
+.macd-sort-select {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08);
+    color: #ddd;
+    cursor: pointer;
+    outline: none;
+}
+.macd-sort-select option {
+    background: #1a1a2e;
+    color: #ddd;
+}
+.macd-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 4px;
+}
+@media (max-width: 768px) {
+    .macd-controls { gap: 6px; }
+    .macd-filter-btn { padding: 4px 8px; font-size: 10px; }
+    .macd-divider { display: none; }
+}
+
+.macd-signal-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #e94560;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+.macd-signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.macd-signal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e94560;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.macd-signal-title .pulse-dot {
+    width: 12px;
+    height: 12px;
+    background: #e94560;
+    border-radius: 50%;
+    animation: macd-pulse 2s infinite;
+}
+@keyframes macd-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(233, 69, 96, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(233, 69, 96, 0); }
+}
+.macd-signal-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
+}
+.macd-signal-count {
+    background: #e94560;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.macd-signal-empty {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 14px;
+}
+.macd-signal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+}
+.macd-signal-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 14px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.macd-signal-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #e94560;
+    transform: translateY(-2px);
+}
+.macd-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+.macd-card-code {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+.macd-card-code a { color: #fff; text-decoration: none; }
+.macd-card-code a:hover { color: #e94560; text-decoration: underline; }
+.macd-card-name {
+    font-size: 13px;
+    color: #aaa;
+}
+.macd-card-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4ecdc4;
+}
+.macd-card-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+.macd-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+}
+.macd-badge-cross {
+    background: rgba(233, 69, 96, 0.2);
+    color: #e94560;
+    border: 1px solid rgba(233, 69, 96, 0.4);
+}
+.macd-badge-type-long {
+    background: rgba(78, 205, 196, 0.2);
+    color: #4ecdc4;
+    border: 1px solid rgba(78, 205, 196, 0.4);
+}
+.macd-badge-type-short {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.4);
+}
+.macd-badge-source {
+    background: rgba(100, 100, 255, 0.2);
+    color: #aab;
+    border: 1px solid rgba(100, 100, 255, 0.3);
+}
+.macd-card-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+.macd-metric { text-align: center; }
+.macd-metric-label { font-size: 10px; color: #666; margin-bottom: 2px; }
+.macd-metric-value { font-size: 13px; color: #ddd; font-weight: bold; }
+.macd-card-stars { color: #ffc107; font-size: 14px; letter-spacing: 1px; }
+@media (max-width: 768px) {
+    .macd-signal-section { padding: 14px; margin: 12px 0; }
+    .macd-signal-grid { grid-template-columns: 1fr; }
+    .macd-signal-title { font-size: 16px; }
+}
+
 </style>

@@ -22,7 +22,7 @@ print(f"{'='*60}\n")
 
 try:
     # 1. 主要數據收集器
-    print("[1/9] 收集主要數據 (TX + MXF)...")
+    print("[1/10] 收集主要數據 (TX + MXF)...")
     try:
         from data_collector_v2 import DataCollector
         collector = DataCollector()
@@ -37,7 +37,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 2. 三大法人買賣金額
-    print("\n[2/9] 收集三大法人買賣金額...")
+    print("\n[2/10] 收集三大法人買賣金額...")
     try:
         import institutional_money_collector
         institutional_money_collector.main()
@@ -46,7 +46,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 3. 漲停跌停股
-    print("\n[3/9] 收集漲停跌停股...")
+    print("\n[3/10] 收集漲停跌停股...")
     try:
         import limit_updown_collector
         limit_updown_collector.main()
@@ -55,7 +55,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 4. 外資買賣超排行（新增）
-    print("\n[4/9] 收集外資買賣超 Top 50...")
+    print("\n[4/10] 收集外資買賣超 Top 50...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'foreign_with_price_v2.py'], 
@@ -68,7 +68,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 5. 產業外資流向
-    print("\n[5/9] 收集產業外資流向...")
+    print("\n[5/10] 收集產業外資流向...")
     try:
         from industry_foreign_flow_collector import collect_industry_foreign_flow
         collect_industry_foreign_flow()
@@ -77,7 +77,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 6. 產業熱力圖（新增）
-    print("\n[6/9] 更新產業熱力圖...")
+    print("\n[6/10] 更新產業熱力圖...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'industry_heatmap_collector.py'], 
@@ -96,7 +96,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
 
     # 7. MXF 散戶多空比歷史
-    print("\n[7/9] 收集 MXF 散戶多空比歷史...")
+    print("\n[7/10] 收集 MXF 散戶多空比歷史...")
     try:
         from retail_ratio_collector_v2 import collect_mxf_ratio_history
         collect_mxf_ratio_history()
@@ -111,6 +111,28 @@ except Exception as e:
     sys.exit(1)
 
 print(f"\n{'='*60}")
+
+    # 10. MACD 訊號掃描
+    print("\n[10/10] MACD 訊號掃描...")
+    try:
+        import subprocess
+        result = subprocess.run(['python3', 'macd_signal_scanner.py'],
+                              capture_output=True, text=True, timeout=600)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+            try:
+                import json
+                with open('data/macd_signal_stocks.json', 'r') as f:
+                    sig_data = json.load(f)
+                print(f"  → 找到 {sig_data.get('signal_count', 0)} 檔訊號股")
+            except:
+                pass
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+
 print(f"✓ 所有數據更新完成!")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"{'='*60}\n")
