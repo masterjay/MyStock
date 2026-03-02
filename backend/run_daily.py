@@ -22,7 +22,7 @@ print(f"{'='*60}\n")
 
 try:
     # 1. 主要數據收集器
-    print("[1/10] 收集主要數據 (TX + MXF)...")
+    print("[1/8] 收集主要數據 (TX + MXF)...")
     try:
         from data_collector_v2 import DataCollector
         collector = DataCollector()
@@ -37,7 +37,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 2. 三大法人買賣金額
-    print("\n[2/10] 收集三大法人買賣金額...")
+    print("\n[2/8] 收集三大法人買賣金額...")
     try:
         import institutional_money_collector
         institutional_money_collector.main()
@@ -46,7 +46,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 3. 漲停跌停股
-    print("\n[3/10] 收集漲停跌停股...")
+    print("\n[3/8] 收集漲停跌停股...")
     try:
         import limit_updown_collector
         limit_updown_collector.main()
@@ -54,8 +54,8 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
     
-    # 4. 外資買賣超排行（新增）
-    print("\n[4/10] 收集外資買賣超 Top 50...")
+    # 4. 外資買賣超排行
+    print("\n[4/8] 收集外資買賣超 Top 50...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'foreign_with_price_v2.py'], 
@@ -68,7 +68,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
     
     # 5. 產業外資流向
-    print("\n[5/10] 收集產業外資流向...")
+    print("\n[5/8] 收集產業外資流向...")
     try:
         from industry_foreign_flow_collector import collect_industry_foreign_flow
         collect_industry_foreign_flow()
@@ -76,8 +76,8 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
     
-    # 6. 產業熱力圖（新增）
-    print("\n[6/10] 更新產業熱力圖...")
+    # 6. 產業熱力圖
+    print("\n[6/8] 更新產業熱力圖...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'industry_heatmap_collector.py'], 
@@ -96,24 +96,16 @@ try:
         print(f"  ✗ 錯誤: {e}")
 
     # 7. MXF 散戶多空比歷史
-    print("\n[7/10] 收集 MXF 散戶多空比歷史...")
+    print("\n[7/8] 收集 MXF 散戶多空比歷史...")
     try:
         from retail_ratio_collector_v2 import collect_mxf_ratio_history
         collect_mxf_ratio_history()
         print("  ✓ 完成")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
-        
-except Exception as e:
-    print(f"\n✗ 執行錯誤: {e}")
-    import traceback
-    traceback.print_exc()
-    sys.exit(1)
 
-print(f"\n{'='*60}")
-
-    # 10. MACD 訊號掃描
-    print("\n[10/10] MACD 訊號掃描...")
+    # 8. MACD 訊號掃描
+    print("\n[8/8] MACD 訊號掃描...")
     try:
         import subprocess
         result = subprocess.run(['python3', 'macd_signal_scanner.py'],
@@ -132,8 +124,13 @@ print(f"\n{'='*60}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
+except Exception as e:
+    print(f"\n✗ 執行錯誤: {e}")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
+print(f"\n{'='*60}")
 print(f"✓ 所有數據更新完成!")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"{'='*60}\n")
-
