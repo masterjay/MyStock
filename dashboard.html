@@ -4458,6 +4458,7 @@
             const futuresValues = historyData.futures.map(d => d.ratio).reverse();
             
             const chartOptions = {
+                interaction: { mode: 'index', axis: 'x', intersect: false },
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
@@ -4481,6 +4482,7 @@
                     labels: marginLabels,
                     datasets: [{
                         data: marginValues,
+                        pointRadius: 3, pointHoverRadius: 6, pointHitRadius: 20,
                         borderColor: '#00ff88',
                         backgroundColor: 'rgba(0, 255, 136, 0.1)',
                         borderWidth: 2,
@@ -4506,6 +4508,7 @@
                     labels: futuresLabels,
                     datasets: [{
                         data: futuresValues,
+                        pointRadius: 3, pointHoverRadius: 6, pointHitRadius: 20,
                         borderColor: '#00d9ff',
                         backgroundColor: 'rgba(0, 217, 255, 0.1)',
                         borderWidth: 2,
