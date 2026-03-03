@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-概念股收集器 (Concept Stock Collector) v2
+概念股收集器 (Concept Stock Collector) v3
 ==========================================
-從公開網站爬取概念股分類，建立 stock_id -> [概念標籤] 的對照表。
-
 資料來源:
   1. Yahoo 股市概念股分類 (有分類頁的題材)
-  2. 內建成分股清單 (Yahoo 沒有分類頁的題材, 如 CoWoS / CPO)
+  2. 內建成分股清單 (Yahoo 沒有分類頁的題材)
   3. 本地 JSON 手動補充 (覆蓋/微調)
 
 輸出: data/concept_stocks.json
@@ -47,10 +45,16 @@ CONCEPT_DEFINITIONS = {
         'yahoo_category': '衛星/低軌衛星',
         'builtin_stocks': [],
     },
-    'ai_robot': {
-        'label': 'AI / 機器人',
+    'ai_intelligence': {
+        'label': 'AI 人工智慧',
         'color': '#8B5CF6',
         'yahoo_category': 'AI人工智慧',
+        'builtin_stocks': [],
+    },
+    'robot': {
+        'label': '機器人 / 智慧機械',
+        'color': '#A855F7',
+        'yahoo_category': '機器人/智慧機械',
         'builtin_stocks': [],
     },
     'cowos': {
@@ -70,6 +74,70 @@ CONCEPT_DEFINITIONS = {
         'builtin_stocks': [
             '3363', '3163', '4979', '3081', '3450', '2393', '3714', '6285',
             '4966', '2379', '3037', '5347', '2330', '3711', '2345',
+        ],
+    },
+    'hbm': {
+        'label': 'HBM 高頻寬記憶體',
+        'color': '#EF4444',
+        'yahoo_category': '',
+        'builtin_stocks': [
+            '2330',  # 台積電
+            '2408',  # 南亞科
+            '2344',  # 華邦電
+            '6239',  # 力成
+            '2467',  # 志聖
+            '8110',  # 華東
+            '8150',  # 南茂
+            '6515',  # 穎崴
+            '6223',  # 旺矽
+            '2449',  # 京元電
+            '3374',  # 精材
+            '3006',  # 晶豪科
+            '4919',  # 新唐
+            '3035',  # 智原
+        ],
+    },
+    'heavy_electric': {
+        'label': '重電',
+        'color': '#F97316',
+        'yahoo_category': '',
+        'builtin_stocks': [
+            '1519',  # 華城
+            '1503',  # 士電
+            '1513',  # 中興電
+            '1514',  # 亞力
+            '1504',  # 東元
+            '2371',  # 大同
+            '1605',  # 華新
+            '1589',  # 永冠
+            '1609',  # 大亞
+            '1543',  # 大西洋
+            '4538',  # 協禧
+            '6508',  # 惠特
+            '1611',  # 中電
+            '8462',  # 柏瑞醫
+            '1503',  # 士電
+        ],
+    },
+    'edge_ai': {
+        'label': '邊緣AI',
+        'color': '#06B6D4',
+        'yahoo_category': '',
+        'builtin_stocks': [
+            '2395',  # 研華
+            '6166',  # 凌華
+            '8050',  # 廣積
+            '6877',  # 安馳 (暐凡)
+            '3035',  # 智原
+            '3706',  # 神達
+            '3231',  # 緯創
+            '2357',  # 華碩
+            '2376',  # 技嘉
+            '2353',  # 宏碁
+            '2382',  # 廣達
+            '3013',  # 晟銘電
+            '6414',  # 樺漢
+            '2356',  # 英業達
         ],
     },
 }
@@ -148,7 +216,7 @@ def load_manual_overrides():
 
 def collect_concept_stocks():
     print("=" * 50)
-    print("概念股收集器 v2")
+    print("概念股收集器 v3")
     print("=" * 50)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -274,7 +342,7 @@ if __name__ == '__main__':
             tagged = [s for s in signals if s.get('concepts')]
             print(f"\n有概念標籤: {len(tagged)}/{len(md.get('signals', []))}")
             for s in tagged[:10]:
-                print(f"  {s['stock_id']} {s.get('name','')} → {', '.join(c['label'] for c in s['concepts'])}")
+                print(f"  {s.get('code', s.get('stock_id',''))} {s.get('name','')} → {', '.join(c['label'] for c in s['concepts'])}")
         else:
             print("尚無 MACD 訊號資料")
     else:

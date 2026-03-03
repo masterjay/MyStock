@@ -195,7 +195,13 @@
       "signal_strength": 2,
       "date": "2026/03/02",
       "source": "產業外資",
-      "concepts": []
+      "concepts": [
+        {
+          "id": "robot",
+          "label": "機器人 / 智慧機械",
+          "color": "#A855F7"
+        }
+      ]
     },
     {
       "code": "4571",
@@ -246,7 +252,13 @@
       "signal_strength": 1,
       "date": "2026/03/02",
       "source": "產業外資",
-      "concepts": []
+      "concepts": [
+        {
+          "id": "heavy_electric",
+          "label": "重電",
+          "color": "#F97316"
+        }
+      ]
     },
     {
       "code": "8104",
@@ -294,9 +306,13 @@
       "label": "低軌衛星",
       "color": "#3B82F6"
     },
-    "ai_robot": {
-      "label": "AI / 機器人",
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
       "color": "#8B5CF6"
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7"
     },
     "cowos": {
       "label": "CoWoS / 先進封裝",
@@ -305,6 +321,18 @@
     "cpo": {
       "label": "CPO 矽光子",
       "color": "#10B981"
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444"
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316"
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4"
     }
   }
 }

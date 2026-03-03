@@ -4,7 +4,11 @@
     "add": [],
     "remove": []
   },
-  "ai_robot": {
+  "ai_intelligence": {
+    "add": [],
+    "remove": []
+  },
+  "robot": {
     "add": [],
     "remove": []
   },
@@ -13,6 +17,18 @@
     "remove": []
   },
   "cpo": {
+    "add": [],
+    "remove": []
+  },
+  "hbm": {
+    "add": [],
+    "remove": []
+  },
+  "heavy_electric": {
+    "add": [],
+    "remove": []
+  },
+  "edge_ai": {
     "add": [],
     "remove": []
   }

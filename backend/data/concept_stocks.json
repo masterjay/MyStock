@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-03-03T17:01:17.939327",
-  "concept_count": 4,
-  "total_stocks": 84,
+  "updated_at": "2026-03-03T18:05:16.752601",
+  "concept_count": 8,
+  "total_stocks": 129,
   "concepts": {
     "low_orbit_satellite": {
       "label": "低軌衛星",
@@ -42,8 +42,8 @@
         "4912"
       ]
     },
-    "ai_robot": {
-      "label": "AI / 機器人",
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
       "color": "#8B5CF6",
       "count": 30,
       "source": "yahoo",
@@ -78,6 +78,45 @@
         "3231",
         "3324",
         "3443"
+      ]
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7",
+      "count": 31,
+      "source": "yahoo",
+      "stocks": [
+        "1503",
+        "1504",
+        "1536",
+        "1583",
+        "1590",
+        "1597",
+        "2049",
+        "2308",
+        "2317",
+        "2324",
+        "2330",
+        "2345",
+        "2352",
+        "2354",
+        "2357",
+        "2359",
+        "2360",
+        "2365",
+        "2371",
+        "2374",
+        "2377",
+        "2382",
+        "2395",
+        "2458",
+        "2464",
+        "2467",
+        "3003",
+        "3008",
+        "3019",
+        "3022",
+        "3030"
       ]
     },
     "cowos": {
@@ -134,12 +173,78 @@
         "5347",
         "6285"
       ]
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444",
+      "count": 14,
+      "source": "builtin",
+      "stocks": [
+        "2330",
+        "2344",
+        "2408",
+        "2449",
+        "2467",
+        "3006",
+        "3035",
+        "3374",
+        "4919",
+        "6223",
+        "6239",
+        "6515",
+        "8110",
+        "8150"
+      ]
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316",
+      "count": 14,
+      "source": "builtin",
+      "stocks": [
+        "1503",
+        "1504",
+        "1513",
+        "1514",
+        "1519",
+        "1543",
+        "1589",
+        "1605",
+        "1609",
+        "1611",
+        "2371",
+        "4538",
+        "6508",
+        "8462"
+      ]
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4",
+      "count": 14,
+      "source": "builtin",
+      "stocks": [
+        "2353",
+        "2356",
+        "2357",
+        "2376",
+        "2382",
+        "2395",
+        "3013",
+        "3035",
+        "3231",
+        "3706",
+        "6166",
+        "6414",
+        "6877",
+        "8050"
+      ]
     }
   },
   "stock_concepts": {
     "2312": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2313": [
       "low_orbit_satellite"
@@ -149,16 +254,19 @@
     ],
     "2317": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence",
+      "robot"
     ],
     "2327": [
       "low_orbit_satellite"
     ],
     "2330": [
       "low_orbit_satellite",
-      "ai_robot",
+      "ai_intelligence",
+      "robot",
       "cowos",
-      "cpo"
+      "cpo",
+      "hbm"
     ],
     "2355": [
       "low_orbit_satellite"
@@ -168,11 +276,11 @@
     ],
     "2368": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2383": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2392": [
       "low_orbit_satellite"
@@ -182,11 +290,11 @@
     ],
     "2453": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2454": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2485": [
       "low_orbit_satellite"
@@ -211,7 +319,7 @@
     ],
     "3227": [
       "low_orbit_satellite",
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3305": [
       "low_orbit_satellite"
@@ -241,75 +349,165 @@
       "low_orbit_satellite"
     ],
     "1504": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot",
+      "heavy_electric"
     ],
     "2059": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2308": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot"
     ],
     "2353": [
-      "ai_robot"
+      "ai_intelligence",
+      "edge_ai"
     ],
     "2356": [
-      "ai_robot"
+      "ai_intelligence",
+      "edge_ai"
     ],
     "2357": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot",
+      "edge_ai"
     ],
     "2376": [
-      "ai_robot"
+      "ai_intelligence",
+      "edge_ai"
     ],
     "2377": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot"
     ],
     "2379": [
-      "ai_robot",
+      "ai_intelligence",
       "cpo"
     ],
     "2382": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot",
+      "edge_ai"
     ],
     "2395": [
-      "ai_robot"
+      "ai_intelligence",
+      "robot",
+      "edge_ai"
     ],
     "2439": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "2449": [
-      "ai_robot",
-      "cowos"
+      "ai_intelligence",
+      "cowos",
+      "hbm"
     ],
     "3029": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3037": [
-      "ai_robot",
+      "ai_intelligence",
       "cowos",
       "cpo"
     ],
     "3044": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3078": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3163": [
-      "ai_robot",
+      "ai_intelligence",
       "cpo"
     ],
     "3169": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3231": [
-      "ai_robot"
+      "ai_intelligence",
+      "edge_ai"
     ],
     "3324": [
-      "ai_robot"
+      "ai_intelligence"
     ],
     "3443": [
-      "ai_robot"
+      "ai_intelligence"
+    ],
+    "1503": [
+      "robot",
+      "heavy_electric"
+    ],
+    "1536": [
+      "robot"
+    ],
+    "1583": [
+      "robot"
+    ],
+    "1590": [
+      "robot"
+    ],
+    "1597": [
+      "robot"
+    ],
+    "2049": [
+      "robot"
+    ],
+    "2324": [
+      "robot"
+    ],
+    "2345": [
+      "robot",
+      "cpo"
+    ],
+    "2352": [
+      "robot"
+    ],
+    "2354": [
+      "robot"
+    ],
+    "2359": [
+      "robot"
+    ],
+    "2360": [
+      "robot"
+    ],
+    "2365": [
+      "robot"
+    ],
+    "2371": [
+      "robot",
+      "heavy_electric"
+    ],
+    "2374": [
+      "robot"
+    ],
+    "2458": [
+      "robot"
+    ],
+    "2464": [
+      "robot",
+      "cowos"
+    ],
+    "2467": [
+      "robot",
+      "cowos",
+      "hbm"
+    ],
+    "3003": [
+      "robot"
+    ],
+    "3008": [
+      "robot"
+    ],
+    "3019": [
+      "robot"
+    ],
+    "3022": [
+      "robot"
+    ],
+    "3030": [
+      "robot"
     ],
     "1560": [
       "cowos"
@@ -323,17 +521,12 @@
     "2404": [
       "cowos"
     ],
-    "2464": [
-      "cowos"
-    ],
-    "2467": [
-      "cowos"
-    ],
     "3131": [
       "cowos"
     ],
     "3374": [
-      "cowos"
+      "cowos",
+      "hbm"
     ],
     "3583": [
       "cowos"
@@ -358,13 +551,15 @@
       "cowos"
     ],
     "6223": [
-      "cowos"
+      "cowos",
+      "hbm"
     ],
     "6510": [
       "cowos"
     ],
     "6515": [
-      "cowos"
+      "cowos",
+      "hbm"
     ],
     "6640": [
       "cowos"
@@ -374,9 +569,6 @@
     ],
     "8027": [
       "cowos"
-    ],
-    "2345": [
-      "cpo"
     ],
     "2393": [
       "cpo"
@@ -404,6 +596,82 @@
     ],
     "6285": [
       "cpo"
+    ],
+    "2344": [
+      "hbm"
+    ],
+    "2408": [
+      "hbm"
+    ],
+    "3006": [
+      "hbm"
+    ],
+    "3035": [
+      "hbm",
+      "edge_ai"
+    ],
+    "4919": [
+      "hbm"
+    ],
+    "6239": [
+      "hbm"
+    ],
+    "8110": [
+      "hbm"
+    ],
+    "8150": [
+      "hbm"
+    ],
+    "1513": [
+      "heavy_electric"
+    ],
+    "1514": [
+      "heavy_electric"
+    ],
+    "1519": [
+      "heavy_electric"
+    ],
+    "1543": [
+      "heavy_electric"
+    ],
+    "1589": [
+      "heavy_electric"
+    ],
+    "1605": [
+      "heavy_electric"
+    ],
+    "1609": [
+      "heavy_electric"
+    ],
+    "1611": [
+      "heavy_electric"
+    ],
+    "4538": [
+      "heavy_electric"
+    ],
+    "6508": [
+      "heavy_electric"
+    ],
+    "8462": [
+      "heavy_electric"
+    ],
+    "3013": [
+      "edge_ai"
+    ],
+    "3706": [
+      "edge_ai"
+    ],
+    "6166": [
+      "edge_ai"
+    ],
+    "6414": [
+      "edge_ai"
+    ],
+    "6877": [
+      "edge_ai"
+    ],
+    "8050": [
+      "edge_ai"
     ]
   }
 }
