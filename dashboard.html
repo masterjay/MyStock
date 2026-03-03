@@ -3751,14 +3751,14 @@
             <div class="charts-grid">
                 <div class="chart-card">
                     <div class="chart-title">
-                        融資使用率趨勢 (30日)
+                        融資使用率趨勢 (15日)
                         <span class="info-icon" onclick="showMarginInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
                     </div>
                     <canvas id="marginChart"></canvas>
                 </div>
                 <div class="chart-card">
                     <div class="chart-title">
-                        多空比趨勢 (30日)
+                        多空比趨勢 (15日)
                         <span class="info-icon" onclick="showFuturesInfo()" style="cursor: pointer; margin-left: 8px; font-size: 16px; color: #64748b;">ℹ️</span>
                     </div>
                     <canvas id="futuresChart"></canvas>
@@ -5108,6 +5108,7 @@
                 const descEl = row.querySelector('.comp-desc');
                 
                 if (comp && comp.score != null) {
+                    row.style.display = '';
                     const s = comp.score;
                     bar.style.width = s + '%';
                     scoreEl.textContent = s;
@@ -5131,7 +5132,7 @@
                         if (descEl) descEl.style.color = '#16c784';
                     }
                 } else {
-                    bar.style.width = '0%';
+                    row.style.display = 'none';
                     scoreEl.textContent = '--';
                     scoreEl.style.color = 'var(--text-secondary)';
                     if (descEl) { descEl.textContent = '--'; descEl.style.color = 'var(--text-secondary)'; }
