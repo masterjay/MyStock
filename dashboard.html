@@ -423,6 +423,8 @@
             to { opacity: 1; }
         }
 
+        .guide-panel { position:fixed; top:0; left:0; width:100%; height:100%; z-index:10000; display:none; overflow-y:auto; }
+        .guide-panel.active { display:block; }
         .guide-panel-overlay {
             position: absolute;
             top: 0;
@@ -434,6 +436,7 @@
         }
 
         .guide-panel-content {
+            z-index: 1;
             position: relative;
             max-width: 1400px;
             max-height: 90vh;
@@ -442,7 +445,7 @@
             border: 2px solid var(--accent-green);
             border-radius: 12px;
         
-            animation: slideUp 0.4s ease;
+            animation: fadeIn 0.3s ease;
         }
 
         @keyframes slideUp {
@@ -454,6 +457,10 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .guide-panel-header {
@@ -711,6 +718,7 @@
             }
 
             .guide-panel-content {
+            z-index: 1;
                 margin: 2vh auto;
                 max-height: 96vh;
             }
@@ -1791,6 +1799,7 @@
     
     /* guide-panel-content - 移除 1400px 限制 */
     .guide-panel-content {
+            z-index: 1;
         max-width: 100% !important;
         padding: 12px 6px !important;
     }
@@ -1804,6 +1813,7 @@
 @media (max-width: 420px) {
     .turnover-single-wrap,
     .guide-panel-content {
+            z-index: 1;
         padding: 8px 4px !important;
     }
 }
@@ -3196,6 +3206,7 @@
     
     /* guide-panel-content - 移除 1400px 限制 */
     .guide-panel-content {
+            z-index: 1;
         max-width: 100% !important;
         padding: 12px 6px !important;
     }
@@ -3209,6 +3220,7 @@
 @media (max-width: 420px) {
     .turnover-single-wrap,
     .guide-panel-content {
+            z-index: 1;
         padding: 8px 4px !important;
     }
 }
@@ -3825,7 +3837,7 @@
     </div>
 
         <!-- 數據解讀彈出面板 -->
-        <div id="guidePanel" class="guide-panel" style="display: none;">
+        <div id="guidePanel" class="guide-panel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; overflow-y:auto;">
 
 
             <div class="guide-panel-overlay" id="guidePanelOverlay"></div>
@@ -5529,23 +5541,23 @@
                 const guidePanelOverlay = document.getElementById('guidePanelOverlay');
                 
                 guideBtn.addEventListener('click', () => {
-                    guidePanel.classList.add('active');
+                    guidePanel.style.display='block'; guidePanel.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 });
                 
                 guidePanelClose.addEventListener('click', () => {
-                    guidePanel.classList.remove('active');
+                    guidePanel.style.display='none'; guidePanel.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 });
                 
                 guidePanelOverlay.addEventListener('click', () => {
-                    guidePanel.classList.remove('active');
+                    guidePanel.style.display='none'; guidePanel.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 });
                 
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && guidePanel.classList.contains('active')) {
-                        guidePanel.classList.remove('active');
+                        guidePanel.style.display='none'; guidePanel.classList.remove('active');
                         document.body.style.overflow = 'auto';
                     }
                 });
@@ -7413,6 +7425,7 @@ function initMacdModal() {
     
     /* guide-panel-content - 移除 1400px 限制 */
     .guide-panel-content {
+            z-index: 1;
         max-width: 100% !important;
         padding: 12px 6px !important;
     }
@@ -7426,6 +7439,7 @@ function initMacdModal() {
 @media (max-width: 420px) {
     .turnover-single-wrap,
     .guide-panel-content {
+            z-index: 1;
         padding: 8px 4px !important;
     }
 }
