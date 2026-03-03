@@ -157,14 +157,22 @@ def calc_sentiment(margin, futures):
 
 
 def get_us_fear_greed():
-    """嘗試讀取美股恐懼貪婪指數"""
-    fg_file = Path(__file__).parent / 'data' / 'fear_greed.json'
-    if fg_file.exists():
-        try:
-            with open(fg_file) as f:
-                return json.load(f)
-        except:
-            pass
+    """即時抓取美股恐懼貪婪指數"""
+    try:
+        from scraper_us_sentiment import USFearGreedScraper
+        scraper = USFearGreedScraper()
+        data = scraper.fetch_current_index()
+        if data and data.get('score') is not None:
+            score = round(data['score'])
+            return {
+                'score': score,
+                'rating': data.get('rating', 'N/A').upper(),
+                'previous_close': round(data.get('previous_close', 0)),
+                'previous_week': round(data.get('previous_week', 0)),
+                'previous_month': round(data.get('previous_month', 0)),
+            }
+    except Exception as e:
+        print(f"  ⚠ 美股指數抓取失敗: {e}")
     return {'score': None, 'rating': 'N/A', 'previous_close': None}
 
 
