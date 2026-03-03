@@ -1,18 +1,9 @@
 {
-  "updated_at": "2026-03-01T19:00:47.697254",
+  "updated_at": "2026-03-02T22:54:11.610392",
   "mxf": {
     "name": "微型台指期貨 (MXF)",
     "description": "散戶參與度高，更能反映散戶情緒",
     "history": [
-      {
-        "date": "20260105",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
       {
         "date": "20260106",
         "retail_long": 31553,
@@ -273,6 +264,15 @@
         "total_oi": 29124,
         "close_price": 0.0,
         "foreign_net": 4988
+      },
+      {
+        "date": "20260302",
+        "retail_long": 48486,
+        "retail_short": 41595,
+        "retail_ratio": 11.47,
+        "total_oi": 60054,
+        "close_price": 0.0,
+        "foreign_net": 5714
       }
     ]
   },

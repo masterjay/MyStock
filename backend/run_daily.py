@@ -104,6 +104,22 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
+    # 概念股收集 (每週一更新)
+    from datetime import datetime as _dt
+    if _dt.now().weekday() == 0:
+        print("\n[概念股] 每週更新概念股對照表...")
+        try:
+            result = subprocess.run(['python3', 'concept_stock_collector.py'],
+                                  capture_output=True, text=True, timeout=120)
+            if result.returncode == 0:
+                print("  ✓ 完成")
+            else:
+                print(f"  ✗ 失敗: {result.stderr[:200]}")
+        except Exception as e:
+            print(f"  ✗ 錯誤: {e}")
+    else:
+        print("\n[概念股] 非週一，跳過")
+
     # 8. MACD 訊號掃描
     print("\n[8/8] MACD 訊號掃描...")
     try:

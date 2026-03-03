@@ -532,6 +532,7 @@ def main():
         'total_scanned': total,
         'signal_count': len(signals),
         'signals': signals,
+
         'config': {
             'macd_params': f"{FAST_PERIOD},{SLOW_PERIOD},{SIGNAL_PERIOD}",
             'volume_shrink_ratio': VOLUME_SHRINK_RATIO,
@@ -543,9 +544,47 @@ def main():
     if errors:
         output['errors'] = errors
     
+    
+    # === 概念股標籤 ===
+    try:
+        from concept_stock_collector import enrich_signals_with_concepts
+        signals = enrich_signals_with_concepts(signals)
+        concept_tagged = sum(1 for s in signals if s.get('concepts'))
+        print(f"  → {concept_tagged} 檔有概念股標籤")
+    except ImportError:
+        print("  ℹ concept_stock_collector 不存在，跳過概念標籤")
+    except Exception as e:
+        print(f"  ⚠ 概念標籤失敗: {e}")
+
+
+    # === 概念股 meta ===
+    try:
+        concept_file = DATA_DIR / 'concept_stocks.json'
+        if concept_file.exists():
+            with open(concept_file, 'r', encoding='utf-8') as _f:
+                _cdata = json.load(_f)
+            output['concepts_meta'] = {
+                cid: {'label': cd['label'], 'color': cd['color']}
+                for cid, cd in _cdata.get('concepts', {}).items()
+            }
+    except Exception:
+        pass
     output_path = DATA_DIR / 'macd_signal_stocks.json'
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
+
+    # 保存歷史檔案（保留3天）
+    scan_date_str = output["scan_date"].replace("-", "")
+    history_path = DATA_DIR / f"macd_signal_{scan_date_str}.json"
+    with open(history_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+    
+    # 清理超過3天的歷史檔案
+    import glob
+    history_files = sorted(glob.glob(str(DATA_DIR / "macd_signal_2*.json")), reverse=True)
+    for old_file in history_files[3:]:
+        os.remove(old_file)
+        print(f"  🗑 清理舊檔: {os.path.basename(old_file)}")
     
     # 印出摘要
     print(f"\n{'=' * 60}")

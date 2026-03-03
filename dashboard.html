@@ -3383,18 +3383,21 @@
         <div id="mainContent" style="display: none;">
             <!-- 散戶對決區塊 -->
             
-        <!-- MACD 訊號股清單 -->
+                    &#x1F3AF; MACD 訊號股
         <div class="macd-signal-section" id="macd-signal-section">
             <div class="macd-signal-header">
                 <div class="macd-signal-title">
                     <span class="pulse-dot"></span>
                     &#x1F3AF; MACD 訊號股
+                    <button class="macd-info-btn" id="macd-info-btn" title="篩選條件說明">ℹ️</button>
                 </div>
                 <div>
                     <span class="macd-signal-count" id="macd-signal-count">載入中...</span>
                 </div>
             </div>
             <div class="macd-signal-meta" id="macd-signal-meta"></div>
+            <div class="macd-date-tabs" id="macd-date-tabs"></div>
+            <div id="concept-filter-bar" class="concept-filter-bar" style="display:none;"></div>
             <div class="macd-controls" id="macd-controls">
                 <div class="macd-filter-group">
                     <span class="macd-filter-label">星等:</span>
@@ -5485,6 +5488,7 @@
                 updateUI(data);
                 updateTurnoverMonitor(turnoverData);
                 loadMacdSignals();
+                initMacdModal();
                 loadAllCommodities();
                 
                 // 載入產業熱圖
@@ -5617,11 +5621,15 @@
     
 // ========== MACD 訊號股載入 ==========
 var _macdSignals = [];
+var _macdAllDays = {};
+var _macdDates = [];
+var _macdCurrentDate = '';
 var _macdFilters = { star: 'all', type: 'all', status: 'all', source: 'all' };
 var _macdSort = 'strength_desc';
 
 async function loadMacdSignals() {
     try {
+        // 載入最新的主檔
         var response = await fetch('./backend/data/macd_signal_stocks.json?t=' + new Date().getTime());
         if (!response.ok) {
             document.getElementById('macd-signal-grid').innerHTML = '<div class="macd-signal-empty">尚未產生訊號資料</div>';
@@ -5629,17 +5637,67 @@ async function loadMacdSignals() {
             return;
         }
         var data = await response.json();
-        _macdSignals = data.signals || [];
-        
-        var meta = document.getElementById('macd-signal-meta');
-        meta.textContent = '掃描日期: ' + (data.scan_date || '') + ' | 掃描 ' + (data.total_scanned || 0) + ' 檔 | MACD(' + ((data.config || {}).macd_params || '12,26,9') + ')';
-        
+        var latestDate = (data.scan_date || '').replace(/-/g, '');
+        _macdAllDays[latestDate] = data;
+
+        // 嘗試載入前兩天的歷史檔
+        var d = new Date(data.scan_date);
+        for (var i = 1; i <= 6; i++) {
+            var prev = new Date(d);
+            prev.setDate(prev.getDate() - i);
+            var ds = prev.getFullYear() + ('0'+(prev.getMonth()+1)).slice(-2) + ('0'+prev.getDate()).slice(-2);
+            try {
+                var r = await fetch('./backend/data/macd_signal_' + ds + '.json?t=' + new Date().getTime());
+                if (r.ok) {
+                    var pd = await r.json();
+                    _macdAllDays[ds] = pd;
+                }
+            } catch(e) {}
+            if (Object.keys(_macdAllDays).length >= 3) break;
+        }
+
+        // 排序日期（新到舊）
+        _macdDates = Object.keys(_macdAllDays).sort().reverse();
+        _macdCurrentDate = _macdDates[0];
+        _macdSignals = _macdAllDays[_macdCurrentDate].signals || [];
+
+        renderMacdDateTabs();
+        updateMacdMeta();
         renderMacdSignals();
         initMacdControls();
+        initConceptFilter(_macdAllDays[_macdCurrentDate]);
     } catch (error) {
         console.error('MACD error:', error);
         document.getElementById('macd-signal-grid').innerHTML = '<div class="macd-signal-empty">載入失敗</div>';
     }
+}
+
+function renderMacdDateTabs() {
+    var container = document.getElementById('macd-date-tabs');
+    if (!container || _macdDates.length <= 1) { if(container) container.style.display='none'; return; }
+    container.innerHTML = _macdDates.map(function(ds) {
+        var label = ds.substring(0,4) + '/' + ds.substring(4,6) + '/' + ds.substring(6,8);
+        var activeClass = ds === _macdCurrentDate ? ' active' : '';
+        var count = (_macdAllDays[ds].signals || []).length;
+        return '<button class="macd-date-tab' + activeClass + '" data-date="' + ds + '">' + label + ' (' + count + '檔)</button>';
+    }).join('');
+    container.querySelectorAll('.macd-date-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            _macdCurrentDate = this.getAttribute('data-date');
+            _macdSignals = _macdAllDays[_macdCurrentDate].signals || [];
+            container.querySelectorAll('.macd-date-tab').forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            updateMacdMeta();
+            renderMacdSignals();
+            initConceptFilter(_macdAllDays[_macdCurrentDate]);
+        });
+    });
+}
+
+function updateMacdMeta() {
+    var data = _macdAllDays[_macdCurrentDate];
+    var meta = document.getElementById('macd-signal-meta');
+    meta.textContent = '掃描日期: ' + (data.scan_date || '') + ' | 掃描 ' + (data.total_scanned || 0) + ' 檔 | MACD(' + ((data.config || {}).macd_params || '12,26,9') + ')';
 }
 
 function initMacdControls() {
@@ -5701,7 +5759,9 @@ function renderMacdSignals() {
         for (var i = 0; i < (s.signal_strength || 1); i++) stars += '\u2B50';
         var typeClass = s.trade_type === '長線' ? 'macd-badge-type-long' : 'macd-badge-type-short';
         var yahooUrl = 'https://tw.stock.yahoo.com/quote/' + s.code + '.TW/technical-analysis';
-        return '<div class="macd-signal-card" data-url="' + yahooUrl + '">' +
+        var conceptHtml = (s.concepts||[]).map(function(c){ return '<span class="concept-tag" style="--tag-color:'+c.color+'">'+c.label+'</span>'; }).join('');
+        var conceptIds = (s.concepts||[]).map(function(c){ return c.id; }).join(',');
+        return '<div class="macd-signal-card" data-url="' + yahooUrl + '" data-concepts="' + conceptIds + '">' +
             '<div class="macd-card-top">' +
                 '<div>' +
                     '<div class="macd-card-code">' +
@@ -5713,6 +5773,7 @@ function renderMacdSignals() {
                         '<span class="macd-badge ' + typeClass + '">' + s.trade_type + '</span>' +
                         '<span class="macd-badge macd-badge-source">' + (s.source || '') + '</span>' +
                     '</div>' +
+                    (conceptHtml ? '<div class="signal-concepts">' + conceptHtml + '</div>' : '') +
                 '</div>' +
                 '<div style="text-align:right">' +
                     '<div class="macd-card-price">' + s.price.toFixed(2) + '</div>' +
@@ -5735,6 +5796,72 @@ function renderMacdSignals() {
     });
 }
 
+
+
+// MACD 說明彈窗（等 DOM 載入後綁定）
+
+// === 概念股篩選 ===
+var _activeConceptFilter = null;
+var _conceptsMeta = {};
+function initConceptFilter(macdData) {
+    var bar = document.getElementById('concept-filter-bar');
+    if (!bar) return;
+    _conceptsMeta = macdData.concepts_meta || {};
+    var signals = macdData.signals || [];
+    var counts = {};
+    var any = false;
+    signals.forEach(function(s) {
+        (s.concepts||[]).forEach(function(c) {
+            counts[c.id] = (counts[c.id]||0) + 1;
+            any = true;
+            if (!_conceptsMeta[c.id]) _conceptsMeta[c.id] = {label:c.label, color:c.color};
+        });
+    });
+    if (!any) { bar.style.display='none'; return; }
+    bar.style.display = 'flex';
+    var h = '<button class="concept-filter-btn active" data-concept="all" style="--concept-color:#6B7280"><span class="dot"></span>\u5168\u90E8 <span class="count">'+signals.length+'</span></button>';
+    Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];}).forEach(function(cid) {
+        var m = _conceptsMeta[cid]||{};
+        h += '<button class="concept-filter-btn" data-concept="'+cid+'" style="--concept-color:'+(m.color||'#6B7280')+'"><span class="dot"></span>'+(m.label||cid)+' <span class="count">'+counts[cid]+'</span></button>';
+    });
+    bar.innerHTML = h;
+    _activeConceptFilter = null;
+    bar.querySelectorAll('.concept-filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            bar.querySelectorAll('.concept-filter-btn').forEach(function(b){b.classList.remove('active');});
+            this.classList.add('active');
+            _activeConceptFilter = this.getAttribute('data-concept')==='all' ? null : this.getAttribute('data-concept');
+            document.querySelectorAll('.macd-signal-card').forEach(function(card) {
+                if (!_activeConceptFilter) { card.classList.remove('concept-hidden'); return; }
+                var cc = card.getAttribute('data-concepts')||'';
+                if (cc.indexOf(_activeConceptFilter)>=0) card.classList.remove('concept-hidden');
+                else card.classList.add('concept-hidden');
+            });
+        });
+    });
+}
+
+function initMacdModal() {
+    var overlay = document.getElementById('macd-modal-overlay');
+    var openBtn = document.getElementById('macd-info-btn');
+    var closeBtn = document.getElementById('macd-modal-close');
+    if (openBtn && overlay) {
+        openBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            overlay.classList.add('show');
+        });
+    }
+    if (closeBtn && overlay) {
+        closeBtn.addEventListener('click', function() {
+            overlay.classList.remove('show');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) overlay.classList.remove('show');
+        });
+    }
+}
 
 </script>
 
@@ -6045,6 +6172,45 @@ function renderMacdSignals() {
                     <div class="legend-item"><span class="legend-dot" style="background:#2ed573"></span> 76-100：極度貪婪</div>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- MACD 篩選條件說明彈窗 -->
+    <div class="macd-modal-overlay" id="macd-modal-overlay">
+        <div class="macd-modal">
+            <button class="macd-modal-close" id="macd-modal-close">&times;</button>
+            <h3>🎯 MACD 訊號篩選條件</h3>
+            <div class="macd-modal-section pass">
+                <h4>✅ 條件一：多頭股</h4>
+                <p>股價必須在 <span class="val">MA20（20日均線）</span>之上，確認趨勢向上。<br>不是多頭的股票直接跳過，不搶反彈。</p>
+            </div>
+            <div class="macd-modal-section pass">
+                <h4>✅ 條件二：日線量縮</h4>
+                <p>近5日均量 / 近20日均量 &lt; <span class="val">0.85</span><br>量縮代表賣壓減緩、籌碼沉澱，是反轉前的訊號。</p>
+            </div>
+            <div class="macd-modal-section pass">
+                <h4>✅ 條件三：MACD 柱狀體縮小</h4>
+                <p>柱狀體（DIF - MACD）為負值且連續 <span class="val">3 天</span>絕對值在縮小，<br>或柱狀體剛從負轉正（剛金叉）。代表空方力道減弱中。</p>
+            </div>
+            <div class="macd-modal-section pass">
+                <h4>✅ 條件四：不離 0 軸太遠</h4>
+                <p>DIF 和 MACD 佔股價的百分比都 &lt; <span class="val">2.0%</span><br>太遠代表還在深度回檔，金叉可能只是反彈而非反轉。</p>
+            </div>
+            <hr class="macd-modal-divider">
+            <div class="macd-modal-section">
+                <h4>🏷️ 長線 / 短線標記</h4>
+                <p>DIF 和 MACD 都在 0 軸之上 → <span class="val" style="color:#4ecdc4">長線</span>（多頭格局金叉，可抱久一點）<br>DIF 或 MACD 在 0 軸之下 → <span class="val" style="color:#ffc107">短線</span>（空方區域金叉，快進快出）</p>
+            </div>
+            <hr class="macd-modal-divider">
+            <div class="macd-modal-section">
+                <h4>⭐ 訊號強度（1~5 星）</h4>
+                <p>• 量縮比 &lt; 0.6 → +2 星 / &lt; 0.75 → +1 星<br>• DIF 距 0 軸 &lt; 0.5% → +2 星 / &lt; 1.0% → +1 星<br>• 柱體縮小速度 &gt; 50% → +1 星</p>
+            </div>
+            <hr class="macd-modal-divider">
+            <div class="macd-modal-section">
+                <h4>🔍 掃描範圍</h4>
+                <p>外資買超 Top 50 + 外資賣超 Top 50 + 週轉率名單 + 產業外資動向個股<br>去重後約 <span class="val">1000+</span> 檔，使用 MACD(12,26,9) 參數。</p>
+            </div>
+            <div class="macd-modal-footer">每日 19:00 自動更新 • 資料來源: Yahoo Finance + TWSE</div>
         </div>
     </div>
 </body>
@@ -7381,6 +7547,145 @@ function renderMacdSignals() {
 
 /* ========== MACD 訊號區塊 ========== */
 
+
+/* MACD 說明彈窗 */
+.macd-date-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0 4px 0;
+}
+.macd-date-tab {
+    padding: 4px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.03);
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.macd-date-tab:hover {
+    border-color: #e94560;
+    color: #e94560;
+}
+.macd-date-tab.active {
+    background: rgba(233,69,96,0.15);
+    border-color: #e94560;
+    color: #e94560;
+    font-weight: 600;
+}
+.macd-info-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    margin-left: 8px;
+}
+.macd-info-btn:hover {
+    border-color: #e94560;
+    color: #e94560;
+    background: rgba(233,69,96,0.1);
+}
+.macd-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.macd-modal-overlay.show {
+    display: flex;
+}
+.macd-modal {
+    background: #1a1a2e;
+    border: 1px solid #e94560;
+    border-radius: 12px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(233,69,96,0.3);
+}
+.macd-modal-close {
+    position: absolute;
+    top: 12px; right: 16px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+}
+.macd-modal-close:hover { color: #e94560; }
+.macd-modal h3 {
+    color: #e94560;
+    font-size: 18px;
+    margin: 0 0 18px 0;
+}
+.macd-modal-section {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border-left: 3px solid #e94560;
+}
+.macd-modal-section.pass {
+    border-left-color: #4ecdc4;
+}
+.macd-modal-section h4 {
+    color: #fff;
+    font-size: 14px;
+    margin: 0 0 6px 0;
+}
+.macd-modal-section p {
+    color: #aaa;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+}
+.macd-modal-section .val {
+    color: #ffc107;
+    font-weight: bold;
+}
+.macd-modal-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 16px 0;
+}
+.macd-modal-stars {
+    margin-top: 6px;
+}
+.macd-modal-stars p {
+    font-size: 12px;
+    color: #888;
+    margin: 3px 0;
+}
+.macd-modal-footer {
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+    margin-top: 14px;
+}
+@media (max-width: 768px) {
+    .macd-modal { padding: 20px; max-width: 95vw; }
+    .macd-modal-section h4 { font-size: 13px; }
+    .macd-modal-section p { font-size: 12px; }
+}
+
 /* MACD 過濾排序列 */
 .macd-controls {
     display: flex;
@@ -7588,4 +7893,15 @@ function renderMacdSignals() {
     .macd-signal-title { font-size: 16px; }
 }
 
+
+/* === 概念股標籤篩選 === */
+.concept-filter-bar { display:flex; flex-wrap:wrap; gap:6px; padding:8px 0; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.concept-filter-btn { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.04); color:#9CA3AF; font-size:12px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.concept-filter-btn:hover { background:rgba(255,255,255,0.08); color:#D1D5DB; }
+.concept-filter-btn.active { border-color:var(--concept-color,#6B7280); background:color-mix(in srgb,var(--concept-color,#6B7280) 20%,transparent); color:#F3F4F6; }
+.concept-filter-btn .dot { width:6px; height:6px; border-radius:50%; background:var(--concept-color,#6B7280); }
+.concept-filter-btn .count { font-size:10px; opacity:0.7; margin-left:2px; }
+.signal-concepts { display:flex; flex-wrap:wrap; gap:3px; margin-top:4px; }
+.concept-tag { display:inline-block; padding:1px 6px; border-radius:8px; font-size:10px; line-height:16px; background:color-mix(in srgb,var(--tag-color,#6B7280) 15%,transparent); color:var(--tag-color,#9CA3AF); border:1px solid color-mix(in srgb,var(--tag-color,#6B7280) 30%,transparent); white-space:nowrap; }
+.macd-signal-card.concept-hidden { display:none !important; }
 </style>
