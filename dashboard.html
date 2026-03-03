@@ -5188,6 +5188,40 @@
         }
 
         // 更新外資買賣超顯示
+        function updateTrustTopStocks(data) {
+            if (!data || !data.trust_top_buy || !data.trust_top_sell) return;
+            const buyList = document.getElementById("trust-buy-list");
+            const sellList = document.getElementById("trust-sell-list");
+            if (!buyList || !sellList) return;
+            buyList.innerHTML = "";
+            data.trust_top_buy.forEach((stock, index) => {
+                const amount = Math.abs(stock.trust_net);
+                const amountText = amount >= 10000 ? (amount / 10000).toFixed(1) + "萬" : amount.toLocaleString();
+                const item = document.createElement("div");
+                item.className = "foreign-item";
+                item.innerHTML = `
+                    <div class="foreign-rank">${index + 1}</div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-name">${stock.name}</div>
+                    <div class="foreign-amount">+${amountText}</div>
+                `;
+                buyList.appendChild(item);
+            });
+            sellList.innerHTML = "";
+            data.trust_top_sell.forEach((stock, index) => {
+                const amount = Math.abs(stock.trust_net);
+                const amountText = amount >= 10000 ? (amount / 10000).toFixed(1) + "萬" : amount.toLocaleString();
+                const item = document.createElement("div");
+                item.className = "foreign-item";
+                item.innerHTML = `
+                    <div class="foreign-rank">${index + 1}</div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-name">${stock.name}</div>
+                    <div class="foreign-amount">-${amountText}</div>
+                `;
+                sellList.appendChild(item);
+            });
+        }
         function updateForeignTopStocks(data) {
             if (!data || !data.top_buy || !data.top_sell) return;
 
@@ -5517,7 +5551,7 @@
                 
                 // 載入外資排行
                 const foreignData = await loadForeignTopStocks();
-                if (foreignData) updateForeignTopStocks(foreignData);
+                if (foreignData) { updateForeignTopStocks(foreignData); updateTrustTopStocks(foreignData); }
                 if (data.sentiment) {
                     if (data.sentiment.taiwan) updateTaiwanGauge(data.sentiment.taiwan, data.latest);
                     if (data.sentiment.us) updateUSGauge(data.sentiment.us);
@@ -5931,6 +5965,20 @@ function initMacdModal() {
     </div>
 
 
+<!-- 投信買賣超排行 -->
+    <div class="foreign-section">
+        <div class="foreign-title">📊 投信買賣超排行 TOP 50</div>
+        <div class="foreign-grid">
+            <div class="foreign-card buy">
+                <div class="foreign-card-title">🔴 投信買超</div>
+                <div class="foreign-list" id="trust-buy-list"></div>
+            </div>
+            <div class="foreign-card sell">
+                <div class="foreign-card-title">🟢 投信賣超</div>
+                <div class="foreign-list" id="trust-sell-list"></div>
+            </div>
+        </div>
+    </div>
     <!-- 漲停跌停股列表 -->
     <div class="limit-section-wrapper">
         <div class="limit-main-title">📊 漲停跌停股名單</div>
