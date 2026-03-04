@@ -3589,7 +3589,7 @@
             <!-- 市場情緒指標 -->
             <div class="dual-gauge-section">
                 <div class="dual-gauge-header">
-                    <h2>市場情緒指標</h2>
+                    <h2>市場情緒指標 <span class="data-update-date" id="date-sentiment"></span></h2>
                 </div>
                 <div class="dual-gauge-grid">
                     <div class="gauge-card taiwan">
@@ -4744,6 +4744,7 @@
             }
 
         function updateUI(data) {
+            if (data && data.updated_at) setUpdateDate('date-sentiment', data.updated_at);
             const dataIndicator = document.getElementById('dataIndicator');
             const dataSourceText = document.getElementById('dataSourceText');
             const mockWarning = document.getElementById('mockDataWarning');
