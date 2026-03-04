@@ -42,7 +42,7 @@
       "available_weight": 0.45
     },
     "us": {
-      "score": 32,
+      "score": 33,
       "rating": "FEAR",
       "previous_close": 32,
       "previous_week": 46,
@@ -51,16 +51,6 @@
   },
   "history": {
     "margin": [
-      {
-        "date": "20251230",
-        "ratio": 56.89,
-        "balance": 3413.68
-      },
-      {
-        "date": "20251231",
-        "ratio": 57.23,
-        "balance": 3434.1
-      },
       {
         "date": "20260102",
         "ratio": 57.77,
@@ -205,5 +195,5 @@
       }
     ]
   },
-  "updated_at": "2026-03-04T22:26:19.406743"
+  "updated_at": "2026-03-04T22:36:08.036980"
 }

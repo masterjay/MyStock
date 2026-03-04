@@ -4470,14 +4470,14 @@
             const marginLabels = historyData.margin.map(d => {
                 const str = d.date;
                 return str.slice(4,6) + '/' + str.slice(6,8);
-            }).reverse();
-            const marginValues = historyData.margin.map(d => d.ratio).reverse();
+            });
+            const marginValues = historyData.margin.map(d => d.ratio);
             
             const futuresLabels = historyData.futures.map(d => {
                 const str = d.date;
                 return str.slice(4,6) + '/' + str.slice(6,8);
-            }).reverse();
-            const futuresValues = historyData.futures.map(d => d.ratio).reverse();
+            });
+            const futuresValues = historyData.futures.map(d => d.ratio);
             
             const chartOptions = {
                 interaction: { mode: 'index', axis: 'x', intersect: false },
