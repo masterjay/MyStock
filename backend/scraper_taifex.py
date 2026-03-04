@@ -13,6 +13,7 @@ class TAIFEXScraper:
         }
         self.product_map = {
             'MXF': '微型臺指',
+            'TX': '臺股期貨',
         }
     
     def _to_int(self, text):

@@ -6,21 +6,21 @@
       "balance": 3766.16
     },
     "futures": {
-      "date": "20260212",
-      "ratio": 0.99,
-      "foreign_net": -27665,
-      "trust_net": 28915,
-      "dealer_net": -1871,
-      "retail_long": 37569,
-      "retail_short": 37903,
-      "retail_net": -334,
-      "retail_ratio": 0.99,
-      "pcr_volume": 1.25
+      "date": "20260304",
+      "ratio": 1.03,
+      "foreign_net": -41633,
+      "trust_net": 30549,
+      "dealer_net": 5071,
+      "retail_long": 209237,
+      "retail_short": 203224,
+      "retail_net": 6013,
+      "retail_ratio": 2.19,
+      "pcr_volume": null
     }
   },
   "sentiment": {
     "taiwan": {
-      "score": 41,
+      "score": 42,
       "rating": "恐懼",
       "components": {
         "margin": {
@@ -37,17 +37,12 @@
           "score": 15,
           "weight": 0.15,
           "desc": "外資淨部位"
-        },
-        "pcr": {
-          "score": 40,
-          "weight": 0.1,
-          "desc": "Put/Call比"
         }
       },
-      "available_weight": 0.55
+      "available_weight": 0.45
     },
     "us": {
-      "score": 31,
+      "score": 32,
       "rating": "FEAR",
       "previous_close": 32,
       "previous_week": 46,
@@ -134,11 +129,6 @@
     ],
     "futures": [
       {
-        "date": "20260123",
-        "ratio": 0.96,
-        "foreign_net": -22666
-      },
-      {
         "date": "20260126",
         "ratio": 0.93,
         "foreign_net": -26527
@@ -207,8 +197,13 @@
         "date": "20260212",
         "ratio": 0.99,
         "foreign_net": -27665
+      },
+      {
+        "date": "20260304",
+        "ratio": 1.03,
+        "foreign_net": -41633
       }
     ]
   },
-  "updated_at": "2026-03-04T20:42:18.964592"
+  "updated_at": "2026-03-04T22:26:19.406743"
 }

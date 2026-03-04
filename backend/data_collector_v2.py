@@ -175,12 +175,42 @@ class DataCollector:
         }
     
     def _collect_tx_futures(self, date_slash):
-        """收集 TX 大台期貨數據 (舊邏輯保留)"""
+        """收集 TX 大台期貨數據"""
         try:
-            # 使用舊的方法 (您原本的 scraper_taifex.py 邏輯)
-            # 這裡簡化處理，實際上您需要保留原本的 TX 爬蟲邏輯
-            print("  ⚠ TX 大台數據收集需要您原本的爬蟲邏輯")
-            print("  ⚠ 暫時跳過，稍後整合")
+            result = self.taifex_scraper.get_retail_ratio(
+                date=date_slash,
+                commodity_id='TX',
+                debug=True
+            )
+            
+            if result:
+                # 存入 futures_data 表
+                conn = sqlite3.connect(self.db_path)
+                cursor = conn.cursor()
+                date_str = result['date'].replace('/', '')
+                # 計算多空比
+                ratio = round(result['retail_long'] / result['retail_short'], 2) if result['retail_short'] > 0 else 0
+                cursor.execute("""
+                    INSERT OR REPLACE INTO futures_data 
+                    (date, retail_long, retail_short, retail_ratio, retail_net,
+                     open_interest, long_short_ratio, foreign_net, trust_net, dealer_net)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    date_str,
+                    result['retail_long'],
+                    result['retail_short'],
+                    result['retail_ratio'],
+                    result.get('retail_net', result['retail_long'] - result['retail_short']),
+                    result.get('total_oi', 0),
+                    ratio,
+                    result.get('foreign', {}).get('net', 0),
+                    result.get('trusts', {}).get('net', 0),
+                    result.get('dealers', {}).get('net', 0)
+                ))
+                conn.commit()
+                conn.close()
+                print(f"  ✓ TX 散戶多空比: {result['retail_ratio']:.2f}")
+                return result
             return None
         except Exception as e:
             print(f"  ✗ TX 收集失敗: {e}")
