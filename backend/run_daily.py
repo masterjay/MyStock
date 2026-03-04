@@ -135,6 +135,10 @@ try:
                 print(f"  → 找到 {sig_data.get('signal_count', 0)} 檔訊號股")
             except:
                 pass
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
 
     print("\n[9/9] 產生 market_data.json...")
     try:
@@ -146,9 +150,6 @@ try:
             print(f"  ✗ 失敗: {result.stderr[:200]}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
-        else:
-            print(f"  ✗ 失敗: {result.stderr[:200]}")
-    except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
 except Exception as e:
