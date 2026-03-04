@@ -1932,6 +1932,13 @@
     text-align: center;
     font-size: 12px;
 }
+
+.data-update-date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-weight: normal;
+    margin-left: 8px;
+}
 </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
 <style>
@@ -3395,12 +3402,11 @@
         <div id="mainContent" style="display: none;">
             <!-- 散戶對決區塊 -->
             
-                    &#x1F3AF; MACD 訊號股
+                    &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
         <div class="macd-signal-section" id="macd-signal-section">
             <div class="macd-signal-header">
                 <div class="macd-signal-title">
                     <span class="pulse-dot"></span>
-                    &#x1F3AF; MACD 訊號股
                     <button class="macd-info-btn" id="macd-info-btn" title="篩選條件說明">ℹ️</button>
                 </div>
                 <div>
@@ -4174,6 +4180,21 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        // 更新區塊日期顯示
+        function setUpdateDate(elementId, dateStr) {
+            const el = document.getElementById(elementId);
+            if (!el || !dateStr) return;
+            let display = '';
+            if (dateStr.includes('T')) {
+                display = dateStr.substring(0, 10);
+            } else if (dateStr.length === 8) {
+                display = dateStr.substring(0, 4) + '-' + dateStr.substring(4, 6) + '-' + dateStr.substring(6, 8);
+            } else {
+                display = dateStr;
+            }
+            el.textContent = '(' + display + ')';
+        }
         // ============================================
         // 排序功能
         // ============================================
@@ -4393,6 +4414,7 @@
         }
 
         function updateTurnoverMonitor(turnoverData) {
+            if (turnoverData) setUpdateDate("date-turnover", turnoverData.updated_at || turnoverData.date);
             if (!turnoverData || !turnoverData.all_stocks) {
                 console.log('無周轉率數據');
                 return;
@@ -4783,6 +4805,7 @@
         }
 
         function updateCommodityDisplay(commodity, data, color, decimals = 2) {
+            if (data && commodity === "copper") setUpdateDate("date-commodity", data.updated_at || data.date);
             if (!data || !data.history || data.history.length === 0) {
                 console.log(`無 ${commodity} 數據`);
                 return;
@@ -5228,6 +5251,7 @@
             });
         }
         function updateForeignTopStocks(data) {
+            if (data) setUpdateDate("date-foreign", data.date || data.updated_at);
             if (!data || !data.top_buy || !data.top_sell) return;
 
             const buyList = document.getElementById('foreign-buy-list');
@@ -5237,7 +5261,7 @@
 
             buyList.innerHTML = '';
             data.top_buy.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net);
+                const amount = Math.abs(stock.net);
                 const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
                 
                 const item = document.createElement('div');
@@ -5253,7 +5277,7 @@
 
             sellList.innerHTML = '';
             data.top_sell.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net);
+                const amount = Math.abs(stock.net);
                 const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
                 
                 const item = document.createElement('div');
@@ -5294,6 +5318,7 @@
 
         // 更新產業熱圖
         function updateIndustryHeatmap(data) {
+            if (data) setUpdateDate("date-heatmap", data.date || data.updated_at);
             if (!data || !data.industries) return;
             
             const container = document.getElementById('heatmap-grid');
@@ -5446,6 +5471,7 @@
         }
 
         function updateLimitUpDown(data) {
+            if (data) setUpdateDate("date-limit", data.date || data.updated_at);
             if (!data || !data.limit_up || !data.limit_down) return;
             const upList = document.getElementById('limit-up-list');
             const upCount = document.getElementById('limit-up-count');
@@ -5484,6 +5510,7 @@
 
         // 更新三大法人顯示
         function updateInstitutionalMoney(data) {
+            if (data) setUpdateDate("date-institutional", data.date || data.updated_at);
             if (!data || !data.data) return;
 
             const tbody = document.getElementById('institutional-tbody');
@@ -5679,6 +5706,7 @@ var _macdFilters = { star: 'all', type: 'all', status: 'all', source: 'all' };
 var _macdSort = 'strength_desc';
 
 async function loadMacdSignals() {
+
     try {
         // 載入最新的主檔
         var response = await fetch('./backend/data/macd_signal_stocks.json?t=' + new Date().getTime());
@@ -5689,6 +5717,7 @@ async function loadMacdSignals() {
         }
         var data = await response.json();
         var latestDate = (data.scan_date || '').replace(/-/g, '');
+        setUpdateDate('date-macd', data.scan_date || data.updated_at);
         _macdAllDays[latestDate] = data;
 
         // 嘗試載入前兩天的歷史檔
@@ -5925,7 +5954,7 @@ function initMacdModal() {
 
 <!-- 三大法人買賣金額統計 -->
     <div class="institutional-money-section">
-        <div class="institutional-money-title">💰 三大法人買賣金額統計</div>
+        <div class="institutional-money-title">💰 三大法人買賣金額統計 <span class="data-update-date" id="date-institutional"></span></div>
         <table class="institutional-table">
             <thead>
                 <tr>
@@ -5944,7 +5973,7 @@ function initMacdModal() {
 
 <!-- 外資買賣超排行 -->
     <div class="foreign-section">
-        <div class="foreign-title">📊 外資買賣超排行 TOP 50</div>
+        <div class="foreign-title">📊 外資買賣超排行 TOP 50 <span class="data-update-date" id="date-foreign"></span></div>
         
         <div class="foreign-grid">
             <!-- 買超 -->
@@ -5972,7 +6001,7 @@ function initMacdModal() {
 
 <!-- 投信買賣超排行 -->
     <div class="foreign-section">
-        <div class="foreign-title">📊 投信買賣超排行 TOP 50</div>
+        <div class="foreign-title">📊 投信買賣超排行 TOP 50 <span class="data-update-date" id="date-trust"></span></div>
         <div class="foreign-grid">
             <div class="foreign-card buy">
                 <div class="foreign-card-title">🔴 投信買超</div>
@@ -5986,7 +6015,7 @@ function initMacdModal() {
     </div>
     <!-- 漲停跌停股列表 -->
     <div class="limit-section-wrapper">
-        <div class="limit-main-title">📊 漲停跌停股名單</div>
+        <div class="limit-main-title">📊 漲停跌停股名單 <span class="data-update-date" id="date-limit"></span></div>
         <div class="limit-grid">
             <div class="limit-card up">
                 <div class="limit-card-title">
@@ -6005,7 +6034,7 @@ function initMacdModal() {
         </div>
     </div>
     <div class="industry-heatmap-section">
-        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序</div>
+        <div class="heatmap-title">💰 產業外資動向 - 買賣超排序 <span class="data-update-date" id="date-heatmap"></span></div>
         <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
 
@@ -6014,7 +6043,7 @@ function initMacdModal() {
     <div class="turnover-section">
         <div class="turnover-header">
             <div class="turnover-title">
-                🔥 周轉率過熱監控
+                🔥 周轉率過熱監控 <span class="data-update-date" id="date-turnover"></span>
                 <span style="font-size: 14px; color: rgba(255,255,255,0.5);">成交量 TOP 50 熱門股追蹤</span>
             </div>
             <div class="turnover-stats">
@@ -6089,7 +6118,7 @@ function initMacdModal() {
 
     <!-- 商品期貨走勢 -->
     <div class="commodities-section">
-        <div class="commodities-main-title">📊 國際商品期貨 (120日走勢)</div>
+        <div class="commodities-main-title">📊 國際商品期貨 (120日走勢) <span class="data-update-date" id="date-commodity"></span></div>
         
         <div class="commodities-grid">
             <!-- 銅 -->

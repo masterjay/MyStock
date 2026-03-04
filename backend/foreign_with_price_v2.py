@@ -105,10 +105,18 @@ for row in foreign_data:
         # 取得漲跌幅
         change_pct = stock_prices.get(code, 0)
         
+        # 投信買賣超 (row[10])
+        try:
+            trust_raw = row[10].replace(',', '').replace('，', '') if len(row) > 10 else '0'
+            trust_zhang = float(trust_raw) if trust_raw and trust_raw != '--' else 0
+        except:
+            trust_zhang = 0
+        
         stocks.append({
             'code': code,
             'name': name,
             'net': round(net_zhang, 0),
+            'trust_net': round(trust_zhang, 0),
             'change': change_pct,
             'industry': stock_industry.get(code, '其他')
         })
@@ -123,11 +131,21 @@ top_sell = [s for s in stocks if s['net'] < 0][:50]
 print(f"✓ 買超: {len(top_buy)} 檔")
 print(f"✓ 賣超: {len(top_sell)} 檔")
 
+# 投信排行
+trust_stocks = [s for s in stocks if s.get('trust_net', 0) != 0]
+trust_sorted = sorted(trust_stocks, key=lambda x: x['trust_net'], reverse=True)
+trust_top_buy = trust_sorted[:50]
+trust_top_sell = sorted(trust_stocks, key=lambda x: x['trust_net'])[:50]
+print(f"✓ 投信買超: {len(trust_top_buy)} 檔")
+print(f"✓ 投信賣超: {len(trust_top_sell)} 檔")
+
 output = {
     'updated_at': datetime.now().isoformat(),
     'date': target_date,
     'top_buy': top_buy,
-    'top_sell': top_sell
+    'top_sell': top_sell,
+    'trust_top_buy': trust_top_buy,
+    'trust_top_sell': trust_top_sell
 }
 
 with open('data/foreign_top_stocks.json', 'w', encoding='utf-8') as f:
