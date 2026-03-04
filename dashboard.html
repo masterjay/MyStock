@@ -3619,20 +3619,20 @@
                             </div>
                         </div>
                         <div class="gauge-history sentiment-components">
-                            <div class="component-row" id="comp-momentum">
-                                <span class="comp-label">價格動能</span>
+                            <div class="component-row" id="comp-momentum" style="opacity:0.3">
+                                <span class="comp-label">價格動能 (待實作)</span>
                                 <div class="comp-bar-wrap"><div class="comp-bar" style="width:0%"></div></div>
                                 <span class="comp-score">--</span>
                                 <span class="comp-desc">--</span>
                             </div>
-                            <div class="component-row" id="comp-breadth">
-                                <span class="comp-label">市場廣度</span>
+                            <div class="component-row" id="comp-breadth" style="opacity:0.3">
+                                <span class="comp-label">市場廣度 (待實作)</span>
                                 <div class="comp-bar-wrap"><div class="comp-bar" style="width:0%"></div></div>
                                 <span class="comp-score">--</span>
                                 <span class="comp-desc">--</span>
                             </div>
-                            <div class="component-row" id="comp-strength">
-                                <span class="comp-label">新高低比</span>
+                            <div class="component-row" id="comp-strength" style="opacity:0.3">
+                                <span class="comp-label">新高低比 (待實作)</span>
                                 <div class="comp-bar-wrap"><div class="comp-bar" style="width:0%"></div></div>
                                 <span class="comp-score">--</span>
                                 <span class="comp-desc">--</span>
@@ -6210,17 +6210,17 @@ function initMacdModal() {
                 <h4>🎯 指標權重分配</h4>
                 <div class="weight-chart">
                     <div class="weight-group">
-                        <div class="weight-title">價格類 (45%)</div>
-                        <div class="weight-item"><span>價格動能</span><span>20%</span></div>
-                        <div class="weight-item"><span>市場廣度</span><span>15%</span></div>
-                        <div class="weight-item"><span>新高低比</span><span>10%</span></div>
+                        <div class="weight-title">啟用中</div>
+                        <div class="weight-item"><span>融資使用率</span><span>27%</span></div>
+                        <div class="weight-item"><span>期貨多空比</span><span>27%</span></div>
+                        <div class="weight-item"><span>外資淨部位</span><span>27%</span></div>
+                        <div class="weight-item"><span>Put/Call比</span><span>19%</span></div>
                     </div>
                     <div class="weight-group">
-                        <div class="weight-title">機構類 (55%)</div>
-                        <div class="weight-item"><span>融資使用率</span><span>15%</span></div>
-                        <div class="weight-item"><span>期貨多空比</span><span>15%</span></div>
-                        <div class="weight-item"><span>外資淨部位</span><span>10%</span></div>
-                        <div class="weight-item"><span>Put/Call比</span><span>15%</span></div>
+                        <div class="weight-title" style="color: rgba(255,255,255,0.4)">待實作</div>
+                        <div class="weight-item" style="opacity:0.4"><span>價格動能</span><span>--</span></div>
+                        <div class="weight-item" style="opacity:0.4"><span>市場廣度</span><span>--</span></div>
+                        <div class="weight-item" style="opacity:0.4"><span>新高低比</span><span>--</span></div>
                     </div>
                 </div>
             </div>
@@ -6228,15 +6228,15 @@ function initMacdModal() {
                 <h4>📖 各指標說明</h4>
                 <div class="indicator-list">
                     <div class="indicator-item">
-                        <div class="indicator-name">價格動能</div>
+                        <div class="indicator-name">價格動能 <span style="font-size:11px;color:rgba(255,255,255,0.4)">(待實作)</span></div>
                         <div class="indicator-desc">大盤指數相對於 20日/60日均線的位置。<br><b>高分</b>＝站上均線，趨勢偏多；<b>低分</b>＝跌破均線，趨勢偏空</div>
                     </div>
                     <div class="indicator-item">
-                        <div class="indicator-name">市場廣度</div>
+                        <div class="indicator-name">市場廣度 <span style="font-size:11px;color:rgba(255,255,255,0.4)">(待實作)</span></div>
                         <div class="indicator-desc">上漲家數佔總家數的比率。<br><b>高分</b>＝多數股票上漲，漲勢健康；<b>低分</b>＝多數股票下跌，僅權值股撐盤</div>
                     </div>
                     <div class="indicator-item">
-                        <div class="indicator-name">新高低比</div>
+                        <div class="indicator-name">新高低比 <span style="font-size:11px;color:rgba(255,255,255,0.4)">(待實作)</span></div>
                         <div class="indicator-desc">創52週新高 vs 新低的股票數量（以漲停/跌停近似）。<br><b>高分</b>＝新高多，市場強勢；<b>低分</b>＝新低多，市場弱勢</div>
                     </div>
                     <div class="indicator-item">
