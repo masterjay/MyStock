@@ -167,7 +167,7 @@ def collect_foreign_top_stocks():
     top5 = sorted(stocks, key=lambda x: x['foreign_net'], reverse=True)[:5]
     print("\n前5買超:")
     for i, s in enumerate(top5, 1):
-        print(f"  {i}. {s['code']} {s['name']}: {s['foreign_net']:,} 張")
+        print(f"  {i}. {s['code']} {s['name']}: {s['foreign_net']//1000:,} 張")
     
     print("\n[2/3] 儲存到資料庫...")
     saved = save_to_database(stocks)

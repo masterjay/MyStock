@@ -5224,8 +5224,8 @@
             if (!buyList || !sellList) return;
             buyList.innerHTML = "";
             data.trust_top_buy.forEach((stock, index) => {
-                const amount = Math.abs(stock.trust_net);
-                const amountText = amount >= 10000 ? (amount / 10000).toFixed(1) + "萬" : amount.toLocaleString();
+                const amount = Math.abs(stock.trust_net) / 1000;
+                const amountText = `${Math.round(amount).toLocaleString()}張`;
                 const item = document.createElement("div");
                 item.className = "foreign-item";
                 item.innerHTML = `
@@ -5238,8 +5238,8 @@
             });
             sellList.innerHTML = "";
             data.trust_top_sell.forEach((stock, index) => {
-                const amount = Math.abs(stock.trust_net);
-                const amountText = amount >= 10000 ? (amount / 10000).toFixed(1) + "萬" : amount.toLocaleString();
+                const amount = Math.abs(stock.trust_net) / 1000;
+                const amountText = `${Math.round(amount).toLocaleString()}張`;
                 const item = document.createElement("div");
                 item.className = "foreign-item";
                 item.innerHTML = `
@@ -5262,8 +5262,8 @@
 
             buyList.innerHTML = '';
             data.top_buy.forEach((stock, index) => {
-                const amount = Math.abs(stock.net);
-                const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
+                const amount = Math.abs(stock.foreign_net) / 1000;
+                const amountText = `${Math.round(amount).toLocaleString()}張`;
                 
                 const item = document.createElement('div');
                 item.className = 'foreign-item';
@@ -5278,8 +5278,8 @@
 
             sellList.innerHTML = '';
             data.top_sell.forEach((stock, index) => {
-                const amount = Math.abs(stock.net);
-                const amountText = amount >= 10000 ? `${(amount / 10000).toFixed(1)}萬` : `${amount.toLocaleString()}`;
+                const amount = Math.abs(stock.foreign_net) / 1000;
+                const amountText = `${Math.round(amount).toLocaleString()}張`;
                 
                 const item = document.createElement('div');
                 item.className = 'foreign-item';
@@ -5330,18 +5330,18 @@
             container.innerHTML = Object.entries(industries).sort((a, b) => b[1].avg_change - a[1].avg_change).map(([industryName, industry], idx) => {
                 const colorClass = getHeatmapColor(industry.avg_change);
                 const changeSign = industry.avg_change >= 0 ? '+' : '';
-                const netSign = industry.foreign_net >= 0 ? '+' : '';
+                const netSign = industry.net >= 0 ? '+' : '';
                 
                 let netDisplay;
                 const foreignNet = industry.foreign_net || 0;
                 const absNet = Math.abs(foreignNet);
-                if (absNet >= 100) {
-                    netDisplay = foreignNet.toFixed(0);
-                } else if (absNet >= 10) {
-                    netDisplay = foreignNet.toFixed(1);
-                } else {
-                    netDisplay = foreignNet.toFixed(2);
-                }
+                    netDisplay = Math.round(foreignNet * 1000).toLocaleString();
+
+
+
+
+
+
                 
                 // 股票明細
                 const stocksHtml = industry.top_stocks ? `
@@ -5352,8 +5352,8 @@
                         </div>
                         <div class="summary-card">
                             <div class="summary-card-label">外資買賣超</div>
-                            <div class="summary-card-value ${industry.foreign_net >= 0 ? 'positive' : 'negative'}">
-                                ${industry.foreign_net >= 0 ? '+' : ''}${industry.foreign_net.toFixed(2)}萬張
+                            <div class="summary-card-value ${industry.foreign_net >= 0 ? "positive" : "negative"}">
+                                ${industry.foreign_net >= 0 ? "+" : ""}${Math.round(industry.foreign_net * 1000).toLocaleString()}張
                             </div>
                         </div>
                         <div class="summary-card">
@@ -5382,7 +5382,7 @@
                                     <tr>
                                         <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></td>
                                         <td class="td-name">${stock.name}</td>
-                                        <td class="td-foreign ${netClass}">${netSign}${stock.net.toFixed(2)}萬張</td>
+                                        <td class="td-foreign ${netClass}">${netSign}${Math.round(stock.net).toLocaleString()}張</td>
                                         <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
                                     </tr>
                                 `;
@@ -5398,7 +5398,7 @@
                         <div class="block-stats">
                             <div class="block-stat">
                                 <span>外資</span>
-                                <span class="block-stat-value">${netSign}${netDisplay}萬張</span>
+                                <span class="block-stat-value">${netSign}${netDisplay}張</span>
                             </div>
                             <div class="block-stat">
                                 <span>TOP50檔數</span>
