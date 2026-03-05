@@ -3403,6 +3403,21 @@
             <!-- 散戶對決區塊 -->
             
                     &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
+        <div class="watchlist-section" id="watchlist-section">
+            <div class="watchlist-header">
+                <span class="watchlist-title">📋 自選股掃描清單</span>
+                <span class="watchlist-hint">列於此處的股票將強制納入每日 MACD 掃描</span>
+            </div>
+            <div class="watchlist-body">
+                <div class="watchlist-tags" id="watchlist-tags"></div>
+                <div class="watchlist-add">
+                    <input type="text" id="watchlist-code-input" placeholder="代碼 e.g. 8086" maxlength="6" />
+                    <input type="text" id="watchlist-name-input" placeholder="名稱 e.g. 宏捷科" maxlength="10" />
+                    <button id="watchlist-add-btn">＋ 加入</button>
+                    <button id="watchlist-scan-btn">🔍 立即掃描</button>
+                </div>
+            </div>
+        </div>
         <div class="macd-signal-section" id="macd-signal-section">
             <div class="macd-signal-header">
                 <div class="macd-signal-title">
@@ -4179,6 +4194,108 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+// ============================================================
+// Watchlist 自選股管理
+// ============================================================
+var _watchlistData = [];
+
+async function loadWatchlist() {
+    try {
+        var res = await fetch('/api/watchlist');
+        if (res.ok) {
+            _watchlistData = await res.json();
+        }
+    } catch(e) {
+        _watchlistData = [];
+    }
+    renderWatchlistTags();
+}
+
+function renderWatchlistTags() {
+    var container = document.getElementById('watchlist-tags');
+    if (!container) return;
+    if (_watchlistData.length === 0) {
+        container.innerHTML = '<span style="font-size:11px;color:rgba(255,255,255,0.3);">尚無自選股</span>';
+        return;
+    }
+    container.innerHTML = _watchlistData.map(function(item, idx) {
+        var code = typeof item === 'object' ? item.code : item;
+        var name = typeof item === 'object' ? item.name : '';
+        return '<div class="watchlist-tag">' +
+            '<span>' + code + (name ? ' ' + name : '') + '</span>' +
+            '<span class="watchlist-tag-remove" data-idx="' + idx + '">×</span>' +
+        '</div>';
+    }).join('');
+    container.querySelectorAll('.watchlist-tag-remove').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var idx = parseInt(this.getAttribute('data-idx'));
+            _watchlistData.splice(idx, 1);
+            saveWatchlist();
+        });
+    });
+}
+
+function saveWatchlist() {
+    fetch('/api/watchlist', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(_watchlistData)
+    }).then(function(res) {
+        if (res.ok) {
+            renderWatchlistTags();
+        } else {
+            alert('儲存失敗');
+        }
+    }).catch(function() {
+        alert('無法連接 watchlist server，請確認 watchlist_server.py 是否執行中');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadWatchlist();
+
+    var scanBtn = document.getElementById('watchlist-scan-btn');
+    if (scanBtn) {
+        scanBtn.addEventListener('click', function() {
+            scanBtn.disabled = true;
+            scanBtn.textContent = '⏳ 掃描中...';
+            fetch('/api/scan', { method: 'POST' })
+                .then(function(res) { return res.json(); })
+                .then(function() {
+                    setTimeout(function() {
+                        loadMacdSignals();
+                        scanBtn.disabled = false;
+                        scanBtn.textContent = '🔍 立即掃描';
+                    }, 90000);
+                })
+                .catch(function() {
+                    alert('無法啟動掃描');
+                    scanBtn.disabled = false;
+                    scanBtn.textContent = '🔍 立即掃描';
+                });
+        });
+    }
+
+    var addBtn = document.getElementById('watchlist-add-btn');
+    if (addBtn) {
+        addBtn.addEventListener('click', function() {
+            var code = document.getElementById('watchlist-code-input').value.trim();
+            var name = document.getElementById('watchlist-name-input').value.trim();
+            if (!code) return;
+            var exists = _watchlistData.some(function(item) {
+                return (typeof item === 'object' ? item.code : item) === code;
+            });
+            if (exists) { alert(code + ' 已在清單中'); return; }
+            _watchlistData.push({code: code, name: name});
+            document.getElementById('watchlist-code-input').value = '';
+            document.getElementById('watchlist-name-input').value = '';
+            saveWatchlist();
+        });
+    }
+});
+
+</script>
     <script>
 
         // 更新區塊日期顯示
@@ -7847,6 +7964,87 @@ function initMacdModal() {
     .macd-divider { display: none; }
 }
 
+.watchlist-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+}
+.watchlist-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.watchlist-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+.watchlist-hint {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+}
+.watchlist-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.watchlist-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.watchlist-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(99,179,237,0.12);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 20px;
+    padding: 3px 10px 3px 12px;
+    font-size: 12px;
+    color: #90cdf4;
+}
+.watchlist-tag-remove {
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0 2px;
+}
+.watchlist-tag-remove:hover { color: #fc8181; }
+.watchlist-add {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.watchlist-add input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #e0e0e0;
+    padding: 4px 10px;
+    font-size: 12px;
+    outline: none;
+    width: 90px;
+}
+.watchlist-add input:focus { border-color: rgba(99,179,237,0.5); }
+#watchlist-add-btn {
+    background: rgba(99,179,237,0.15);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 6px;
+    color: #90cdf4;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+#watchlist-add-btn:hover { background: rgba(99,179,237,0.25); }
+#watchlist-scan-btn { background: rgba(72,187,120,0.15); border: 1px solid rgba(72,187,120,0.3); border-radius: 6px; color: #9ae6b4; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+#watchlist-scan-btn:hover { background: rgba(72,187,120,0.25); }
+#watchlist-scan-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 .macd-signal-section {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     border: 2px solid #e94560;
@@ -7985,7 +8183,88 @@ function initMacdModal() {
 .macd-metric-value { font-size: 13px; color: #ddd; font-weight: bold; }
 .macd-card-stars { color: #ffc107; font-size: 14px; letter-spacing: 1px; }
 @media (max-width: 768px) {
-    .macd-signal-section { padding: 14px; margin: 12px 0; }
+    .watchlist-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+}
+.watchlist-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.watchlist-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+.watchlist-hint {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+}
+.watchlist-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.watchlist-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.watchlist-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(99,179,237,0.12);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 20px;
+    padding: 3px 10px 3px 12px;
+    font-size: 12px;
+    color: #90cdf4;
+}
+.watchlist-tag-remove {
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+    line-height: 1;
+    padding: 0 2px;
+}
+.watchlist-tag-remove:hover { color: #fc8181; }
+.watchlist-add {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.watchlist-add input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #e0e0e0;
+    padding: 4px 10px;
+    font-size: 12px;
+    outline: none;
+    width: 90px;
+}
+.watchlist-add input:focus { border-color: rgba(99,179,237,0.5); }
+#watchlist-add-btn {
+    background: rgba(99,179,237,0.15);
+    border: 1px solid rgba(99,179,237,0.3);
+    border-radius: 6px;
+    color: #90cdf4;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+#watchlist-add-btn:hover { background: rgba(99,179,237,0.25); }
+#watchlist-scan-btn { background: rgba(72,187,120,0.15); border: 1px solid rgba(72,187,120,0.3); border-radius: 6px; color: #9ae6b4; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+#watchlist-scan-btn:hover { background: rgba(72,187,120,0.25); }
+#watchlist-scan-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.macd-signal-section { padding: 14px; margin: 12px 0; }
     .macd-signal-grid { grid-template-columns: 1fr; }
     .macd-signal-title { font-size: 16px; }
 }
