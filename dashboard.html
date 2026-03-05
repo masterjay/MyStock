@@ -5379,7 +5379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             buyList.innerHTML = '';
             data.top_buy.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net) / 1000;
+                const amount = Math.abs(stock.net) / 1000;
                 const amountText = `${Math.round(amount).toLocaleString()}張`;
                 
                 const item = document.createElement('div');
@@ -5395,7 +5395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             sellList.innerHTML = '';
             data.top_sell.forEach((stock, index) => {
-                const amount = Math.abs(stock.foreign_net) / 1000;
+                const amount = Math.abs(stock.net) / 1000;
                 const amountText = `${Math.round(amount).toLocaleString()}張`;
                 
                 const item = document.createElement('div');
@@ -5851,7 +5851,7 @@ async function loadMacdSignals() {
                     _macdAllDays[ds] = pd;
                 }
             } catch(e) {}
-            if (Object.keys(_macdAllDays).length >= 3) break;
+            if (Object.keys(_macdAllDays).length >= 10) break;
         }
 
         // 排序日期（新到舊）
