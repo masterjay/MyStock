@@ -582,7 +582,7 @@ def main():
     # 清理超過3天的歷史檔案
     import glob
     history_files = sorted(glob.glob(str(DATA_DIR / "macd_signal_2*.json")), reverse=True)
-    for old_file in history_files[3:]:
+    for old_file in history_files[10:]:
         os.remove(old_file)
         print(f"  🗑 清理舊檔: {os.path.basename(old_file)}")
     
