@@ -3726,7 +3726,7 @@
                         <div class="gauge-card-header">
                             <div class="gauge-flag">📊</div>
                             <div class="gauge-card-title">
-                                <h3><a href="https://invest.cnyes.com/futures/GF/VIX" target="_blank" style="color:inherit; text-decoration:none; border-bottom:1px dashed rgba(255,255,255,0.3);">VIX 恐慌指數 ↗</a></h3>
+                                <h3 style="display:flex;align-items:center;gap:8px;"><a href="https://invest.cnyes.com/futures/GF/VIX" target="_blank" style="color:inherit; text-decoration:none; border-bottom:1px dashed rgba(255,255,255,0.3);">VIX 恐慌指數 ↗</a><button class="sentiment-info-btn" onclick="document.getElementById('vix-popup-overlay').style.display='flex'" title="VIX 操作指南" style="flex-shrink:0;">ℹ️</button></h3>
                                 <p>CBOE Volatility Index</p>
                             </div>
                         </div>
@@ -6507,6 +6507,69 @@ function initMacdModal() {
             <div class="macd-modal-footer">每日 19:00 自動更新 • 資料來源: Yahoo Finance + TWSE</div>
         </div>
     </div>
+
+<!-- VIX 說明 Popup -->
+<div id="vix-popup-overlay" onclick="if(event.target===this)this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#1a1f2e;border:1px solid rgba(255,255,255,0.1);border-radius:16px;max-width:580px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+    <div style="padding:20px 24px 16px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:22px;font-weight:700;color:#e8e4dc;">📊 VIX 恐慌指數 操作指南</div>
+        <div style="font-size:14px;color:#666;margin-top:3px;">0050 ＋ 台積電 長期投資框架</div>
+      </div>
+      <button onclick="document.getElementById('vix-popup-overlay').style.display='none'" style="background:rgba(255,255,255,0.08);border:none;border-radius:50%;width:32px;height:32px;color:#aaa;font-size:18px;cursor:pointer;line-height:32px;text-align:center;padding:0;">×</button>
+    </div>
+    <div style="padding:20px 24px;">
+
+      <!-- 第一階 -->
+      <div style="border-left:3px solid #4cca8f;background:rgba(76,202,143,0.06);border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="font-family:monospace;font-weight:700;font-size:20px;color:#4cca8f;">&lt; 15</span>
+          <span style="background:rgba(76,202,143,0.15);color:#4cca8f;font-size:13px;padding:3px 12px;border-radius:12px;font-weight:700;">市場過熱區</span>
+        </div>
+        <div style="font-size:14px;color:#888;margin-bottom:8px;">市場情緒：極度樂觀、毫無防備</div>
+        <div style="font-size:15px;color:#c8c4bc;line-height:1.8;">【維持定時定額】此時容錯率極低，嚴格禁止任何單筆加碼或追高，耐心等待市場過熱後的修正。</div>
+      </div>
+
+      <!-- 第二階 -->
+      <div style="border-left:3px solid #d4a843;background:rgba(212,168,67,0.06);border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="font-family:monospace;font-weight:700;font-size:20px;color:#d4a843;">20 – 30</span>
+          <span style="background:rgba(212,168,67,0.15);color:#d4a843;font-size:13px;padding:3px 12px;border-radius:12px;font-weight:700;">波段修正區</span>
+        </div>
+        <div style="font-size:14px;color:#888;margin-bottom:8px;">市場情緒：擔憂蔓延，股市出現 5–10% 技術性回檔</div>
+        <div style="font-size:15px;color:#c8c4bc;line-height:1.8;">【啟動加碼準備】將 0050 與台積電列入觀察清單。VIX 站穩 25 且股市回測關鍵均線，可啟動小額（<span style="color:#d4a843;font-weight:700;">約 20% 預備金</span>）試探性加碼。</div>
+      </div>
+
+      <!-- 第三階 -->
+      <div style="border-left:3px solid #e8a030;background:rgba(232,160,48,0.06);border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="font-family:monospace;font-weight:700;font-size:20px;color:#e8a030;">30 – 40</span>
+          <span style="background:rgba(232,160,48,0.15);color:#e8a030;font-size:13px;padding:3px 12px;border-radius:12px;font-weight:700;">恐慌殺盤區</span>
+        </div>
+        <div style="font-size:14px;color:#888;margin-bottom:8px;">市場情緒：散戶信心動搖、無差別拋售</div>
+        <div style="font-size:15px;color:#c8c4bc;line-height:1.8;">【第一波重倉加碼】投入預備金 <span style="color:#e8a030;font-weight:700;">40–50%</span>。歷史經驗顯示，VIX 超過 30 通常對應 0050 的波段低點。</div>
+      </div>
+
+      <!-- 第四階 -->
+      <div style="border-left:3px solid #e8504a;background:rgba(232,80,74,0.06);border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <span style="font-family:monospace;font-weight:700;font-size:20px;color:#e8504a;">&gt; 40</span>
+          <span style="background:rgba(232,80,74,0.15);color:#e8504a;font-size:13px;padding:3px 12px;border-radius:12px;font-weight:700;">極端崩盤區</span>
+        </div>
+        <div style="font-size:14px;color:#888;margin-bottom:8px;">市場情緒：市場進入絕望時刻（如 2025/4 月 VIX 衝上 44）</div>
+        <div style="font-size:15px;color:#c8c4bc;line-height:1.8;">【終極加碼 ／ 分批 All-in】十年一遇的資產重分配機會。台積電 / 0050 出現非理性打折價，將剩餘預備金分 <span style="color:#e8504a;font-weight:700;">2–3 次全力累積</span>核心籌碼。</div>
+      </div>
+
+      <!-- 核心心法 -->
+      <div style="background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.2);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:17px;font-weight:700;color:#e8e4dc;line-height:1.9;">長期投資者不需要猜測底部，<br>只需在 <span style="color:#d4a843;">VIX 飆高</span> 時，冷靜拿起「打折券」買入優質資產。</div>
+        <div style="font-size:14px;color:#888;margin-top:10px;"><span style="color:#d4a843;font-weight:700;">VIX 越高，風險其實越低</span> — 因為最壞的情緒，都已反映在股價裡了。</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 <style>
