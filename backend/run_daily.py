@@ -152,6 +152,19 @@ try:
         print(f"  ✗ 錯誤: {e}")
         print(f"  ✗ 錯誤: {e}")
 
+    # 10. VIX 恐慌指數
+    print("\n[10/10] 抓取 VIX 恐慌指數...")
+    try:
+        result = subprocess.run(['python3', 'fetch_vix.py'],
+                              capture_output=True, text=True, timeout=60)
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
 except Exception as e:
     print(f"\n✗ 執行錯誤: {e}")
     import traceback
