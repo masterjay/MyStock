@@ -3346,6 +3346,160 @@
     text-align: center;
     font-size: 12px;
 }
+
+/* ── 主流股雷達 ── */
+.mainstream-radar {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+.mainstream-radar .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.mainstream-radar .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.mainstream-radar .section-title .badge {
+    background: #1f6feb;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+.mainstream-radar .section-subtitle { color: #8b949e; font-size: 13px; }
+.mainstream-radar .update-time { color: #484f58; font-size: 12px; }
+.mainstream-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.mainstream-controls .ctrl-btn {
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.mainstream-controls .ctrl-btn.active,
+.mainstream-controls .ctrl-btn:hover {
+    border-color: #388bfd;
+    color: #388bfd;
+    background: #1c2d42;
+}
+.mainstream-table-wrap { overflow-x: auto; }
+.mainstream-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.mainstream-table th {
+    background: #161b22;
+    color: #8b949e;
+    padding: 8px 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid #21262d;
+    white-space: nowrap;
+}
+.mainstream-table th:nth-child(1),
+.mainstream-table th:nth-child(2),
+.mainstream-table th:nth-child(3) { text-align: left; }
+.mainstream-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #161b22;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.mainstream-table tr:hover td { background: #161b22; }
+.mainstream-table .rank-col { color: #484f58; font-size: 12px; text-align: center; width: 32px; }
+.mainstream-table .stock-code { color: #58a6ff; font-weight: 600; }
+.mainstream-table .stock-name { color: #e6edf3; max-width: 80px; overflow: hidden; text-overflow: ellipsis; }
+.mainstream-table .price-col { color: #e6edf3; text-align: right; }
+.mainstream-table .change-up   { color: #f85149; text-align: right; }
+.mainstream-table .change-down { color: #3fb950; text-align: right; }
+.mainstream-table .change-flat { color: #8b949e; text-align: right; }
+.mainstream-table .amount-col  { color: #d29922; text-align: right; }
+.cond-cell { text-align: center; min-width: 42px; }
+.cond-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: default;
+}
+.cond-dot.pass    { background: rgba(63,185,80,0.15);  color: #3fb950; }
+.cond-dot.fail    { background: rgba(248,81,73,0.12);  color: #f85149; }
+.cond-dot.unknown { background: rgba(139,148,158,0.1); color: #484f58; }
+.cond-manual-btn {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid #30363d;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    color: #484f58;
+}
+.cond-manual-btn:hover { border-color: #58a6ff; }
+.cond-manual-btn.marked-yes { background: rgba(63,185,80,0.2);  border-color: #3fb950; color: #3fb950; }
+.cond-manual-btn.marked-no  { background: rgba(248,81,73,0.15); border-color: #f85149; color: #f85149; }
+.score-bar-wrap { display: flex; align-items: center; gap: 6px; min-width: 80px; }
+.score-num { font-weight: 700; font-size: 14px; min-width: 20px; text-align: right; }
+.score-num.high { color: #3fb950; }
+.score-num.mid  { color: #d29922; }
+.score-num.low  { color: #8b949e; }
+.score-bar { flex: 1; height: 6px; background: #21262d; border-radius: 3px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+.score-bar-fill.high { background: #3fb950; }
+.score-bar-fill.mid  { background: #d29922; }
+.score-bar-fill.low  { background: #484f58; }
+.mainstream-badge {
+    background: linear-gradient(135deg, #1f6feb, #388bfd);
+    color: #fff; font-size: 10px; padding: 2px 6px;
+    border-radius: 4px; font-weight: 700;
+}
+.watching-badge {
+    background: rgba(210,153,34,0.2); color: #d29922;
+    font-size: 10px; padding: 2px 6px; border-radius: 4px;
+    border: 1px solid rgba(210,153,34,0.3);
+}
+.note-input {
+    background: transparent; border: none;
+    border-bottom: 1px solid #21262d;
+    color: #8b949e; font-size: 12px;
+    width: 90px; padding: 2px 4px; outline: none;
+}
+.note-input:focus { border-bottom-color: #388bfd; color: #e6edf3; }
+.cond-header { cursor: help; border-bottom: 1px dashed #30363d; }
+.mainstream-empty { text-align: center; color: #484f58; padding: 40px; font-size: 14px; }
+@media (max-width: 768px) {
+    .mainstream-table .hide-mobile { display: none; }
+    .mainstream-radar { padding: 14px; }
+    .mainstream-table th, .mainstream-table td { padding: 7px 6px; }
+}
 </style>
 </head>
 <body>
@@ -3399,6 +3553,52 @@
         </div>
 
         <!-- Main Content -->
+            <!-- 主流股雷達 -->
+            <section class="mainstream-radar" id="mainstream-radar-section">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title">
+                            🎯 主流股雷達
+                            <span class="badge" id="mainstream-count-badge">0 檔</span>
+                        </div>
+                        <div class="section-subtitle">成交金額 TOP 20 × 6條主流條件篩選</div>
+                    </div>
+                    <div class="update-time" id="mainstream-update-time">載入中...</div>
+                </div>
+                <div class="mainstream-controls">
+                    <span style="color:#484f58;font-size:12px;">顯示：</span>
+                    <button class="ctrl-btn active" onclick="filterMainstream('all')" id="filter-all">全部</button>
+                    <button class="ctrl-btn" onclick="filterMainstream('mainstream')" id="filter-mainstream">✅ 主流股</button>
+                    <button class="ctrl-btn" onclick="filterMainstream('watching')" id="filter-watching">👀 觀察中</button>
+                    <span style="color:#484f58;font-size:12px;margin-left:8px;">✏️ = 手動確認欄位</span>
+                </div>
+                <div class="mainstream-table-wrap">
+                    <table class="mainstream-table" id="mainstream-table">
+                        <thead>
+                            <tr>
+                                <th>排</th>
+                                <th>代號</th>
+                                <th>名稱</th>
+                                <th class="hide-mobile">股價</th>
+                                <th class="hide-mobile">漲跌%</th>
+                                <th class="hide-mobile">金額(億)</th>
+                                <th title="近5日是否連續出現在成交金額前30" class="cond-header">①連榜5日</th>
+                                <th title="均量20是否持續翻揚（非一日衝量）" class="cond-header">②均量翻揚</th>
+                                <th title="回檔時是否守住EMA10/EMA20" class="cond-header">③守EMA20</th>
+                                <th title="外資或投信近5日是否持續買超" class="cond-header">④法人買超</th>
+                                <th title="是否有明確基本面催化劑（非概念股）— 手動確認" class="cond-header">⑤基本面✏️</th>
+                                <th title="類股中是否為領漲股（非跟漲）— 手動確認" class="cond-header">⑥領漲股✏️</th>
+                                <th>分數</th>
+                                <th class="hide-mobile">判定</th>
+                                <th class="hide-mobile">備註</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mainstream-tbody">
+                            <tr><td colspan="15" class="mainstream-empty">載入中...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         <div id="mainContent" style="display: none;">
             <!-- 散戶對決區塊 -->
             
@@ -3408,6 +3608,7 @@
                 <span class="watchlist-title">📋 自選股掃描清單</span>
                 <span class="watchlist-hint">列於此處的股票將強制納入每日 MACD 掃描</span>
             </div>
+
             <div class="watchlist-body">
                 <div class="watchlist-tags" id="watchlist-tags"></div>
                 <div class="watchlist-add">
@@ -3430,6 +3631,7 @@
             </div>
             <div class="macd-signal-meta" id="macd-signal-meta"></div>
             <div class="macd-date-tabs" id="macd-date-tabs"></div>
+            <div id="notion-theme-bar" class="concept-filter-bar" style="display:none;border-bottom:none;padding-bottom:0;margin-bottom:0;"></div>
             <div id="concept-filter-bar" class="concept-filter-bar" style="display:none;"></div>
             <div class="macd-controls" id="macd-controls">
                 <div class="macd-filter-group">
@@ -4232,6 +4434,45 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
 // ============================================================
+// Notion 主題自選股
+// ============================================================
+var _notionThemeData = null;
+var _activeNotionTheme = null;
+
+async function loadNotionThemes() {
+    try {
+        var res = await fetch('/data/watchlist_notion.json');
+        if (!res.ok) return;
+        _notionThemeData = await res.json();
+        // 資料載入完成，等 initConceptFilter 呼叫 injectNotionThemeBtns 插入按鈕
+    } catch(e) {
+        console.log('Notion主題載入失敗', e);
+    }
+}
+
+function applyNotionTheme(name) {
+    if (!_notionThemeData) return;
+    var codes = _notionThemeData.themes[name] || [];
+    if (codes.length === 0) return;
+    // 過濾 MACD 結果：只顯示屬於此主題的股票
+    document.querySelectorAll('.macd-signal-card').forEach(function(card) {
+        var cardCode = card.querySelector('.macd-code, [class*="code"]');
+        // 從卡片的 data-url 或文字抓代碼
+        var url = card.getAttribute('data-url') || '';
+        var matched = codes.some(function(code) {
+            return url.indexOf(code) >= 0 || card.textContent.indexOf(code) >= 0;
+        });
+        if (matched) card.classList.remove('notion-hidden');
+        else card.classList.add('notion-hidden');
+    });
+}
+
+function clearNotionTheme() {
+    document.querySelectorAll('.macd-signal-card').forEach(function(card) {
+        card.classList.remove('notion-hidden');
+    });
+}
+
 // Watchlist 自選股管理
 // ============================================================
 var _watchlistData = [];
@@ -4290,6 +4531,7 @@ function saveWatchlist() {
 
 document.addEventListener('DOMContentLoaded', function() {
     loadWatchlist();
+    loadNotionThemes();
 
     var scanBtn = document.getElementById('watchlist-scan-btn');
     if (scanBtn) {
@@ -6063,9 +6305,13 @@ function initConceptFilter(macdData) {
     _activeConceptFilter = null;
     bar.querySelectorAll('.concept-filter-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
+            // 清除所有 active（包含 notion 主題按鈕）
             bar.querySelectorAll('.concept-filter-btn').forEach(function(b){b.classList.remove('active');});
             this.classList.add('active');
             _activeConceptFilter = this.getAttribute('data-concept')==='all' ? null : this.getAttribute('data-concept');
+            // 清除 Notion 主題選取
+            _activeNotionTheme = null;
+            clearNotionTheme();
             document.querySelectorAll('.macd-signal-card').forEach(function(card) {
                 if (!_activeConceptFilter) { card.classList.remove('concept-hidden'); return; }
                 var cc = card.getAttribute('data-concepts')||'';
@@ -6073,6 +6319,50 @@ function initConceptFilter(macdData) {
                 else card.classList.add('concept-hidden');
             });
         });
+    });
+    // 渲染完成後插入 Notion 主題按鈕
+    injectNotionThemeBtns(bar);
+}
+
+function injectNotionThemeBtns(bar) {
+    if (!_notionThemeData) return;
+    // 移除舊的 notion 按鈕和分隔線
+    bar.querySelectorAll('[data-notion-theme]').forEach(function(el){ el.remove(); });
+
+    // 加分隔線
+    var sep = document.createElement('span');
+    sep.setAttribute('data-notion-theme', '_sep');
+    sep.style.cssText = 'display:inline-block;width:1px;height:14px;background:rgba(255,255,255,0.15);margin:0 4px;align-self:center;';
+    bar.appendChild(sep);
+
+    // 加 Notion 主題按鈕
+    Object.keys(_notionThemeData.themes).forEach(function(name) {
+        var count = _notionThemeData.themes[name].length;
+        var btn = document.createElement('button');
+        btn.className = 'concept-filter-btn';
+        btn.setAttribute('data-notion-theme', name);
+        btn.style.setProperty('--concept-color', '#7C3AED');
+        btn.innerHTML = '<span class="dot"></span>' + name + ' <span class="count">' + count + '</span>';
+        btn.addEventListener('click', function() {
+            if (_activeNotionTheme === name) {
+                // 再點取消，回全部
+                _activeNotionTheme = null;
+                _activeConceptFilter = null;
+                bar.querySelectorAll('.concept-filter-btn').forEach(function(b){b.classList.remove('active');});
+                var allBtn = bar.querySelector('[data-concept="all"]');
+                if (allBtn) allBtn.classList.add('active');
+                clearNotionTheme();
+            } else {
+                // 選此主題
+                _activeNotionTheme = name;
+                _activeConceptFilter = null;
+                bar.querySelectorAll('.concept-filter-btn').forEach(function(b){b.classList.remove('active');});
+                btn.classList.add('active');
+                document.querySelectorAll('.macd-signal-card').forEach(function(card){card.classList.remove('concept-hidden');});
+                applyNotionTheme(name);
+            }
+        });
+        bar.appendChild(btn);
     });
 }
 
@@ -6570,6 +6860,148 @@ function initMacdModal() {
   </div>
 </div>
 
+
+<script>
+// ── 主流股雷達 ──
+let _mainstreamData = null;
+let _mainstreamFilter = 'all';
+let _mainstreamManual = {};
+
+function loadMainstreamData() {
+    fetch('data/top_volume_stocks.json?v=' + Date.now())
+        .then(r => r.ok ? r.json() : Promise.reject('not found'))
+        .then(data => {
+            _mainstreamData = data;
+            try {
+                const saved = localStorage.getItem('mainstream_manual');
+                if (saved) _mainstreamManual = JSON.parse(saved);
+            } catch(e) {}
+            renderMainstreamTable();
+        })
+        .catch(() => {
+            document.getElementById('mainstream-tbody').innerHTML =
+                '<tr><td colspan="15" class="mainstream-empty">⚠ 尚無資料，待今日 19:00 後自動更新</td></tr>';
+        });
+}
+
+function renderMainstreamTable() {
+    if (!_mainstreamData) return;
+    const data = _mainstreamData;
+    document.getElementById('mainstream-update-time').textContent = '更新：' + (data.updated_at || '--');
+
+    let stocks = data.stocks.map(s => {
+        const m = _mainstreamManual[s.code] || {};
+        const conds = Object.assign({}, s.conditions);
+        if (m.cond5 !== undefined) conds.cond5_fundamental   = m.cond5;
+        if (m.cond6 !== undefined) conds.cond6_sector_leader = m.cond6;
+        const allConds = [conds.cond1_top30_5d, conds.cond2_vol_ma20,
+                          conds.cond3_ema_support, conds.cond4_institutional,
+                          conds.cond5_fundamental, conds.cond6_sector_leader];
+        const totalPass = allConds.filter(c => c === true).length;
+        return Object.assign({}, s, { conditions: conds, total_pass: totalPass,
+                                       is_mainstream: totalPass >= 4 });
+    });
+
+    const mainCount = stocks.filter(s => s.is_mainstream).length;
+    document.getElementById('mainstream-count-badge').textContent = mainCount + ' 檔';
+
+    if (_mainstreamFilter === 'mainstream') stocks = stocks.filter(s => s.is_mainstream);
+    else if (_mainstreamFilter === 'watching') stocks = stocks.filter(s => !s.is_mainstream && s.total_pass >= 2);
+
+    const tbody = document.getElementById('mainstream-tbody');
+    if (!stocks.length) {
+        tbody.innerHTML = '<tr><td colspan="15" class="mainstream-empty">無符合條件的股票</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = stocks.map(s => {
+        const c = s.conditions;
+        const chgRaw = parseFloat(s.change_pct) || 0;
+        const chgClass = chgRaw > 0 ? 'change-up' : chgRaw < 0 ? 'change-down' : 'change-flat';
+        const chgStr = chgRaw > 0 ? '+' + s.change_pct : s.change_pct;
+        const score = s.total_pass;
+        const scoreClass = score >= 4 ? 'high' : score >= 2 ? 'mid' : 'low';
+        const barPct = Math.round(score / 6 * 100);
+        const badge = s.is_mainstream
+            ? '<span class="mainstream-badge">主流股</span>'
+            : score >= 2 ? '<span class="watching-badge">觀察中</span>' : '';
+        const note = (_mainstreamManual[s.code] && _mainstreamManual[s.code].note) || s.note || '';
+
+        return `<tr>
+            <td class="rank-col">${s.rank}</td>
+            <td class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${s.code}/technical-analysis" target="_blank" style="color:#58a6ff;text-decoration:none;">${s.code}</a></td>
+            <td class="stock-name" title="${s.name}">${s.name}</td>
+            <td class="price-col hide-mobile">${s.price || '--'}</td>
+            <td class="${chgClass} hide-mobile">${chgStr || '--'}</td>
+            <td class="amount-col hide-mobile">${s.amount_b ? s.amount_b.toFixed(1) : '--'}</td>
+            ${renderCondCell(c.cond1_top30_5d, c.details && c.details.top30_days ? c.details.top30_days+'日上榜' : '')}
+            ${renderCondCell(c.cond2_vol_ma20,  c.details && c.details.volume_ratio ? '量比'+c.details.volume_ratio : '')}
+            ${renderCondCell(c.cond3_ema_support, c.details && c.details.ma20 ? 'MA20:'+c.details.ma20 : '')}
+            ${renderCondCell(c.cond4_institutional, c.details && c.details.foreign_net ? '外資:'+Math.round((c.details.foreign_net||0)/1e4)+'萬' : '')}
+            <td class="cond-cell">${renderManualBtn(s.code, 5, c.cond5_fundamental)}</td>
+            <td class="cond-cell">${renderManualBtn(s.code, 6, c.cond6_sector_leader)}</td>
+            <td>
+                <div class="score-bar-wrap">
+                    <span class="score-num ${scoreClass}">${score}</span>
+                    <div class="score-bar"><div class="score-bar-fill ${scoreClass}" style="width:${barPct}%"></div></div>
+                    <span style="color:#484f58;font-size:11px;">/6</span>
+                </div>
+            </td>
+            <td class="hide-mobile">${badge}</td>
+            <td class="hide-mobile">
+                <input class="note-input" type="text" value="${escHtml(note)}"
+                    placeholder="備註..." maxlength="30"
+                    onchange="saveNote('${s.code}', this.value)">
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function renderCondCell(val, tooltip) {
+    const t = tooltip ? ' title="' + escHtml(tooltip) + '"' : '';
+    if (val === true)  return `<td class="cond-cell"><span class="cond-dot pass"${t}>✓</span></td>`;
+    if (val === false) return `<td class="cond-cell"><span class="cond-dot fail"${t}>✗</span></td>`;
+    return `<td class="cond-cell"><span class="cond-dot unknown" title="無資料">?</span></td>`;
+}
+
+function renderManualBtn(code, condNum, currentVal) {
+    const state = currentVal === true ? 'marked-yes' : currentVal === false ? 'marked-no' : '';
+    const icon  = currentVal === true ? '✓' : currentVal === false ? '✗' : '?';
+    return `<button class="cond-manual-btn ${state}"
+        onclick="toggleManual('${code}', ${condNum})"
+        title="點擊切換：未知→是→否→未知">${icon}</button>`;
+}
+
+function toggleManual(code, condNum) {
+    if (!_mainstreamManual[code]) _mainstreamManual[code] = {};
+    const key = 'cond' + condNum;
+    const cur = _mainstreamManual[code][key];
+    _mainstreamManual[code][key] = cur === undefined ? true : cur === true ? false : undefined;
+    try { localStorage.setItem('mainstream_manual', JSON.stringify(_mainstreamManual)); } catch(e) {}
+    renderMainstreamTable();
+}
+
+function saveNote(code, val) {
+    if (!_mainstreamManual[code]) _mainstreamManual[code] = {};
+    _mainstreamManual[code].note = val;
+    try { localStorage.setItem('mainstream_manual', JSON.stringify(_mainstreamManual)); } catch(e) {}
+}
+
+function filterMainstream(type) {
+    _mainstreamFilter = type;
+    ['all','mainstream','watching'].forEach(t => {
+        const el = document.getElementById('filter-' + t);
+        if (el) el.classList.toggle('active', t === type);
+    });
+    renderMainstreamTable();
+}
+
+function escHtml(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.addEventListener('DOMContentLoaded', loadMainstreamData);
+</script>
 </body>
 </html>
 <style>
@@ -8416,6 +8848,7 @@ function initMacdModal() {
 
 
 /* === 概念股標籤篩選 === */
+.macd-signal-card.notion-hidden { display: none !important; }
 .concept-filter-bar { display:flex; flex-wrap:wrap; gap:6px; padding:8px 0; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.06); }
 .concept-filter-btn { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.04); color:#9CA3AF; font-size:12px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
 .concept-filter-btn:hover { background:rgba(255,255,255,0.08); color:#D1D5DB; }

@@ -8,6 +8,17 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# 載入 .env 環境變數
+try:
+    with open(Path(__file__).parent / ".env") as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                os.environ.setdefault(_k.strip(), _v.strip())
+except FileNotFoundError:
+    pass
+
 # 確保在正確的目錄
 script_dir = Path(__file__).parent
 os.chdir(script_dir)
@@ -153,9 +164,47 @@ try:
         print(f"  ✗ 錯誤: {e}")
 
     # 10. VIX 恐慌指數
-    print("\n[10/10] 抓取 VIX 恐慌指數...")
+    print("\n[10/11] 抓取 VIX 恐慌指數...")
     try:
         result = subprocess.run(['python3', 'fetch_vix.py'],
+                              capture_output=True, text=True, timeout=60)
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 11. 主流股雷達
+    print("\n[11/11] 主流股雷達篩選...")
+    try:
+        result = subprocess.run(['python3', 'top_volume_screener.py'],
+                                capture_output=True, text=True, timeout=120)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 12. Notion 自選股同步
+    print("\n[12/12] 同步 Notion 主題自選股...")
+    try:
+        result = subprocess.run(['python3', 'notion_watchlist.py'],
+                              capture_output=True, text=True, timeout=60)
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 12. Notion 自選股同步
+    print("\n[12/12] 同步 Notion 主題自選股...")
+    try:
+        result = subprocess.run(['python3', 'notion_watchlist.py'],
                               capture_output=True, text=True, timeout=60)
         if result.returncode == 0:
             print(result.stdout.strip())
