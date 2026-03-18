@@ -3580,12 +3580,12 @@
                     <table class="mainstream-table" id="mainstream-table">
                         <thead>
                             <tr>
-                                <th>排</th>
+                                <th onclick="sortMainstream('rank')" style="cursor:pointer;user-select:none;" title="點擊回到初始排序">排 <span id="ms-sort-rank">⇅</span></th>
                                 <th>代號</th>
                                 <th>名稱</th>
-                                <th class="hide-mobile">股價</th>
-                                <th class="hide-mobile">漲跌%</th>
-                                <th class="hide-mobile">金額(億)</th>
+                                <th class="hide-mobile sortable-th" onclick="sortMainstream('price')" id="ms-th-price" style="cursor:pointer;user-select:none;">股價 <span id="ms-sort-price">⇅</span></th>
+                                <th class="hide-mobile sortable-th" onclick="sortMainstream('change_pct')" id="ms-th-change" style="cursor:pointer;user-select:none;">漲跌% <span id="ms-sort-change_pct">⇅</span></th>
+                                <th class="hide-mobile sortable-th" onclick="sortMainstream('amount_b')" id="ms-th-amount" style="cursor:pointer;user-select:none;">金額(億) <span id="ms-sort-amount_b">⇅</span></th>
                                 <th title="近5日是否連續出現在成交金額前30" class="cond-header">①連榜5日</th>
                                 <th title="均量20是否持續翻揚（非一日衝量）" class="cond-header">②均量翻揚</th>
                                 <th title="回檔時是否守住EMA10/EMA20" class="cond-header">③守EMA20</th>
@@ -6888,6 +6888,33 @@ function loadMainstreamData() {
         });
 }
 
+let _mainstreamSortKey = null;
+let _mainstreamSortDir = 1; // 1=asc, -1=desc
+
+function sortMainstream(key) {
+    if (key === 'rank') {
+        // 回到初始排序（條件分數）
+        _mainstreamSortKey = null;
+        _mainstreamSortDir = -1;
+    } else if (_mainstreamSortKey === key) {
+        _mainstreamSortDir *= -1;
+    } else {
+        _mainstreamSortKey = key;
+        _mainstreamSortDir = -1; // 預設由高到低
+    }
+    // 更新箭頭圖示
+    ['rank', 'price', 'change_pct', 'amount_b'].forEach(k => {
+        const el = document.getElementById('ms-sort-' + k);
+        if (!el) return;
+        if (k === 'rank') {
+            el.textContent = _mainstreamSortKey === null ? '↺' : '⇅';
+        } else {
+            el.textContent = k === _mainstreamSortKey ? (_mainstreamSortDir === -1 ? '↓' : '↑') : '⇅';
+        }
+    });
+    renderMainstreamTable();
+}
+
 function renderMainstreamTable() {
     if (!_mainstreamData) return;
     const data = _mainstreamData;
@@ -6911,6 +6938,15 @@ function renderMainstreamTable() {
 
     if (_mainstreamFilter === 'mainstream') stocks = stocks.filter(s => s.is_mainstream);
     else if (_mainstreamFilter === 'watching') stocks = stocks.filter(s => !s.is_mainstream && s.total_pass >= 2);
+
+    // 自訂排序
+    if (_mainstreamSortKey) {
+        stocks.sort((a, b) => {
+            const va = parseFloat(a[_mainstreamSortKey]) || 0;
+            const vb = parseFloat(b[_mainstreamSortKey]) || 0;
+            return (va - vb) * _mainstreamSortDir;
+        });
+    }
 
     const tbody = document.getElementById('mainstream-tbody');
     if (!stocks.length) {
