@@ -136,9 +136,14 @@ def fetch_twse_top30_fallback():
                 price = float(price_str) if price_str.replace('.','').isdigit() else 0
                 amt_b = amt / 1e8
                 
+                # 漲跌價(元) → 漲跌幅(%)
+                chg_val = float(chg_str) if chg_str.replace('.','').replace('-','').isdigit() else 0
+                prev_price = price - chg_val
+                chg_pct = round(chg_val / prev_price * 100, 2) if prev_price > 0 else 0
+                
                 stocks.append({
                     'code': code, 'name': name,
-                    'price': price, 'change_pct': chg_str,
+                    'price': price, 'change_pct': chg_pct,
                     'volume': vol, 'amount_b': amt_b,
                 })
             except:
@@ -283,15 +288,16 @@ def check_conditions(stock, history, inst_data, top30_history, macd_signals=None
     # ── 爬 Yahoo Finance 取K線資料 ──
     ydata = fetch_yahoo_kline(stock['code'])
     
-    # ── 條件2：近3日量持續上揚（非一日衝量）──
+    # ── 條件2：量能維持在均量1.2倍以上（主流股盤整量縮仍算正常）──
     if ydata:
-        result['cond2_vol_ma20'] = ydata.get('vol_rising', False)
-        result['details']['volume_ratio'] = ydata.get('volume_ratio')
+        vr = ydata.get('volume_ratio', 0)
+        result['cond2_vol_ma20'] = vr >= 1.2
+        result['details']['volume_ratio'] = vr
     else:
         # fallback: macd_signal_stocks
         vr = stock.get('volume_ratio')
         if vr is not None:
-            result['cond2_vol_ma20'] = float(vr) >= 1.0
+            result['cond2_vol_ma20'] = float(vr) >= 1.2
             result['details']['volume_ratio'] = vr
     
     # ── 條件3：收盤 > MA20 ──
