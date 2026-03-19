@@ -1,2012 +1,1612 @@
 {
-  "updated_at": "2026-03-05T14:57:43.292513",
-  "date": "20260305",
+  "updated_at": "2026-03-18T20:30:32.766332",
+  "date": "20260318",
   "top_buy": [
-    {
-      "code": "3481",
-      "name": "群創",
-      "foreign_buy": 241541250,
-      "foreign_sell": 178123474,
-      "foreign_net": 63417776,
-      "trust_net": -551548,
-      "dealer_net": -3804262,
-      "total_net": 59061966
-    },
     {
       "code": "2337",
       "name": "旺宏",
-      "foreign_buy": 91527995,
-      "foreign_sell": 51605810,
-      "foreign_net": 39922185,
-      "trust_net": -38000,
-      "dealer_net": 1576357,
-      "total_net": 41460542
+      "net": 43721265.0,
+      "trust_net": -1732000.0,
+      "change": 9.96,
+      "industry": "半導體"
+    },
+    {
+      "code": "3715",
+      "name": "定穎投控",
+      "net": 18975423.0,
+      "trust_net": -10000.0,
+      "change": 9.81,
+      "industry": "電子零組件"
     },
     {
       "code": "2344",
       "name": "華邦電",
-      "foreign_buy": 77737777,
-      "foreign_sell": 39044718,
-      "foreign_net": 38693059,
-      "trust_net": -5297042,
-      "dealer_net": -551907,
-      "total_net": 32844110
-    },
-    {
-      "code": "2408",
-      "name": "南亞科",
-      "foreign_buy": 50282709,
-      "foreign_sell": 19976523,
-      "foreign_net": 30306186,
-      "trust_net": -5724291,
-      "dealer_net": -2483420,
-      "total_net": 22098475
-    },
-    {
-      "code": "2105",
-      "name": "正新",
-      "foreign_buy": 36813690,
-      "foreign_sell": 22477436,
-      "foreign_net": 14336254,
-      "trust_net": -20977857,
-      "dealer_net": -494756,
-      "total_net": -7136359
-    },
-    {
-      "code": "1303",
-      "name": "南亞",
-      "foreign_buy": 38066142,
-      "foreign_sell": 24534985,
-      "foreign_net": 13531157,
-      "trust_net": 331649,
-      "dealer_net": -721159,
-      "total_net": 13141647
-    },
-    {
-      "code": "6443",
-      "name": "元晶",
-      "foreign_buy": 47267322,
-      "foreign_sell": 34565288,
-      "foreign_net": 12702034,
-      "trust_net": 0,
-      "dealer_net": 39230,
-      "total_net": 12741264
-    },
-    {
-      "code": "6239",
-      "name": "力成",
-      "foreign_buy": 11432646,
-      "foreign_sell": 4568137,
-      "foreign_net": 6864509,
-      "trust_net": -2475000,
-      "dealer_net": 43536,
-      "total_net": 4433045
-    },
-    {
-      "code": "2367",
-      "name": "燿華",
-      "foreign_buy": 80598819,
-      "foreign_sell": 74974050,
-      "foreign_net": 5624769,
-      "trust_net": -22000,
-      "dealer_net": -349241,
-      "total_net": 5253528
-    },
-    {
-      "code": "6285",
-      "name": "啟碁",
-      "foreign_buy": 13020654,
-      "foreign_sell": 7625714,
-      "foreign_net": 5394940,
-      "trust_net": 36000,
-      "dealer_net": -1111669,
-      "total_net": 4319271
-    },
-    {
-      "code": "8110",
-      "name": "華東",
-      "foreign_buy": 9500100,
-      "foreign_sell": 4191100,
-      "foreign_net": 5309000,
-      "trust_net": -12000,
-      "dealer_net": -6945,
-      "total_net": 5290055
-    },
-    {
-      "code": "4977",
-      "name": "眾達-KY",
-      "foreign_buy": 7990304,
-      "foreign_sell": 3738020,
-      "foreign_net": 4252284,
-      "trust_net": 0,
-      "dealer_net": -142849,
-      "total_net": 4109435
-    },
-    {
-      "code": "4989",
-      "name": "榮科",
-      "foreign_buy": 21528140,
-      "foreign_sell": 17659500,
-      "foreign_net": 3868640,
-      "trust_net": 0,
-      "dealer_net": -5846,
-      "total_net": 3862794
-    },
-    {
-      "code": "4763",
-      "name": "材料*-KY",
-      "foreign_buy": 5552190,
-      "foreign_sell": 2074674,
-      "foreign_net": 3477516,
-      "trust_net": -344570,
-      "dealer_net": -148510,
-      "total_net": 2984436
-    },
-    {
-      "code": "8150",
-      "name": "南茂",
-      "foreign_buy": 11763670,
-      "foreign_sell": 8502000,
-      "foreign_net": 3261670,
-      "trust_net": -2000,
-      "dealer_net": -300575,
-      "total_net": 2959095
-    },
-    {
-      "code": "2486",
-      "name": "一詮",
-      "foreign_buy": 7571928,
-      "foreign_sell": 4505000,
-      "foreign_net": 3066928,
-      "trust_net": -200000,
-      "dealer_net": -322416,
-      "total_net": 2544512
-    },
-    {
-      "code": "4958",
-      "name": "臻鼎-KY",
-      "foreign_buy": 10081895,
-      "foreign_sell": 7126398,
-      "foreign_net": 2955497,
-      "trust_net": 7000,
-      "dealer_net": -544872,
-      "total_net": 2417625
-    },
-    {
-      "code": "9907",
-      "name": "統一實",
-      "foreign_buy": 4122000,
-      "foreign_sell": 1171000,
-      "foreign_net": 2951000,
-      "trust_net": -69676,
-      "dealer_net": -417324,
-      "total_net": 2464000
-    },
-    {
-      "code": "6282",
-      "name": "康舒",
-      "foreign_buy": 10334500,
-      "foreign_sell": 7519707,
-      "foreign_net": 2814793,
-      "trust_net": 13000,
-      "dealer_net": -879556,
-      "total_net": 1948237
-    },
-    {
-      "code": "1802",
-      "name": "台玻",
-      "foreign_buy": 3747039,
-      "foreign_sell": 1208670,
-      "foreign_net": 2538369,
-      "trust_net": 0,
-      "dealer_net": 772693,
-      "total_net": 3311062
-    },
-    {
-      "code": "1504",
-      "name": "東元",
-      "foreign_buy": 9516842,
-      "foreign_sell": 7015807,
-      "foreign_net": 2501035,
-      "trust_net": -806914,
-      "dealer_net": -559023,
-      "total_net": 1135098
-    },
-    {
-      "code": "2006",
-      "name": "東和鋼鐵",
-      "foreign_buy": 3637373,
-      "foreign_sell": 1305348,
-      "foreign_net": 2332025,
-      "trust_net": -58974,
-      "dealer_net": -28832,
-      "total_net": 2244219
-    },
-    {
-      "code": "2458",
-      "name": "義隆",
-      "foreign_buy": 4343153,
-      "foreign_sell": 2040500,
-      "foreign_net": 2302653,
-      "trust_net": -59678,
-      "dealer_net": 70568,
-      "total_net": 2313543
-    },
-    {
-      "code": "2312",
-      "name": "金寶",
-      "foreign_buy": 8847000,
-      "foreign_sell": 6598000,
-      "foreign_net": 2249000,
-      "trust_net": -5000,
-      "dealer_net": -813911,
-      "total_net": 1430089
-    },
-    {
-      "code": "1717",
-      "name": "長興",
-      "foreign_buy": 11883310,
-      "foreign_sell": 9751020,
-      "foreign_net": 2132290,
-      "trust_net": 570000,
-      "dealer_net": -1513036,
-      "total_net": 1189254
-    },
-    {
-      "code": "2014",
-      "name": "中鴻",
-      "foreign_buy": 4202000,
-      "foreign_sell": 2178000,
-      "foreign_net": 2024000,
-      "trust_net": 0,
-      "dealer_net": -754154,
-      "total_net": 1269846
-    },
-    {
-      "code": "2412",
-      "name": "中華電",
-      "foreign_buy": 13507148,
-      "foreign_sell": 11489164,
-      "foreign_net": 2017984,
-      "trust_net": 100000,
-      "dealer_net": 460912,
-      "total_net": 2578896
-    },
-    {
-      "code": "8422",
-      "name": "可寧衛*",
-      "foreign_buy": 7172280,
-      "foreign_sell": 5307000,
-      "foreign_net": 1865280,
-      "trust_net": -169000,
-      "dealer_net": -211460,
-      "total_net": 1484820
-    },
-    {
-      "code": "8112",
-      "name": "至上",
-      "foreign_buy": 4822164,
-      "foreign_sell": 2960217,
-      "foreign_net": 1861947,
-      "trust_net": -18056,
-      "dealer_net": -727482,
-      "total_net": 1116409
-    },
-    {
-      "code": "2867",
-      "name": "三商壽",
-      "foreign_buy": 10837000,
-      "foreign_sell": 9053000,
-      "foreign_net": 1784000,
-      "trust_net": 0,
-      "dealer_net": -771000,
-      "total_net": 1013000
-    },
-    {
-      "code": "3189",
-      "name": "景碩",
-      "foreign_buy": 16030346,
-      "foreign_sell": 14276656,
-      "foreign_net": 1753690,
-      "trust_net": -496000,
-      "dealer_net": -119335,
-      "total_net": 1138355
-    },
-    {
-      "code": "5521",
-      "name": "工信",
-      "foreign_buy": 4948000,
-      "foreign_sell": 3205000,
-      "foreign_net": 1743000,
-      "trust_net": 0,
-      "dealer_net": -39729,
-      "total_net": 1703271
-    },
-    {
-      "code": "3701",
-      "name": "大眾控",
-      "foreign_buy": 8761000,
-      "foreign_sell": 7033000,
-      "foreign_net": 1728000,
-      "trust_net": 0,
-      "dealer_net": -102171,
-      "total_net": 1625829
-    },
-    {
-      "code": "2355",
-      "name": "敬鵬",
-      "foreign_buy": 5597000,
-      "foreign_sell": 3898000,
-      "foreign_net": 1699000,
-      "trust_net": -4011,
-      "dealer_net": -103966,
-      "total_net": 1591023
-    },
-    {
-      "code": "1560",
-      "name": "中砂",
-      "foreign_buy": 3162197,
-      "foreign_sell": 1552700,
-      "foreign_net": 1609497,
-      "trust_net": -7000,
-      "dealer_net": -120082,
-      "total_net": 1482415
-    },
-    {
-      "code": "6271",
-      "name": "同欣電",
-      "foreign_buy": 4725031,
-      "foreign_sell": 3160500,
-      "foreign_net": 1564531,
-      "trust_net": -159000,
-      "dealer_net": -600317,
-      "total_net": 805214
-    },
-    {
-      "code": "6994",
-      "name": "富威電力",
-      "foreign_buy": 2351000,
-      "foreign_sell": 868000,
-      "foreign_net": 1483000,
-      "trust_net": 0,
-      "dealer_net": 2324,
-      "total_net": 1485324
-    },
-    {
-      "code": "7780",
-      "name": "大研生醫*",
-      "foreign_buy": 2205003,
-      "foreign_sell": 732100,
-      "foreign_net": 1472903,
-      "trust_net": 0,
-      "dealer_net": -49298,
-      "total_net": 1423605
-    },
-    {
-      "code": "3036",
-      "name": "文曄",
-      "foreign_buy": 15271900,
-      "foreign_sell": 13819111,
-      "foreign_net": 1452789,
-      "trust_net": -1028021,
-      "dealer_net": 73767,
-      "total_net": 498535
-    },
-    {
-      "code": "4967",
-      "name": "十銓",
-      "foreign_buy": 3309106,
-      "foreign_sell": 1973100,
-      "foreign_net": 1336006,
-      "trust_net": -3000,
-      "dealer_net": -4775,
-      "total_net": 1328231
-    },
-    {
-      "code": "3006",
-      "name": "晶豪科",
-      "foreign_buy": 7129415,
-      "foreign_sell": 5796925,
-      "foreign_net": 1332490,
-      "trust_net": -9000,
-      "dealer_net": -607630,
-      "total_net": 715860
-    },
-    {
-      "code": "3576",
-      "name": "聯合再生",
-      "foreign_buy": 1394450,
-      "foreign_sell": 103262,
-      "foreign_net": 1291188,
-      "trust_net": 0,
-      "dealer_net": -347000,
-      "total_net": 944188
-    },
-    {
-      "code": "8131",
-      "name": "福懋科",
-      "foreign_buy": 3077022,
-      "foreign_sell": 1795000,
-      "foreign_net": 1282022,
-      "trust_net": -6000,
-      "dealer_net": -70166,
-      "total_net": 1205856
-    },
-    {
-      "code": "3045",
-      "name": "台灣大",
-      "foreign_buy": 7072746,
-      "foreign_sell": 5827673,
-      "foreign_net": 1245073,
-      "trust_net": -16000,
-      "dealer_net": 31392,
-      "total_net": 1260465
-    },
-    {
-      "code": "056904",
-      "name": "貿聯群益58購01",
-      "foreign_buy": 1200000,
-      "foreign_sell": 0,
-      "foreign_net": 1200000,
-      "trust_net": 0,
-      "dealer_net": -1706000,
-      "total_net": -506000
-    },
-    {
-      "code": "2489",
-      "name": "瑞軒",
-      "foreign_buy": 3658000,
-      "foreign_sell": 2462529,
-      "foreign_net": 1195471,
-      "trust_net": 0,
-      "dealer_net": 1103000,
-      "total_net": 2298471
-    },
-    {
-      "code": "2467",
-      "name": "志聖",
-      "foreign_buy": 3345016,
-      "foreign_sell": 2172006,
-      "foreign_net": 1173010,
-      "trust_net": -3000,
-      "dealer_net": -150792,
-      "total_net": 1019218
-    },
-    {
-      "code": "4919",
-      "name": "新唐",
-      "foreign_buy": 5338000,
-      "foreign_sell": 4195049,
-      "foreign_net": 1142951,
-      "trust_net": 8000,
-      "dealer_net": -213131,
-      "total_net": 937820
-    },
-    {
-      "code": "6202",
-      "name": "盛群",
-      "foreign_buy": 2400070,
-      "foreign_sell": 1291000,
-      "foreign_net": 1109070,
-      "trust_net": 0,
-      "dealer_net": -40908,
-      "total_net": 1068162
-    },
-    {
-      "code": "8046",
-      "name": "南電",
-      "foreign_buy": 1554435,
-      "foreign_sell": 476780,
-      "foreign_net": 1077655,
-      "trust_net": -9000,
-      "dealer_net": 164747,
-      "total_net": 1233402
-    }
-  ],
-  "top_sell": [
-    {
-      "code": "2887",
-      "name": "台新新光金",
-      "foreign_buy": 44980190,
-      "foreign_sell": 126272601,
-      "foreign_net": -81292411,
-      "trust_net": 65244000,
-      "dealer_net": 3332751,
-      "total_net": -12715660
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "foreign_buy": 34197956,
-      "foreign_sell": 70061454,
-      "foreign_net": -35863498,
-      "trust_net": 1352371,
-      "dealer_net": -1596624,
-      "total_net": -36107751
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "foreign_buy": 23476531,
-      "foreign_sell": 58518621,
-      "foreign_net": -35042090,
-      "trust_net": 9965973,
-      "dealer_net": 3045853,
-      "total_net": -22030264
-    },
-    {
-      "code": "2610",
-      "name": "華航",
-      "foreign_buy": 22984092,
-      "foreign_sell": 55388800,
-      "foreign_net": -32404708,
-      "trust_net": -620000,
-      "dealer_net": -1243563,
-      "total_net": -34268271
-    },
-    {
-      "code": "2609",
-      "name": "陽明",
-      "foreign_buy": 80792760,
-      "foreign_sell": 111355508,
-      "foreign_net": -30562748,
-      "trust_net": -147000,
-      "dealer_net": -2436838,
-      "total_net": -33146586
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "foreign_buy": 22375376,
-      "foreign_sell": 49729787,
-      "foreign_net": -27354411,
-      "trust_net": 1466715,
-      "dealer_net": 799129,
-      "total_net": -25088567
-    },
-    {
-      "code": "2883",
-      "name": "凱基金",
-      "foreign_buy": 34933016,
-      "foreign_sell": 61857744,
-      "foreign_net": -26924728,
-      "trust_net": 2061000,
-      "dealer_net": 1045466,
-      "total_net": -23818262
-    },
-    {
-      "code": "2834",
-      "name": "臺企銀",
-      "foreign_buy": 7006415,
-      "foreign_sell": 33217900,
-      "foreign_net": -26211485,
-      "trust_net": -13000,
-      "dealer_net": -1386822,
-      "total_net": -27611307
-    },
-    {
-      "code": "2002",
-      "name": "中鋼",
-      "foreign_buy": 19292124,
-      "foreign_sell": 44769580,
-      "foreign_net": -25477456,
-      "trust_net": -857000,
-      "dealer_net": -1119040,
-      "total_net": -27453496
-    },
-    {
-      "code": "2801",
-      "name": "彰銀",
-      "foreign_buy": 6746679,
-      "foreign_sell": 26696896,
-      "foreign_net": -19950217,
-      "trust_net": -15000,
-      "dealer_net": -1882819,
-      "total_net": -21848036
-    },
-    {
-      "code": "3231",
-      "name": "緯創",
-      "foreign_buy": 14205625,
-      "foreign_sell": 32308583,
-      "foreign_net": -18102958,
-      "trust_net": 268058,
-      "dealer_net": 1316545,
-      "total_net": -16518355
-    },
-    {
-      "code": "2324",
-      "name": "仁寶",
-      "foreign_buy": 15616084,
-      "foreign_sell": 31999090,
-      "foreign_net": -16383006,
-      "trust_net": 10000,
-      "dealer_net": -18672,
-      "total_net": -16391678
-    },
-    {
-      "code": "5880",
-      "name": "合庫金",
-      "foreign_buy": 7636761,
-      "foreign_sell": 23193008,
-      "foreign_net": -15556247,
-      "trust_net": 691000,
-      "dealer_net": -462107,
-      "total_net": -15327354
-    },
-    {
-      "code": "2892",
-      "name": "第一金",
-      "foreign_buy": 12433289,
-      "foreign_sell": 27484318,
-      "foreign_net": -15051029,
-      "trust_net": 722000,
-      "dealer_net": -329122,
-      "total_net": -14658151
-    },
-    {
-      "code": "2884",
-      "name": "玉山金",
-      "foreign_buy": 19828060,
-      "foreign_sell": 34807823,
-      "foreign_net": -14979763,
-      "trust_net": 363000,
-      "dealer_net": 825719,
-      "total_net": -13791044
-    },
-    {
-      "code": "2845",
-      "name": "遠東銀",
-      "foreign_buy": 5037000,
-      "foreign_sell": 17991716,
-      "foreign_net": -12954716,
-      "trust_net": -8000,
-      "dealer_net": -654890,
-      "total_net": -13617606
-    },
-    {
-      "code": "1314",
-      "name": "中石化",
-      "foreign_buy": 6563500,
-      "foreign_sell": 19404000,
-      "foreign_net": -12840500,
-      "trust_net": 0,
-      "dealer_net": -825427,
-      "total_net": -13665927
-    },
-    {
-      "code": "2356",
-      "name": "英業達",
-      "foreign_buy": 6362409,
-      "foreign_sell": 18933747,
-      "foreign_net": -12571338,
-      "trust_net": -65000,
-      "dealer_net": -189371,
-      "total_net": -12825709
-    },
-    {
-      "code": "2618",
-      "name": "長榮航",
-      "foreign_buy": 18233955,
-      "foreign_sell": 29817000,
-      "foreign_net": -11583045,
-      "trust_net": -245694,
-      "dealer_net": 969,
-      "total_net": -11827770
-    },
-    {
-      "code": "5876",
-      "name": "上海商銀",
-      "foreign_buy": 3194135,
-      "foreign_sell": 13568913,
-      "foreign_net": -10374778,
-      "trust_net": -104000,
-      "dealer_net": -421473,
-      "total_net": -10900251
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "foreign_buy": 11680628,
-      "foreign_sell": 21471367,
-      "foreign_net": -9790739,
-      "trust_net": 156846,
-      "dealer_net": 119634,
-      "total_net": -9514259
-    },
-    {
-      "code": "1313",
-      "name": "聯成",
-      "foreign_buy": 9471000,
-      "foreign_sell": 18897000,
-      "foreign_net": -9426000,
-      "trust_net": 0,
-      "dealer_net": 49753,
-      "total_net": -9376247
-    },
-    {
-      "code": "1310",
-      "name": "台苯",
-      "foreign_buy": 3970000,
-      "foreign_sell": 12485000,
-      "foreign_net": -8515000,
-      "trust_net": 0,
-      "dealer_net": -15436,
-      "total_net": -8530436
-    },
-    {
-      "code": "2886",
-      "name": "兆豐金",
-      "foreign_buy": 14163123,
-      "foreign_sell": 22506452,
-      "foreign_net": -8343329,
-      "trust_net": 308000,
-      "dealer_net": 569394,
-      "total_net": -7465935
-    },
-    {
-      "code": "6505",
-      "name": "台塑化",
-      "foreign_buy": 22461452,
-      "foreign_sell": 30709639,
-      "foreign_net": -8248187,
-      "trust_net": 149276,
-      "dealer_net": -456280,
-      "total_net": -8555191
-    },
-    {
-      "code": "2303",
-      "name": "聯電",
-      "foreign_buy": 48193423,
-      "foreign_sell": 55796713,
-      "foreign_net": -7603290,
-      "trust_net": 20053751,
-      "dealer_net": 120936,
-      "total_net": 12571397
-    },
-    {
-      "code": "2615",
-      "name": "萬海",
-      "foreign_buy": 29901101,
-      "foreign_sell": 37005949,
-      "foreign_net": -7104848,
-      "trust_net": -25000,
-      "dealer_net": -2086626,
-      "total_net": -9216474
-    },
-    {
-      "code": "1101",
-      "name": "台泥",
-      "foreign_buy": 14103457,
-      "foreign_sell": 21155337,
-      "foreign_net": -7051880,
-      "trust_net": 160000,
-      "dealer_net": -2523475,
-      "total_net": -9415355
-    },
-    {
-      "code": "2812",
-      "name": "台中銀",
-      "foreign_buy": 4224350,
-      "foreign_sell": 10069000,
-      "foreign_net": -5844650,
-      "trust_net": 0,
-      "dealer_net": -753786,
-      "total_net": -6598436
-    },
-    {
-      "code": "2481",
-      "name": "強茂",
-      "foreign_buy": 4558000,
-      "foreign_sell": 10193209,
-      "foreign_net": -5635209,
-      "trust_net": -114000,
-      "dealer_net": -563557,
-      "total_net": -6312766
-    },
-    {
-      "code": "9904",
-      "name": "寶成",
-      "foreign_buy": 3450000,
-      "foreign_sell": 8668000,
-      "foreign_net": -5218000,
-      "trust_net": -15751,
-      "dealer_net": -131173,
-      "total_net": -5364924
-    },
-    {
-      "code": "9945",
-      "name": "潤泰新",
-      "foreign_buy": 1705000,
-      "foreign_sell": 6885246,
-      "foreign_net": -5180246,
-      "trust_net": -1000,
-      "dealer_net": -487309,
-      "total_net": -5668555
-    },
-    {
-      "code": "1301",
-      "name": "台塑",
-      "foreign_buy": 12411931,
-      "foreign_sell": 17580175,
-      "foreign_net": -5168244,
-      "trust_net": 0,
-      "dealer_net": -1128433,
-      "total_net": -6296677
-    },
-    {
-      "code": "2327",
-      "name": "國巨*",
-      "foreign_buy": 13897256,
-      "foreign_sell": 18986706,
-      "foreign_net": -5089450,
-      "trust_net": 1097515,
-      "dealer_net": -659819,
-      "total_net": -4651754
-    },
-    {
-      "code": "2485",
-      "name": "兆赫",
-      "foreign_buy": 33520732,
-      "foreign_sell": 38454452,
-      "foreign_net": -4933720,
-      "trust_net": 0,
-      "dealer_net": -496214,
-      "total_net": -5429934
-    },
-    {
-      "code": "1711",
-      "name": "永光",
-      "foreign_buy": 7348882,
-      "foreign_sell": 12205000,
-      "foreign_net": -4856118,
-      "trust_net": 0,
-      "dealer_net": -587220,
-      "total_net": -5443338
-    },
-    {
-      "code": "2027",
-      "name": "大成鋼",
-      "foreign_buy": 7766194,
-      "foreign_sell": 12602840,
-      "foreign_net": -4836646,
-      "trust_net": 2310000,
-      "dealer_net": 2559292,
-      "total_net": 32646
-    },
-    {
-      "code": "3005",
-      "name": "神基",
-      "foreign_buy": 1969742,
-      "foreign_sell": 6747114,
-      "foreign_net": -4777372,
-      "trust_net": 472000,
-      "dealer_net": 263707,
-      "total_net": -4041665
-    },
-    {
-      "code": "2887I",
-      "name": "台新新光辛特",
-      "foreign_buy": 126000,
-      "foreign_sell": 4791000,
-      "foreign_net": -4665000,
-      "trust_net": 0,
-      "dealer_net": 0,
-      "total_net": -4665000
-    },
-    {
-      "code": "3706",
-      "name": "神達",
-      "foreign_buy": 5583000,
-      "foreign_sell": 10092000,
-      "foreign_net": -4509000,
-      "trust_net": 19000,
-      "dealer_net": -44238,
-      "total_net": -4534238
-    },
-    {
-      "code": "4938",
-      "name": "和碩",
-      "foreign_buy": 3901216,
-      "foreign_sell": 8363456,
-      "foreign_net": -4462240,
-      "trust_net": -30886,
-      "dealer_net": -258609,
-      "total_net": -4751735
-    },
-    {
-      "code": "9105",
-      "name": "泰金寶-DR",
-      "foreign_buy": 2328000,
-      "foreign_sell": 6742000,
-      "foreign_net": -4414000,
-      "trust_net": 0,
-      "dealer_net": -290323,
-      "total_net": -4704323
-    },
-    {
-      "code": "6005",
-      "name": "群益證",
-      "foreign_buy": 3445001,
-      "foreign_sell": 7800650,
-      "foreign_net": -4355649,
-      "trust_net": 1958986,
-      "dealer_net": 0,
-      "total_net": -2396663
-    },
-    {
-      "code": "2323",
-      "name": "中環",
-      "foreign_buy": 2994000,
-      "foreign_sell": 7200000,
-      "foreign_net": -4206000,
-      "trust_net": 0,
-      "dealer_net": -98171,
-      "total_net": -4304171
-    },
-    {
-      "code": "6116",
-      "name": "彩晶",
-      "foreign_buy": 10245000,
-      "foreign_sell": 14340020,
-      "foreign_net": -4095020,
-      "trust_net": 0,
-      "dealer_net": -573296,
-      "total_net": -4668316
-    },
-    {
-      "code": "2301",
-      "name": "光寶科",
-      "foreign_buy": 14827378,
-      "foreign_sell": 18911719,
-      "foreign_net": -4084341,
-      "trust_net": -242103,
-      "dealer_net": -282851,
-      "total_net": -4609295
-    },
-    {
-      "code": "2855",
-      "name": "統一證",
-      "foreign_buy": 2926060,
-      "foreign_sell": 7003000,
-      "foreign_net": -4076940,
-      "trust_net": -12000,
-      "dealer_net": 0,
-      "total_net": -4088940
-    },
-    {
-      "code": "1409",
-      "name": "新纖",
-      "foreign_buy": 915000,
-      "foreign_sell": 4892000,
-      "foreign_net": -3977000,
-      "trust_net": -4000,
-      "dealer_net": -92514,
-      "total_net": -4073514
-    },
-    {
-      "code": "1216",
-      "name": "統一",
-      "foreign_buy": 5227130,
-      "foreign_sell": 9094238,
-      "foreign_net": -3867108,
-      "trust_net": 63846,
-      "dealer_net": 410614,
-      "total_net": -3392648
-    },
-    {
-      "code": "2406",
-      "name": "國碩",
-      "foreign_buy": 8262000,
-      "foreign_sell": 11914000,
-      "foreign_net": -3652000,
-      "trust_net": 0,
-      "dealer_net": -14775,
-      "total_net": -3666775
-    }
-  ],
-  "trust_top_buy": [
-    {
-      "code": "2887",
-      "name": "台新新光金",
-      "foreign_buy": 44980190,
-      "foreign_sell": 126272601,
-      "foreign_net": -81292411,
-      "trust_net": 65244000,
-      "dealer_net": 3332751,
-      "total_net": -12715660
-    },
-    {
-      "code": "2303",
-      "name": "聯電",
-      "foreign_buy": 48193423,
-      "foreign_sell": 55796713,
-      "foreign_net": -7603290,
-      "trust_net": 20053751,
-      "dealer_net": 120936,
-      "total_net": 12571397
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "foreign_buy": 23476531,
-      "foreign_sell": 58518621,
-      "foreign_net": -35042090,
-      "trust_net": 9965973,
-      "dealer_net": 3045853,
-      "total_net": -22030264
-    },
-    {
-      "code": "2603",
-      "name": "長榮",
-      "foreign_buy": 26249501,
-      "foreign_sell": 25554139,
-      "foreign_net": 695362,
-      "trust_net": 3543207,
-      "dealer_net": -570148,
-      "total_net": 3668421
-    },
-    {
-      "code": "2027",
-      "name": "大成鋼",
-      "foreign_buy": 7766194,
-      "foreign_sell": 12602840,
-      "foreign_net": -4836646,
-      "trust_net": 2310000,
-      "dealer_net": 2559292,
-      "total_net": 32646
-    },
-    {
-      "code": "2883",
-      "name": "凱基金",
-      "foreign_buy": 34933016,
-      "foreign_sell": 61857744,
-      "foreign_net": -26924728,
-      "trust_net": 2061000,
-      "dealer_net": 1045466,
-      "total_net": -23818262
-    },
-    {
-      "code": "6005",
-      "name": "群益證",
-      "foreign_buy": 3445001,
-      "foreign_sell": 7800650,
-      "foreign_net": -4355649,
-      "trust_net": 1958986,
-      "dealer_net": 0,
-      "total_net": -2396663
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "foreign_buy": 22375376,
-      "foreign_sell": 49729787,
-      "foreign_net": -27354411,
-      "trust_net": 1466715,
-      "dealer_net": 799129,
-      "total_net": -25088567
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "foreign_buy": 34197956,
-      "foreign_sell": 70061454,
-      "foreign_net": -35863498,
-      "trust_net": 1352371,
-      "dealer_net": -1596624,
-      "total_net": -36107751
-    },
-    {
-      "code": "2313",
-      "name": "華通",
-      "foreign_buy": 37623749,
-      "foreign_sell": 39188736,
-      "foreign_net": -1564987,
-      "trust_net": 1282000,
-      "dealer_net": 29987,
-      "total_net": -253000
+      "net": 16744344.0,
+      "trust_net": 604000.0,
+      "change": 3.64,
+      "industry": "半導體"
     },
     {
       "code": "3702",
       "name": "大聯大",
-      "foreign_buy": 5680212,
-      "foreign_sell": 6054450,
-      "foreign_net": -374238,
-      "trust_net": 1217000,
-      "dealer_net": 79824,
-      "total_net": 922586
+      "net": 14140200.0,
+      "trust_net": -160000.0,
+      "change": 3.44,
+      "industry": "電子通路"
     },
     {
-      "code": "2880",
-      "name": "華南金",
-      "foreign_buy": 22097447,
-      "foreign_sell": 22104072,
-      "foreign_net": -6625,
-      "trust_net": 1132000,
-      "dealer_net": 741775,
-      "total_net": 1867150
+      "code": "1326",
+      "name": "台化",
+      "net": 11263981.0,
+      "trust_net": 207000.0,
+      "change": 3.96,
+      "industry": "塑膠工業"
     },
     {
-      "code": "2327",
-      "name": "國巨*",
-      "foreign_buy": 13897256,
-      "foreign_sell": 18986706,
-      "foreign_net": -5089450,
-      "trust_net": 1097515,
-      "dealer_net": -659819,
-      "total_net": -4651754
+      "code": "2027",
+      "name": "大成鋼",
+      "net": 10408710.0,
+      "trust_net": 44000.0,
+      "change": 1.34,
+      "industry": "鋼鐵工業"
     },
     {
-      "code": "2385",
-      "name": "群光",
-      "foreign_buy": 3352567,
-      "foreign_sell": 4256399,
-      "foreign_net": -903832,
-      "trust_net": 991979,
-      "dealer_net": 96800,
-      "total_net": 184947
-    },
-    {
-      "code": "3665",
-      "name": "貿聯-KY",
-      "foreign_buy": 3708619,
-      "foreign_sell": 3604052,
-      "foreign_net": 104567,
-      "trust_net": 843000,
-      "dealer_net": 91295,
-      "total_net": 1038862
-    },
-    {
-      "code": "2892",
-      "name": "第一金",
-      "foreign_buy": 12433289,
-      "foreign_sell": 27484318,
-      "foreign_net": -15051029,
-      "trust_net": 722000,
-      "dealer_net": -329122,
-      "total_net": -14658151
-    },
-    {
-      "code": "4915",
-      "name": "致伸",
-      "foreign_buy": 904382,
-      "foreign_sell": 3842000,
-      "foreign_net": -2937618,
-      "trust_net": 696189,
-      "dealer_net": -33400,
-      "total_net": -2274829
-    },
-    {
-      "code": "5880",
-      "name": "合庫金",
-      "foreign_buy": 7636761,
-      "foreign_sell": 23193008,
-      "foreign_net": -15556247,
-      "trust_net": 691000,
-      "dealer_net": -462107,
-      "total_net": -15327354
-    },
-    {
-      "code": "3017",
-      "name": "奇鋐",
-      "foreign_buy": 2933573,
-      "foreign_sell": 2737350,
-      "foreign_net": 196223,
-      "trust_net": 630366,
-      "dealer_net": -99031,
-      "total_net": 727558
-    },
-    {
-      "code": "1717",
-      "name": "長興",
-      "foreign_buy": 11883310,
-      "foreign_sell": 9751020,
-      "foreign_net": 2132290,
-      "trust_net": 570000,
-      "dealer_net": -1513036,
-      "total_net": 1189254
-    },
-    {
-      "code": "3532",
-      "name": "台勝科",
-      "foreign_buy": 1429538,
-      "foreign_sell": 1964000,
-      "foreign_net": -534462,
-      "trust_net": 504000,
-      "dealer_net": -25694,
-      "total_net": -56156
-    },
-    {
-      "code": "1215",
-      "name": "卜蜂",
-      "foreign_buy": 455035,
-      "foreign_sell": 523866,
-      "foreign_net": -68831,
-      "trust_net": 488000,
-      "dealer_net": 18711,
-      "total_net": 437880
-    },
-    {
-      "code": "3005",
-      "name": "神基",
-      "foreign_buy": 1969742,
-      "foreign_sell": 6747114,
-      "foreign_net": -4777372,
-      "trust_net": 472000,
-      "dealer_net": 263707,
-      "total_net": -4041665
-    },
-    {
-      "code": "2404",
-      "name": "漢唐",
-      "foreign_buy": 1425861,
-      "foreign_sell": 1223710,
-      "foreign_net": 202151,
-      "trust_net": 454670,
-      "dealer_net": -127194,
-      "total_net": 529627
+      "code": "2303",
+      "name": "聯電",
+      "net": 10005669.0,
+      "trust_net": 1024498.0,
+      "change": 0.66,
+      "industry": "半導體"
     },
     {
       "code": "2449",
       "name": "京元電子",
-      "foreign_buy": 9435581,
-      "foreign_sell": 8385706,
-      "foreign_net": 1049875,
-      "trust_net": 404835,
-      "dealer_net": -365847,
-      "total_net": 1088863
-    },
-    {
-      "code": "2211",
-      "name": "長榮鋼",
-      "foreign_buy": 328000,
-      "foreign_sell": 931000,
-      "foreign_net": -603000,
-      "trust_net": 391675,
-      "dealer_net": -15203,
-      "total_net": -226528
-    },
-    {
-      "code": "2884",
-      "name": "玉山金",
-      "foreign_buy": 19828060,
-      "foreign_sell": 34807823,
-      "foreign_net": -14979763,
-      "trust_net": 363000,
-      "dealer_net": 825719,
-      "total_net": -13791044
-    },
-    {
-      "code": "2454",
-      "name": "聯發科",
-      "foreign_buy": 4780404,
-      "foreign_sell": 7844675,
-      "foreign_net": -3064271,
-      "trust_net": 333978,
-      "dealer_net": -130628,
-      "total_net": -2860921
-    },
-    {
-      "code": "1303",
-      "name": "南亞",
-      "foreign_buy": 38066142,
-      "foreign_sell": 24534985,
-      "foreign_net": 13531157,
-      "trust_net": 331649,
-      "dealer_net": -721159,
-      "total_net": 13141647
-    },
-    {
-      "code": "1477",
-      "name": "聚陽",
-      "foreign_buy": 921038,
-      "foreign_sell": 1038000,
-      "foreign_net": -116962,
-      "trust_net": 324965,
-      "dealer_net": 287562,
-      "total_net": 495565
-    },
-    {
-      "code": "2886",
-      "name": "兆豐金",
-      "foreign_buy": 14163123,
-      "foreign_sell": 22506452,
-      "foreign_net": -8343329,
-      "trust_net": 308000,
-      "dealer_net": 569394,
-      "total_net": -7465935
-    },
-    {
-      "code": "2308",
-      "name": "台達電",
-      "foreign_buy": 9275012,
-      "foreign_sell": 10395660,
-      "foreign_net": -1120648,
-      "trust_net": 292906,
-      "dealer_net": -171830,
-      "total_net": -999572
-    },
-    {
-      "code": "2357",
-      "name": "華碩",
-      "foreign_buy": 1530858,
-      "foreign_sell": 3173865,
-      "foreign_net": -1643007,
-      "trust_net": 281998,
-      "dealer_net": 169392,
-      "total_net": -1191617
-    },
-    {
-      "code": "3231",
-      "name": "緯創",
-      "foreign_buy": 14205625,
-      "foreign_sell": 32308583,
-      "foreign_net": -18102958,
-      "trust_net": 268058,
-      "dealer_net": 1316545,
-      "total_net": -16518355
-    },
-    {
-      "code": "3044",
-      "name": "健鼎",
-      "foreign_buy": 1592055,
-      "foreign_sell": 1845577,
-      "foreign_net": -253522,
-      "trust_net": 263000,
-      "dealer_net": -46030,
-      "total_net": -36552
-    },
-    {
-      "code": "2360",
-      "name": "致茂",
-      "foreign_buy": 2386729,
-      "foreign_sell": 3469107,
-      "foreign_net": -1082378,
-      "trust_net": 243684,
-      "dealer_net": 131075,
-      "total_net": -707619
-    },
-    {
-      "code": "2451",
-      "name": "創見",
-      "foreign_buy": 2313174,
-      "foreign_sell": 2134943,
-      "foreign_net": 178231,
-      "trust_net": 220871,
-      "dealer_net": -63948,
-      "total_net": 335154
-    },
-    {
-      "code": "1101",
-      "name": "台泥",
-      "foreign_buy": 14103457,
-      "foreign_sell": 21155337,
-      "foreign_net": -7051880,
-      "trust_net": 160000,
-      "dealer_net": -2523475,
-      "total_net": -9415355
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "foreign_buy": 11680628,
-      "foreign_sell": 21471367,
-      "foreign_net": -9790739,
-      "trust_net": 156846,
-      "dealer_net": 119634,
-      "total_net": -9514259
-    },
-    {
-      "code": "6505",
-      "name": "台塑化",
-      "foreign_buy": 22461452,
-      "foreign_sell": 30709639,
-      "foreign_net": -8248187,
-      "trust_net": 149276,
-      "dealer_net": -456280,
-      "total_net": -8555191
-    },
-    {
-      "code": "1590",
-      "name": "亞德客-KY",
-      "foreign_buy": 1279939,
-      "foreign_sell": 1186648,
-      "foreign_net": 93291,
-      "trust_net": 113369,
-      "dealer_net": -25534,
-      "total_net": 181126
-    },
-    {
-      "code": "3661",
-      "name": "世芯-KY",
-      "foreign_buy": 545957,
-      "foreign_sell": 1036150,
-      "foreign_net": -490193,
-      "trust_net": 106500,
-      "dealer_net": -59869,
-      "total_net": -443562
-    },
-    {
-      "code": "4904",
-      "name": "遠傳",
-      "foreign_buy": 4048620,
-      "foreign_sell": 3390870,
-      "foreign_net": 657750,
-      "trust_net": 101000,
-      "dealer_net": 4310,
-      "total_net": 763060
-    },
-    {
-      "code": "2412",
-      "name": "中華電",
-      "foreign_buy": 13507148,
-      "foreign_sell": 11489164,
-      "foreign_net": 2017984,
-      "trust_net": 100000,
-      "dealer_net": 460912,
-      "total_net": 2578896
-    },
-    {
-      "code": "3563",
-      "name": "牧德",
-      "foreign_buy": 2077300,
-      "foreign_sell": 1924987,
-      "foreign_net": 152313,
-      "trust_net": 100000,
-      "dealer_net": 133111,
-      "total_net": 385424
-    },
-    {
-      "code": "6278",
-      "name": "台表科",
-      "foreign_buy": 667000,
-      "foreign_sell": 1261000,
-      "foreign_net": -594000,
-      "trust_net": 96718,
-      "dealer_net": -27085,
-      "total_net": -524367
-    },
-    {
-      "code": "6526",
-      "name": "達發",
-      "foreign_buy": 757043,
-      "foreign_sell": 987767,
-      "foreign_net": -230724,
-      "trust_net": 74000,
-      "dealer_net": -23766,
-      "total_net": -180490
-    },
-    {
-      "code": "2352",
-      "name": "佳世達",
-      "foreign_buy": 2109199,
-      "foreign_sell": 4269820,
-      "foreign_net": -2160621,
-      "trust_net": 74000,
-      "dealer_net": -310320,
-      "total_net": -2396941
-    },
-    {
-      "code": "2409",
-      "name": "友達",
-      "foreign_buy": 61511587,
-      "foreign_sell": 60530434,
-      "foreign_net": 981153,
-      "trust_net": 73635,
-      "dealer_net": -7323726,
-      "total_net": -6268938
-    },
-    {
-      "code": "2371",
-      "name": "大同",
-      "foreign_buy": 7041339,
-      "foreign_sell": 8481000,
-      "foreign_net": -1439661,
-      "trust_net": 65401,
-      "dealer_net": -1094098,
-      "total_net": -2468358
-    }
-  ],
-  "trust_top_sell": [
-    {
-      "code": "2105",
-      "name": "正新",
-      "foreign_buy": 36813690,
-      "foreign_sell": 22477436,
-      "foreign_net": 14336254,
-      "trust_net": -20977857,
-      "dealer_net": -494756,
-      "total_net": -7136359
-    },
-    {
-      "code": "2408",
-      "name": "南亞科",
-      "foreign_buy": 50282709,
-      "foreign_sell": 19976523,
-      "foreign_net": 30306186,
-      "trust_net": -5724291,
-      "dealer_net": -2483420,
-      "total_net": 22098475
-    },
-    {
-      "code": "2344",
-      "name": "華邦電",
-      "foreign_buy": 77737777,
-      "foreign_sell": 39044718,
-      "foreign_net": 38693059,
-      "trust_net": -5297042,
-      "dealer_net": -551907,
-      "total_net": 32844110
-    },
-    {
-      "code": "6239",
-      "name": "力成",
-      "foreign_buy": 11432646,
-      "foreign_sell": 4568137,
-      "foreign_net": 6864509,
-      "trust_net": -2475000,
-      "dealer_net": 43536,
-      "total_net": 4433045
-    },
-    {
-      "code": "6770",
-      "name": "力積電",
-      "foreign_buy": 60930591,
-      "foreign_sell": 60760610,
-      "foreign_net": 169981,
-      "trust_net": -2168000,
-      "dealer_net": -891834,
-      "total_net": -2889853
-    },
-    {
-      "code": "2455",
-      "name": "全新",
-      "foreign_buy": 1179664,
-      "foreign_sell": 450095,
-      "foreign_net": 729569,
-      "trust_net": -1200000,
-      "dealer_net": -511852,
-      "total_net": -982283
-    },
-    {
-      "code": "3036",
-      "name": "文曄",
-      "foreign_buy": 15271900,
-      "foreign_sell": 13819111,
-      "foreign_net": 1452789,
-      "trust_net": -1028021,
-      "dealer_net": 73767,
-      "total_net": 498535
-    },
-    {
-      "code": "3037",
-      "name": "欣興",
-      "foreign_buy": 7262011,
-      "foreign_sell": 10826773,
-      "foreign_net": -3564762,
-      "trust_net": -898000,
-      "dealer_net": 504835,
-      "total_net": -3957927
-    },
-    {
-      "code": "1605",
-      "name": "華新",
-      "foreign_buy": 16015284,
-      "foreign_sell": 18232000,
-      "foreign_net": -2216716,
-      "trust_net": -893589,
-      "dealer_net": -2152486,
-      "total_net": -5262791
-    },
-    {
-      "code": "3711",
-      "name": "日月光投控",
-      "foreign_buy": 20116647,
-      "foreign_sell": 19067913,
-      "foreign_net": 1048734,
-      "trust_net": -886388,
-      "dealer_net": 978342,
-      "total_net": 1140688
-    },
-    {
-      "code": "2002",
-      "name": "中鋼",
-      "foreign_buy": 19292124,
-      "foreign_sell": 44769580,
-      "foreign_net": -25477456,
-      "trust_net": -857000,
-      "dealer_net": -1119040,
-      "total_net": -27453496
-    },
-    {
-      "code": "1504",
-      "name": "東元",
-      "foreign_buy": 9516842,
-      "foreign_sell": 7015807,
-      "foreign_net": 2501035,
-      "trust_net": -806914,
-      "dealer_net": -559023,
-      "total_net": 1135098
-    },
-    {
-      "code": "2610",
-      "name": "華航",
-      "foreign_buy": 22984092,
-      "foreign_sell": 55388800,
-      "foreign_net": -32404708,
-      "trust_net": -620000,
-      "dealer_net": -1243563,
-      "total_net": -34268271
-    },
-    {
-      "code": "1795",
-      "name": "美時",
-      "foreign_buy": 2278020,
-      "foreign_sell": 1605547,
-      "foreign_net": 672473,
-      "trust_net": -554820,
-      "dealer_net": -212625,
-      "total_net": -94972
-    },
-    {
-      "code": "3481",
-      "name": "群創",
-      "foreign_buy": 241541250,
-      "foreign_sell": 178123474,
-      "foreign_net": 63417776,
-      "trust_net": -551548,
-      "dealer_net": -3804262,
-      "total_net": 59061966
-    },
-    {
-      "code": "3189",
-      "name": "景碩",
-      "foreign_buy": 16030346,
-      "foreign_sell": 14276656,
-      "foreign_net": 1753690,
-      "trust_net": -496000,
-      "dealer_net": -119335,
-      "total_net": 1138355
-    },
-    {
-      "code": "2368",
-      "name": "金像電",
-      "foreign_buy": 4163808,
-      "foreign_sell": 3897788,
-      "foreign_net": 266020,
-      "trust_net": -446622,
-      "dealer_net": -115394,
-      "total_net": -295996
-    },
-    {
-      "code": "6415",
-      "name": "矽力*-KY",
-      "foreign_buy": 4037429,
-      "foreign_sell": 3047555,
-      "foreign_net": 989874,
-      "trust_net": -356000,
-      "dealer_net": -176978,
-      "total_net": 456896
-    },
-    {
-      "code": "5871",
-      "name": "中租-KY",
-      "foreign_buy": 3318842,
-      "foreign_sell": 5984837,
-      "foreign_net": -2665995,
-      "trust_net": -346700,
-      "dealer_net": -144348,
-      "total_net": -3157043
-    },
-    {
-      "code": "4763",
-      "name": "材料*-KY",
-      "foreign_buy": 5552190,
-      "foreign_sell": 2074674,
-      "foreign_net": 3477516,
-      "trust_net": -344570,
-      "dealer_net": -148510,
-      "total_net": 2984436
-    },
-    {
-      "code": "3533",
-      "name": "嘉澤",
-      "foreign_buy": 1346784,
-      "foreign_sell": 895965,
-      "foreign_net": 450819,
-      "trust_net": -316386,
-      "dealer_net": -17581,
-      "total_net": 116852
-    },
-    {
-      "code": "2645",
-      "name": "長榮航太",
-      "foreign_buy": 1484329,
-      "foreign_sell": 1307164,
-      "foreign_net": 177165,
-      "trust_net": -307000,
-      "dealer_net": -62009,
-      "total_net": -191844
-    },
-    {
-      "code": "2618",
-      "name": "長榮航",
-      "foreign_buy": 18233955,
-      "foreign_sell": 29817000,
-      "foreign_net": -11583045,
-      "trust_net": -245694,
-      "dealer_net": 969,
-      "total_net": -11827770
-    },
-    {
-      "code": "2301",
-      "name": "光寶科",
-      "foreign_buy": 14827378,
-      "foreign_sell": 18911719,
-      "foreign_net": -4084341,
-      "trust_net": -242103,
-      "dealer_net": -282851,
-      "total_net": -4609295
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "foreign_buy": 2596048,
-      "foreign_sell": 3026957,
-      "foreign_net": -430909,
-      "trust_net": -215988,
-      "dealer_net": -116192,
-      "total_net": -763089
-    },
-    {
-      "code": "2486",
-      "name": "一詮",
-      "foreign_buy": 7571928,
-      "foreign_sell": 4505000,
-      "foreign_net": 3066928,
-      "trust_net": -200000,
-      "dealer_net": -322416,
-      "total_net": 2544512
-    },
-    {
-      "code": "7769",
-      "name": "鴻勁",
-      "foreign_buy": 1463533,
-      "foreign_sell": 938175,
-      "foreign_net": 525358,
-      "trust_net": -198200,
-      "dealer_net": -28692,
-      "total_net": 298466
-    },
-    {
-      "code": "1402",
-      "name": "遠東新",
-      "foreign_buy": 8373624,
-      "foreign_sell": 9666294,
-      "foreign_net": -1292670,
-      "trust_net": -197000,
-      "dealer_net": -632928,
-      "total_net": -2122598
-    },
-    {
-      "code": "6472",
-      "name": "保瑞",
-      "foreign_buy": 273756,
-      "foreign_sell": 297416,
-      "foreign_net": -23660,
-      "trust_net": -190000,
-      "dealer_net": -14821,
-      "total_net": -228481
-    },
-    {
-      "code": "2542",
-      "name": "興富發",
-      "foreign_buy": 2967244,
-      "foreign_sell": 3251200,
-      "foreign_net": -283956,
-      "trust_net": -172000,
-      "dealer_net": -347975,
-      "total_net": -803931
-    },
-    {
-      "code": "8422",
-      "name": "可寧衛*",
-      "foreign_buy": 7172280,
-      "foreign_sell": 5307000,
-      "foreign_net": 1865280,
-      "trust_net": -169000,
-      "dealer_net": -211460,
-      "total_net": 1484820
-    },
-    {
-      "code": "6768",
-      "name": "志強-KY",
-      "foreign_buy": 210101,
-      "foreign_sell": 259000,
-      "foreign_net": -48899,
-      "trust_net": -162168,
-      "dealer_net": 6219,
-      "total_net": -204848
-    },
-    {
-      "code": "5243",
-      "name": "乙盛-KY",
-      "foreign_buy": 1499000,
-      "foreign_sell": 1541000,
-      "foreign_net": -42000,
-      "trust_net": -160000,
-      "dealer_net": -145480,
-      "total_net": -347480
-    },
-    {
-      "code": "6271",
-      "name": "同欣電",
-      "foreign_buy": 4725031,
-      "foreign_sell": 3160500,
-      "foreign_net": 1564531,
-      "trust_net": -159000,
-      "dealer_net": -600317,
-      "total_net": 805214
-    },
-    {
-      "code": "2504",
-      "name": "國產",
-      "foreign_buy": 1194000,
-      "foreign_sell": 3065476,
-      "foreign_net": -1871476,
-      "trust_net": -152204,
-      "dealer_net": -33000,
-      "total_net": -2056680
-    },
-    {
-      "code": "2609",
-      "name": "陽明",
-      "foreign_buy": 80792760,
-      "foreign_sell": 111355508,
-      "foreign_net": -30562748,
-      "trust_net": -147000,
-      "dealer_net": -2436838,
-      "total_net": -33146586
-    },
-    {
-      "code": "2049",
-      "name": "上銀",
-      "foreign_buy": 7531017,
-      "foreign_sell": 6553619,
-      "foreign_net": 977398,
-      "trust_net": -142000,
-      "dealer_net": 45206,
-      "total_net": 880604
-    },
-    {
-      "code": "6781",
-      "name": "AES-KY",
-      "foreign_buy": 701380,
-      "foreign_sell": 441654,
-      "foreign_net": 259726,
-      "trust_net": -138642,
-      "dealer_net": -45367,
-      "total_net": 75717
-    },
-    {
-      "code": "6176",
-      "name": "瑞儀",
-      "foreign_buy": 2708930,
-      "foreign_sell": 4186000,
-      "foreign_net": -1477070,
-      "trust_net": -135203,
-      "dealer_net": 90966,
-      "total_net": -1521307
-    },
-    {
-      "code": "3167",
-      "name": "大量",
-      "foreign_buy": 176000,
-      "foreign_sell": 275066,
-      "foreign_net": -99066,
-      "trust_net": -135000,
-      "dealer_net": -54848,
-      "total_net": -288914
+      "net": 9880816.0,
+      "trust_net": 2844000.0,
+      "change": 9.86,
+      "industry": "半導體"
+    },
+    {
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "net": 7915219.0,
+      "trust_net": -28000.0,
+      "change": 4.55,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2347",
+      "name": "聯強",
+      "net": 7682208.0,
+      "trust_net": -7013.0,
+      "change": 1.78,
+      "industry": "電子通路"
     },
     {
       "code": "2353",
       "name": "宏碁",
-      "foreign_buy": 12738535,
-      "foreign_sell": 12694488,
-      "foreign_net": 44047,
-      "trust_net": -134563,
-      "dealer_net": -842449,
-      "total_net": -932965
+      "net": 7099540.0,
+      "trust_net": -274678.0,
+      "change": 5.28,
+      "industry": "電腦及週邊"
     },
     {
-      "code": "2481",
-      "name": "強茂",
-      "foreign_buy": 4558000,
-      "foreign_sell": 10193209,
-      "foreign_net": -5635209,
-      "trust_net": -114000,
-      "dealer_net": -563557,
-      "total_net": -6312766
+      "code": "2495",
+      "name": "普安",
+      "net": 6912950.0,
+      "trust_net": 0.0,
+      "change": 9.94,
+      "industry": "電腦及週邊"
     },
     {
-      "code": "3035",
-      "name": "智原",
-      "foreign_buy": 610150,
-      "foreign_sell": 1784075,
-      "foreign_net": -1173925,
-      "trust_net": -111000,
-      "dealer_net": -240647,
-      "total_net": -1525572
+      "code": "2855",
+      "name": "統一證",
+      "net": 6900000.0,
+      "trust_net": -6000.0,
+      "change": 5.28,
+      "industry": "金融保險"
     },
     {
-      "code": "6257",
-      "name": "矽格",
-      "foreign_buy": 4196153,
-      "foreign_sell": 5578253,
-      "foreign_net": -1382100,
-      "trust_net": -109000,
-      "dealer_net": -1095205,
-      "total_net": -2586305
+      "code": "3045",
+      "name": "台灣大",
+      "net": 6881304.0,
+      "trust_net": -1282686.0,
+      "change": 0.46,
+      "industry": "通信網路"
     },
     {
-      "code": "4583",
-      "name": "台灣精銳",
-      "foreign_buy": 303000,
-      "foreign_sell": 149000,
-      "foreign_net": 154000,
-      "trust_net": -108000,
-      "dealer_net": -11041,
-      "total_net": 34959
+      "code": "3037",
+      "name": "欣興",
+      "net": 6762083.0,
+      "trust_net": 1352000.0,
+      "change": 6.81,
+      "industry": "電子零組件"
     },
     {
-      "code": "5876",
-      "name": "上海商銀",
-      "foreign_buy": 3194135,
-      "foreign_sell": 13568913,
-      "foreign_net": -10374778,
-      "trust_net": -104000,
-      "dealer_net": -421473,
-      "total_net": -10900251
+      "code": "1605",
+      "name": "華新",
+      "net": 6743632.0,
+      "trust_net": 69000.0,
+      "change": 0.3,
+      "industry": "電器電纜"
     },
     {
-      "code": "2474",
-      "name": "可成",
-      "foreign_buy": 1475940,
-      "foreign_sell": 2231531,
-      "foreign_net": -755591,
-      "trust_net": -95242,
-      "dealer_net": -13177,
-      "total_net": -864010
+      "code": "4919",
+      "name": "新唐",
+      "net": 5666165.0,
+      "trust_net": -1000.0,
+      "change": 9.98,
+      "industry": "半導體"
+    },
+    {
+      "code": "3189",
+      "name": "景碩",
+      "net": 5355301.0,
+      "trust_net": 8000.0,
+      "change": 7.03,
+      "industry": "半導體"
+    },
+    {
+      "code": "1301",
+      "name": "台塑",
+      "net": 5198807.0,
+      "trust_net": 10931.0,
+      "change": 1.83,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2382",
+      "name": "廣達",
+      "net": 4997462.0,
+      "trust_net": -5325.0,
+      "change": 1.38,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "3033",
+      "name": "威健",
+      "net": 4599900.0,
+      "trust_net": 0.0,
+      "change": 3.9,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2323",
+      "name": "中環",
+      "net": 4462000.0,
+      "trust_net": -940.0,
+      "change": 2.33,
+      "industry": "光電"
+    },
+    {
+      "code": "2369",
+      "name": "菱生",
+      "net": 4411500.0,
+      "trust_net": 0.0,
+      "change": 5.7,
+      "industry": "半導體"
+    },
+    {
+      "code": "8028",
+      "name": "昇陽半導體",
+      "net": 3968160.0,
+      "trust_net": -1130000.0,
+      "change": 4.23,
+      "industry": "半導體"
+    },
+    {
+      "code": "5871",
+      "name": "中租-KY",
+      "net": 3899593.0,
+      "trust_net": -98475.0,
+      "change": 1.9,
+      "industry": "其他"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "net": 3859575.0,
+      "trust_net": -334834.0,
+      "change": 1.1,
+      "industry": "金融保險"
     },
     {
       "code": "8021",
       "name": "尖點",
-      "foreign_buy": 4389859,
-      "foreign_sell": 4003377,
-      "foreign_net": 386482,
-      "trust_net": -93000,
-      "dealer_net": -47656,
-      "total_net": 245826
+      "net": 3844086.0,
+      "trust_net": -27000.0,
+      "change": 9.92,
+      "industry": "其他電子"
     },
     {
-      "code": "3013",
-      "name": "晟銘電",
-      "foreign_buy": 1742000,
-      "foreign_sell": 1070725,
-      "foreign_net": 671275,
-      "trust_net": -92000,
-      "dealer_net": -68158,
-      "total_net": 511117
+      "code": "0056",
+      "name": "元大高股息",
+      "net": 3737110.0,
+      "trust_net": 0.0,
+      "change": 0.74,
+      "industry": "其他"
     },
     {
-      "code": "8261",
-      "name": "富鼎",
-      "foreign_buy": 527000,
-      "foreign_sell": 1125000,
-      "foreign_net": -598000,
-      "trust_net": -90000,
-      "dealer_net": -16676,
-      "total_net": -704676
+      "code": "1809",
+      "name": "中釉",
+      "net": 3709000.0,
+      "trust_net": 0.0,
+      "change": 9.85,
+      "industry": "玻璃陶瓷"
+    },
+    {
+      "code": "0052",
+      "name": "富邦科技",
+      "net": 3684441.0,
+      "trust_net": -220000.0,
+      "change": 1.69,
+      "industry": "其他"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "net": 3614312.0,
+      "trust_net": -903248.0,
+      "change": 0.27,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2377",
+      "name": "微星",
+      "net": 3310869.0,
+      "trust_net": 510000.0,
+      "change": 4.17,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2880",
+      "name": "華南金",
+      "net": 3279312.0,
+      "trust_net": -111935.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2492",
+      "name": "華新科",
+      "net": 3142333.0,
+      "trust_net": 2000.0,
+      "change": 1.43,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2455",
+      "name": "全新",
+      "net": 3074360.0,
+      "trust_net": -797000.0,
+      "change": 5.32,
+      "industry": "通信網路"
+    },
+    {
+      "code": "2356",
+      "name": "英業達",
+      "net": 2958387.0,
+      "trust_net": -114000.0,
+      "change": 0.8,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "3048",
+      "name": "益登",
+      "net": 2898323.0,
+      "trust_net": 0.0,
+      "change": 4.29,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2324",
+      "name": "仁寶",
+      "net": 2819377.0,
+      "trust_net": 76000.0,
+      "change": 2.02,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "4960",
+      "name": "誠美材",
+      "net": 2778000.0,
+      "trust_net": 0.0,
+      "change": 3.25,
+      "industry": "光電"
+    },
+    {
+      "code": "4906",
+      "name": "正文",
+      "net": 2738000.0,
+      "trust_net": -16042.0,
+      "change": 5.85,
+      "industry": "通信網路"
+    },
+    {
+      "code": "2355",
+      "name": "敬鵬",
+      "net": 2709900.0,
+      "trust_net": -17026.0,
+      "change": 6.41,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1313",
+      "name": "聯成",
+      "net": 2673700.0,
+      "trust_net": 0.0,
+      "change": 2.39,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "1101",
+      "name": "台泥",
+      "net": 2577726.0,
+      "trust_net": 92000.0,
+      "change": 0.41,
+      "industry": "水泥工業"
+    },
+    {
+      "code": "6153",
+      "name": "嘉聯益",
+      "net": 2505544.0,
+      "trust_net": -11175.0,
+      "change": 1.16,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2603",
+      "name": "長榮",
+      "net": 2473535.0,
+      "trust_net": 115677.0,
+      "change": 0.0,
+      "industry": "航運業"
+    },
+    {
+      "code": "4763",
+      "name": "材料*-KY",
+      "net": 2439695.0,
+      "trust_net": -96313.0,
+      "change": 3.06,
+      "industry": "化學工業"
+    },
+    {
+      "code": "2481",
+      "name": "強茂",
+      "net": 2435511.0,
+      "trust_net": -1927000.0,
+      "change": 1.49,
+      "industry": "半導體"
+    },
+    {
+      "code": "4967",
+      "name": "十銓",
+      "net": 2381194.0,
+      "trust_net": 0.0,
+      "change": 9.8,
+      "industry": "半導體"
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "net": 2368412.0,
+      "trust_net": -1235606.0,
+      "change": 0.97,
+      "industry": "通信網路"
+    },
+    {
+      "code": "9933",
+      "name": "中鼎",
+      "net": 2290028.0,
+      "trust_net": 21000.0,
+      "change": 0.59,
+      "industry": "其他"
+    }
+  ],
+  "top_sell": [
+    {
+      "code": "6770",
+      "name": "力積電",
+      "net": -67088216.0,
+      "trust_net": -9000.0,
+      "change": 0.28,
+      "industry": "半導體"
+    },
+    {
+      "code": "1802",
+      "name": "台玻",
+      "net": -38412086.0,
+      "trust_net": 10000.0,
+      "change": 3.39,
+      "industry": "玻璃陶瓷"
+    },
+    {
+      "code": "2317",
+      "name": "鴻海",
+      "net": -38172470.0,
+      "trust_net": -42293.0,
+      "change": 0.96,
+      "industry": "其他電子"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "net": -36952061.0,
+      "trust_net": 4764831.0,
+      "change": 1.86,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2409",
+      "name": "友達",
+      "net": -26946492.0,
+      "trust_net": 54000.0,
+      "change": 1.89,
+      "industry": "光電"
+    },
+    {
+      "code": "2313",
+      "name": "華通",
+      "net": -20465064.0,
+      "trust_net": -1593000.0,
+      "change": 2.91,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6282",
+      "name": "康舒",
+      "net": -17909298.0,
+      "trust_net": 14000.0,
+      "change": 4.97,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "3576",
+      "name": "聯合再生",
+      "net": -17658837.0,
+      "trust_net": -12000.0,
+      "change": 4.49,
+      "industry": "光電"
+    },
+    {
+      "code": "4927",
+      "name": "泰鼎-KY",
+      "net": -13606292.0,
+      "trust_net": 0.0,
+      "change": 9.77,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6443",
+      "name": "元晶",
+      "net": -12437715.0,
+      "trust_net": 0.0,
+      "change": 2.41,
+      "industry": "光電"
+    },
+    {
+      "code": "8110",
+      "name": "華東",
+      "net": -11366500.0,
+      "trust_net": 0.0,
+      "change": 0.49,
+      "industry": "半導體"
+    },
+    {
+      "code": "3481",
+      "name": "群創",
+      "net": -8489112.0,
+      "trust_net": 20000.0,
+      "change": 0.9,
+      "industry": "光電"
+    },
+    {
+      "code": "2834",
+      "name": "臺企銀",
+      "net": -7274754.0,
+      "trust_net": 53281.0,
+      "change": 0.66,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "net": -6670585.0,
+      "trust_net": -1227329.0,
+      "change": 2.76,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1402",
+      "name": "遠東新",
+      "net": -5664100.0,
+      "trust_net": -379000.0,
+      "change": 0.75,
+      "industry": "紡織纖維"
+    },
+    {
+      "code": "0050",
+      "name": "元大台灣50",
+      "net": -5531981.0,
+      "trust_net": 2000000.0,
+      "change": 1.5,
+      "industry": "其他"
+    },
+    {
+      "code": "2371",
+      "name": "大同",
+      "net": -5229900.0,
+      "trust_net": 15000.0,
+      "change": 1.63,
+      "industry": "電機機械"
+    },
+    {
+      "code": "6239",
+      "name": "力成",
+      "net": -4847960.0,
+      "trust_net": 95000.0,
+      "change": 4.2,
+      "industry": "半導體"
+    },
+    {
+      "code": "1717",
+      "name": "長興",
+      "net": -4774309.0,
+      "trust_net": 1000.0,
+      "change": 1.29,
+      "industry": "化學工業"
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "net": -4745289.0,
+      "trust_net": 4764834.0,
+      "change": 0.76,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2610",
+      "name": "華航",
+      "net": -4670003.0,
+      "trust_net": -89555.0,
+      "change": 0.26,
+      "industry": "航運業"
+    },
+    {
+      "code": "2421",
+      "name": "建準",
+      "net": -4523633.0,
+      "trust_net": -48000.0,
+      "change": 2.71,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1102",
+      "name": "亞泥",
+      "net": -4158808.0,
+      "trust_net": -1117453.0,
+      "change": 0.29,
+      "industry": "水泥工業"
+    },
+    {
+      "code": "2002",
+      "name": "中鋼",
+      "net": -4098223.0,
+      "trust_net": 122512.0,
+      "change": 0.26,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "2406",
+      "name": "國碩",
+      "net": -3930761.0,
+      "trust_net": 0.0,
+      "change": 3.8,
+      "industry": "光電"
+    },
+    {
+      "code": "1312",
+      "name": "國喬",
+      "net": -3805529.0,
+      "trust_net": 0.0,
+      "change": 1.1,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "net": -3737895.0,
+      "trust_net": 2348501.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3711",
+      "name": "日月光投控",
+      "net": -3735146.0,
+      "trust_net": 307728.0,
+      "change": 4.53,
+      "industry": "半導體"
+    },
+    {
+      "code": "2897",
+      "name": "王道銀行",
+      "net": -3656000.0,
+      "trust_net": -8000.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2408",
+      "name": "南亞科",
+      "net": -3602702.0,
+      "trust_net": 590249.0,
+      "change": 1.66,
+      "industry": "半導體"
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "net": -3438835.0,
+      "trust_net": -69591.0,
+      "change": 0.52,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2633",
+      "name": "台灣高鐵",
+      "net": -3266009.0,
+      "trust_net": 38398.0,
+      "change": 0.58,
+      "industry": "航運業"
+    },
+    {
+      "code": "2328",
+      "name": "廣宇",
+      "net": -3111009.0,
+      "trust_net": 0.0,
+      "change": 2.6,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1303",
+      "name": "南亞",
+      "net": -3082558.0,
+      "trust_net": 661820.0,
+      "change": 0.82,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2327",
+      "name": "國巨*",
+      "net": -3080173.0,
+      "trust_net": -897976.0,
+      "change": 2.0,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2464",
+      "name": "盟立",
+      "net": -3078489.0,
+      "trust_net": 0.0,
+      "change": 0.63,
+      "industry": "其他電子"
+    },
+    {
+      "code": "3019",
+      "name": "亞光",
+      "net": -2941453.0,
+      "trust_net": 0.0,
+      "change": 1.48,
+      "industry": "光電"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "net": -2845144.0,
+      "trust_net": -175109.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "9904",
+      "name": "寶成",
+      "net": -2624525.0,
+      "trust_net": -720488.0,
+      "change": 0.35,
+      "industry": "其他"
+    },
+    {
+      "code": "1582",
+      "name": "信錦",
+      "net": -2512950.0,
+      "trust_net": 0.0,
+      "change": 0.53,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1609",
+      "name": "大亞",
+      "net": -2425088.0,
+      "trust_net": 16000.0,
+      "change": 1.44,
+      "industry": "電器電纜"
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "net": -2368066.0,
+      "trust_net": -15879.0,
+      "change": 0.34,
+      "industry": "金融保險"
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "net": -2305711.0,
+      "trust_net": -1560393.0,
+      "change": 0.71,
+      "industry": "食品工業"
+    },
+    {
+      "code": "8422",
+      "name": "可寧衛*",
+      "net": -2303760.0,
+      "trust_net": -227000.0,
+      "change": 1.51,
+      "industry": "其他"
+    },
+    {
+      "code": "1319",
+      "name": "東陽",
+      "net": -2171000.0,
+      "trust_net": -13340.0,
+      "change": 1.45,
+      "industry": "汽車工業"
+    },
+    {
+      "code": "2105",
+      "name": "正新",
+      "net": -2143129.0,
+      "trust_net": -26410.0,
+      "change": 0.67,
+      "industry": "橡膠工業"
+    },
+    {
+      "code": "2329",
+      "name": "華泰",
+      "net": -2112287.0,
+      "trust_net": 0.0,
+      "change": 0.18,
+      "industry": "半導體"
+    },
+    {
+      "code": "1409",
+      "name": "新纖",
+      "net": -2096760.0,
+      "trust_net": 0.0,
+      "change": 1.51,
+      "industry": "紡織纖維"
+    },
+    {
+      "code": "3005",
+      "name": "神基",
+      "net": -2067953.0,
+      "trust_net": 713000.0,
+      "change": 1.49,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1711",
+      "name": "永光",
+      "net": -1981625.0,
+      "trust_net": 0.0,
+      "change": 0.77,
+      "industry": "化學工業"
+    }
+  ],
+  "trust_top_buy": [
+    {
+      "code": "2891",
+      "name": "中信金",
+      "net": -4745289.0,
+      "trust_net": 4764834.0,
+      "change": 0.76,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "net": -36952061.0,
+      "trust_net": 4764831.0,
+      "change": 1.86,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2449",
+      "name": "京元電子",
+      "net": 9880816.0,
+      "trust_net": 2844000.0,
+      "change": 9.86,
+      "industry": "半導體"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "net": -3737895.0,
+      "trust_net": 2348501.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "0050",
+      "name": "元大台灣50",
+      "net": -5531981.0,
+      "trust_net": 2000000.0,
+      "change": 1.5,
+      "industry": "其他"
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "net": 6762083.0,
+      "trust_net": 1352000.0,
+      "change": 6.81,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2301",
+      "name": "光寶科",
+      "net": -795694.0,
+      "trust_net": 1097431.0,
+      "change": 1.19,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2303",
+      "name": "聯電",
+      "net": 10005669.0,
+      "trust_net": 1024498.0,
+      "change": 0.66,
+      "industry": "半導體"
+    },
+    {
+      "code": "3005",
+      "name": "神基",
+      "net": -2067953.0,
+      "trust_net": 713000.0,
+      "change": 1.49,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1303",
+      "name": "南亞",
+      "net": -3082558.0,
+      "trust_net": 661820.0,
+      "change": 0.82,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2344",
+      "name": "華邦電",
+      "net": 16744344.0,
+      "trust_net": 604000.0,
+      "change": 3.64,
+      "industry": "半導體"
+    },
+    {
+      "code": "3036",
+      "name": "文曄",
+      "net": 626987.0,
+      "trust_net": 597271.0,
+      "change": 2.61,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2408",
+      "name": "南亞科",
+      "net": -3602702.0,
+      "trust_net": 590249.0,
+      "change": 1.66,
+      "industry": "半導體"
+    },
+    {
+      "code": "2377",
+      "name": "微星",
+      "net": 3310869.0,
+      "trust_net": 510000.0,
+      "change": 4.17,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2360",
+      "name": "致茂",
+      "net": 140518.0,
+      "trust_net": 365758.0,
+      "change": 6.46,
+      "industry": "其他電子"
+    },
+    {
+      "code": "8046",
+      "name": "南電",
+      "net": -485810.0,
+      "trust_net": 339000.0,
+      "change": 4.23,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "3711",
+      "name": "日月光投控",
+      "net": -3735146.0,
+      "trust_net": 307728.0,
+      "change": 4.53,
+      "industry": "半導體"
+    },
+    {
+      "code": "3406",
+      "name": "玉晶光",
+      "net": -47874.0,
+      "trust_net": 223000.0,
+      "change": 0.45,
+      "industry": "光電"
+    },
+    {
+      "code": "3008",
+      "name": "大立光",
+      "net": -159055.0,
+      "trust_net": 221894.0,
+      "change": 1.67,
+      "industry": "光電"
+    },
+    {
+      "code": "1326",
+      "name": "台化",
+      "net": 11263981.0,
+      "trust_net": 207000.0,
+      "change": 3.96,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "3653",
+      "name": "健策",
+      "net": 93484.0,
+      "trust_net": 198719.0,
+      "change": 6.85,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2345",
+      "name": "智邦",
+      "net": 547189.0,
+      "trust_net": 147174.0,
+      "change": 9.97,
+      "industry": "通信網路"
+    },
+    {
+      "code": "6937",
+      "name": "天虹",
+      "net": 3000.0,
+      "trust_net": 125000.0,
+      "change": 1.85,
+      "industry": "半導體"
+    },
+    {
+      "code": "2002",
+      "name": "中鋼",
+      "net": -4098223.0,
+      "trust_net": 122512.0,
+      "change": 0.26,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "2603",
+      "name": "長榮",
+      "net": 2473535.0,
+      "trust_net": 115677.0,
+      "change": 0.0,
+      "industry": "航運業"
+    },
+    {
+      "code": "7769",
+      "name": "鴻勁",
+      "net": 69577.0,
+      "trust_net": 109065.0,
+      "change": 3.55,
+      "industry": "半導體"
+    },
+    {
+      "code": "2059",
+      "name": "川湖",
+      "net": 45315.0,
+      "trust_net": 107013.0,
+      "change": 1.79,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "3533",
+      "name": "嘉澤",
+      "net": 819542.0,
+      "trust_net": 100000.0,
+      "change": 5.22,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6213",
+      "name": "聯茂",
+      "net": 408191.0,
+      "trust_net": 100000.0,
+      "change": 2.38,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6239",
+      "name": "力成",
+      "net": -4847960.0,
+      "trust_net": 95000.0,
+      "change": 4.2,
+      "industry": "半導體"
+    },
+    {
+      "code": "1101",
+      "name": "台泥",
+      "net": 2577726.0,
+      "trust_net": 92000.0,
+      "change": 0.41,
+      "industry": "水泥工業"
+    },
+    {
+      "code": "3443",
+      "name": "創意",
+      "net": 405217.0,
+      "trust_net": 89000.0,
+      "change": 9.83,
+      "industry": "半導體"
+    },
+    {
+      "code": "2801",
+      "name": "彰銀",
+      "net": 966329.0,
+      "trust_net": 77754.0,
+      "change": 0.24,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2324",
+      "name": "仁寶",
+      "net": 2819377.0,
+      "trust_net": 76000.0,
+      "change": 2.02,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1605",
+      "name": "華新",
+      "net": 6743632.0,
+      "trust_net": 69000.0,
+      "change": 0.3,
+      "industry": "電器電纜"
+    },
+    {
+      "code": "2409",
+      "name": "友達",
+      "net": -26946492.0,
+      "trust_net": 54000.0,
+      "change": 1.89,
+      "industry": "光電"
+    },
+    {
+      "code": "2834",
+      "name": "臺企銀",
+      "net": -7274754.0,
+      "trust_net": 53281.0,
+      "change": 0.66,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2308",
+      "name": "台達電",
+      "net": 1386279.0,
+      "trust_net": 52728.0,
+      "change": 1.74,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6197",
+      "name": "佳必琪",
+      "net": 188108.0,
+      "trust_net": 46000.0,
+      "change": 1.83,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2027",
+      "name": "大成鋼",
+      "net": 10408710.0,
+      "trust_net": 44000.0,
+      "change": 1.34,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "3665",
+      "name": "貿聯-KY",
+      "net": -544644.0,
+      "trust_net": 43040.0,
+      "change": 3.05,
+      "industry": "其他電子"
+    },
+    {
+      "code": "2633",
+      "name": "台灣高鐵",
+      "net": -3266009.0,
+      "trust_net": 38398.0,
+      "change": 0.58,
+      "industry": "航運業"
+    },
+    {
+      "code": "6438",
+      "name": "迅得",
+      "net": -369974.0,
+      "trust_net": 38000.0,
+      "change": 1.63,
+      "industry": "其他電子"
+    },
+    {
+      "code": "5288",
+      "name": "豐祥-KY",
+      "net": -20000.0,
+      "trust_net": 30000.0,
+      "change": 1.09,
+      "industry": "電機機械"
+    },
+    {
+      "code": "2812",
+      "name": "台中銀",
+      "net": -1621749.0,
+      "trust_net": 27187.0,
+      "change": 0.24,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2352",
+      "name": "佳世達",
+      "net": -102715.0,
+      "trust_net": 26000.0,
+      "change": 0.41,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "net": 195328.0,
+      "trust_net": 25981.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "9933",
+      "name": "中鼎",
+      "net": 2290028.0,
+      "trust_net": 21000.0,
+      "change": 0.59,
+      "industry": "其他"
+    },
+    {
+      "code": "6531",
+      "name": "愛普*",
+      "net": 747968.0,
+      "trust_net": 20000.0,
+      "change": 1.42,
+      "industry": "半導體"
+    },
+    {
+      "code": "2845",
+      "name": "遠東銀",
+      "net": 227666.0,
+      "trust_net": 20000.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    }
+  ],
+  "trust_top_sell": [
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "net": -806671.0,
+      "trust_net": -3088599.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2481",
+      "name": "強茂",
+      "net": 2435511.0,
+      "trust_net": -1927000.0,
+      "change": 1.49,
+      "industry": "半導體"
+    },
+    {
+      "code": "2337",
+      "name": "旺宏",
+      "net": 43721265.0,
+      "trust_net": -1732000.0,
+      "change": 9.96,
+      "industry": "半導體"
+    },
+    {
+      "code": "2313",
+      "name": "華通",
+      "net": -20465064.0,
+      "trust_net": -1593000.0,
+      "change": 2.91,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "net": -2305711.0,
+      "trust_net": -1560393.0,
+      "change": 0.71,
+      "industry": "食品工業"
+    },
+    {
+      "code": "3045",
+      "name": "台灣大",
+      "net": 6881304.0,
+      "trust_net": -1282686.0,
+      "change": 0.46,
+      "industry": "通信網路"
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "net": 2368412.0,
+      "trust_net": -1235606.0,
+      "change": 0.97,
+      "industry": "通信網路"
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "net": -6670585.0,
+      "trust_net": -1227329.0,
+      "change": 2.76,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "6285",
+      "name": "啟碁",
+      "net": 1158101.0,
+      "trust_net": -1184000.0,
+      "change": 1.76,
+      "industry": "通信網路"
+    },
+    {
+      "code": "8028",
+      "name": "昇陽半導體",
+      "net": 3968160.0,
+      "trust_net": -1130000.0,
+      "change": 4.23,
+      "industry": "半導體"
+    },
+    {
+      "code": "1102",
+      "name": "亞泥",
+      "net": -4158808.0,
+      "trust_net": -1117453.0,
+      "change": 0.29,
+      "industry": "水泥工業"
+    },
+    {
+      "code": "8210",
+      "name": "勤誠",
+      "net": 292005.0,
+      "trust_net": -949338.0,
+      "change": 1.02,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "net": 3614312.0,
+      "trust_net": -903248.0,
+      "change": 0.27,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2327",
+      "name": "國巨*",
+      "net": -3080173.0,
+      "trust_net": -897976.0,
+      "change": 2.0,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2618",
+      "name": "長榮航",
+      "net": 2136807.0,
+      "trust_net": -854510.0,
+      "change": 0.57,
+      "industry": "航運業"
+    },
+    {
+      "code": "1536",
+      "name": "和大",
+      "net": -1614000.0,
+      "trust_net": -833000.0,
+      "change": 0.95,
+      "industry": "汽車工業"
+    },
+    {
+      "code": "2455",
+      "name": "全新",
+      "net": 3074360.0,
+      "trust_net": -797000.0,
+      "change": 5.32,
+      "industry": "通信網路"
+    },
+    {
+      "code": "9904",
+      "name": "寶成",
+      "net": -2624525.0,
+      "trust_net": -720488.0,
+      "change": 0.35,
+      "industry": "其他"
+    },
+    {
+      "code": "2368",
+      "name": "金像電",
+      "net": 1039099.0,
+      "trust_net": -692001.0,
+      "change": 0.0,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1560",
+      "name": "中砂",
+      "net": 1240010.0,
+      "trust_net": -587000.0,
+      "change": 7.53,
+      "industry": "電機機械"
+    },
+    {
+      "code": "6005",
+      "name": "群益證",
+      "net": -127437.0,
+      "trust_net": -561368.0,
+      "change": 2.64,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3450",
+      "name": "聯鈞",
+      "net": 878042.0,
+      "trust_net": -510000.0,
+      "change": 0.18,
+      "industry": "半導體"
+    },
+    {
+      "code": "9907",
+      "name": "統一實",
+      "net": -563000.0,
+      "trust_net": -502013.0,
+      "change": 0.55,
+      "industry": "其他"
+    },
+    {
+      "code": "2006",
+      "name": "東和鋼鐵",
+      "net": 1475021.0,
+      "trust_net": -420688.0,
+      "change": 0.52,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "2474",
+      "name": "可成",
+      "net": -816870.0,
+      "trust_net": -388000.0,
+      "change": 0.54,
+      "industry": "其他電子"
+    },
+    {
+      "code": "1402",
+      "name": "遠東新",
+      "net": -5664100.0,
+      "trust_net": -379000.0,
+      "change": 0.75,
+      "industry": "紡織纖維"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "net": 3859575.0,
+      "trust_net": -334834.0,
+      "change": 1.1,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2903",
+      "name": "遠百",
+      "net": 425932.0,
+      "trust_net": -299000.0,
+      "change": 0.0,
+      "industry": "貿易百貨"
+    },
+    {
+      "code": "2353",
+      "name": "宏碁",
+      "net": 7099540.0,
+      "trust_net": -274678.0,
+      "change": 5.28,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "8422",
+      "name": "可寧衛*",
+      "net": -2303760.0,
+      "trust_net": -227000.0,
+      "change": 1.51,
+      "industry": "其他"
+    },
+    {
+      "code": "6669",
+      "name": "緯穎",
+      "net": -802837.0,
+      "trust_net": -221977.0,
+      "change": 3.8,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "0052",
+      "name": "富邦科技",
+      "net": 3684441.0,
+      "trust_net": -220000.0,
+      "change": 1.69,
+      "industry": "其他"
+    },
+    {
+      "code": "8464",
+      "name": "億豐",
+      "net": -366812.0,
+      "trust_net": -194131.0,
+      "change": 1.8,
+      "industry": "其他"
+    },
+    {
+      "code": "1210",
+      "name": "大成",
+      "net": -186849.0,
+      "trust_net": -191000.0,
+      "change": 1.13,
+      "industry": "食品工業"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "net": -2845144.0,
+      "trust_net": -175109.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3702",
+      "name": "大聯大",
+      "net": 14140200.0,
+      "trust_net": -160000.0,
+      "change": 3.44,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2454",
+      "name": "聯發科",
+      "net": -920633.0,
+      "trust_net": -155860.0,
+      "change": 0.0,
+      "industry": "半導體"
+    },
+    {
+      "code": "2609",
+      "name": "陽明",
+      "net": -1263554.0,
+      "trust_net": -149943.0,
+      "change": 0.34,
+      "industry": "航運業"
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "net": 373457.0,
+      "trust_net": -144429.0,
+      "change": 1.87,
+      "industry": "半導體"
+    },
+    {
+      "code": "5876",
+      "name": "上海商銀",
+      "net": 1225292.0,
+      "trust_net": -141872.0,
+      "change": 0.51,
+      "industry": "金融保險"
+    },
+    {
+      "code": "9939",
+      "name": "宏全",
+      "net": -416750.0,
+      "trust_net": -141000.0,
+      "change": 2.53,
+      "industry": "其他"
+    },
+    {
+      "code": "2206",
+      "name": "三陽工業",
+      "net": -434980.0,
+      "trust_net": -135274.0,
+      "change": 0.0,
+      "industry": "汽車工業"
+    },
+    {
+      "code": "6446",
+      "name": "藥華藥",
+      "net": 343763.0,
+      "trust_net": -135000.0,
+      "change": 2.44,
+      "industry": "生技醫療"
+    },
+    {
+      "code": "1590",
+      "name": "亞德客-KY",
+      "net": 76208.0,
+      "trust_net": -123000.0,
+      "change": 0.0,
+      "industry": "電機機械"
+    },
+    {
+      "code": "2441",
+      "name": "超豐",
+      "net": -255223.0,
+      "trust_net": -116000.0,
+      "change": 5.29,
+      "industry": "半導體"
+    },
+    {
+      "code": "2356",
+      "name": "英業達",
+      "net": 2958387.0,
+      "trust_net": -114000.0,
+      "change": 0.8,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2880",
+      "name": "華南金",
+      "net": 3279312.0,
+      "trust_net": -111935.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2504",
+      "name": "國產",
+      "net": -395883.0,
+      "trust_net": -111026.0,
+      "change": 1.19,
+      "industry": "建材營造"
+    },
+    {
+      "code": "1513",
+      "name": "中興電",
+      "net": 573583.0,
+      "trust_net": -106176.0,
+      "change": 0.0,
+      "industry": "電機機械"
+    },
+    {
+      "code": "5871",
+      "name": "中租-KY",
+      "net": 3899593.0,
+      "trust_net": -98475.0,
+      "change": 1.9,
+      "industry": "其他"
     }
   ]
 }

@@ -5,3 +5,4 @@ __pycache__/
 deprecated/
 .idea/
 *.xml
+backend/.env

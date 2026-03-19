@@ -119,10 +119,18 @@ def fetch_kline_yahoo(stock_code, days=80):
     """
     try:
         import yfinance as yf
-        ticker = yf.Ticker(f"{stock_code}.TW")
-        df = ticker.history(period=f"{days}d")
+        # 先試 .TW（上市），失敗再試 .TWO（上櫃）
+        df = None
+        for suffix in ['.TW', '.TWO']:
+            try:
+                ticker = yf.Ticker(f"{stock_code}{suffix}")
+                df = ticker.history(period=f"{days}d")
+                if not df.empty:
+                    break
+            except Exception:
+                continue
         
-        if df.empty:
+        if df is None or df.empty:
             return []
         
         klines = []
@@ -291,9 +299,22 @@ def analyze_stock(stock_code, stock_name, klines):
     dif_pct = abs(current_dif / current_price * 100) if current_price > 0 else 999
     macd_pct = abs(current_macd / current_price * 100) if current_price > 0 else 999
     
-    if dif_pct > MACD_ZERO_THRESHOLD or macd_pct > MACD_ZERO_THRESHOLD:
-        return None  # 離 0 軸太遠
-    
+    # ---- 5b. 判斷 Stage ----
+    # Stage 2（原有邏輯）：接近零軸，即將金叉
+    # Stage 1（新增）：負值極大值剛開始收斂，離零軸還遠
+    is_near_zero = dif_pct <= MACD_ZERO_THRESHOLD and macd_pct <= MACD_ZERO_THRESHOLD
+    is_stage1 = (
+        not is_near_zero and
+        current_hist < 0 and
+        len(histogram) >= 2 and
+        abs(current_hist) < abs(histogram[-2])  # 今天比昨天縮小
+    )
+
+    if not is_near_zero and not is_stage1:
+        return None  # 兩個條件都不符合
+
+    stage = 2 if is_near_zero else 1
+
     # ---- 6. 判斷短線/長線 ----
     if current_dif > 0 and current_macd > 0:
         trade_type = "長線"  # 0軸上金叉
@@ -323,6 +344,7 @@ def analyze_stock(stock_code, stock_name, klines):
         'dif_pct': round(dif_pct, 4),
         'volume_ratio': round(vol_ratio, 2),
         'trade_type': trade_type,
+        'stage': stage,
         'cross_status': cross_status,
         'signal_strength': calc_signal_strength(
             vol_ratio, dif_pct, current_hist, histogram[-2] if len(histogram) >= 2 else 0
@@ -435,6 +457,23 @@ def load_stock_list():
     else:
         print(f"  ✗ 找不到 {turnover_path}")
     
+    # 0. 自選股 watchlist
+    watchlist_path = SCRIPT_DIR / 'data' / 'watchlist.json'
+    if watchlist_path.exists():
+        try:
+            with open(watchlist_path, 'r', encoding='utf-8') as f:
+                wl = json.load(f)
+            for item in wl:
+                code = str(item.get('code', item) if isinstance(item, dict) else item).strip()
+                name = item.get('name', '') if isinstance(item, dict) else ''
+                if code and code not in stocks:
+                    stocks[code] = {'name': name, 'source': '自選股'}
+                elif code in stocks:
+                    stocks[code]['source'] += '+自選股'
+            print(f"  ✓ 自選股: {len(wl)} 檔")
+        except Exception as e:
+            print(f"  ✗ 讀取自選股失敗: {e}")
+
     # 3. 產業外資動向個股（從 industry_heatmap.json）
     heatmap_path = DATA_DIR / 'industry_heatmap.json'
     if heatmap_path.exists():
@@ -582,7 +621,7 @@ def main():
     # 清理超過3天的歷史檔案
     import glob
     history_files = sorted(glob.glob(str(DATA_DIR / "macd_signal_2*.json")), reverse=True)
-    for old_file in history_files[10:]:
+    for old_file in history_files[20:]:
         os.remove(old_file)
         print(f"  🗑 清理舊檔: {os.path.basename(old_file)}")
     

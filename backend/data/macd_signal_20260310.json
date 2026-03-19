@@ -1,0 +1,102 @@
+{
+  "updated_at": "2026-03-10T20:38:44.750867",
+  "scan_date": "2026-03-10",
+  "total_scanned": 1086,
+  "signal_count": 3,
+  "signals": [
+    {
+      "code": "3576",
+      "name": "聯合再生",
+      "price": 19.799999237060547,
+      "ma20": 18.09,
+      "dif": 2.9354,
+      "macd": 2.9855,
+      "histogram": -0.0501,
+      "dif_pct": 14.8254,
+      "volume_ratio": 0.71,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 2,
+      "date": "2026/03/10",
+      "source": "外資賣超+產業外資",
+      "concepts": []
+    },
+    {
+      "code": "3164",
+      "name": "景岳",
+      "price": 18.049999237060547,
+      "ma20": 17.93,
+      "dif": -0.0677,
+      "macd": -0.075,
+      "histogram": 0.0073,
+      "dif_pct": 0.3749,
+      "volume_ratio": 0.8,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 2,
+      "date": "2026/03/10",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "8112",
+      "name": "至上",
+      "price": 77.69999694824219,
+      "ma20": 72.65,
+      "dif": -1.0135,
+      "macd": -1.3044,
+      "histogram": 0.2909,
+      "dif_pct": 1.3044,
+      "volume_ratio": 0.84,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 1,
+      "date": "2026/03/10",
+      "source": "外資買超+週轉率+產業外資",
+      "concepts": []
+    }
+  ],
+  "config": {
+    "macd_params": "12,26,9",
+    "volume_shrink_ratio": 0.85,
+    "macd_zero_threshold": 2.0,
+    "histogram_shrink_days": 3
+  },
+  "concepts_meta": {
+    "low_orbit_satellite": {
+      "label": "低軌衛星",
+      "color": "#3B82F6"
+    },
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
+      "color": "#8B5CF6"
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7"
+    },
+    "cowos": {
+      "label": "CoWoS / 先進封裝",
+      "color": "#F59E0B"
+    },
+    "cpo": {
+      "label": "CPO 矽光子",
+      "color": "#10B981"
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444"
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316"
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4"
+    }
+  }
+}

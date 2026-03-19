@@ -126,7 +126,7 @@ for row in foreign_data:
 stocks.sort(key=lambda x: x['net'], reverse=True)
 
 top_buy = [s for s in stocks if s['net'] > 0][:50]
-top_sell = [s for s in stocks if s['net'] < 0][:50]
+top_sell = sorted([s for s in stocks if s['net'] < 0], key=lambda x: x['net'])[:50]
 
 print(f"✓ 買超: {len(top_buy)} 檔")
 print(f"✓ 賣超: {len(top_sell)} 檔")
