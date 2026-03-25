@@ -6168,7 +6168,7 @@ async function loadMacdSignals() {
 
         // 嘗試載入前兩天的歷史檔
         var d = new Date(data.scan_date);
-        for (var i = 1; i <= 6; i++) {
+        for (var i = 1; i <= 25; i++) {
             var prev = new Date(d);
             prev.setDate(prev.getDate() - i);
             var ds = prev.getFullYear() + ('0'+(prev.getMonth()+1)).slice(-2) + ('0'+prev.getDate()).slice(-2);
@@ -6179,7 +6179,7 @@ async function loadMacdSignals() {
                     _macdAllDays[ds] = pd;
                 }
             } catch(e) {}
-            if (Object.keys(_macdAllDays).length >= 10) break;
+            if (Object.keys(_macdAllDays).length >= 20) break;
         }
 
         // 排序日期（新到舊）
