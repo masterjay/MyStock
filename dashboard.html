@@ -7132,7 +7132,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
         return '<span class="chip-status ' + cls + '">' + s + '</span>';
       }).join('');
       return '<div class="alert-chip">' +
-        '<a class="chip-id" href="https://tw.stock.yahoo.com/quote/' + a.stock_id + '" target="_blank" rel="noopener">' + a.stock_id + '</a>' +
+        '<a class="chip-id" href="https://tw.stock.yahoo.com/quote/' + a.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + a.stock_id + '</a>' +
         '<span class="chip-name">' + a.stock_name + '</span>' +
         statuses + '</div>';
     }).join('');
@@ -7148,7 +7148,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
       var urgent = d.days_left <= 1 ? ' urgent' : '';
       return '<div class="disposal-row">' +
         '<span class="row-num">' + (i+1) + '</span>' +
-        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
+        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
         '<span class="row-name">' + d.stock_name + '</span>' +
         '<div class="row-tags">' + freqHtml + '<span class="item-days' + urgent + '">' + daysText + '</span></div>' +
         '</div>';
@@ -7164,7 +7164,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
       var periodHtml = d.end_date_str ? '<span class="item-period">~' + d.end_date_str + '</span>' : '';
       return '<div class="disposal-row">' +
         '<span class="row-num">' + (i+1) + '</span>' +
-        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
+        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
         '<span class="row-name">' + d.stock_name + '</span>' +
         '<div class="row-tags">' + freqHtml + periodHtml + '</div>' +
         '</div>';
