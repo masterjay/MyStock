@@ -1,0 +1,312 @@
+{
+  "updated_at": "2026-03-22T20:38:12.186435",
+  "scan_date": "2026-03-22",
+  "total_scanned": 1084,
+  "signal_count": 14,
+  "signals": [
+    {
+      "code": "2484",
+      "name": "希華",
+      "price": 28.299999237060547,
+      "ma20": 27.92,
+      "dif": 0.1928,
+      "macd": 0.2407,
+      "histogram": -0.0479,
+      "dif_pct": 0.6812,
+      "volume_ratio": 0.44,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 4,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "8162",
+      "name": "微矽電子-創",
+      "price": 39.150001525878906,
+      "ma20": 38.69,
+      "dif": 0.1623,
+      "macd": 0.2471,
+      "histogram": -0.0848,
+      "dif_pct": 0.4145,
+      "volume_ratio": 0.72,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 4,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "8033",
+      "name": "雷虎",
+      "price": 152.0,
+      "ma20": 149.93,
+      "dif": -0.3513,
+      "macd": -0.638,
+      "histogram": 0.2867,
+      "dif_pct": 0.2311,
+      "volume_ratio": 0.37,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 4,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1307",
+      "name": "三芳",
+      "price": 34.25,
+      "ma20": 34.11,
+      "dif": 0.4159,
+      "macd": 0.4162,
+      "histogram": -0.0003,
+      "dif_pct": 1.2143,
+      "volume_ratio": 0.55,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 3,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "6442",
+      "name": "光聖",
+      "price": 2045.0,
+      "ma20": 1937.75,
+      "dif": 40.1346,
+      "macd": 53.8344,
+      "histogram": -13.6998,
+      "dif_pct": 1.9626,
+      "volume_ratio": 0.35,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 3,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2889",
+      "name": "國票金",
+      "price": 16.549999237060547,
+      "ma20": 16.49,
+      "dif": -0.0905,
+      "macd": -0.0946,
+      "histogram": 0.004,
+      "dif_pct": 0.547,
+      "volume_ratio": 0.6,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 3,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2104",
+      "name": "國際中橡",
+      "price": 12.649999618530273,
+      "ma20": 12.54,
+      "dif": 0.1987,
+      "macd": 0.2071,
+      "histogram": -0.0084,
+      "dif_pct": 1.5708,
+      "volume_ratio": 0.57,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 2,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "price": 94.0999984741211,
+      "ma20": 92.9,
+      "dif": 0.5905,
+      "macd": 0.5476,
+      "histogram": 0.0429,
+      "dif_pct": 0.6276,
+      "volume_ratio": 0.7,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 2,
+      "date": "2026/03/20",
+      "source": "外資賣超+產業外資",
+      "concepts": []
+    },
+    {
+      "code": "3042",
+      "name": "晶技",
+      "price": 93.0,
+      "ma20": 91.72,
+      "dif": 1.573,
+      "macd": 1.5967,
+      "histogram": -0.0237,
+      "dif_pct": 1.6914,
+      "volume_ratio": 0.78,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "8367",
+      "name": "建新國際",
+      "price": 45.849998474121094,
+      "ma20": 45.28,
+      "dif": 0.6401,
+      "macd": 0.6483,
+      "histogram": -0.0082,
+      "dif_pct": 1.3962,
+      "volume_ratio": 0.79,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "3030",
+      "name": "德律",
+      "price": 255.5,
+      "ma20": 239.7,
+      "dif": 18.091,
+      "macd": 18.331,
+      "histogram": -0.24,
+      "dif_pct": 7.0806,
+      "volume_ratio": 0.85,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": [
+        {
+          "id": "robot",
+          "label": "機器人 / 智慧機械",
+          "color": "#A855F7"
+        }
+      ]
+    },
+    {
+      "code": "6285",
+      "name": "啟碁",
+      "price": 173.5,
+      "ma20": 172.38,
+      "dif": 3.7251,
+      "macd": 4.7318,
+      "histogram": -1.0067,
+      "dif_pct": 2.147,
+      "volume_ratio": 0.76,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": [
+        {
+          "id": "cpo",
+          "label": "CPO 矽光子",
+          "color": "#10B981"
+        }
+      ]
+    },
+    {
+      "code": "6269",
+      "name": "台郡",
+      "price": 60.29999923706055,
+      "ma20": 58.83,
+      "dif": -0.6528,
+      "macd": -0.7844,
+      "histogram": 0.1316,
+      "dif_pct": 1.0826,
+      "volume_ratio": 0.76,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "外資賣超+產業外資",
+      "concepts": []
+    },
+    {
+      "code": "8210",
+      "name": "勤誠",
+      "price": 912.0,
+      "ma20": 902.35,
+      "dif": -11.8629,
+      "macd": -12.9567,
+      "histogram": 1.0938,
+      "dif_pct": 1.3008,
+      "volume_ratio": 0.82,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 1,
+      "date": "2026/03/20",
+      "source": "產業外資",
+      "concepts": []
+    }
+  ],
+  "config": {
+    "macd_params": "12,26,9",
+    "volume_shrink_ratio": 0.85,
+    "macd_zero_threshold": 2.0,
+    "histogram_shrink_days": 3
+  },
+  "concepts_meta": {
+    "low_orbit_satellite": {
+      "label": "低軌衛星",
+      "color": "#3B82F6"
+    },
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
+      "color": "#8B5CF6"
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7"
+    },
+    "cowos": {
+      "label": "CoWoS / 先進封裝",
+      "color": "#F59E0B"
+    },
+    "cpo": {
+      "label": "CPO 矽光子",
+      "color": "#10B981"
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444"
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316"
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4"
+    }
+  }
+}

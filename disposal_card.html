@@ -1,0 +1,527 @@
+<!-- 
+  處置股區塊 - 加入 dashboard.html 的適當位置
+  需要 disposal_stocks.json 資料檔 (由 disposal_stocks.py 產生)
+  
+  使用方式：
+  1. 將此 HTML 片段貼入 dashboard.html 的主內容區
+  2. 將下方的 CSS 加入你的 <style> 區
+  3. 將下方的 JS 加入你的 <script> 區
+-->
+
+<!-- ==================== HTML ==================== -->
+<div id="disposal-section" class="disposal-section">
+  <div class="disposal-header">
+    <div class="disposal-title-row">
+      <span class="disposal-icon">🚨</span>
+      <h3 class="disposal-title">處置股監控</h3>
+      <span id="disposal-count" class="disposal-badge">--</span>
+    </div>
+    <div class="disposal-actions">
+      <span id="disposal-updated" class="disposal-updated"></span>
+      <a href="https://attstock.tw/risk" target="_blank" rel="noopener" class="disposal-link-btn">
+        處置大師 ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- 觀察名單警示 -->
+  <div id="disposal-alerts" class="disposal-alerts" style="display:none;">
+    <div class="alert-banner">
+      <span class="alert-icon">⚠️</span>
+      <span class="alert-text">觀察名單中有股票被處置或列為注意股</span>
+    </div>
+    <div id="alert-list" class="alert-list"></div>
+  </div>
+
+  <!-- 處置中 / 即將出關 -->
+  <div class="disposal-grid">
+    <!-- 即將出關 -->
+    <div class="disposal-card disposal-card-release">
+      <div class="card-label">📅 即將出關</div>
+      <div id="release-list" class="disposal-list">
+        <div class="loading-placeholder">載入中...</div>
+      </div>
+    </div>
+
+    <!-- 目前處置中 -->
+    <div class="disposal-card disposal-card-active">
+      <div class="card-label">🔒 處置中</div>
+      <div id="active-list" class="disposal-list">
+        <div class="loading-placeholder">載入中...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速連結 -->
+  <div class="disposal-quick-links">
+    <a href="https://attstock.tw/risk" target="_blank" class="qlink qlink-risk">風險股預測</a>
+    <a href="https://www.twse.com.tw/zh/announcement/punish.html" target="_blank" class="qlink qlink-twse">證交所公告</a>
+    <a href="https://www.tpex.org.tw/web/bulletin/disposal/disposal_result.php?l=zh-tw" target="_blank" class="qlink qlink-tpex">櫃買中心公告</a>
+    <a href="https://www.twse.com.tw/zh/announcement/notice.html" target="_blank" class="qlink qlink-notice">注意股公告</a>
+  </div>
+</div>
+
+
+<!-- ==================== CSS ==================== -->
+<style>
+/* --- 處置股區塊 --- */
+.disposal-section {
+  margin: 20px 0;
+  padding: 0;
+}
+
+.disposal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.disposal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disposal-icon {
+  font-size: 1.2em;
+}
+
+.disposal-title {
+  margin: 0;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.disposal-badge {
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 0.8em;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.disposal-badge.zero {
+  background: #2ecc71;
+}
+
+.disposal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.disposal-updated {
+  font-size: 0.75em;
+  color: var(--text-muted, #888);
+}
+
+.disposal-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 14px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff6b35, #e74c3c);
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 0.82em;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.disposal-link-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* 觀察名單警示 */
+.disposal-alerts {
+  margin-bottom: 12px;
+}
+
+.alert-banner {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border: 1px solid #ffb74d;
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.alert-icon {
+  font-size: 1.1em;
+}
+
+.alert-text {
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #e65100;
+}
+
+.alert-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.alert-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff8e1;
+  border: 1px solid #ffcc02;
+  font-size: 0.82em;
+  font-weight: 500;
+}
+
+.alert-chip .chip-id {
+  font-weight: 700;
+  color: #e65100;
+}
+
+.alert-chip .chip-status {
+  font-size: 0.75em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.chip-status.disposal {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.chip-status.notice {
+  background: #ff9800;
+  color: #fff;
+}
+
+/* 卡片 grid */
+.disposal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .disposal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.disposal-card {
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 120px;
+}
+
+.disposal-card-release {
+  background: linear-gradient(145deg, #e8f5e9, #f1f8e9);
+  border: 1px solid #a5d6a7;
+}
+
+.disposal-card-active {
+  background: linear-gradient(145deg, #fce4ec, #fff3e0);
+  border: 1px solid #ef9a9a;
+}
+
+.card-label {
+  font-size: 0.85em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-primary, #333);
+}
+
+.disposal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.disposal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.7);
+  font-size: 0.82em;
+  transition: background 0.15s;
+}
+
+.disposal-item:hover {
+  background: rgba(255,255,255,0.95);
+}
+
+.disposal-item .item-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.disposal-item .item-id {
+  font-weight: 700;
+  color: #1a1a2e;
+  min-width: 45px;
+}
+
+.disposal-item .item-name {
+  color: #555;
+}
+
+.disposal-item .item-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9em;
+}
+
+.disposal-item .item-freq {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+.freq-5 { background: #e74c3c; color: #fff; }
+.freq-20 { background: #ff9800; color: #fff; }
+.freq-45, .freq-60 { background: #9c27b0; color: #fff; }
+.freq-other { background: #607d8b; color: #fff; }
+
+.item-days {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.item-days.urgent {
+  color: #e74c3c;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.disposal-empty {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-size: 0.85em;
+}
+
+.loading-placeholder {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+  font-size: 0.85em;
+}
+
+/* 快速連結 */
+.disposal-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qlink {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.78em;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  border: 1px solid;
+}
+
+.qlink-risk {
+  color: #e74c3c;
+  border-color: #e74c3c;
+  background: #fef0ee;
+}
+.qlink-risk:hover { background: #e74c3c; color: #fff !important; }
+
+.qlink-twse {
+  color: #1565c0;
+  border-color: #1565c0;
+  background: #e3f2fd;
+}
+.qlink-twse:hover { background: #1565c0; color: #fff !important; }
+
+.qlink-tpex {
+  color: #7b1fa2;
+  border-color: #7b1fa2;
+  background: #f3e5f5;
+}
+.qlink-tpex:hover { background: #7b1fa2; color: #fff !important; }
+
+.qlink-notice {
+  color: #e65100;
+  border-color: #e65100;
+  background: #fff3e0;
+}
+.qlink-notice:hover { background: #e65100; color: #fff !important; }
+
+/* 暗色模式支持 (如果你的 dashboard 有) */
+@media (prefers-color-scheme: dark) {
+  .disposal-title { color: #eee; }
+  .disposal-item { background: rgba(255,255,255,0.08); }
+  .disposal-item:hover { background: rgba(255,255,255,0.15); }
+  .disposal-item .item-id { color: #eee; }
+  .disposal-item .item-name { color: #bbb; }
+  .disposal-card-release { background: linear-gradient(145deg, #1b3a1b, #1e3d1e); border-color: #2e7d32; }
+  .disposal-card-active { background: linear-gradient(145deg, #3d1c1c, #3d2b1c); border-color: #c62828; }
+  .alert-banner { background: linear-gradient(135deg, #3d2b00, #3d2200); border-color: #e65100; }
+  .alert-chip { background: #3d2b00; border-color: #e65100; }
+}
+</style>
+
+
+<!-- ==================== JavaScript ==================== -->
+<script>
+// 處置股區塊 JS
+(function() {
+  const DATA_URL = 'data/disposal_stocks.json';
+
+  async function loadDisposalData() {
+    try {
+      const resp = await fetch(DATA_URL + '?t=' + Date.now());
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const data = await resp.json();
+      renderDisposal(data);
+    } catch (e) {
+      console.warn('[處置股] 載入失敗:', e);
+      document.getElementById('active-list').innerHTML =
+        '<div class="disposal-empty">資料載入失敗，請確認 disposal_stocks.py 已執行</div>';
+      document.getElementById('release-list').innerHTML =
+        '<div class="disposal-empty">--</div>';
+    }
+  }
+
+  function renderDisposal(data) {
+    // 更新時間
+    const updatedEl = document.getElementById('disposal-updated');
+    if (updatedEl && data.updated_at) {
+      updatedEl.textContent = '更新: ' + data.updated_at;
+    }
+
+    // 處置中數量
+    const countEl = document.getElementById('disposal-count');
+    const count = data.total_disposal_count || 0;
+    countEl.textContent = count;
+    if (count === 0) countEl.classList.add('zero');
+
+    // 觀察名單警示
+    renderAlerts(data.watchlist_alerts || []);
+
+    // 即將出關
+    renderReleaseList(data.upcoming_release || []);
+
+    // 處置中
+    renderActiveList(data.active_disposals || []);
+  }
+
+  function renderAlerts(alerts) {
+    const container = document.getElementById('disposal-alerts');
+    const list = document.getElementById('alert-list');
+    if (!alerts.length) {
+      container.style.display = 'none';
+      return;
+    }
+    container.style.display = 'block';
+    list.innerHTML = alerts.map(a => {
+      const statuses = (a.status || []).map(s => {
+        const cls = s === '處置中' ? 'disposal' : 'notice';
+        return `<span class="chip-status ${cls}">${s}</span>`;
+      }).join('');
+      return `<div class="alert-chip">
+        <span class="chip-id">${a.stock_id}</span>
+        <span>${a.stock_name}</span>
+        ${statuses}
+      </div>`;
+    }).join('');
+  }
+
+  function renderReleaseList(items) {
+    const el = document.getElementById('release-list');
+    if (!items.length) {
+      el.innerHTML = '<div class="disposal-empty">近期無出關股</div>';
+      return;
+    }
+    el.innerHTML = items.map(d => {
+      const freqClass = getFreqClass(d.match_frequency);
+      const freqHtml = d.match_frequency
+        ? `<span class="item-freq ${freqClass}">${d.match_frequency}</span>` : '';
+      const daysText = d.days_left === 0 ? '今日出關'
+        : d.days_left === 1 ? '明日出關'
+        : `${d.days_left}日後`;
+      return `<div class="disposal-item">
+        <div class="item-left">
+          <span class="item-id">${d.stock_id}</span>
+          <span class="item-name">${d.stock_name}</span>
+          <span class="item-market">${d.market || ''}</span>
+        </div>
+        <div class="item-right">
+          ${freqHtml}
+          <span class="item-days ${d.days_left <= 1 ? 'urgent' : ''}">${daysText}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderActiveList(items) {
+    const el = document.getElementById('active-list');
+    if (!items.length) {
+      el.innerHTML = '<div class="disposal-empty">目前無處置股 ✅</div>';
+      return;
+    }
+    el.innerHTML = items.map(d => {
+      const freqClass = getFreqClass(d.match_frequency);
+      const freqHtml = d.match_frequency
+        ? `<span class="item-freq ${freqClass}">${d.match_frequency}</span>` : '';
+      const periodHtml = d.end_date_str
+        ? `<span style="color:#888;">~${d.end_date_str}</span>` : '';
+      return `<div class="disposal-item">
+        <div class="item-left">
+          <span class="item-id">${d.stock_id}</span>
+          <span class="item-name">${d.stock_name}</span>
+        </div>
+        <div class="item-right">
+          ${freqHtml}
+          ${periodHtml}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function getFreqClass(freq) {
+    if (!freq) return '';
+    if (freq.includes('5')) return 'freq-5';
+    if (freq.includes('20')) return 'freq-20';
+    if (freq.includes('45') || freq.includes('60')) return 'freq-45';
+    return 'freq-other';
+  }
+
+  // 載入
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadDisposalData);
+  } else {
+    loadDisposalData();
+  }
+})();
+</script>

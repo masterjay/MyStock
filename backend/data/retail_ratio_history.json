@@ -1,63 +1,9 @@
 {
-  "updated_at": "2026-03-18T20:30:58.760170",
+  "updated_at": "2026-03-26T19:01:02.868618",
   "mxf": {
     "name": "微型台指期貨 (MXF)",
     "description": "散戶參與度高，更能反映散戶情緒",
     "history": [
-      {
-        "date": "20260122",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260123",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260126",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260127",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260128",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260129",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
       {
         "date": "20260130",
         "retail_long": 31553,
@@ -273,6 +219,60 @@
         "total_oi": 21186,
         "close_price": 0.0,
         "foreign_net": 1744
+      },
+      {
+        "date": "20260319",
+        "retail_long": 78288,
+        "retail_short": 42420,
+        "retail_ratio": 44.57,
+        "total_oi": 80472,
+        "close_price": 0.0,
+        "foreign_net": -1748
+      },
+      {
+        "date": "20260320",
+        "retail_long": 55728,
+        "retail_short": 32865,
+        "retail_ratio": 38.71,
+        "total_oi": 59062,
+        "close_price": 0.0,
+        "foreign_net": 1294
+      },
+      {
+        "date": "20260323",
+        "retail_long": 86248,
+        "retail_short": 51143,
+        "retail_ratio": 38.33,
+        "total_oi": 91594,
+        "close_price": 0.0,
+        "foreign_net": 1479
+      },
+      {
+        "date": "20260324",
+        "retail_long": 74898,
+        "retail_short": 47271,
+        "retail_ratio": 33.92,
+        "total_oi": 81446,
+        "close_price": 0.0,
+        "foreign_net": 2779
+      },
+      {
+        "date": "20260325",
+        "retail_long": 57490,
+        "retail_short": 39113,
+        "retail_ratio": 28.53,
+        "total_oi": 64402,
+        "close_price": 0.0,
+        "foreign_net": 3855
+      },
+      {
+        "date": "20260326",
+        "retail_long": 64048,
+        "retail_short": 42464,
+        "retail_ratio": 30.4,
+        "total_oi": 71008,
+        "close_price": 0.0,
+        "foreign_net": 1951
       }
     ]
   },
@@ -280,54 +280,6 @@
     "name": "台指期貨 (TX)",
     "description": "法人為主，反映機構態度",
     "history": [
-      {
-        "date": "20260119",
-        "retail_long": 33628,
-        "retail_short": 37061,
-        "retail_ratio": 0.91,
-        "open_interest": 131280,
-        "foreign_net": -33726
-      },
-      {
-        "date": "20260120",
-        "retail_long": 32884,
-        "retail_short": 35696,
-        "retail_ratio": 0.92,
-        "open_interest": 127364,
-        "foreign_net": -32675
-      },
-      {
-        "date": "20260121",
-        "retail_long": 28250,
-        "retail_short": 30139,
-        "retail_ratio": 0.94,
-        "open_interest": 108438,
-        "foreign_net": -24473
-      },
-      {
-        "date": "20260122",
-        "retail_long": 28290,
-        "retail_short": 30121,
-        "retail_ratio": 0.94,
-        "open_interest": 108479,
-        "foreign_net": -24293
-      },
-      {
-        "date": "20260123",
-        "retail_long": 28915,
-        "retail_short": 30126,
-        "retail_ratio": 0.96,
-        "open_interest": 109649,
-        "foreign_net": -22666
-      },
-      {
-        "date": "20260126",
-        "retail_long": 27877,
-        "retail_short": 29839,
-        "retail_ratio": 0.93,
-        "open_interest": 107188,
-        "foreign_net": -26527
-      },
       {
         "date": "20260127",
         "retail_long": 28751,
@@ -519,6 +471,54 @@
         "retail_ratio": 0.29,
         "open_interest": 230178,
         "foreign_net": -34549
+      },
+      {
+        "date": "20260319",
+        "retail_long": 176078,
+        "retail_short": 172738,
+        "retail_ratio": 1.44,
+        "open_interest": 232544,
+        "foreign_net": -40825
+      },
+      {
+        "date": "20260320",
+        "retail_long": 168659,
+        "retail_short": 168367,
+        "retail_ratio": 0.13,
+        "open_interest": 224684,
+        "foreign_net": -36366
+      },
+      {
+        "date": "20260323",
+        "retail_long": 168029,
+        "retail_short": 167719,
+        "retail_ratio": 0.14,
+        "open_interest": 223832,
+        "foreign_net": -37717
+      },
+      {
+        "date": "20260324",
+        "retail_long": 166568,
+        "retail_short": 169453,
+        "retail_ratio": -1.29,
+        "open_interest": 224014,
+        "foreign_net": -34108
+      },
+      {
+        "date": "20260325",
+        "retail_long": 169158,
+        "retail_short": 169761,
+        "retail_ratio": -0.27,
+        "open_interest": 225946,
+        "foreign_net": -35947
+      },
+      {
+        "date": "20260326",
+        "retail_long": 171772,
+        "retail_short": 171419,
+        "retail_ratio": 0.15,
+        "open_interest": 228794,
+        "foreign_net": -37065
       }
     ]
   }

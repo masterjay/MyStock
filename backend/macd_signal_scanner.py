@@ -416,9 +416,37 @@ def load_stock_list():
                         stocks[code]['source'] += '+外資賣超'
             sell_count = len(data.get('top_sell', []))
             
+            # --- 投信買超 + 賣超 Top 50 ---
+            trust_buy_count = 0
+            for stock in data.get('trust_top_buy', []):
+                code = stock.get('code', '')
+                if code and len(code) == 4 and code.isdigit():
+                    if code not in stocks:
+                        stocks[code] = {
+                            'name': stock.get('name', ''),
+                            'source': '投信買超'
+                        }
+                    else:
+                        stocks[code]['source'] += '+投信買超'
+                    trust_buy_count += 1
+
+            trust_sell_count = 0
+            for stock in data.get('trust_top_sell', []):
+                code = stock.get('code', '')
+                if code and len(code) == 4 and code.isdigit():
+                    if code not in stocks:
+                        stocks[code] = {
+                            'name': stock.get('name', ''),
+                            'source': '投信賣超'
+                        }
+                    else:
+                        stocks[code]['source'] += '+投信賣超'
+                    trust_sell_count += 1
+
             print(f"  ✓ 外資買超: {buy_count} 檔, 賣超: {sell_count} 檔")
+            print(f"  ✓ 投信買超: {trust_buy_count} 檔, 賣超: {trust_sell_count} 檔")
         except Exception as e:
-            print(f"  ✗ 讀取外資買賣超失敗: {e}")
+            print(f"  ✗ 讀取外資/投信買賣超失敗: {e}")
     else:
         print(f"  ✗ 找不到 {foreign_path}")
     

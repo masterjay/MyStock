@@ -1,344 +1,201 @@
 {
-  "date": "20260318",
+  "date": "20260326",
   "limit_up": [
     {
-      "code": "2338",
-      "name": "光罩",
-      "price": 56.1,
-      "change": "+5.10",
-      "change_pct": 10.0,
-      "volume": 8569057
-    },
-    {
-      "code": "2399",
-      "name": "映泰",
-      "price": 30.8,
-      "change": "+2.80",
-      "change_pct": 10.0,
-      "volume": 8970645
-    },
-    {
-      "code": "2436",
-      "name": "偉詮電",
-      "price": 69.3,
-      "change": "+6.30",
-      "change_pct": 10.0,
-      "volume": 14092017
-    },
-    {
-      "code": "2451",
-      "name": "創見",
-      "price": 313.5,
-      "change": "+28.50",
-      "change_pct": 10.0,
-      "volume": 18632953
-    },
-    {
-      "code": "2465",
-      "name": "麗臺",
-      "price": 63.8,
-      "change": "+5.80",
-      "change_pct": 10.0,
-      "volume": 2452903
-    },
-    {
-      "code": "7749",
-      "name": "意騰-KY",
-      "price": 435.0,
-      "change": "+39.50",
-      "change_pct": 9.99,
-      "volume": 315693
-    },
-    {
-      "code": "4919",
-      "name": "新唐",
-      "price": 90.4,
-      "change": "+8.20",
+      "code": "6830",
+      "name": "汎銓",
+      "price": 474.0,
+      "change": "+43.00",
       "change_pct": 9.98,
-      "volume": 19919340
+      "volume": 2349656
     },
     {
-      "code": "2345",
-      "name": "智邦",
-      "price": 1600.0,
-      "change": "+145.00",
-      "change_pct": 9.97,
-      "volume": 8456080
-    },
-    {
-      "code": "2337",
-      "name": "旺宏",
-      "price": 143.5,
-      "change": "+13.00",
-      "change_pct": 9.96,
-      "volume": 242590763
-    },
-    {
-      "code": "2380",
-      "name": "虹光",
-      "price": 6.07,
-      "change": "+0.55",
-      "change_pct": 9.96,
-      "volume": 554202
-    },
-    {
-      "code": "8271",
-      "name": "宇瞻",
-      "price": 204.5,
-      "change": "+18.50",
-      "change_pct": 9.95,
-      "volume": 4294072
-    },
-    {
-      "code": "2495",
-      "name": "普安",
-      "price": 35.95,
-      "change": "+3.25",
-      "change_pct": 9.94,
-      "volume": 25692653
-    },
-    {
-      "code": "2390",
-      "name": "云辰",
-      "price": 10.85,
-      "change": "+0.98",
-      "change_pct": 9.93,
-      "volume": 2615971
-    },
-    {
-      "code": "2438",
-      "name": "翔耀",
-      "price": 22.7,
+      "code": "6431",
+      "name": "光麗-KY",
+      "price": 22.65,
       "change": "+2.05",
+      "change_pct": 9.95,
+      "volume": 409580
+    },
+    {
+      "code": "1582",
+      "name": "信錦",
+      "price": 93.0,
+      "change": "+8.40",
       "change_pct": 9.93,
-      "volume": 466390
+      "volume": 8600863
     },
     {
-      "code": "3049",
-      "name": "精金",
-      "price": 14.95,
-      "change": "+1.35",
-      "change_pct": 9.93,
-      "volume": 51422418
-    },
-    {
-      "code": "3060",
-      "name": "銘異",
-      "price": 31.55,
-      "change": "+2.85",
-      "change_pct": 9.93,
-      "volume": 10360776
-    },
-    {
-      "code": "6689",
-      "name": "伊雲谷",
-      "price": 78.7,
-      "change": "+7.10",
+      "code": "2419",
+      "name": "仲琦",
+      "price": 33.25,
+      "change": "+3.00",
       "change_pct": 9.92,
-      "volume": 2727314
+      "volume": 20348205
     },
     {
-      "code": "6776",
-      "name": "展碁國際",
-      "price": 69.8,
-      "change": "+6.30",
+      "code": "6277",
+      "name": "宏正",
+      "price": 65.4,
+      "change": "+5.90",
       "change_pct": 9.92,
-      "volume": 6230312
+      "volume": 912911
     },
     {
-      "code": "8021",
-      "name": "尖點",
-      "price": 260.5,
-      "change": "+23.50",
-      "change_pct": 9.92,
-      "volume": 25233966
+      "code": "4906",
+      "name": "正文",
+      "price": 36.6,
+      "change": "+3.30",
+      "change_pct": 9.91,
+      "volume": 16098854
     },
     {
-      "code": "3057",
-      "name": "喬鼎",
-      "price": 16.65,
-      "change": "+1.50",
+      "code": "2355",
+      "name": "敬鵬",
+      "price": 49.4,
+      "change": "+4.45",
       "change_pct": 9.9,
-      "volume": 333537
+      "volume": 30011444
     },
     {
-      "code": "4989",
-      "name": "榮科",
-      "price": 75.5,
-      "change": "+6.80",
-      "change_pct": 9.9,
-      "volume": 47059272
+      "code": "3576",
+      "name": "聯合再生",
+      "price": 25.0,
+      "change": "+2.25",
+      "change_pct": 9.89,
+      "volume": 40045391
     },
     {
-      "code": "6209",
-      "name": "今國光",
-      "price": 57.7,
-      "change": "+5.20",
-      "change_pct": 9.9,
-      "volume": 6593283
+      "code": "6962",
+      "name": "奕力-KY",
+      "price": 33.9,
+      "change": "+3.05",
+      "change_pct": 9.89,
+      "volume": 6071344
     },
     {
-      "code": "6226",
-      "name": "光鼎",
-      "price": 13.35,
-      "change": "+1.20",
-      "change_pct": 9.88,
-      "volume": 3966645
+      "code": "7780",
+      "name": "大研生醫*",
+      "price": 20.0,
+      "change": "+1.80",
+      "change_pct": 9.89,
+      "volume": 1698498
     },
     {
-      "code": "2012",
-      "name": "春雨",
-      "price": 16.7,
-      "change": "+1.50",
-      "change_pct": 9.87,
-      "volume": 403912
-    },
-    {
-      "code": "7711",
-      "name": "永擎",
-      "price": 245.0,
-      "change": "+22.00",
-      "change_pct": 9.87,
-      "volume": 531942
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "price": 323.0,
-      "change": "+29.00",
+      "code": "2305",
+      "name": "全友",
+      "price": 16.15,
+      "change": "+1.45",
       "change_pct": 9.86,
-      "volume": 35571257
+      "volume": 5623874
     },
     {
-      "code": "2466",
-      "name": "冠西電",
-      "price": 51.8,
-      "change": "+4.65",
+      "code": "7721",
+      "name": "微程式",
+      "price": 55.7,
+      "change": "+5.00",
       "change_pct": 9.86,
-      "volume": 738873
+      "volume": 486171
     },
     {
-      "code": "3338",
-      "name": "泰碩",
-      "price": 63.5,
-      "change": "+5.70",
-      "change_pct": 9.86,
-      "volume": 3971346
+      "code": "2424",
+      "name": "隴華",
+      "price": 26.85,
+      "change": "+2.40",
+      "change_pct": 9.82,
+      "volume": 160314
     },
     {
-      "code": "1809",
-      "name": "中釉",
-      "price": 29.55,
-      "change": "+2.65",
-      "change_pct": 9.85,
-      "volume": 25879869
+      "code": "1309",
+      "name": "台達化",
+      "price": 20.15,
+      "change": "+1.80",
+      "change_pct": 9.81,
+      "volume": 11922223
+    },
+    {
+      "code": "1905",
+      "name": "華紙",
+      "price": 14.0,
+      "change": "+1.25",
+      "change_pct": 9.8,
+      "volume": 17861888
     },
     {
       "code": "3532",
       "name": "台勝科",
-      "price": 150.5,
-      "change": "+13.50",
-      "change_pct": 9.85,
-      "volume": 6994948
-    },
-    {
-      "code": "3443",
-      "name": "創意",
-      "price": 2515.0,
-      "change": "+225.00",
-      "change_pct": 9.83,
-      "volume": 3033839
-    },
-    {
-      "code": "3715",
-      "name": "定穎投控",
-      "price": 173.5,
-      "change": "+15.50",
-      "change_pct": 9.81,
-      "volume": 65951355
-    },
-    {
-      "code": "4967",
-      "name": "十銓",
-      "price": 246.5,
-      "change": "+22.00",
-      "change_pct": 9.8,
-      "volume": 14712957
-    },
-    {
-      "code": "6442",
-      "name": "光聖",
-      "price": 1850.0,
-      "change": "+165.00",
-      "change_pct": 9.79,
-      "volume": 593006
-    },
-    {
-      "code": "3006",
-      "name": "晶豪科",
-      "price": 213.5,
-      "change": "+19.00",
+      "price": 146.0,
+      "change": "+13.00",
       "change_pct": 9.77,
-      "volume": 52713943
+      "volume": 3814142
     },
     {
-      "code": "3058",
-      "name": "立德",
-      "price": 10.45,
-      "change": "+0.93",
-      "change_pct": 9.77,
-      "volume": 2510222
+      "code": "3026",
+      "name": "禾伸堂",
+      "price": 146.5,
+      "change": "+13.00",
+      "change_pct": 9.74,
+      "volume": 3198780
     },
     {
-      "code": "2316",
-      "name": "楠梓電",
-      "price": 112.5,
+      "code": "1308",
+      "name": "亞聚",
+      "price": 18.05,
+      "change": "+1.60",
+      "change_pct": 9.73,
+      "volume": 21974233
+    },
+    {
+      "code": "1304",
+      "name": "台聚",
+      "price": 15.85,
+      "change": "+1.40",
+      "change_pct": 9.69,
+      "volume": 25013325
+    },
+    {
+      "code": "2231",
+      "name": "為升",
+      "price": 114.0,
       "change": "+10.00",
-      "change_pct": 9.76,
-      "volume": 11993599
-    },
+      "change_pct": 9.62,
+      "volume": 3725284
+    }
+  ],
+  "limit_down": [
     {
-      "code": "6909",
-      "name": "創控",
-      "price": 49.15,
-      "change": "+4.35",
-      "change_pct": 9.71,
-      "volume": 3498612
+      "code": "6139",
+      "name": "亞翔",
+      "price": 589.0,
+      "change": "-65.00",
+      "change_pct": -9.94,
+      "volume": 11115049
     },
     {
       "code": "3135",
       "name": "凌航",
-      "price": 130.0,
-      "change": "+11.50",
-      "change_pct": 9.7,
-      "volume": 10994258
+      "price": 113.5,
+      "change": "-12.50",
+      "change_pct": -9.92,
+      "volume": 10657918
     },
     {
-      "code": "9929",
-      "name": "秋雨",
-      "price": 12.45,
-      "change": "+1.10",
-      "change_pct": 9.69,
-      "volume": 292706
+      "code": "2337",
+      "name": "旺宏",
+      "price": 128.0,
+      "change": "-14.00",
+      "change_pct": -9.86,
+      "volume": 37170691
     },
     {
-      "code": "1449",
-      "name": "佳和",
-      "price": 11.9,
-      "change": "+1.05",
-      "change_pct": 9.68,
-      "volume": 1898580
-    },
-    {
-      "code": "1735",
-      "name": "日勝化",
-      "price": 31.45,
-      "change": "+2.75",
-      "change_pct": 9.58,
-      "volume": 10811471
+      "code": "4967",
+      "name": "十銓",
+      "price": 229.5,
+      "change": "-25.00",
+      "change_pct": -9.82,
+      "volume": 18210581
     }
   ],
-  "limit_down": [],
-  "limit_up_count": 42,
-  "limit_down_count": 0
+  "limit_up_count": 20,
+  "limit_down_count": 4
 }
