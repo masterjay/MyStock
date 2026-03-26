@@ -4765,7 +4765,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 tr.innerHTML = `
                     <td>${idx + 1}</td>
-                    <td><span class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></span><span class="stock-name">${stock.name}</span></td>
+                    <td><span class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></span><span class="stock-name">${stock.name}</span></td>
                     <td class="stock-price">${stock.close_price ? stock.close_price.toFixed(2) : "-"}</td>
                     <td class="stock-change ${stock.change_pct >= 0 ? "change-up" : "change-down"}">${stock.change_pct != null && stock.change_pct !== undefined ? (stock.change_pct >= 0 ? "+" : "") + stock.change_pct.toFixed(2) + "%" : "-"}</td>
                     <td>${stock.industry || '-'}</td>
@@ -5673,7 +5673,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.className = "foreign-item";
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">+${amountText}</div>
                 `;
@@ -5687,7 +5687,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.className = "foreign-item";
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">-${amountText}</div>
                 `;
@@ -5712,7 +5712,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">+${amountText}</div>
                 `;
@@ -5728,7 +5728,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.className = 'foreign-item';
                 item.innerHTML = `
                     <div class="foreign-rank">${index + 1}</div>
-                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="foreign-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="foreign-name">${stock.name}</div>
                     <div class="foreign-amount">-${amountText}</div>
                 `;
@@ -5823,7 +5823,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 const chgClass = stock.change_pct >= 0 ? 'text-red' : 'text-green';
                                 return `
                                     <tr>
-                                        <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></td>
+                                        <td class="td-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></td>
                                         <td class="td-name">${stock.name}</td>
                                         <td class="td-foreign ${netClass}">${netSign}${Math.round(stock.net).toLocaleString()}張</td>
                                         <td class="td-change ${chgClass}">${chgSign}${stock.change_pct.toFixed(2)}%</td>
@@ -5929,7 +5929,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
@@ -5942,7 +5942,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const item = document.createElement('div');
                 item.className = 'limit-item';
                 item.innerHTML = `
-                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
+                    <div class="limit-code"><a href="https://tw.stock.yahoo.com/quote/${stock.code}.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" class="stock-link" onclick="event.stopPropagation()">${stock.code}</a></div>
                     <div class="limit-name">${stock.name}</div>
                     <div class="limit-price">${stock.price}</div>
                 `;
@@ -6283,7 +6283,7 @@ function renderMacdSignals() {
         var stars = '';
         for (var i = 0; i < (s.signal_strength || 1); i++) stars += '\u2B50';
         var typeClass = s.trade_type === '長線' ? 'macd-badge-type-long' : 'macd-badge-type-short';
-        var yahooUrl = 'https://tw.stock.yahoo.com/quote/' + s.code + '.TW/technical-analysis';
+        var yahooUrl = 'https://tw.stock.yahoo.com/quote/' + s.code + '.TW/technical-analysis#main-1-QuoteTabs-Proxy';
         var conceptHtml = (s.concepts||[]).map(function(c){ return '<span class="concept-tag" style="--tag-color:'+c.color+'">'+c.label+'</span>'; }).join('');
         var conceptIds = (s.concepts||[]).map(function(c){ return c.id; }).join(',');
         return '<div class="macd-signal-card" data-url="' + yahooUrl + '" data-concepts="' + conceptIds + '">' +
@@ -7013,7 +7013,7 @@ function renderMainstreamTable() {
 
         return `<tr>
             <td class="rank-col">${s.rank}</td>
-            <td class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${s.code}/technical-analysis" target="_blank" style="color:#58a6ff;text-decoration:none;">${s.code}</a></td>
+            <td class="stock-code"><a href="https://tw.stock.yahoo.com/quote/${s.code}/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" style="color:#58a6ff;text-decoration:none;">${s.code}</a></td>
             <td class="stock-name" title="${s.name}">${s.name}</td>
             <td class="price-col hide-mobile">${s.price || '--'}</td>
             <td class="${chgClass} hide-mobile">${chgStr || '--'}</td>
@@ -7131,7 +7131,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
         return '<span class="chip-status ' + cls + '">' + s + '</span>';
       }).join('');
       return '<div class="alert-chip">' +
-        '<a class="chip-id" href="https://tw.stock.yahoo.com/quote/' + a.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + a.stock_id + '</a>' +
+        '<a class="chip-id" href="https://tw.stock.yahoo.com/quote/' + a.stock_id + '.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" rel="noopener">' + a.stock_id + '</a>' +
         '<span class="chip-name">' + a.stock_name + '</span>' +
         statuses + '</div>';
     }).join('');
@@ -7147,7 +7147,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
       var urgent = d.days_left <= 1 ? ' urgent' : '';
       return '<div class="disposal-row">' +
         '<span class="row-num">' + (i+1) + '</span>' +
-        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
+        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
         '<span class="row-name">' + d.stock_name + '</span>' +
         '<div class="row-tags">' + freqHtml + '<span class="item-days' + urgent + '">' + daysText + '</span></div>' +
         '</div>';
@@ -7163,7 +7163,7 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
       var periodHtml = d.end_date_str ? '<span class="item-period">~' + d.end_date_str + '</span>' : '';
       return '<div class="disposal-row">' +
         '<span class="row-num">' + (i+1) + '</span>' +
-        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
+        '<a class="row-id" href="https://tw.stock.yahoo.com/quote/' + d.stock_id + '.TW/technical-analysis#main-1-QuoteTabs-Proxy" target="_blank" rel="noopener">' + d.stock_id + '</a>' +
         '<span class="row-name">' + d.stock_name + '</span>' +
         '<div class="row-tags">' + freqHtml + periodHtml + '</div>' +
         '</div>';
