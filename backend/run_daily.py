@@ -226,7 +226,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
 
     # 13. 處置股監控
-    print("\n[13/13] 處置股資料抓取...")
+    print("\n[13/15] 處置股資料抓取...")
     try:
         result = subprocess.run(["python3", "disposal_stocks.py"],
                               capture_output=True, text=True, timeout=60)
@@ -237,6 +237,33 @@ try:
             print(f"  ✗ 失敗: {result.stderr[:200]}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
+
+    # 14. 周轉率數據收集
+    print("\n[14/15] 周轉率數據收集...")
+    try:
+        result = subprocess.run(['python3', 'turnover_collector.py'],
+                              capture_output=True, text=True, timeout=120)
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 15. 周轉率分析
+    print("\n[15/15] 周轉率過熱分析...")
+    try:
+        result = subprocess.run(['python3', 'turnover_analyzer.py'],
+                              capture_output=True, text=True, timeout=60)
+        if result.returncode == 0:
+            print(result.stdout.strip())
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
 except Exception as e:
     print(f"\n✗ 執行錯誤: {e}")
     import traceback

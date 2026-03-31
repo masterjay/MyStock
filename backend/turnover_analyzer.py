@@ -12,7 +12,7 @@ from datetime import datetime
 
 def get_consecutive_overheat_days(stock_code, days=7):
     """計算連續過熱天數"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     cursor.execute('''
         SELECT date, turnover_rate FROM turnover_history 
@@ -31,7 +31,7 @@ def get_consecutive_overheat_days(stock_code, days=7):
 
 def analyze_and_export():
     """分析並導出 JSON"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     
     today = datetime.now().strftime('%Y%m%d')

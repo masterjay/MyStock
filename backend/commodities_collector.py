@@ -98,7 +98,7 @@ def get_commodity_data(symbol, days=120):
 
 def save_to_database(commodity_key, commodity_data):
     """儲存到資料庫"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     
     table_name = COMMODITIES[commodity_key]['table']

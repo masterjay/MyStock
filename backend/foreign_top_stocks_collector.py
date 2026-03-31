@@ -68,7 +68,7 @@ def get_foreign_top_stocks_by_date(date_str):
 
 def save_to_database(stocks):
     """儲存到資料庫"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     
     cursor.execute('''

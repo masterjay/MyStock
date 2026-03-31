@@ -188,7 +188,7 @@ def calculate_turnover_and_surge(stocks_volume, shares_dict, industry_dict, curs
 
 def save_to_database(date, stocks_data):
     """儲存周轉率資料到資料庫"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     
     # 確保表格有新欄位
@@ -220,7 +220,7 @@ def save_to_database(date, stocks_data):
 
 def clean_old_data(days=30):
     """清理超過N天的舊資料"""
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     
     cutoff_date = (datetime.now() - timedelta(days=days)).strftime('%Y%m%d')
@@ -263,7 +263,7 @@ def collect_turnover_data():
     
     # Step 3: 計算周轉率和爆量倍數
     print("\n[3/5] 計算周轉率和爆量倍數...")
-    conn = sqlite3.connect('market_data.db')
+    conn = sqlite3.connect('data/market_data.db')
     cursor = conn.cursor()
     stocks_data = calculate_turnover_and_surge(stocks_volume, shares_dict, industry_dict, cursor)
     conn.close()

@@ -13,7 +13,7 @@ import os
 class LimitUpDownCollector:
     def __init__(self):
         self.base_url = "https://www.twse.com.tw/rwd/zh/afterTrading/STOCK_DAY_ALL"
-        self.db_path = "market_data.db"
+        self.db_path = "data/market_data.db"
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
