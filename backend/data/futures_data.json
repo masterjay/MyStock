@@ -1,46 +1,28 @@
 {
   "latest": {
     "mxf_futures": {
-      "date": "20260326",
+      "date": "20260330",
       "close_price": 0.0,
-      "total_oi": 71008,
-      "retail_long": 64048,
-      "retail_short": 42464,
-      "retail_net": 21584,
-      "retail_ratio": 30.4,
-      "foreign_net": 1951
+      "total_oi": 101804,
+      "retail_long": 92653,
+      "retail_short": 60053,
+      "retail_net": 32600,
+      "retail_ratio": 32.02,
+      "foreign_net": 5315
     },
     "tx_futures": {
-      "date": "20260326",
-      "retail_ratio": 353,
-      "foreign_net": -37065
+      "date": "20260330",
+      "retail_ratio": -388,
+      "foreign_net": -37282
     },
     "margin": {
-      "date": "20260320",
-      "ratio": 66.43,
-      "balance": 3985.91
+      "date": "20260330",
+      "ratio": 65.45,
+      "balance": 3927.09
     }
   },
   "history": {
     "mxf": [
-      {
-        "date": "20260130",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260202",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
       {
         "date": "20260203",
         "retail_ratio": -21.22,
@@ -292,19 +274,27 @@
         "close_price": 0.0,
         "total_oi": 71008,
         "foreign_net": 1951
+      },
+      {
+        "date": "20260327",
+        "retail_ratio": 33.56,
+        "retail_long": 86057,
+        "retail_short": 54586,
+        "close_price": 0.0,
+        "total_oi": 93762,
+        "foreign_net": 3072
+      },
+      {
+        "date": "20260330",
+        "retail_ratio": 32.02,
+        "retail_long": 92653,
+        "retail_short": 60053,
+        "close_price": 0.0,
+        "total_oi": 101804,
+        "foreign_net": 5315
       }
     ],
     "tx": [
-      {
-        "date": "20260127",
-        "retail_ratio": 0.96,
-        "foreign_net": -25318
-      },
-      {
-        "date": "20260128",
-        "retail_ratio": 0.93,
-        "foreign_net": -27932
-      },
       {
         "date": "20260129",
         "retail_ratio": 0.88,
@@ -444,8 +434,18 @@
         "date": "20260326",
         "retail_ratio": 0.15,
         "foreign_net": -37065
+      },
+      {
+        "date": "20260327",
+        "retail_ratio": 1.19,
+        "foreign_net": -39919
+      },
+      {
+        "date": "20260330",
+        "retail_ratio": -0.17,
+        "foreign_net": -37282
       }
     ]
   },
-  "updated_at": "2026-03-26T19:00:28.205329"
+  "updated_at": "2026-03-31T13:33:02.244492"
 }

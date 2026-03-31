@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-03-26T19:09:20.299227",
+  "updated_at": "2026-03-26T20:37:54.122284",
   "scan_date": "2026-03-26",
-  "total_scanned": 1067,
+  "total_scanned": 1071,
   "signal_count": 18,
   "signals": [
     {
@@ -19,7 +19,7 @@
       "cross_status": "即將金叉",
       "signal_strength": 5,
       "date": "2026/03/26",
-      "source": "產業外資",
+      "source": "投信買超+產業外資",
       "concepts": [
         {
           "id": "robot",
@@ -227,6 +227,24 @@
       "concepts": []
     },
     {
+      "code": "2891",
+      "name": "中信金",
+      "price": 53.0,
+      "ma20": 52.19,
+      "dif": 0.2641,
+      "macd": 0.2443,
+      "histogram": 0.0198,
+      "dif_pct": 0.4983,
+      "volume_ratio": 0.77,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 2,
+      "date": "2026/03/26",
+      "source": "投信買超+產業外資",
+      "concepts": []
+    },
+    {
       "code": "1203",
       "name": "味王",
       "price": 39.54999923706055,
@@ -273,24 +291,6 @@
       "dif_pct": 0.5957,
       "volume_ratio": 0.62,
       "trade_type": "短線",
-      "stage": 2,
-      "cross_status": "已金叉",
-      "signal_strength": 2,
-      "date": "2026/03/26",
-      "source": "產業外資",
-      "concepts": []
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "price": 53.0,
-      "ma20": 52.19,
-      "dif": 0.2641,
-      "macd": 0.2443,
-      "histogram": 0.0198,
-      "dif_pct": 0.4983,
-      "volume_ratio": 0.77,
-      "trade_type": "長線",
       "stage": 2,
       "cross_status": "已金叉",
       "signal_strength": 2,

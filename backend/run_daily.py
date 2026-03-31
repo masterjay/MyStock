@@ -151,7 +151,18 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
-    print("\n[9/9] 產生 market_data.json...")
+    print("\n[9/10] 收集市場廣度數據...")
+    try:
+        result = subprocess.run(["python3", "market_breadth_collector.py"],
+                              capture_output=True, text=True, timeout=60)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    print("\n[10/10] 產生 market_data.json...")
     try:
         result = subprocess.run(["python3", "market_data_exporter.py"],
                               capture_output=True, text=True, timeout=30)

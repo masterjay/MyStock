@@ -1,27 +1,9 @@
 {
-  "updated_at": "2026-03-26T19:01:02.868618",
+  "updated_at": "2026-03-31T13:33:40.986221",
   "mxf": {
     "name": "微型台指期貨 (MXF)",
     "description": "散戶參與度高，更能反映散戶情緒",
     "history": [
-      {
-        "date": "20260130",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260202",
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "retail_ratio": -21.22,
-        "total_oi": 49004,
-        "close_price": 0.0,
-        "foreign_net": 3707
-      },
       {
         "date": "20260203",
         "retail_long": 31553,
@@ -273,6 +255,24 @@
         "total_oi": 71008,
         "close_price": 0.0,
         "foreign_net": 1951
+      },
+      {
+        "date": "20260327",
+        "retail_long": 86057,
+        "retail_short": 54586,
+        "retail_ratio": 33.56,
+        "total_oi": 93762,
+        "close_price": 0.0,
+        "foreign_net": 3072
+      },
+      {
+        "date": "20260330",
+        "retail_long": 92653,
+        "retail_short": 60053,
+        "retail_ratio": 32.02,
+        "total_oi": 101804,
+        "close_price": 0.0,
+        "foreign_net": 5315
       }
     ]
   },
@@ -280,22 +280,6 @@
     "name": "台指期貨 (TX)",
     "description": "法人為主，反映機構態度",
     "history": [
-      {
-        "date": "20260127",
-        "retail_long": 28751,
-        "retail_short": 30036,
-        "retail_ratio": 0.96,
-        "open_interest": 109177,
-        "foreign_net": -25318
-      },
-      {
-        "date": "20260128",
-        "retail_long": 28863,
-        "retail_short": 31042,
-        "retail_ratio": 0.93,
-        "open_interest": 111255,
-        "foreign_net": -27932
-      },
       {
         "date": "20260129",
         "retail_long": 29231,
@@ -519,6 +503,22 @@
         "retail_ratio": 0.15,
         "open_interest": 228794,
         "foreign_net": -37065
+      },
+      {
+        "date": "20260327",
+        "retail_long": 171765,
+        "retail_short": 169071,
+        "retail_ratio": 1.19,
+        "open_interest": 227224,
+        "foreign_net": -39919
+      },
+      {
+        "date": "20260330",
+        "retail_long": 167362,
+        "retail_short": 167750,
+        "retail_ratio": -0.17,
+        "open_interest": 223408,
+        "foreign_net": -37282
       }
     ]
   }

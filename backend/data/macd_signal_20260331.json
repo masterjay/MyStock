@@ -1,0 +1,317 @@
+{
+  "updated_at": "2026-03-31T13:41:38.668814",
+  "scan_date": "2026-03-31",
+  "total_scanned": 1070,
+  "signal_count": 14,
+  "signals": [
+    {
+      "code": "1720",
+      "name": "生達",
+      "price": 63.400001525878906,
+      "ma20": 63.31,
+      "dif": 0.1465,
+      "macd": 0.2251,
+      "histogram": -0.0786,
+      "dif_pct": 0.2311,
+      "volume_ratio": 0.5,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 4,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "5706",
+      "name": "鳳凰",
+      "price": 50.900001525878906,
+      "ma20": 50.74,
+      "dif": 0.3331,
+      "macd": 0.3422,
+      "histogram": -0.0091,
+      "dif_pct": 0.6544,
+      "volume_ratio": 0.55,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 4,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "6951",
+      "name": "青新-創",
+      "price": 78.0999984741211,
+      "ma20": 78.07,
+      "dif": 0.7469,
+      "macd": 0.8047,
+      "histogram": -0.0577,
+      "dif_pct": 0.9564,
+      "volume_ratio": 0.53,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 3,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2399",
+      "name": "映泰",
+      "price": 30.0,
+      "ma20": 28.23,
+      "dif": 1.8097,
+      "macd": 1.8225,
+      "histogram": -0.0128,
+      "dif_pct": 6.0325,
+      "volume_ratio": 0.27,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 3,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "9912",
+      "name": "偉聯",
+      "price": 12.5,
+      "ma20": 12.39,
+      "dif": 0.113,
+      "macd": 0.1159,
+      "histogram": -0.0029,
+      "dif_pct": 0.9038,
+      "volume_ratio": 0.36,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 3,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1537",
+      "name": "廣隆",
+      "price": 124.0,
+      "ma20": 123.67,
+      "dif": 0.0047,
+      "macd": -0.0083,
+      "histogram": 0.013,
+      "dif_pct": 0.0038,
+      "volume_ratio": 0.72,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 3,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "6515",
+      "name": "穎崴",
+      "price": 6925.0,
+      "ma20": 6692.25,
+      "dif": 817.4106,
+      "macd": 852.3738,
+      "histogram": -34.9633,
+      "dif_pct": 11.8038,
+      "volume_ratio": 0.55,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "投信賣超+產業外資",
+      "concepts": [
+        {
+          "id": "cowos",
+          "label": "CoWoS / 先進封裝",
+          "color": "#F59E0B"
+        },
+        {
+          "id": "hbm",
+          "label": "HBM 高頻寬記憶體",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    {
+      "code": "5515",
+      "name": "建國",
+      "price": 35.95000076293945,
+      "ma20": 35.65,
+      "dif": 0.9729,
+      "macd": 1.0174,
+      "histogram": -0.0445,
+      "dif_pct": 2.7063,
+      "volume_ratio": 0.6,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "9929",
+      "name": "秋雨",
+      "price": 11.899999618530273,
+      "ma20": 11.68,
+      "dif": 0.4824,
+      "macd": 0.5117,
+      "histogram": -0.0293,
+      "dif_pct": 4.0539,
+      "volume_ratio": 0.45,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "3653",
+      "name": "健策",
+      "price": 3795.0,
+      "ma20": 3626.75,
+      "dif": 230.7725,
+      "macd": 233.773,
+      "histogram": -3.0005,
+      "dif_pct": 6.081,
+      "volume_ratio": 0.68,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1709",
+      "name": "和益",
+      "price": 17.850000381469727,
+      "ma20": 17.68,
+      "dif": 0.3045,
+      "macd": 0.3098,
+      "histogram": -0.0053,
+      "dif_pct": 1.706,
+      "volume_ratio": 0.61,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "4960",
+      "name": "誠美材",
+      "price": 24.299999237060547,
+      "ma20": 22.72,
+      "dif": 2.6672,
+      "macd": 2.7517,
+      "histogram": -0.0845,
+      "dif_pct": 10.9761,
+      "volume_ratio": 0.56,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 2,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2010",
+      "name": "春源",
+      "price": 24.799999237060547,
+      "ma20": 24.15,
+      "dif": 0.7789,
+      "macd": 0.7861,
+      "histogram": -0.0072,
+      "dif_pct": 3.1407,
+      "volume_ratio": 0.75,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 1,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2393",
+      "name": "億光",
+      "price": 66.80000305175781,
+      "ma20": 64.91,
+      "dif": 2.6354,
+      "macd": 2.7183,
+      "histogram": -0.0828,
+      "dif_pct": 3.9452,
+      "volume_ratio": 0.65,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 1,
+      "date": "2026/03/31",
+      "source": "產業外資",
+      "concepts": [
+        {
+          "id": "cpo",
+          "label": "CPO 矽光子",
+          "color": "#10B981"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "macd_params": "12,26,9",
+    "volume_shrink_ratio": 0.85,
+    "macd_zero_threshold": 2.0,
+    "histogram_shrink_days": 3
+  },
+  "concepts_meta": {
+    "low_orbit_satellite": {
+      "label": "低軌衛星",
+      "color": "#3B82F6"
+    },
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
+      "color": "#8B5CF6"
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7"
+    },
+    "cowos": {
+      "label": "CoWoS / 先進封裝",
+      "color": "#F59E0B"
+    },
+    "cpo": {
+      "label": "CPO 矽光子",
+      "color": "#10B981"
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444"
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316"
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4"
+    }
+  }
+}

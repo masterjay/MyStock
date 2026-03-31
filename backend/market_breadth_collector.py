@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-市場廣度與動能數據收集器
-收集: 1. 大盤動能 2. 上漲家數比 3. 創新高低家數
+市場廣度與動能數據收集器 v2
+收集: 1. 大盤收盤價 2. 漲跌家數 3. 漲跌停家數(從 limit_updown 讀取)
 """
 
 import requests
 import sqlite3
 from datetime import datetime
-import json
+from pathlib import Path
 import re
+import time
+
+DB_PATH = Path(__file__).parent / 'data' / 'market_data.db'
+
+
+def get_conn():
+    return sqlite3.connect(str(DB_PATH))
+
 
 def get_market_momentum():
     """取得加權指數動能數據 - 使用 FMTQIK"""
@@ -23,7 +31,6 @@ def get_market_momentum():
         
         data = r.json()
         
-        # FMTQIK 格式: ['115/01/16', '成交股數', '成交金額', '成交筆數', '加權指數', '漲跌']
         if 'data' in data and len(data['data']) > 0:
             latest = data['data'][-1]
             close_price = float(latest[4].replace(',', ''))
@@ -37,7 +44,7 @@ def get_market_momentum():
         return None
         
     except Exception as e:
-        print(f"✗ 抓取動能失敗: {e}")
+        print(f"  ✗ 抓取動能失敗: {e}")
         return None
 
 
@@ -53,8 +60,6 @@ def get_market_breadth():
         
         data = r.json()
         
-        # 2025新格式: tables[7] = 漲跌證券數合計
-        # 格式: ['上漲(漲停)', '8,112(204)', '421(29)']
         if 'tables' in data and len(data['tables']) > 7:
             momentum_table = data['tables'][7]['data']
             
@@ -64,7 +69,6 @@ def get_market_breadth():
                     return int(match.group(1).replace(',','')), int(match.group(2))
                 return int(s.replace(',', '')), 0
             
-            # [2] = 股票欄位
             up_count, up_limit = parse_count(momentum_table[0][2])
             down_count, down_limit = parse_count(momentum_table[1][2])
             unchanged = int(momentum_table[2][2].replace(',', ''))
@@ -77,7 +81,7 @@ def get_market_breadth():
                 'up_count': up_count,
                 'down_count': down_count,
                 'unchanged': unchanged,
-                'up_ratio': up_ratio,
+                'up_ratio': round(up_ratio, 1),
                 'up_limit': up_limit,
                 'down_limit': down_limit
             }
@@ -85,25 +89,32 @@ def get_market_breadth():
         return None
         
     except Exception as e:
-        print(f"✗ 抓取廣度失敗: {e}")
+        print(f"  ✗ 抓取廣度失敗: {e}")
         return None
 
-def get_new_highs_lows():
-    """取得創新高新低家數"""
+
+def get_limit_updown_from_db(date_str):
+    """從 limit_updown 表讀取當天漲跌停家數"""
     try:
-        return {
-            'date': datetime.now().strftime('%Y%m%d'),
-            'new_highs': 0,
-            'new_lows': 0,
-            'hl_ratio': 50
-        }
+        conn = get_conn()
+        up = conn.execute(
+            "SELECT COUNT(*) FROM limit_updown WHERE date=? AND type='limit_up'",
+            (date_str,)
+        ).fetchone()[0]
+        down = conn.execute(
+            "SELECT COUNT(*) FROM limit_updown WHERE date=? AND type='limit_down'",
+            (date_str,)
+        ).fetchone()[0]
+        conn.close()
+        return {'up_limit': up, 'down_limit': down}
     except Exception as e:
-        print(f"✗ 抓取新高低失敗: {e}")
+        print(f"  ✗ 讀取漲跌停失敗: {e}")
         return None
 
-def save_to_database(momentum_data, breadth_data, hl_data):
-    """儲存到資料庫"""
-    conn = sqlite3.connect('market_data.db')
+
+def save_to_database(momentum_data, breadth_data):
+    """儲存到 market_breadth 表"""
+    conn = get_conn()
     cursor = conn.cursor()
     
     cursor.execute('''
@@ -115,100 +126,74 @@ def save_to_database(momentum_data, breadth_data, hl_data):
             down_count INTEGER,
             unchanged INTEGER,
             up_ratio REAL,
-            new_highs INTEGER,
-            new_lows INTEGER,
-            hl_ratio REAL,
+            up_limit INTEGER DEFAULT 0,
+            down_limit INTEGER DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
     
-    if momentum_data and breadth_data:
+    # 漲跌停從 breadth 或 limit_updown 表取
+    up_limit = breadth_data.get('up_limit', 0) if breadth_data else 0
+    down_limit = breadth_data.get('down_limit', 0) if breadth_data else 0
+    
+    # 如果 breadth 的漲跌停是 0，嘗試從 limit_updown 表補
+    if up_limit == 0 and down_limit == 0:
+        db_limits = get_limit_updown_from_db(momentum_data['date'])
+        if db_limits:
+            up_limit = db_limits['up_limit']
+            down_limit = db_limits['down_limit']
+    
+    if momentum_data:
         cursor.execute('''
             INSERT OR REPLACE INTO market_breadth 
-            (date, taiex_close, up_count, down_count, unchanged, up_ratio, new_highs, new_lows, hl_ratio)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (date, taiex_close, up_count, down_count, unchanged, up_ratio, up_limit, down_limit)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             momentum_data['date'],
             momentum_data['close'],
-            breadth_data['up_count'],
-            breadth_data['down_count'],
-            breadth_data['unchanged'],
-            breadth_data['up_ratio'],
-            hl_data['new_highs'] if hl_data else 0,
-            hl_data['new_lows'] if hl_data else 0,
-            hl_data['hl_ratio'] if hl_data else 50
+            breadth_data['up_count'] if breadth_data else None,
+            breadth_data['down_count'] if breadth_data else None,
+            breadth_data['unchanged'] if breadth_data else None,
+            breadth_data['up_ratio'] if breadth_data else None,
+            up_limit,
+            down_limit
         ))
     
     conn.commit()
     conn.close()
 
-def calculate_momentum_score(close_price):
-    """計算動能分數"""
-    conn = sqlite3.connect('market_data.db')
-    cursor = conn.cursor()
-    
-    cursor.execute('''
-        SELECT taiex_close FROM market_breadth 
-        ORDER BY date DESC LIMIT 60
-    ''')
-    
-    prices = [row[0] for row in cursor.fetchall()]
-    conn.close()
-    
-    if len(prices) < 20:
-        return 50
-    
-    ma20 = sum(prices[:20]) / 20
-    ma60 = sum(prices) / len(prices) if len(prices) >= 60 else ma20
-    
-    deviation_20 = ((close_price - ma20) / ma20) * 100
-    deviation_60 = ((close_price - ma60) / ma60) * 100
-    
-    score_20 = max(0, min(100, 50 + deviation_20 * 5))
-    score_60 = max(0, min(100, 50 + deviation_60 * 5))
-    
-    momentum_score = (score_20 * 0.6 + score_60 * 0.4)
-    return momentum_score
 
 def collect_market_breadth():
     """主函數"""
-    print("="*60)
-    print("📊 市場廣度與動能數據收集")
-    print("="*60)
+    print("=" * 50)
+    print("📊 市場廣度數據收集")
+    print("=" * 50)
     
-    print("\n[1/3] 抓取大盤動能...")
+    print("\n[1/2] 抓取大盤收盤價...")
     momentum_data = get_market_momentum()
     if momentum_data:
-        print(f"✓ 加權指數: {momentum_data['close']:.2f}")
+        print(f"  ✓ 加權指數: {momentum_data['close']:.2f}")
     else:
-        print("✗ 動能數據失敗")
+        print("  ✗ 動能數據失敗")
         return False
     
-    print("\n[2/3] 抓取市場廣度...")
+    time.sleep(3)  # TWSE rate limit
+    
+    print("\n[2/2] 抓取漲跌家數...")
     breadth_data = get_market_breadth()
     if breadth_data:
-        print(f"✓ 上漲: {breadth_data['up_count']} (漲停: {breadth_data.get('up_limit', 0)})")
-        print(f"✓ 下跌: {breadth_data['down_count']} (跌停: {breadth_data.get('down_limit', 0)})")
+        print(f"  ✓ 上漲: {breadth_data['up_count']} (漲停: {breadth_data.get('up_limit', 0)})")
+        print(f"  ✓ 下跌: {breadth_data['down_count']} (跌停: {breadth_data.get('down_limit', 0)})")
         print(f"  上漲比率: {breadth_data['up_ratio']:.1f}%")
     else:
-        print("✗ 廣度數據失敗")
-        return False
-    
-    print("\n[3/3] 計算新高低...")
-    hl_data = get_new_highs_lows()
-    print("✓ 新高低數據 (暫時預設)")
+        print("  ✗ 廣度數據失敗 (非交易時間?)")
     
     print("\n儲存到資料庫...")
-    save_to_database(momentum_data, breadth_data, hl_data)
+    save_to_database(momentum_data, breadth_data)
     
-    momentum_score = calculate_momentum_score(momentum_data['close'])
-    print(f"\n動能分數: {momentum_score:.1f}")
-    
-    print("\n" + "="*60)
-    print("✓ 市場廣度數據收集完成!")
-    print("="*60)
-    
+    print("\n✓ 市場廣度數據收集完成!")
     return True
+
 
 if __name__ == '__main__':
     collect_market_breadth()

@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-03-26 19:09:39",
-  "date": "20260326",
+  "updated_at": "2026-03-27 19:08:16",
+  "date": "20260327",
   "total_stocks": 30,
-  "mainstream_count": 5,
+  "mainstream_count": 4,
   "stocks": [
     {
       "rank": 1,
       "code": "2313",
       "name": "華通",
-      "price": 245.5,
-      "change_pct": 6.74,
-      "amount_b": 422.45132861,
+      "price": 270.0,
+      "change_pct": 9.98,
+      "amount_b": 405.50185605,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": true,
@@ -20,11 +20,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.79,
-          "ma20": 214.8,
-          "current_price": 245.5,
-          "foreign_net": 22510070.0,
-          "trust_net": 4082607.0
+          "volume_ratio": 1.65,
+          "ma20": 218.07,
+          "current_price": 270.0,
+          "foreign_net": 10322497.0,
+          "trust_net": 2814163.0
         },
         "auto_score": 4
       },
@@ -35,11 +35,11 @@
     },
     {
       "rank": 2,
-      "code": "3017",
-      "name": "奇鋐",
-      "price": 2275.0,
-      "change_pct": 8.33,
-      "amount_b": 193.27999055,
+      "code": "2367",
+      "name": "燿華",
+      "price": 78.2,
+      "change_pct": 3.85,
+      "amount_b": 269.61853451,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": true,
@@ -49,11 +49,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.41,
-          "ma20": 1883.25,
-          "current_price": 2275.0,
-          "foreign_net": 1488590.0,
-          "trust_net": 430170.0
+          "volume_ratio": 3.28,
+          "ma20": 71.67,
+          "current_price": 78.19999694824219,
+          "foreign_net": 7385163.0,
+          "trust_net": -11000.0
         },
         "auto_score": 4
       },
@@ -64,11 +64,11 @@
     },
     {
       "rank": 3,
-      "code": "8046",
-      "name": "南電",
-      "price": 569.0,
-      "change_pct": 5.37,
-      "amount_b": 178.69634397,
+      "code": "3715",
+      "name": "定穎投控",
+      "price": 203.5,
+      "change_pct": 10.0,
+      "amount_b": 150.13138713,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": true,
@@ -78,11 +78,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 2.37,
-          "ma20": 509.73,
-          "current_price": 569.0,
-          "foreign_net": 4337448.0,
-          "trust_net": 2581791.0
+          "volume_ratio": 1.81,
+          "ma20": 163.97,
+          "current_price": 203.5,
+          "foreign_net": 4259355.0,
+          "trust_net": 394000.0
         },
         "auto_score": 4
       },
@@ -93,11 +93,11 @@
     },
     {
       "rank": 4,
-      "code": "3715",
-      "name": "定穎投控",
-      "price": 185.0,
-      "change_pct": 1.09,
-      "amount_b": 122.61481975,
+      "code": "8046",
+      "name": "南電",
+      "price": 561.0,
+      "change_pct": 1.45,
+      "amount_b": 143.85615231,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": true,
@@ -107,11 +107,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.53,
-          "ma20": 161.7,
-          "current_price": 185.0,
-          "foreign_net": 9042961.0,
-          "trust_net": 1208815.0
+          "volume_ratio": 1.98,
+          "ma20": 510.02,
+          "current_price": 561.0,
+          "foreign_net": -2525765.0,
+          "trust_net": 1180193.0
         },
         "auto_score": 4
       },
@@ -122,40 +122,11 @@
     },
     {
       "rank": 5,
-      "code": "2345",
-      "name": "智邦",
-      "price": 1675.0,
-      "change_pct": 0.6,
-      "amount_b": 120.1848594,
-      "conditions": {
-        "cond1_top30_5d": true,
-        "cond2_vol_ma20": true,
-        "cond3_ema_support": true,
-        "cond4_institutional": true,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 5,
-          "volume_ratio": 1.34,
-          "ma20": 1487.75,
-          "current_price": 1675.0,
-          "foreign_net": 865009.0,
-          "trust_net": 149147.0
-        },
-        "auto_score": 4
-      },
-      "total_pass": 4,
-      "total_known": 4,
-      "is_mainstream": true,
-      "note": ""
-    },
-    {
-      "rank": 6,
       "code": "2308",
       "name": "台達電",
-      "price": 1515.0,
-      "change_pct": 2.36,
-      "amount_b": 212.64527021,
+      "price": 1510.0,
+      "change_pct": 0.33,
+      "amount_b": 156.23578905,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": false,
@@ -165,11 +136,40 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.03,
-          "ma20": 1392.75,
-          "current_price": 1515.0,
-          "foreign_net": -1554559.0,
-          "trust_net": 386655.0
+          "volume_ratio": 0.85,
+          "ma20": 1396.75,
+          "current_price": 1510.0,
+          "foreign_net": -2273031.0,
+          "trust_net": 290352.0
+        },
+        "auto_score": 3
+      },
+      "total_pass": 3,
+      "total_known": 4,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 6,
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "price": 230.0,
+      "change_pct": 5.26,
+      "amount_b": 124.33870936,
+      "conditions": {
+        "cond1_top30_5d": false,
+        "cond2_vol_ma20": true,
+        "cond3_ema_support": true,
+        "cond4_institutional": true,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 3,
+          "volume_ratio": 2.11,
+          "ma20": 193.07,
+          "current_price": 230.0,
+          "foreign_net": -2181730.0,
+          "trust_net": 262304.0
         },
         "auto_score": 3
       },
@@ -180,38 +180,40 @@
     },
     {
       "rank": 7,
-      "code": "2367",
-      "name": "燿華",
-      "price": 75.3,
-      "change_pct": 0.27,
-      "amount_b": 204.99191495,
+      "code": "3017",
+      "name": "奇鋐",
+      "price": 2195.0,
+      "change_pct": 3.78,
+      "amount_b": 120.1945987,
       "conditions": {
         "cond1_top30_5d": true,
-        "cond2_vol_ma20": true,
+        "cond2_vol_ma20": false,
         "cond3_ema_support": true,
-        "cond4_institutional": null,
+        "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 2.59,
-          "ma20": 70.98,
-          "current_price": 75.30000305175781
+          "volume_ratio": 0.93,
+          "ma20": 1904.75,
+          "current_price": 2195.0,
+          "foreign_net": -1474446.0,
+          "trust_net": 151307.0
         },
         "auto_score": 3
       },
       "total_pass": 3,
-      "total_known": 3,
+      "total_known": 4,
       "is_mainstream": false,
       "note": ""
     },
     {
       "rank": 8,
-      "code": "2455",
-      "name": "全新",
-      "price": 272.0,
-      "change_pct": 2.06,
-      "amount_b": 168.55082004,
+      "code": "6285",
+      "name": "啟碁",
+      "price": 188.5,
+      "change_pct": 9.59,
+      "amount_b": 86.2807557,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": true,
@@ -220,12 +222,12 @@
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 3,
-          "volume_ratio": 3.17,
-          "ma20": 229.03,
-          "current_price": 272.0,
-          "foreign_net": -1311408.0,
-          "trust_net": 1011917.0
+          "top30_days": 2,
+          "volume_ratio": 2.16,
+          "ma20": 170.15,
+          "current_price": 188.5,
+          "foreign_net": 10707937.0,
+          "trust_net": 158975.0
         },
         "auto_score": 3
       },
@@ -236,25 +238,25 @@
     },
     {
       "rank": 9,
-      "code": "2383",
-      "name": "台光電",
-      "price": 2945.0,
-      "change_pct": 3.51,
-      "amount_b": 135.40701748,
+      "code": "2455",
+      "name": "全新",
+      "price": 270.5,
+      "change_pct": 0.56,
+      "amount_b": 75.61781007,
       "conditions": {
-        "cond1_top30_5d": true,
-        "cond2_vol_ma20": false,
+        "cond1_top30_5d": false,
+        "cond2_vol_ma20": true,
         "cond3_ema_support": true,
         "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 5,
-          "volume_ratio": 1.18,
-          "ma20": 2565.75,
-          "current_price": 2945.0,
-          "foreign_net": 463330.0,
-          "trust_net": 56577.0
+          "top30_days": 4,
+          "volume_ratio": 1.63,
+          "ma20": 231.68,
+          "current_price": 270.5,
+          "foreign_net": -2773551.0,
+          "trust_net": 86764.0
         },
         "auto_score": 3
       },
@@ -265,25 +267,25 @@
     },
     {
       "rank": 10,
-      "code": "6442",
-      "name": "光聖",
-      "price": 2080.0,
-      "change_pct": 2.21,
-      "amount_b": 107.0904738,
+      "code": "2383",
+      "name": "台光電",
+      "price": 2910.0,
+      "change_pct": 1.22,
+      "amount_b": 59.8502682,
       "conditions": {
-        "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
         "cond3_ema_support": true,
         "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 4,
-          "volume_ratio": 1.99,
-          "ma20": 1932.5,
-          "current_price": 2080.0,
-          "foreign_net": -478502.0,
-          "trust_net": 275500.0
+          "top30_days": 5,
+          "volume_ratio": 0.56,
+          "ma20": 2589.25,
+          "current_price": 2910.0,
+          "foreign_net": -483992.0,
+          "trust_net": 151982.0
         },
         "auto_score": 3
       },
@@ -294,11 +296,11 @@
     },
     {
       "rank": 11,
-      "code": "2360",
-      "name": "致茂",
-      "price": 1640.0,
-      "change_pct": 0.92,
-      "amount_b": 97.81419695,
+      "code": "8021",
+      "name": "尖點",
+      "price": 268.0,
+      "change_pct": 4.48,
+      "amount_b": 54.26694291,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": true,
@@ -307,12 +309,12 @@
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 4,
-          "volume_ratio": 1.47,
-          "ma20": 1473.0,
-          "current_price": 1640.0,
-          "foreign_net": -145905.0,
-          "trust_net": 70162.0
+          "top30_days": 1,
+          "volume_ratio": 1.33,
+          "ma20": 243.28,
+          "current_price": 268.0,
+          "foreign_net": 2750507.0,
+          "trust_net": 30443.0
         },
         "auto_score": 3
       },
@@ -323,25 +325,25 @@
     },
     {
       "rank": 12,
-      "code": "4958",
-      "name": "臻鼎-KY",
-      "price": 218.5,
-      "change_pct": 5.3,
-      "amount_b": 93.48029755,
+      "code": "3665",
+      "name": "貿聯-KY",
+      "price": 1860.0,
+      "change_pct": 2.48,
+      "amount_b": 48.18396555,
       "conditions": {
-        "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
         "cond3_ema_support": true,
         "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 2,
-          "volume_ratio": 1.68,
-          "ma20": 192.03,
-          "current_price": 218.5,
-          "foreign_net": 9933667.0,
-          "trust_net": 132679.0
+          "top30_days": 5,
+          "volume_ratio": 0.53,
+          "ma20": 1694.75,
+          "current_price": 1860.0,
+          "foreign_net": -358718.0,
+          "trust_net": 334497.0
         },
         "auto_score": 3
       },
@@ -352,98 +354,11 @@
     },
     {
       "rank": 13,
-      "code": "2368",
-      "name": "金像電",
-      "price": 918.0,
-      "change_pct": 0.44,
-      "amount_b": 66.14455616,
-      "conditions": {
-        "cond1_top30_5d": true,
-        "cond2_vol_ma20": false,
-        "cond3_ema_support": true,
-        "cond4_institutional": true,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 5,
-          "volume_ratio": 0.68,
-          "ma20": 868.2,
-          "current_price": 918.0,
-          "foreign_net": 535384.0,
-          "trust_net": -728749.0
-        },
-        "auto_score": 3
-      },
-      "total_pass": 3,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
-      "rank": 14,
-      "code": "3533",
-      "name": "嘉澤",
-      "price": 2270.0,
-      "change_pct": 5.58,
-      "amount_b": 65.20355485,
-      "conditions": {
-        "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
-        "cond3_ema_support": true,
-        "cond4_institutional": true,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 2,
-          "volume_ratio": 1.25,
-          "ma20": 1799.25,
-          "current_price": 2270.0,
-          "foreign_net": -133070.0,
-          "trust_net": 625956.0
-        },
-        "auto_score": 3
-      },
-      "total_pass": 3,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
-      "rank": 15,
-      "code": "3665",
-      "name": "貿聯-KY",
-      "price": 1815.0,
-      "change_pct": 0.55,
-      "amount_b": 64.1633884,
-      "conditions": {
-        "cond1_top30_5d": true,
-        "cond2_vol_ma20": false,
-        "cond3_ema_support": true,
-        "cond4_institutional": true,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 5,
-          "volume_ratio": 0.7,
-          "ma20": 1672.25,
-          "current_price": 1815.0,
-          "foreign_net": -197520.0,
-          "trust_net": 305766.0
-        },
-        "auto_score": 3
-      },
-      "total_pass": 3,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
-      "rank": 16,
       "code": "2330",
       "name": "台積電",
-      "price": 1840.0,
-      "change_pct": 0.27,
-      "amount_b": 455.649394,
+      "price": 1820.0,
+      "change_pct": 1.11,
+      "amount_b": 613.84010665,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": false,
@@ -453,11 +368,98 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 0.58,
-          "ma20": 1876.25,
-          "current_price": 1840.0,
-          "foreign_net": -5190747.0,
-          "trust_net": 547600.0
+          "volume_ratio": 0.83,
+          "ma20": 1867.5,
+          "current_price": 1820.0,
+          "foreign_net": -11135853.0,
+          "trust_net": 381460.0
+        },
+        "auto_score": 2
+      },
+      "total_pass": 2,
+      "total_known": 4,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 14,
+      "code": "2408",
+      "name": "南亞科",
+      "price": 219.5,
+      "change_pct": 2.81,
+      "amount_b": 285.18129664,
+      "conditions": {
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": true,
+        "cond3_ema_support": false,
+        "cond4_institutional": false,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 5,
+          "volume_ratio": 1.28,
+          "ma20": 242.65,
+          "current_price": 219.5,
+          "foreign_net": -3949489.0,
+          "trust_net": -7434000.0
+        },
+        "auto_score": 2
+      },
+      "total_pass": 2,
+      "total_known": 4,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 15,
+      "code": "2344",
+      "name": "華邦電",
+      "price": 92.4,
+      "change_pct": 0.0,
+      "amount_b": 143.19399468,
+      "conditions": {
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": false,
+        "cond4_institutional": true,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 5,
+          "volume_ratio": 0.83,
+          "ma20": 109.6,
+          "current_price": 92.4000015258789,
+          "foreign_net": 24119095.0,
+          "trust_net": -6084149.0
+        },
+        "auto_score": 2
+      },
+      "total_pass": 2,
+      "total_known": 4,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 16,
+      "code": "2454",
+      "name": "聯發科",
+      "price": 1585.0,
+      "change_pct": 0.32,
+      "amount_b": 119.69994985,
+      "conditions": {
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": false,
+        "cond4_institutional": true,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 5,
+          "volume_ratio": 1.07,
+          "ma20": 1710.25,
+          "current_price": 1585.0,
+          "foreign_net": 545089.0,
+          "trust_net": -784763.0
         },
         "auto_score": 2
       },
@@ -468,54 +470,52 @@
     },
     {
       "rank": 17,
-      "code": "2408",
-      "name": "南亞科",
-      "price": 225.5,
-      "change_pct": 0.45,
-      "amount_b": 441.51062439,
+      "code": "2345",
+      "name": "智邦",
+      "price": 1655.0,
+      "change_pct": 1.22,
+      "amount_b": 73.51432015,
       "conditions": {
         "cond1_top30_5d": true,
-        "cond2_vol_ma20": true,
-        "cond3_ema_support": false,
-        "cond4_institutional": false,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": true,
+        "cond4_institutional": null,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.72,
-          "ma20": 245.95,
-          "current_price": 225.5,
-          "foreign_net": -18514610.0,
-          "trust_net": -1723000.0
+          "volume_ratio": 0.87,
+          "ma20": 1500.5,
+          "current_price": 1655.0
         },
         "auto_score": 2
       },
       "total_pass": 2,
-      "total_known": 4,
+      "total_known": 3,
       "is_mainstream": false,
       "note": ""
     },
     {
       "rank": 18,
-      "code": "6770",
-      "name": "力積電",
-      "price": 62.8,
-      "change_pct": 3.63,
-      "amount_b": 187.22999356,
+      "code": "3711",
+      "name": "日月光投控",
+      "price": 353.5,
+      "change_pct": 1.58,
+      "amount_b": 59.42922234,
       "conditions": {
-        "cond1_top30_5d": true,
+        "cond1_top30_5d": false,
         "cond2_vol_ma20": false,
-        "cond3_ema_support": false,
+        "cond3_ema_support": true,
         "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 5,
-          "volume_ratio": 1.05,
-          "ma20": 67.2,
-          "current_price": 62.79999923706055,
-          "foreign_net": -30849668.0,
-          "trust_net": 108156.0
+          "top30_days": 4,
+          "volume_ratio": 0.85,
+          "ma20": 344.25,
+          "current_price": 353.5,
+          "foreign_net": -3893473.0,
+          "trust_net": 65995.0
         },
         "auto_score": 2
       },
@@ -526,25 +526,25 @@
     },
     {
       "rank": 19,
-      "code": "3711",
-      "name": "日月光投控",
-      "price": 359.0,
-      "change_pct": 1.99,
-      "amount_b": 71.91078917,
+      "code": "2317",
+      "name": "鴻海",
+      "price": 199.5,
+      "change_pct": 0.5,
+      "amount_b": 58.52919796,
       "conditions": {
-        "cond1_top30_5d": false,
+        "cond1_top30_5d": true,
         "cond2_vol_ma20": false,
-        "cond3_ema_support": true,
+        "cond3_ema_support": false,
         "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 4,
-          "volume_ratio": 0.98,
-          "ma20": 345.95,
-          "current_price": 359.0,
-          "foreign_net": 2291908.0,
-          "trust_net": -314356.0
+          "top30_days": 5,
+          "volume_ratio": 0.46,
+          "ma20": 211.88,
+          "current_price": 199.5,
+          "foreign_net": -3213609.0,
+          "trust_net": 172570.0
         },
         "auto_score": 2
       },
@@ -555,11 +555,11 @@
     },
     {
       "rank": 20,
-      "code": "3443",
-      "name": "創意",
-      "price": 2540.0,
-      "change_pct": 2.63,
-      "amount_b": 68.2801853,
+      "code": "2360",
+      "name": "致茂",
+      "price": 1615.0,
+      "change_pct": 1.57,
+      "amount_b": 57.81518325,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": false,
@@ -569,11 +569,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 4,
-          "volume_ratio": 1.17,
-          "ma20": 2437.0,
-          "current_price": 2540.0,
-          "foreign_net": 377142.0,
-          "trust_net": -318859.0
+          "volume_ratio": 0.94,
+          "ma20": 1484.75,
+          "current_price": 1615.0,
+          "foreign_net": -409662.0,
+          "trust_net": 188231.0
         },
         "auto_score": 2
       },
@@ -584,25 +584,25 @@
     },
     {
       "rank": 21,
-      "code": "6139",
-      "name": "亞翔",
-      "price": 589.0,
-      "change_pct": 12.4,
-      "amount_b": 68.25847567,
+      "code": "2337",
+      "name": "旺宏",
+      "price": 125.0,
+      "change_pct": 2.46,
+      "amount_b": 56.16551324,
       "conditions": {
         "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
+        "cond2_vol_ma20": false,
         "cond3_ema_support": true,
-        "cond4_institutional": false,
+        "cond4_institutional": true,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 3,
-          "volume_ratio": 2.42,
-          "ma20": 561.65,
-          "current_price": 589.0,
-          "foreign_net": -3353024.0,
-          "trust_net": -384036.0
+          "volume_ratio": 0.38,
+          "ma20": 120.43,
+          "current_price": 125.0,
+          "foreign_net": 9963476.0,
+          "trust_net": -2588000.0
         },
         "auto_score": 2
       },
@@ -613,11 +613,65 @@
     },
     {
       "rank": 22,
-      "code": "6285",
-      "name": "啟碁",
-      "price": 172.0,
-      "change_pct": 4.88,
-      "amount_b": 67.60786478,
+      "code": "6442",
+      "name": "光聖",
+      "price": 2115.0,
+      "change_pct": 1.68,
+      "amount_b": 51.4706153,
+      "conditions": {
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": true,
+        "cond4_institutional": null,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 5,
+          "volume_ratio": 1.05,
+          "ma20": 1931.0,
+          "current_price": 2115.0
+        },
+        "auto_score": 2
+      },
+      "total_pass": 2,
+      "total_known": 3,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 23,
+      "code": "2368",
+      "name": "金像電",
+      "price": 924.0,
+      "change_pct": 0.65,
+      "amount_b": 45.42490265,
+      "conditions": {
+        "cond1_top30_5d": true,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": true,
+        "cond4_institutional": null,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 5,
+          "volume_ratio": 0.48,
+          "ma20": 873.1,
+          "current_price": 924.0
+        },
+        "auto_score": 2
+      },
+      "total_pass": 2,
+      "total_known": 3,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 24,
+      "code": "2355",
+      "name": "敬鵬",
+      "price": 50.5,
+      "change_pct": 2.23,
+      "amount_b": 43.93140767,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": true,
@@ -627,11 +681,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 1,
-          "volume_ratio": 1.75,
-          "ma20": 170.07,
-          "current_price": 172.0,
-          "foreign_net": -5546939.0,
-          "trust_net": -2208.0
+          "volume_ratio": 4.28,
+          "ma20": 44.16,
+          "current_price": 50.5,
+          "foreign_net": -3035900.0,
+          "trust_net": -2000.0
         },
         "auto_score": 2
       },
@@ -641,70 +695,12 @@
       "note": ""
     },
     {
-      "rank": 23,
-      "code": "2344",
-      "name": "華邦電",
-      "price": 96.0,
-      "change_pct": 2.35,
-      "amount_b": 190.56552248,
-      "conditions": {
-        "cond1_top30_5d": true,
-        "cond2_vol_ma20": false,
-        "cond3_ema_support": false,
-        "cond4_institutional": false,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 5,
-          "volume_ratio": 0.98,
-          "ma20": 111.11,
-          "current_price": 96.0,
-          "foreign_net": -4837682.0,
-          "trust_net": -5243467.0
-        },
-        "auto_score": 1
-      },
-      "total_pass": 1,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
-      "rank": 24,
-      "code": "6669",
-      "name": "緯穎",
-      "price": 3465.0,
-      "change_pct": 9.31,
-      "amount_b": 171.6523918,
-      "conditions": {
-        "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
-        "cond3_ema_support": false,
-        "cond4_institutional": false,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 1,
-          "volume_ratio": 2.46,
-          "ma20": 3941.75,
-          "current_price": 3465.0,
-          "foreign_net": -1179987.0,
-          "trust_net": -35672.0
-        },
-        "auto_score": 1
-      },
-      "total_pass": 1,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
       "rank": 25,
-      "code": "2454",
-      "name": "聯發科",
-      "price": 1590.0,
-      "change_pct": 1.92,
-      "amount_b": 126.156386,
+      "code": "6770",
+      "name": "力積電",
+      "price": 59.2,
+      "change_pct": 6.47,
+      "amount_b": 131.11299759,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": false,
@@ -714,11 +710,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 1.12,
-          "ma20": 1728.25,
-          "current_price": 1590.0,
-          "foreign_net": -2165766.0,
-          "trust_net": -338826.0
+          "volume_ratio": 0.82,
+          "ma20": 66.33,
+          "current_price": 59.20000076293945,
+          "foreign_net": -16461137.0,
+          "trust_net": -6000.0
         },
         "auto_score": 1
       },
@@ -729,11 +725,38 @@
     },
     {
       "rank": 26,
-      "code": "2317",
-      "name": "鴻海",
-      "price": 200.5,
-      "change_pct": 0.25,
-      "amount_b": 85.27296581,
+      "code": "3653",
+      "name": "健策",
+      "price": 4040.0,
+      "change_pct": 2.54,
+      "amount_b": 50.89879725,
+      "conditions": {
+        "cond1_top30_5d": false,
+        "cond2_vol_ma20": false,
+        "cond3_ema_support": true,
+        "cond4_institutional": null,
+        "cond5_fundamental": null,
+        "cond6_sector_leader": null,
+        "details": {
+          "top30_days": 4,
+          "volume_ratio": 0.68,
+          "ma20": 3546.75,
+          "current_price": 4040.0
+        },
+        "auto_score": 1
+      },
+      "total_pass": 1,
+      "total_known": 3,
+      "is_mainstream": false,
+      "note": ""
+    },
+    {
+      "rank": 27,
+      "code": "3481",
+      "name": "群創",
+      "price": 24.8,
+      "change_pct": 0.81,
+      "amount_b": 42.83131862,
       "conditions": {
         "cond1_top30_5d": true,
         "cond2_vol_ma20": false,
@@ -743,40 +766,11 @@
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 5,
-          "volume_ratio": 0.64,
-          "ma20": 214.05,
-          "current_price": 200.5,
-          "foreign_net": -5428286.0,
-          "trust_net": -129542.0
-        },
-        "auto_score": 1
-      },
-      "total_pass": 1,
-      "total_known": 4,
-      "is_mainstream": false,
-      "note": ""
-    },
-    {
-      "rank": 27,
-      "code": "3661",
-      "name": "世芯-KY",
-      "price": 3065.0,
-      "change_pct": 2.85,
-      "amount_b": 74.125183,
-      "conditions": {
-        "cond1_top30_5d": false,
-        "cond2_vol_ma20": true,
-        "cond3_ema_support": false,
-        "cond4_institutional": false,
-        "cond5_fundamental": null,
-        "cond6_sector_leader": null,
-        "details": {
-          "top30_days": 3,
-          "volume_ratio": 1.38,
-          "ma20": 3231.75,
-          "current_price": 3065.0,
-          "foreign_net": -253892.0,
-          "trust_net": -294910.0
+          "volume_ratio": 0.23,
+          "ma20": 27.12,
+          "current_price": 24.799999237060547,
+          "foreign_net": -10294718.0,
+          "trust_net": -159000.0
         },
         "auto_score": 1
       },
@@ -787,69 +781,67 @@
     },
     {
       "rank": 28,
-      "code": "3450",
-      "name": "聯鈞",
-      "price": 279.0,
-      "change_pct": 0.36,
-      "amount_b": 64.85525388,
+      "code": "6669",
+      "name": "緯穎",
+      "price": 3395.0,
+      "change_pct": 2.11,
+      "amount_b": 67.99766895,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": false,
         "cond3_ema_support": false,
-        "cond4_institutional": true,
+        "cond4_institutional": null,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
           "top30_days": 2,
-          "volume_ratio": 0.9,
-          "ma20": 281.93,
-          "current_price": 279.0,
-          "foreign_net": 2705625.0,
-          "trust_net": -265177.0
+          "volume_ratio": 1.13,
+          "ma20": 3911.5,
+          "current_price": 3395.0
         },
-        "auto_score": 1
+        "auto_score": 0
       },
-      "total_pass": 1,
-      "total_known": 4,
+      "total_pass": 0,
+      "total_known": 3,
       "is_mainstream": false,
       "note": ""
     },
     {
       "rank": 29,
-      "code": "3481",
-      "name": "群創",
-      "price": 25.0,
-      "change_pct": 2.67,
-      "amount_b": 64.10609066,
+      "code": "2449",
+      "name": "京元電子",
+      "price": 278.5,
+      "change_pct": 3.53,
+      "amount_b": 52.12668017,
       "conditions": {
-        "cond1_top30_5d": true,
+        "cond1_top30_5d": false,
         "cond2_vol_ma20": false,
         "cond3_ema_support": false,
         "cond4_institutional": false,
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 5,
-          "volume_ratio": 0.33,
-          "ma20": 27.22,
-          "current_price": 25.0,
-          "foreign_net": -39444918.0,
-          "trust_net": -173475.0
+          "top30_days": 3,
+          "volume_ratio": 0.95,
+          "ma20": 294.68,
+          "current_price": 278.5,
+          "foreign_net": -2768941.0,
+          "trust_net": -1954447.0
         },
-        "auto_score": 1
+        "auto_score": 0
       },
-      "total_pass": 1,
+      "total_pass": 0,
       "total_known": 4,
       "is_mainstream": false,
       "note": ""
     },
     {
       "rank": 30,
-      "code": "1303",
-      "name": "南亞",
-      "price": 74.8,
-      "change_pct": 1.63,
-      "amount_b": 62.47046611,
+      "code": "3661",
+      "name": "世芯-KY",
+      "price": 3040.0,
+      "change_pct": 0.83,
+      "amount_b": 48.1526602,
       "conditions": {
         "cond1_top30_5d": false,
         "cond2_vol_ma20": false,
@@ -858,12 +850,12 @@
         "cond5_fundamental": null,
         "cond6_sector_leader": null,
         "details": {
-          "top30_days": 2,
-          "volume_ratio": 0.9,
-          "ma20": 81.3,
-          "current_price": 74.80000305175781,
-          "foreign_net": -6050889.0,
-          "trust_net": -3169000.0
+          "top30_days": 3,
+          "volume_ratio": 0.96,
+          "ma20": 3209.25,
+          "current_price": 3040.0,
+          "foreign_net": -196612.0,
+          "trust_net": -52862.0
         },
         "auto_score": 0
       },

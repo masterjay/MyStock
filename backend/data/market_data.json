@@ -1,61 +1,81 @@
 {
   "latest": {
     "margin": {
-      "date": "20260320",
-      "ratio": 66.43,
-      "balance": 3985.91
+      "date": "20260330",
+      "ratio": 65.45,
+      "balance": 3927.09
     },
     "futures": {
-      "date": "20260326",
+      "date": "20260330",
       "ratio": 1.0,
-      "foreign_net": -37065,
-      "trust_net": 38484,
-      "dealer_net": -1772,
-      "retail_long": 171772,
-      "retail_short": 171419,
-      "retail_net": 353,
-      "retail_ratio": 0.15,
+      "foreign_net": -37282,
+      "trust_net": 37470,
+      "dealer_net": 200,
+      "retail_long": 167362,
+      "retail_short": 167750,
+      "retail_net": -388,
+      "retail_ratio": -0.17,
       "pcr_volume": null
+    },
+    "breadth": {
+      "date": "20260331",
+      "close": 32518.16,
+      "up_count": 130,
+      "down_count": 890,
+      "unchanged": 44,
+      "up_ratio": 12.2,
+      "up_limit": 9,
+      "down_limit": 16
     }
   },
   "sentiment": {
     "taiwan": {
-      "score": 47,
-      "rating": "中性",
+      "score": 39,
+      "rating": "恐懼",
       "components": {
+        "breadth": {
+          "score": 15,
+          "weight": 0.15,
+          "desc": "市場廣度",
+          "detail": "漲130 跌890 比率12.2%"
+        },
+        "strength": {
+          "score": 30,
+          "weight": 0.1,
+          "desc": "新高低比",
+          "detail": "漲停9 跌停16"
+        },
         "margin": {
           "score": 75,
           "weight": 0.15,
-          "desc": "融資使用率"
+          "desc": "融資使用率",
+          "detail": "65.5%"
         },
         "futures": {
           "score": 50,
           "weight": 0.15,
-          "desc": "期貨多空比"
+          "desc": "期貨多空比",
+          "detail": "1.00"
         },
         "foreign": {
           "score": 15,
-          "weight": 0.15,
-          "desc": "外資淨部位"
+          "weight": 0.1,
+          "desc": "外資淨部位",
+          "detail": "-37,282"
         }
       },
-      "available_weight": 0.45
+      "available_weight": 0.65
     },
     "us": {
-      "score": 18,
+      "score": 9,
       "rating": "EXTREME FEAR",
-      "previous_close": 19,
-      "previous_week": 17,
-      "previous_month": 42
+      "previous_close": 9,
+      "previous_week": 18,
+      "previous_month": 41
     }
   },
   "history": {
     "margin": [
-      {
-        "date": "20260105",
-        "ratio": 58.49,
-        "balance": 3509.48
-      },
       {
         "date": "20260106",
         "ratio": 59.09,
@@ -125,19 +145,14 @@
         "date": "20260320",
         "ratio": 66.43,
         "balance": 3985.91
+      },
+      {
+        "date": "20260330",
+        "ratio": 65.45,
+        "balance": 3927.09
       }
     ],
     "futures": [
-      {
-        "date": "20260306",
-        "ratio": 1.02,
-        "foreign_net": -38930
-      },
-      {
-        "date": "20260309",
-        "ratio": 1.01,
-        "foreign_net": -40462
-      },
       {
         "date": "20260310",
         "ratio": 0.99,
@@ -202,8 +217,18 @@
         "date": "20260326",
         "ratio": 1.0,
         "foreign_net": -37065
+      },
+      {
+        "date": "20260327",
+        "ratio": 1.02,
+        "foreign_net": -39919
+      },
+      {
+        "date": "20260330",
+        "ratio": 1.0,
+        "foreign_net": -37282
       }
     ]
   },
-  "updated_at": "2026-03-26T19:09:21.065070"
+  "updated_at": "2026-03-31T14:45:57.155146"
 }
