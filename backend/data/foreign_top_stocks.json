@@ -1,1612 +1,1612 @@
 {
-  "updated_at": "2026-03-31T13:33:08.240785",
-  "date": "20260330",
+  "updated_at": "2026-04-10T20:31:37.176804",
+  "date": "20260410",
   "top_buy": [
     {
-      "code": "1326",
-      "name": "台化",
-      "net": 41744872.0,
-      "trust_net": 172000.0,
-      "change": 0,
+      "code": "0050",
+      "name": "元大台灣50",
+      "net": 59382906.0,
+      "trust_net": 0.0,
+      "change": 2.02,
+      "industry": "其他"
+    },
+    {
+      "code": "2303",
+      "name": "聯電",
+      "net": 23681756.0,
+      "trust_net": -104455.0,
+      "change": 3.33,
+      "industry": "半導體"
+    },
+    {
+      "code": "2344",
+      "name": "華邦電",
+      "net": 18830999.0,
+      "trust_net": -1920512.0,
+      "change": 2.75,
+      "industry": "半導體"
+    },
+    {
+      "code": "2408",
+      "name": "南亞科",
+      "net": 18152083.0,
+      "trust_net": -262325.0,
+      "change": 4.88,
+      "industry": "半導體"
+    },
+    {
+      "code": "0052",
+      "name": "富邦科技",
+      "net": 17928859.0,
+      "trust_net": 0.0,
+      "change": 2.22,
+      "industry": "其他"
+    },
+    {
+      "code": "6770",
+      "name": "力積電",
+      "net": 16206540.0,
+      "trust_net": -3017000.0,
+      "change": 2.59,
+      "industry": "半導體"
+    },
+    {
+      "code": "2327",
+      "name": "國巨*",
+      "net": 14708562.0,
+      "trust_net": -123929.0,
+      "change": 1.24,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "6443",
+      "name": "元晶",
+      "net": 11750110.0,
+      "trust_net": 0.0,
+      "change": 4.57,
+      "industry": "光電"
+    },
+    {
+      "code": "2382",
+      "name": "廣達",
+      "net": 11030247.0,
+      "trust_net": 1346974.0,
+      "change": 2.72,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1714",
+      "name": "和桐",
+      "net": 10298000.0,
+      "trust_net": 0.0,
+      "change": 7.82,
+      "industry": "化學工業"
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "net": 9922598.0,
+      "trust_net": -323524.0,
+      "change": 1.89,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "3706",
+      "name": "神達",
+      "net": 9836750.0,
+      "trust_net": -4781.0,
+      "change": 6.14,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "3576",
+      "name": "聯合再生",
+      "net": 9039557.0,
+      "trust_net": 0.0,
+      "change": 6.74,
+      "industry": "光電"
+    },
+    {
+      "code": "2002",
+      "name": "中鋼",
+      "net": 8475350.0,
+      "trust_net": -199000.0,
+      "change": 0.75,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "net": 8159941.0,
+      "trust_net": -173389.0,
+      "change": 2.3,
+      "industry": "半導體"
+    },
+    {
+      "code": "2402",
+      "name": "毅嘉",
+      "net": 7451963.0,
+      "trust_net": -5996.0,
+      "change": 9.86,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2356",
+      "name": "英業達",
+      "net": 6779547.0,
+      "trust_net": -105689.0,
+      "change": 1.14,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "3702",
+      "name": "大聯大",
+      "net": 4885216.0,
+      "trust_net": -1391000.0,
+      "change": 0.22,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2027",
+      "name": "大成鋼",
+      "net": 4670776.0,
+      "trust_net": 894000.0,
+      "change": 2.03,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "5243",
+      "name": "乙盛-KY",
+      "net": 4161200.0,
+      "trust_net": 0.0,
+      "change": 4.85,
+      "industry": "光電"
+    },
+    {
+      "code": "2324",
+      "name": "仁寶",
+      "net": 4072702.0,
+      "trust_net": -918632.0,
+      "change": 3.3,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1605",
+      "name": "華新",
+      "net": 4006537.0,
+      "trust_net": -60640.0,
+      "change": 0.64,
+      "industry": "電器電纜"
+    },
+    {
+      "code": "1409",
+      "name": "新纖",
+      "net": 3909000.0,
+      "trust_net": 0.0,
+      "change": 4.42,
+      "industry": "紡織纖維"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "net": 3685355.0,
+      "trust_net": -1776762.0,
+      "change": 1.24,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2485",
+      "name": "兆赫",
+      "net": 3641234.0,
+      "trust_net": 6000.0,
+      "change": 5.15,
+      "industry": "通信網路"
+    },
+    {
+      "code": "1304",
+      "name": "台聚",
+      "net": 3542500.0,
+      "trust_net": 0.0,
+      "change": 0.63,
       "industry": "塑膠工業"
+    },
+    {
+      "code": "3037",
+      "name": "欣興",
+      "net": 3245419.0,
+      "trust_net": 510112.0,
+      "change": 2.08,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "3036",
+      "name": "文曄",
+      "net": 3095375.0,
+      "trust_net": -2879505.0,
+      "change": 0.67,
+      "industry": "電子通路"
+    },
+    {
+      "code": "1305",
+      "name": "華夏",
+      "net": 2953050.0,
+      "trust_net": 0.0,
+      "change": 1.83,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "3583",
+      "name": "辛耘",
+      "net": 2622025.0,
+      "trust_net": 20693.0,
+      "change": 9.97,
+      "industry": "半導體"
+    },
+    {
+      "code": "1308",
+      "name": "亞聚",
+      "net": 2347000.0,
+      "trust_net": 0.0,
+      "change": 1.85,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2313",
+      "name": "華通",
+      "net": 2337326.0,
+      "trust_net": -17390.0,
+      "change": 1.6,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "4977",
+      "name": "眾達-KY",
+      "net": 2313897.0,
+      "trust_net": 0.0,
+      "change": 7.41,
+      "industry": "通信網路"
+    },
+    {
+      "code": "3045",
+      "name": "台灣大",
+      "net": 2275009.0,
+      "trust_net": 220000.0,
+      "change": 0.0,
+      "industry": "通信網路"
+    },
+    {
+      "code": "3033",
+      "name": "威健",
+      "net": 2124130.0,
+      "trust_net": -2115.0,
+      "change": 1.67,
+      "industry": "電子通路"
+    },
+    {
+      "code": "1309",
+      "name": "台達化",
+      "net": 1950500.0,
+      "trust_net": 0.0,
+      "change": 3.91,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2880",
+      "name": "華南金",
+      "net": 1950467.0,
+      "trust_net": -1446000.0,
+      "change": 1.49,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2316",
+      "name": "楠梓電",
+      "net": 1881292.0,
+      "trust_net": 0.0,
+      "change": 9.77,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2451",
+      "name": "創見",
+      "net": 1831657.0,
+      "trust_net": -597827.0,
+      "change": 3.22,
+      "industry": "半導體"
+    },
+    {
+      "code": "6706",
+      "name": "惠特",
+      "net": 1634225.0,
+      "trust_net": -505.0,
+      "change": 9.8,
+      "industry": "光電"
+    },
+    {
+      "code": "2492",
+      "name": "華新科",
+      "net": 1553056.0,
+      "trust_net": 4000.0,
+      "change": 4.05,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2305",
+      "name": "全友",
+      "net": 1530000.0,
+      "trust_net": 0.0,
+      "change": 2.55,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2618",
+      "name": "長榮航",
+      "net": 1518335.0,
+      "trust_net": -1401824.0,
+      "change": 0.14,
+      "industry": "航運業"
+    },
+    {
+      "code": "1727",
+      "name": "中華化",
+      "net": 1452000.0,
+      "trust_net": -1000.0,
+      "change": 9.86,
+      "industry": "化學工業"
+    },
+    {
+      "code": "5515",
+      "name": "建國",
+      "net": 1440000.0,
+      "trust_net": -10000.0,
+      "change": 7.3,
+      "industry": "建材營造"
+    },
+    {
+      "code": "2371",
+      "name": "大同",
+      "net": 1439641.0,
+      "trust_net": -45351.0,
+      "change": 0.31,
+      "industry": "電機機械"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "net": 1415363.0,
+      "trust_net": -2073883.0,
+      "change": 0.41,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "net": 1380068.0,
+      "trust_net": -828711.0,
+      "change": 0.53,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2486",
+      "name": "一詮",
+      "net": 1377109.0,
+      "trust_net": 484000.0,
+      "change": 6.61,
+      "industry": "光電"
+    },
+    {
+      "code": "2049",
+      "name": "上銀",
+      "net": 1349148.0,
+      "trust_net": 559.0,
+      "change": 1.26,
+      "industry": "電機機械"
+    }
+  ],
+  "top_sell": [
+    {
+      "code": "3481",
+      "name": "群創",
+      "net": -92927159.0,
+      "trust_net": -103868.0,
+      "change": 3.79,
+      "industry": "光電"
+    },
+    {
+      "code": "2409",
+      "name": "友達",
+      "net": -82542534.0,
+      "trust_net": -1769.0,
+      "change": 3.42,
+      "industry": "光電"
+    },
+    {
+      "code": "2367",
+      "name": "燿華",
+      "net": -29884498.0,
+      "trust_net": -10075.0,
+      "change": 3.45,
+      "industry": "電子零組件"
     },
     {
       "code": "1303",
       "name": "南亞",
-      "net": 27414814.0,
-      "trust_net": 5377108.0,
-      "change": 0,
+      "net": -24956746.0,
+      "trust_net": -1409000.0,
+      "change": 4.62,
       "industry": "塑膠工業"
     },
     {
       "code": "1314",
       "name": "中石化",
-      "net": 11732869.0,
+      "net": -21900217.0,
       "trust_net": 0.0,
-      "change": 0,
+      "change": 4.47,
       "industry": "塑膠工業"
     },
     {
-      "code": "2886",
-      "name": "兆豐金",
-      "net": 5809999.0,
-      "trust_net": 281657.0,
-      "change": 0,
+      "code": "2891",
+      "name": "中信金",
+      "net": -21138307.0,
+      "trust_net": 1172997.0,
+      "change": 1.5,
       "industry": "金融保險"
     },
     {
-      "code": "1304",
-      "name": "台聚",
-      "net": 5797280.0,
+      "code": "1802",
+      "name": "台玻",
+      "net": -18702114.0,
       "trust_net": 0.0,
-      "change": 0,
-      "industry": "塑膠工業"
+      "change": 3.22,
+      "industry": "玻璃陶瓷"
     },
     {
-      "code": "3702",
-      "name": "大聯大",
-      "net": 5267400.0,
-      "trust_net": 212000.0,
-      "change": 0,
-      "industry": "電子通路"
-    },
-    {
-      "code": "1308",
-      "name": "亞聚",
-      "net": 5113980.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "2615",
-      "name": "萬海",
-      "net": 4449138.0,
-      "trust_net": -2000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "2105",
-      "name": "正新",
-      "net": 4399700.0,
-      "trust_net": -66595.0,
-      "change": 0,
-      "industry": "橡膠工業"
-    },
-    {
-      "code": "2884",
-      "name": "玉山金",
-      "net": 4276667.0,
-      "trust_net": 16452.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2408",
-      "name": "南亞科",
-      "net": 4169918.0,
-      "trust_net": -172120.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "1714",
-      "name": "和桐",
-      "net": 4051000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "化學工業"
-    },
-    {
-      "code": "1305",
-      "name": "華夏",
-      "net": 3950636.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "4958",
-      "name": "臻鼎-KY",
-      "net": 3382563.0,
-      "trust_net": 3535.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2409",
-      "name": "友達",
-      "net": 3362874.0,
-      "trust_net": 23825.0,
-      "change": 0,
+      "code": "3714",
+      "name": "富采",
+      "net": -16807898.0,
+      "trust_net": 25000.0,
+      "change": 11.35,
       "industry": "光電"
     },
     {
-      "code": "2867",
-      "name": "三商壽",
-      "net": 3304000.0,
-      "trust_net": 0.0,
-      "change": 0,
+      "code": "2610",
+      "name": "華航",
+      "net": -11095470.0,
+      "trust_net": -2081891.0,
+      "change": 0.28,
+      "industry": "航運業"
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "net": -10071328.0,
+      "trust_net": 95570.0,
+      "change": 1.04,
       "industry": "金融保險"
     },
     {
-      "code": "3049",
-      "name": "精金",
-      "net": 3271850.0,
+      "code": "6116",
+      "name": "彩晶",
+      "net": -9024642.0,
       "trust_net": 0.0,
-      "change": 0,
+      "change": 2.9,
       "industry": "光電"
     },
     {
       "code": "2337",
       "name": "旺宏",
-      "net": 3218457.0,
-      "trust_net": 3000.0,
-      "change": 0,
+      "net": -8924062.0,
+      "trust_net": 2500000.0,
+      "change": 2.82,
       "industry": "半導體"
     },
     {
-      "code": "1605",
-      "name": "華新",
-      "net": 3216138.0,
-      "trust_net": -33235.0,
-      "change": 0,
-      "industry": "電器電纜"
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "net": -8630467.0,
+      "trust_net": 683001.0,
+      "change": 0.57,
+      "industry": "電子零組件"
     },
     {
-      "code": "3045",
-      "name": "台灣大",
-      "net": 3165696.0,
-      "trust_net": 51318.0,
-      "change": 0,
-      "industry": "通信網路"
+      "code": "2489",
+      "name": "瑞軒",
+      "net": -7937047.0,
+      "trust_net": 6611000.0,
+      "change": 5.96,
+      "industry": "光電"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "net": -6756557.0,
+      "trust_net": 1228691.0,
+      "change": 0.97,
+      "industry": "金融保險"
     },
     {
       "code": "2892",
       "name": "第一金",
-      "net": 3162548.0,
-      "trust_net": 274441.0,
-      "change": 0,
+      "net": -6515958.0,
+      "trust_net": -583315.0,
+      "change": 1.78,
       "industry": "金融保險"
     },
     {
-      "code": "8046",
-      "name": "南電",
-      "net": 2896262.0,
-      "trust_net": 576220.0,
-      "change": 0,
+      "code": "4906",
+      "name": "正文",
+      "net": -6373115.0,
+      "trust_net": -17061.0,
+      "change": 0.0,
+      "industry": "通信網路"
+    },
+    {
+      "code": "9904",
+      "name": "寶成",
+      "net": -6094334.0,
+      "trust_net": -235774.0,
+      "change": 0.53,
+      "industry": "其他"
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "net": -5776212.0,
+      "trust_net": -131729.0,
+      "change": 1.1,
+      "industry": "金融保險"
+    },
+    {
+      "code": "8112",
+      "name": "至上",
+      "net": -4967458.0,
+      "trust_net": 2696.0,
+      "change": 1.24,
+      "industry": "電子通路"
+    },
+    {
+      "code": "3715",
+      "name": "定穎投控",
+      "net": -4962438.0,
+      "trust_net": -77423.0,
+      "change": 0.27,
       "industry": "電子零組件"
     },
     {
-      "code": "3481",
-      "name": "群創",
-      "net": 2519717.0,
-      "trust_net": 69470.0,
-      "change": 0,
+      "code": "3049",
+      "name": "精金",
+      "net": -4727705.0,
+      "trust_net": 0.0,
+      "change": 4.82,
       "industry": "光電"
     },
     {
       "code": "1102",
       "name": "亞泥",
-      "net": 2396297.0,
-      "trust_net": 17191.0,
-      "change": 0,
+      "net": -4664359.0,
+      "trust_net": -264820.0,
+      "change": 0.71,
       "industry": "水泥工業"
-    },
-    {
-      "code": "2633",
-      "name": "台灣高鐵",
-      "net": 2339688.0,
-      "trust_net": 8000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "9907",
-      "name": "統一實",
-      "net": 2331000.0,
-      "trust_net": -5000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "net": 2283886.0,
-      "trust_net": -1372585.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2049",
-      "name": "上銀",
-      "net": 2241248.0,
-      "trust_net": 1000.0,
-      "change": 0,
-      "industry": "電機機械"
-    },
-    {
-      "code": "3576",
-      "name": "聯合再生",
-      "net": 2222500.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "2845",
-      "name": "遠東銀",
-      "net": 2003000.0,
-      "trust_net": -3000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "5243",
-      "name": "乙盛-KY",
-      "net": 1727940.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "2812",
-      "name": "台中銀",
-      "net": 1695000.0,
-      "trust_net": 1000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "1402",
-      "name": "遠東新",
-      "net": 1654228.0,
-      "trust_net": -120000.0,
-      "change": 0,
-      "industry": "紡織纖維"
-    },
-    {
-      "code": "2897",
-      "name": "王道銀行",
-      "net": 1639000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "8150",
-      "name": "南茂",
-      "net": 1633305.0,
-      "trust_net": 2000.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "1504",
-      "name": "東元",
-      "net": 1545796.0,
-      "trust_net": -67474.0,
-      "change": 0,
-      "industry": "電機機械"
-    },
-    {
-      "code": "2104",
-      "name": "國際中橡",
-      "net": 1416000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "橡膠工業"
-    },
-    {
-      "code": "2484",
-      "name": "希華",
-      "net": 1269000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2542",
-      "name": "興富發",
-      "net": 1258000.0,
-      "trust_net": 9000.0,
-      "change": 0,
-      "industry": "建材營造"
-    },
-    {
-      "code": "3036",
-      "name": "文曄",
-      "net": 1209939.0,
-      "trust_net": 164000.0,
-      "change": 0,
-      "industry": "電子通路"
-    },
-    {
-      "code": "6443",
-      "name": "元晶",
-      "net": 1134400.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "2882",
-      "name": "國泰金",
-      "net": 1087566.0,
-      "trust_net": 2675106.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "6168",
-      "name": "宏齊",
-      "net": 1068000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "9933",
-      "name": "中鼎",
-      "net": 1033700.0,
-      "trust_net": 3000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "6213",
-      "name": "聯茂",
-      "net": 996791.0,
-      "trust_net": -405.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2548",
-      "name": "華固",
-      "net": 947000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "建材營造"
-    },
-    {
-      "code": "2369",
-      "name": "菱生",
-      "net": 871826.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2457",
-      "name": "飛宏",
-      "net": 871000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2915",
-      "name": "潤泰全",
-      "net": 850334.0,
-      "trust_net": -1000.0,
-      "change": 0,
-      "industry": "貿易百貨"
-    },
-    {
-      "code": "3714",
-      "name": "富采",
-      "net": 850000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "光電"
-    }
-  ],
-  "top_sell": [
-    {
-      "code": "0050",
-      "name": "元大台灣50",
-      "net": -70742198.0,
-      "trust_net": 1900000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2027",
-      "name": "大成鋼",
-      "net": -34768180.0,
-      "trust_net": 7000.0,
-      "change": 0,
-      "industry": "鋼鐵工業"
-    },
-    {
-      "code": "2002",
-      "name": "中鋼",
-      "net": -22219839.0,
-      "trust_net": 89514.0,
-      "change": 0,
-      "industry": "鋼鐵工業"
-    },
-    {
-      "code": "6770",
-      "name": "力積電",
-      "net": -20614073.0,
-      "trust_net": 97110.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2303",
-      "name": "聯電",
-      "net": -20125361.0,
-      "trust_net": 8973925.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2887",
-      "name": "台新新光金",
-      "net": -18801842.0,
-      "trust_net": 20007172.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "net": -15959615.0,
-      "trust_net": 557769.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2481",
-      "name": "強茂",
-      "net": -15863790.0,
-      "trust_net": -92000.0,
-      "change": 0,
-      "industry": "半導體"
     },
     {
       "code": "2317",
       "name": "鴻海",
-      "net": -13624878.0,
-      "trust_net": 237739.0,
-      "change": 0,
+      "net": -4481158.0,
+      "trust_net": -415577.0,
+      "change": 0.25,
       "industry": "其他電子"
     },
     {
-      "code": "2890",
-      "name": "永豐金",
-      "net": -12352996.0,
-      "trust_net": 638851.0,
-      "change": 0,
-      "industry": "金融保險"
+      "code": "1711",
+      "name": "永光",
+      "net": -4344730.0,
+      "trust_net": 26000.0,
+      "change": 5.59,
+      "industry": "化學工業"
     },
     {
-      "code": "2367",
-      "name": "燿華",
-      "net": -11266375.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "電子零組件"
+      "code": "1402",
+      "name": "遠東新",
+      "net": -4334988.0,
+      "trust_net": -144596.0,
+      "change": 0.95,
+      "industry": "紡織纖維"
     },
     {
-      "code": "3715",
-      "name": "定穎投控",
-      "net": -11073866.0,
-      "trust_net": 2000.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2313",
-      "name": "華通",
-      "net": -9877018.0,
-      "trust_net": 721484.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2883",
-      "name": "凱基金",
-      "net": -9390244.0,
-      "trust_net": 354547.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2356",
-      "name": "英業達",
-      "net": -9379385.0,
-      "trust_net": 14000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "2801",
-      "name": "彰銀",
-      "net": -8789113.0,
-      "trust_net": 17000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2489",
-      "name": "瑞軒",
-      "net": -8641800.0,
-      "trust_net": 1800000.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "2885",
-      "name": "元大金",
-      "net": -8537371.0,
-      "trust_net": 479451.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "net": -6929284.0,
-      "trust_net": 5063972.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "6505",
-      "name": "台塑化",
-      "net": -6568484.0,
-      "trust_net": 116268.0,
-      "change": 0,
-      "industry": "油電燃氣"
-    },
-    {
-      "code": "1909",
-      "name": "榮成",
-      "net": -6499000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "造紙工業"
+      "code": "3062",
+      "name": "建漢",
+      "net": -3822100.0,
+      "trust_net": 1000.0,
+      "change": 1.16,
+      "industry": "通信網路"
     },
     {
       "code": "2312",
       "name": "金寶",
-      "net": -6448237.0,
-      "trust_net": 0.0,
-      "change": 0,
+      "net": -3756000.0,
+      "trust_net": 3000.0,
+      "change": 1.58,
       "industry": "其他電子"
     },
     {
-      "code": "4906",
-      "name": "正文",
-      "net": -5911000.0,
+      "code": "3673",
+      "name": "TPK-KY",
+      "net": -3669315.0,
+      "trust_net": 0.0,
+      "change": 2.67,
+      "industry": "光電"
+    },
+    {
+      "code": "2609",
+      "name": "陽明",
+      "net": -3540864.0,
+      "trust_net": -108511.0,
+      "change": 0.0,
+      "industry": "航運業"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "net": -3423781.0,
+      "trust_net": 1121007.0,
+      "change": 0.71,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2369",
+      "name": "菱生",
+      "net": -3097898.0,
       "trust_net": -1000.0,
-      "change": 0,
-      "industry": "通信網路"
-    },
-    {
-      "code": "2610",
-      "name": "華航",
-      "net": -5612322.0,
-      "trust_net": -38000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "6285",
-      "name": "啟碁",
-      "net": -5552673.0,
-      "trust_net": 28509.0,
-      "change": 0,
-      "industry": "通信網路"
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "net": -5284533.0,
-      "trust_net": 172409.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "1310",
-      "name": "台苯",
-      "net": -5198000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "2344",
-      "name": "華邦電",
-      "net": -5150659.0,
-      "trust_net": -129281.0,
-      "change": 0,
+      "change": 1.48,
       "industry": "半導體"
     },
     {
-      "code": "2881",
-      "name": "富邦金",
-      "net": -4674797.0,
-      "trust_net": 2381877.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2605",
-      "name": "新興",
-      "net": -3965240.0,
-      "trust_net": 2000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "2834",
-      "name": "臺企銀",
-      "net": -3847641.0,
-      "trust_net": -11000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "0052",
-      "name": "富邦科技",
-      "net": -3846098.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2889",
-      "name": "國票金",
-      "net": -3758000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "1708",
-      "name": "東鹼",
-      "net": -3704000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "化學工業"
-    },
-    {
-      "code": "6005",
-      "name": "群益證",
-      "net": -3699800.0,
-      "trust_net": 292000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "1582",
-      "name": "信錦",
-      "net": -3647880.0,
-      "trust_net": -827.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2353",
-      "name": "宏碁",
-      "net": -3646690.0,
-      "trust_net": -97000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "1710",
-      "name": "東聯",
-      "net": -3616000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "化學工業"
-    },
-    {
-      "code": "3704",
-      "name": "合勤控",
-      "net": -3539000.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "通信網路"
-    },
-    {
-      "code": "1301",
-      "name": "台塑",
-      "net": -3258402.0,
-      "trust_net": 1211944.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "2014",
-      "name": "中鴻",
-      "net": -3216290.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "鋼鐵工業"
-    },
-    {
-      "code": "3450",
-      "name": "聯鈞",
-      "net": -3086642.0,
-      "trust_net": 579.0,
-      "change": 0,
+      "code": "4967",
+      "name": "十銓",
+      "net": -2723247.0,
+      "trust_net": -1000.0,
+      "change": 0.23,
       "industry": "半導體"
-    },
-    {
-      "code": "1216",
-      "name": "統一",
-      "net": -3027864.0,
-      "trust_net": 53108.0,
-      "change": 0,
-      "industry": "食品工業"
-    },
-    {
-      "code": "2618",
-      "name": "長榮航",
-      "net": -3022189.0,
-      "trust_net": 1302000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "3706",
-      "name": "神達",
-      "net": -3020548.0,
-      "trust_net": 5000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "1101",
-      "name": "台泥",
-      "net": -3003510.0,
-      "trust_net": 0.0,
-      "change": 0,
-      "industry": "水泥工業"
-    },
-    {
-      "code": "1904",
-      "name": "正隆",
-      "net": -2836000.0,
-      "trust_net": 4000.0,
-      "change": 0,
-      "industry": "造紙工業"
     },
     {
       "code": "2355",
       "name": "敬鵬",
-      "net": -2794557.0,
-      "trust_net": -1000.0,
-      "change": 0,
+      "net": -2716792.0,
+      "trust_net": -34040.0,
+      "change": 1.89,
       "industry": "電子零組件"
     },
     {
-      "code": "2377",
-      "name": "微星",
-      "net": -2528830.0,
-      "trust_net": 5030.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "2324",
-      "name": "仁寶",
-      "net": -2398140.0,
-      "trust_net": -30024000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    }
-  ],
-  "trust_top_buy": [
-    {
-      "code": "2887",
-      "name": "台新新光金",
-      "net": -18801842.0,
-      "trust_net": 20007172.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2303",
-      "name": "聯電",
-      "net": -20125361.0,
-      "trust_net": 8973925.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "1303",
-      "name": "南亞",
-      "net": 27414814.0,
-      "trust_net": 5377108.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "2891",
-      "name": "中信金",
-      "net": -6929284.0,
-      "trust_net": 5063972.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2882",
-      "name": "國泰金",
-      "net": 1087566.0,
-      "trust_net": 2675106.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2881",
-      "name": "富邦金",
-      "net": -4674797.0,
-      "trust_net": 2381877.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "0050",
-      "name": "元大台灣50",
-      "net": -70742198.0,
-      "trust_net": 1900000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2489",
-      "name": "瑞軒",
-      "net": -8641800.0,
-      "trust_net": 1800000.0,
-      "change": 0,
-      "industry": "光電"
-    },
-    {
-      "code": "2618",
-      "name": "長榮航",
-      "net": -3022189.0,
-      "trust_net": 1302000.0,
-      "change": 0,
-      "industry": "航運業"
-    },
-    {
-      "code": "1301",
-      "name": "台塑",
-      "net": -3258402.0,
-      "trust_net": 1211944.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "2345",
-      "name": "智邦",
-      "net": -196563.0,
-      "trust_net": 839272.0,
-      "change": 0,
-      "industry": "通信網路"
-    },
-    {
-      "code": "2313",
-      "name": "華通",
-      "net": -9877018.0,
-      "trust_net": 721484.0,
-      "change": 0,
+      "code": "4927",
+      "name": "泰鼎-KY",
+      "net": -2699000.0,
+      "trust_net": 0.0,
+      "change": 3.66,
       "industry": "電子零組件"
     },
     {
-      "code": "2890",
-      "name": "永豐金",
-      "net": -12352996.0,
-      "trust_net": 638851.0,
-      "change": 0,
+      "code": "5876",
+      "name": "上海商銀",
+      "net": -2577212.0,
+      "trust_net": -254255.0,
+      "change": 0.0,
       "industry": "金融保險"
     },
     {
       "code": "8046",
       "name": "南電",
-      "net": 2896262.0,
-      "trust_net": 576220.0,
-      "change": 0,
+      "net": -2364940.0,
+      "trust_net": 1227000.0,
+      "change": 0.3,
       "industry": "電子零組件"
     },
     {
-      "code": "2327",
-      "name": "國巨*",
-      "net": -705107.0,
-      "trust_net": 569745.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2330",
-      "name": "台積電",
-      "net": -15959615.0,
-      "trust_net": 557769.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2880",
-      "name": "華南金",
-      "net": 21002.0,
-      "trust_net": 505093.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2885",
-      "name": "元大金",
-      "net": -8537371.0,
-      "trust_net": 479451.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "1723",
-      "name": "中碳",
-      "net": 333997.0,
-      "trust_net": 420000.0,
-      "change": 0,
+      "code": "1718",
+      "name": "中纖",
+      "net": -2275219.0,
+      "trust_net": 0.0,
+      "change": 2.28,
       "industry": "化學工業"
     },
     {
-      "code": "3665",
-      "name": "貿聯-KY",
-      "net": -30835.0,
-      "trust_net": 356533.0,
-      "change": 0,
-      "industry": "其他電子"
-    },
-    {
-      "code": "2883",
-      "name": "凱基金",
-      "net": -9390244.0,
-      "trust_net": 354547.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2357",
-      "name": "華碩",
-      "net": -732898.0,
-      "trust_net": 311365.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "6005",
-      "name": "群益證",
-      "net": -3699800.0,
-      "trust_net": 292000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2385",
-      "name": "群光",
-      "net": 9948.0,
-      "trust_net": 283399.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2886",
-      "name": "兆豐金",
-      "net": 5809999.0,
-      "trust_net": 281657.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2892",
-      "name": "第一金",
-      "net": 3162548.0,
-      "trust_net": 274441.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "5880",
-      "name": "合庫金",
-      "net": -2307388.0,
-      "trust_net": 260354.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "8070",
-      "name": "長華*",
-      "net": -507000.0,
-      "trust_net": 241000.0,
-      "change": 0,
-      "industry": "電子通路"
-    },
-    {
-      "code": "2317",
-      "name": "鴻海",
-      "net": -13624878.0,
-      "trust_net": 237739.0,
-      "change": 0,
-      "industry": "其他電子"
-    },
-    {
-      "code": "3711",
-      "name": "日月光投控",
-      "net": -300743.0,
-      "trust_net": 225964.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "6239",
-      "name": "力成",
-      "net": -1006664.0,
-      "trust_net": 225277.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "0056",
-      "name": "元大高股息",
-      "net": -1636829.0,
-      "trust_net": 220000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "3702",
-      "name": "大聯大",
-      "net": 5267400.0,
-      "trust_net": 212000.0,
-      "change": 0,
-      "industry": "電子通路"
-    },
-    {
-      "code": "3044",
-      "name": "健鼎",
-      "net": -1036591.0,
-      "trust_net": 208192.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "8996",
-      "name": "高力",
-      "net": 325041.0,
-      "trust_net": 181000.0,
-      "change": 0,
-      "industry": "電機機械"
-    },
-    {
-      "code": "2360",
-      "name": "致茂",
-      "net": 382037.0,
-      "trust_net": 180227.0,
-      "change": 0,
-      "industry": "其他電子"
-    },
-    {
-      "code": "2382",
-      "name": "廣達",
-      "net": -5284533.0,
-      "trust_net": 172409.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "1326",
-      "name": "台化",
-      "net": 41744872.0,
-      "trust_net": 172000.0,
-      "change": 0,
-      "industry": "塑膠工業"
-    },
-    {
-      "code": "3533",
-      "name": "嘉澤",
-      "net": 1368.0,
-      "trust_net": 165914.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "3036",
-      "name": "文曄",
-      "net": 1209939.0,
-      "trust_net": 164000.0,
-      "change": 0,
-      "industry": "電子通路"
-    },
-    {
-      "code": "4915",
-      "name": "致伸",
-      "net": -606308.0,
-      "trust_net": 139000.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "6278",
-      "name": "台表科",
-      "net": -262000.0,
-      "trust_net": 129440.0,
-      "change": 0,
+      "code": "4960",
+      "name": "誠美材",
+      "net": -2264000.0,
+      "trust_net": 0.0,
+      "change": 9.79,
       "industry": "光電"
     },
     {
-      "code": "6505",
-      "name": "台塑化",
-      "net": -6568484.0,
-      "trust_net": 116268.0,
-      "change": 0,
-      "industry": "油電燃氣"
+      "code": "1301",
+      "name": "台塑",
+      "net": -2262518.0,
+      "trust_net": 0.0,
+      "change": 0.97,
+      "industry": "塑膠工業"
     },
     {
-      "code": "6257",
-      "name": "矽格",
-      "net": -411450.0,
-      "trust_net": 114459.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2412",
-      "name": "中華電",
-      "net": -1316674.0,
-      "trust_net": 109292.0,
-      "change": 0,
-      "industry": "通信網路"
-    },
-    {
-      "code": "2458",
-      "name": "義隆",
-      "net": -1151000.0,
-      "trust_net": 100461.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2211",
-      "name": "長榮鋼",
-      "net": -748000.0,
-      "trust_net": 99000.0,
-      "change": 0,
-      "industry": "鋼鐵工業"
-    },
-    {
-      "code": "6770",
-      "name": "力積電",
-      "net": -20614073.0,
-      "trust_net": 97110.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2454",
-      "name": "聯發科",
-      "net": -1259054.0,
-      "trust_net": 96186.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2002",
-      "name": "中鋼",
-      "net": -22219839.0,
-      "trust_net": 89514.0,
-      "change": 0,
-      "industry": "鋼鐵工業"
-    }
-  ],
-  "trust_top_sell": [
-    {
-      "code": "2324",
-      "name": "仁寶",
-      "net": -2398140.0,
-      "trust_net": -30024000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "3005",
-      "name": "神基",
-      "net": 218300.0,
-      "trust_net": -2187762.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "2449",
-      "name": "京元電子",
-      "net": 2283886.0,
-      "trust_net": -1372585.0,
-      "change": 0,
-      "industry": "半導體"
+      "code": "6213",
+      "name": "聯茂",
+      "net": -2240664.0,
+      "trust_net": 111518.0,
+      "change": 1.18,
+      "industry": "電子零組件"
     },
     {
       "code": "3189",
       "name": "景碩",
-      "net": 81690.0,
-      "trust_net": -1223420.0,
-      "change": 0,
+      "net": -2168917.0,
+      "trust_net": -497159.0,
+      "change": 1.6,
+      "industry": "半導體"
+    },
+    {
+      "code": "6176",
+      "name": "瑞儀",
+      "net": -2144900.0,
+      "trust_net": -107269.0,
+      "change": 2.77,
+      "industry": "光電"
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "net": -2095153.0,
+      "trust_net": -1925000.0,
+      "change": 0.28,
+      "industry": "食品工業"
+    },
+    {
+      "code": "2903",
+      "name": "遠百",
+      "net": -2066000.0,
+      "trust_net": 15000.0,
+      "change": 1.56,
+      "industry": "貿易百貨"
+    },
+    {
+      "code": "9105",
+      "name": "泰金寶-DR",
+      "net": -1924410.0,
+      "trust_net": 0.0,
+      "change": 1.13,
+      "industry": "其他"
+    },
+    {
+      "code": "2481",
+      "name": "強茂",
+      "net": -1892750.0,
+      "trust_net": -216563.0,
+      "change": 0.5,
+      "industry": "半導體"
+    },
+    {
+      "code": "2104",
+      "name": "國際中橡",
+      "net": -1853000.0,
+      "trust_net": 0.0,
+      "change": 2.64,
+      "industry": "橡膠工業"
+    },
+    {
+      "code": "2105",
+      "name": "正新",
+      "net": -1840784.0,
+      "trust_net": -126594.0,
+      "change": 0.96,
+      "industry": "橡膠工業"
+    },
+    {
+      "code": "4989",
+      "name": "榮科",
+      "net": -1837061.0,
+      "trust_net": 0.0,
+      "change": 9.95,
+      "industry": "電子零組件"
+    }
+  ],
+  "trust_top_buy": [
+    {
+      "code": "2489",
+      "name": "瑞軒",
+      "net": -7937047.0,
+      "trust_net": 6611000.0,
+      "change": 5.96,
+      "industry": "光電"
+    },
+    {
+      "code": "2337",
+      "name": "旺宏",
+      "net": -8924062.0,
+      "trust_net": 2500000.0,
+      "change": 2.82,
+      "industry": "半導體"
+    },
+    {
+      "code": "2382",
+      "name": "廣達",
+      "net": 11030247.0,
+      "trust_net": 1346974.0,
+      "change": 2.72,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "net": -6756557.0,
+      "trust_net": 1228691.0,
+      "change": 0.97,
+      "industry": "金融保險"
+    },
+    {
+      "code": "8046",
+      "name": "南電",
+      "net": -2364940.0,
+      "trust_net": 1227000.0,
+      "change": 0.3,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "net": -21138307.0,
+      "trust_net": 1172997.0,
+      "change": 1.5,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "net": -3423781.0,
+      "trust_net": 1121007.0,
+      "change": 0.71,
+      "industry": "金融保險"
+    },
+    {
+      "code": "6285",
+      "name": "啟碁",
+      "net": -956585.0,
+      "trust_net": 933709.0,
+      "change": 0.22,
+      "industry": "通信網路"
+    },
+    {
+      "code": "6505",
+      "name": "台塑化",
+      "net": 527044.0,
+      "trust_net": 915000.0,
+      "change": 1.36,
+      "industry": "油電燃氣"
+    },
+    {
+      "code": "2027",
+      "name": "大成鋼",
+      "net": 4670776.0,
+      "trust_net": 894000.0,
+      "change": 2.03,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "4958",
+      "name": "臻鼎-KY",
+      "net": -8630467.0,
+      "trust_net": 683001.0,
+      "change": 0.57,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "3532",
+      "name": "台勝科",
+      "net": 808490.0,
+      "trust_net": 516000.0,
+      "change": 9.97,
       "industry": "半導體"
     },
     {
       "code": "3037",
       "name": "欣興",
-      "net": -1154854.0,
-      "trust_net": -631676.0,
-      "change": 0,
+      "net": 3245419.0,
+      "trust_net": 510112.0,
+      "change": 2.08,
       "industry": "電子零組件"
     },
     {
-      "code": "1519",
-      "name": "華城",
-      "net": 303784.0,
-      "trust_net": -437071.0,
-      "change": 0,
-      "industry": "電機機械"
+      "code": "2486",
+      "name": "一詮",
+      "net": 1377109.0,
+      "trust_net": 484000.0,
+      "change": 6.61,
+      "industry": "光電"
     },
     {
-      "code": "6271",
-      "name": "同欣電",
-      "net": -301252.0,
-      "trust_net": -400436.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2404",
-      "name": "漢唐",
-      "net": 93092.0,
-      "trust_net": -331256.0,
-      "change": 0,
-      "industry": "其他電子"
-    },
-    {
-      "code": "8210",
-      "name": "勤誠",
-      "net": -629248.0,
-      "trust_net": -295712.0,
-      "change": 0,
+      "code": "2376",
+      "name": "技嘉",
+      "net": 830447.0,
+      "trust_net": 458409.0,
+      "change": 4.58,
       "industry": "電腦及週邊"
     },
     {
-      "code": "2368",
-      "name": "金像電",
-      "net": -579222.0,
-      "trust_net": -272959.0,
-      "change": 0,
+      "code": "2345",
+      "name": "智邦",
+      "net": 692224.0,
+      "trust_net": 227539.0,
+      "change": 8.58,
+      "industry": "通信網路"
+    },
+    {
+      "code": "3045",
+      "name": "台灣大",
+      "net": 2275009.0,
+      "trust_net": 220000.0,
+      "change": 0.0,
+      "industry": "通信網路"
+    },
+    {
+      "code": "2412",
+      "name": "中華電",
+      "net": 508225.0,
+      "trust_net": 183419.0,
+      "change": 0.37,
+      "industry": "通信網路"
+    },
+    {
+      "code": "6937",
+      "name": "天虹",
+      "net": -70960.0,
+      "trust_net": 139000.0,
+      "change": 3.08,
+      "industry": "半導體"
+    },
+    {
+      "code": "2379",
+      "name": "瑞昱",
+      "net": 839.0,
+      "trust_net": 115485.0,
+      "change": 0.79,
+      "industry": "半導體"
+    },
+    {
+      "code": "6213",
+      "name": "聯茂",
+      "net": -2240664.0,
+      "trust_net": 111518.0,
+      "change": 1.18,
       "industry": "電子零組件"
     },
     {
-      "code": "2395",
-      "name": "研華",
-      "net": 391783.0,
-      "trust_net": -221557.0,
-      "change": 0,
-      "industry": "電腦及週邊"
+      "code": "2383",
+      "name": "台光電",
+      "net": -194742.0,
+      "trust_net": 110048.0,
+      "change": 6.21,
+      "industry": "電子零組件"
     },
     {
-      "code": "2408",
-      "name": "南亞科",
-      "net": 4169918.0,
-      "trust_net": -172120.0,
-      "change": 0,
+      "code": "6257",
+      "name": "矽格",
+      "net": -873875.0,
+      "trust_net": 102877.0,
+      "change": 2.92,
       "industry": "半導體"
     },
     {
-      "code": "2731",
-      "name": "雄獅",
-      "net": -661001.0,
-      "trust_net": -163000.0,
-      "change": 0,
-      "industry": "觀光餐旅"
+      "code": "2881",
+      "name": "富邦金",
+      "net": -10071328.0,
+      "trust_net": 95570.0,
+      "change": 1.04,
+      "industry": "金融保險"
     },
     {
-      "code": "3661",
-      "name": "世芯-KY",
-      "net": -1365303.0,
-      "trust_net": -157475.0,
-      "change": 0,
+      "code": "6451",
+      "name": "訊芯-KY",
+      "net": -532178.0,
+      "trust_net": 81000.0,
+      "change": 9.92,
       "industry": "半導體"
     },
     {
-      "code": "2344",
-      "name": "華邦電",
-      "net": -5150659.0,
-      "trust_net": -129281.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "1402",
-      "name": "遠東新",
-      "net": 1654228.0,
-      "trust_net": -120000.0,
-      "change": 0,
-      "industry": "紡織纖維"
-    },
-    {
-      "code": "2233",
-      "name": "宇隆",
-      "net": -78000.0,
-      "trust_net": -120000.0,
-      "change": 0,
-      "industry": "汽車工業"
-    },
-    {
-      "code": "2353",
-      "name": "宏碁",
-      "net": -3646690.0,
-      "trust_net": -97000.0,
-      "change": 0,
-      "industry": "電腦及週邊"
-    },
-    {
-      "code": "7769",
-      "name": "鴻勁",
-      "net": 231313.0,
-      "trust_net": -96744.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "2481",
-      "name": "強茂",
-      "net": -15863790.0,
-      "trust_net": -92000.0,
-      "change": 0,
-      "industry": "半導體"
-    },
-    {
-      "code": "3596",
-      "name": "智易",
-      "net": -296787.0,
-      "trust_net": -78457.0,
-      "change": 0,
+      "code": "2455",
+      "name": "全新",
+      "net": 1101911.0,
+      "trust_net": 66734.0,
+      "change": 3.82,
       "industry": "通信網路"
     },
     {
       "code": "3443",
       "name": "創意",
-      "net": 246620.0,
-      "trust_net": -72858.0,
-      "change": 0,
+      "net": -182941.0,
+      "trust_net": 57830.0,
+      "change": 0.38,
       "industry": "半導體"
     },
     {
-      "code": "1504",
-      "name": "東元",
-      "net": 1545796.0,
-      "trust_net": -67474.0,
-      "change": 0,
+      "code": "2301",
+      "name": "光寶科",
+      "net": 189231.0,
+      "trust_net": 57176.0,
+      "change": 4.19,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "8996",
+      "name": "高力",
+      "net": 815971.0,
+      "trust_net": 57000.0,
+      "change": 2.97,
       "industry": "電機機械"
     },
     {
-      "code": "2105",
-      "name": "正新",
-      "net": 4399700.0,
-      "trust_net": -66595.0,
-      "change": 0,
-      "industry": "橡膠工業"
+      "code": "6715",
+      "name": "嘉基",
+      "net": -136454.0,
+      "trust_net": 45862.0,
+      "change": 5.91,
+      "industry": "電子零組件"
     },
     {
-      "code": "2455",
-      "name": "全新",
-      "net": -8140.0,
-      "trust_net": -62204.0,
-      "change": 0,
+      "code": "6442",
+      "name": "光聖",
+      "net": 543055.0,
+      "trust_net": 43000.0,
+      "change": 9.93,
       "industry": "通信網路"
     },
     {
-      "code": "3008",
-      "name": "大立光",
-      "net": -13737.0,
-      "trust_net": -60115.0,
-      "change": 0,
+      "code": "2897",
+      "name": "王道銀行",
+      "net": 780000.0,
+      "trust_net": 35000.0,
+      "change": 0.0,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2308",
+      "name": "台達電",
+      "net": 581401.0,
+      "trust_net": 27109.0,
+      "change": 5.47,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "1711",
+      "name": "永光",
+      "net": -4344730.0,
+      "trust_net": 26000.0,
+      "change": 5.59,
+      "industry": "化學工業"
+    },
+    {
+      "code": "3714",
+      "name": "富采",
+      "net": -16807898.0,
+      "trust_net": 25000.0,
+      "change": 11.35,
       "industry": "光電"
     },
     {
-      "code": "6176",
-      "name": "瑞儀",
-      "net": 329000.0,
-      "trust_net": -54805.0,
-      "change": 0,
-      "industry": "光電"
+      "code": "2820",
+      "name": "華票",
+      "net": 289000.0,
+      "trust_net": 21000.0,
+      "change": 0.0,
+      "industry": "金融保險"
     },
     {
-      "code": "6139",
-      "name": "亞翔",
-      "net": -783325.0,
-      "trust_net": -52050.0,
-      "change": 0,
-      "industry": "其他電子"
+      "code": "1434",
+      "name": "福懋",
+      "net": -31000.0,
+      "trust_net": 21000.0,
+      "change": 0.0,
+      "industry": "紡織纖維"
     },
     {
-      "code": "2504",
-      "name": "國產",
-      "net": -649000.0,
-      "trust_net": -43000.0,
-      "change": 0,
-      "industry": "建材營造"
-    },
-    {
-      "code": "6515",
-      "name": "穎崴",
-      "net": 38614.0,
-      "trust_net": -42889.0,
-      "change": 0,
+      "code": "3583",
+      "name": "辛耘",
+      "net": 2622025.0,
+      "trust_net": 20693.0,
+      "change": 9.97,
       "industry": "半導體"
     },
     {
-      "code": "1477",
-      "name": "聚陽",
-      "net": 576562.0,
-      "trust_net": -40480.0,
-      "change": 0,
-      "industry": "紡織纖維"
+      "code": "2501",
+      "name": "國建",
+      "net": 502898.0,
+      "trust_net": 16000.0,
+      "change": 0.86,
+      "industry": "建材營造"
+    },
+    {
+      "code": "2903",
+      "name": "遠百",
+      "net": -2066000.0,
+      "trust_net": 15000.0,
+      "change": 1.56,
+      "industry": "貿易百貨"
+    },
+    {
+      "code": "1326",
+      "name": "台化",
+      "net": -112885.0,
+      "trust_net": 12000.0,
+      "change": 0.33,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2368",
+      "name": "金像電",
+      "net": 419601.0,
+      "trust_net": 11786.0,
+      "change": 0.46,
+      "industry": "電子零組件"
+    },
+    {
+      "code": "8150",
+      "name": "南茂",
+      "net": 1152914.0,
+      "trust_net": 11000.0,
+      "change": 1.66,
+      "industry": "半導體"
+    },
+    {
+      "code": "2851",
+      "name": "中再保",
+      "net": 520000.0,
+      "trust_net": 11000.0,
+      "change": 0.81,
+      "industry": "金融保險"
+    },
+    {
+      "code": "1227",
+      "name": "佳格",
+      "net": -3000.0,
+      "trust_net": 11000.0,
+      "change": 0.17,
+      "industry": "食品工業"
+    },
+    {
+      "code": "2633",
+      "name": "台灣高鐵",
+      "net": -1787960.0,
+      "trust_net": 10204.0,
+      "change": 0.19,
+      "industry": "航運業"
+    },
+    {
+      "code": "9910",
+      "name": "豐泰",
+      "net": -560986.0,
+      "trust_net": 9053.0,
+      "change": 2.26,
+      "industry": "其他"
+    },
+    {
+      "code": "2485",
+      "name": "兆赫",
+      "net": 3641234.0,
+      "trust_net": 6000.0,
+      "change": 5.15,
+      "industry": "通信網路"
+    },
+    {
+      "code": "8070",
+      "name": "長華*",
+      "net": -1059000.0,
+      "trust_net": 6000.0,
+      "change": 1.6,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2441",
+      "name": "超豐",
+      "net": -84445.0,
+      "trust_net": 4606.0,
+      "change": 1.31,
+      "industry": "半導體"
+    }
+  ],
+  "trust_top_sell": [
+    {
+      "code": "1717",
+      "name": "長興",
+      "net": 395467.0,
+      "trust_net": -8026488.0,
+      "change": 8.4,
+      "industry": "化學工業"
+    },
+    {
+      "code": "6770",
+      "name": "力積電",
+      "net": 16206540.0,
+      "trust_net": -3017000.0,
+      "change": 2.59,
+      "industry": "半導體"
+    },
+    {
+      "code": "3036",
+      "name": "文曄",
+      "net": 3095375.0,
+      "trust_net": -2879505.0,
+      "change": 0.67,
+      "industry": "電子通路"
     },
     {
       "code": "2610",
       "name": "華航",
-      "net": -5612322.0,
-      "trust_net": -38000.0,
-      "change": 0,
+      "net": -11095470.0,
+      "trust_net": -2081891.0,
+      "change": 0.28,
       "industry": "航運業"
     },
     {
-      "code": "2606",
-      "name": "裕民",
-      "net": 262500.0,
-      "trust_net": -35000.0,
-      "change": 0,
+      "code": "2887",
+      "name": "台新新光金",
+      "net": 1415363.0,
+      "trust_net": -2073883.0,
+      "change": 0.41,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2449",
+      "name": "京元電子",
+      "net": -435937.0,
+      "trust_net": -1961164.0,
+      "change": 0.91,
+      "industry": "半導體"
+    },
+    {
+      "code": "1216",
+      "name": "統一",
+      "net": -2095153.0,
+      "trust_net": -1925000.0,
+      "change": 0.28,
+      "industry": "食品工業"
+    },
+    {
+      "code": "2344",
+      "name": "華邦電",
+      "net": 18830999.0,
+      "trust_net": -1920512.0,
+      "change": 2.75,
+      "industry": "半導體"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "net": 3685355.0,
+      "trust_net": -1776762.0,
+      "change": 1.24,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2880",
+      "name": "華南金",
+      "net": 1950467.0,
+      "trust_net": -1446000.0,
+      "change": 1.49,
+      "industry": "金融保險"
+    },
+    {
+      "code": "1303",
+      "name": "南亞",
+      "net": -24956746.0,
+      "trust_net": -1409000.0,
+      "change": 4.62,
+      "industry": "塑膠工業"
+    },
+    {
+      "code": "2618",
+      "name": "長榮航",
+      "net": 1518335.0,
+      "trust_net": -1401824.0,
+      "change": 0.14,
       "industry": "航運業"
     },
     {
-      "code": "1605",
-      "name": "華新",
-      "net": 3216138.0,
-      "trust_net": -33235.0,
-      "change": 0,
-      "industry": "電器電纜"
+      "code": "3702",
+      "name": "大聯大",
+      "net": 4885216.0,
+      "trust_net": -1391000.0,
+      "change": 0.22,
+      "industry": "電子通路"
     },
     {
-      "code": "2383",
-      "name": "台光電",
-      "net": -460042.0,
-      "trust_net": -31039.0,
-      "change": 0,
-      "industry": "電子零組件"
+      "code": "6239",
+      "name": "力成",
+      "net": -278535.0,
+      "trust_net": -1007890.0,
+      "change": 2.39,
+      "industry": "半導體"
     },
     {
-      "code": "8261",
-      "name": "富鼎",
-      "net": -502500.0,
-      "trust_net": -30000.0,
-      "change": 0,
+      "code": "2324",
+      "name": "仁寶",
+      "net": 4072702.0,
+      "trust_net": -918632.0,
+      "change": 3.3,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2353",
+      "name": "宏碁",
+      "net": -263683.0,
+      "trust_net": -873851.0,
+      "change": 0.37,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "4904",
+      "name": "遠傳",
+      "net": 432404.0,
+      "trust_net": -831876.0,
+      "change": 0.75,
+      "industry": "通信網路"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "net": 1380068.0,
+      "trust_net": -828711.0,
+      "change": 0.53,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3413",
+      "name": "京鼎",
+      "net": 1062000.0,
+      "trust_net": -610000.0,
+      "change": 2.11,
+      "industry": "半導體"
+    },
+    {
+      "code": "2395",
+      "name": "研華",
+      "net": 408689.0,
+      "trust_net": -606708.0,
+      "change": 0.58,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2451",
+      "name": "創見",
+      "net": 1831657.0,
+      "trust_net": -597827.0,
+      "change": 3.22,
+      "industry": "半導體"
+    },
+    {
+      "code": "3711",
+      "name": "日月光投控",
+      "net": -1806129.0,
+      "trust_net": -586575.0,
+      "change": 0.26,
+      "industry": "半導體"
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "net": -6515958.0,
+      "trust_net": -583315.0,
+      "change": 1.78,
+      "industry": "金融保險"
+    },
+    {
+      "code": "3189",
+      "name": "景碩",
+      "net": -2168917.0,
+      "trust_net": -497159.0,
+      "change": 1.6,
+      "industry": "半導體"
+    },
+    {
+      "code": "6005",
+      "name": "群益證",
+      "net": 94000.0,
+      "trust_net": -443634.0,
+      "change": 1.06,
+      "industry": "金融保險"
+    },
+    {
+      "code": "2915",
+      "name": "潤泰全",
+      "net": -143014.0,
+      "trust_net": -436000.0,
+      "change": 1.08,
+      "industry": "貿易百貨"
+    },
+    {
+      "code": "2317",
+      "name": "鴻海",
+      "net": -4481158.0,
+      "trust_net": -415577.0,
+      "change": 0.25,
+      "industry": "其他電子"
+    },
+    {
+      "code": "2347",
+      "name": "聯強",
+      "net": -1411750.0,
+      "trust_net": -408021.0,
+      "change": 2.32,
+      "industry": "電子通路"
+    },
+    {
+      "code": "2474",
+      "name": "可成",
+      "net": -132004.0,
+      "trust_net": -341355.0,
+      "change": 0.0,
+      "industry": "其他電子"
+    },
+    {
+      "code": "3231",
+      "name": "緯創",
+      "net": 9922598.0,
+      "trust_net": -323524.0,
+      "change": 1.89,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "2454",
+      "name": "聯發科",
+      "net": -1441359.0,
+      "trust_net": -276294.0,
+      "change": 0.0,
+      "industry": "半導體"
+    },
+    {
+      "code": "4938",
+      "name": "和碩",
+      "net": 132206.0,
+      "trust_net": -273760.0,
+      "change": 0.87,
+      "industry": "電腦及週邊"
+    },
+    {
+      "code": "1102",
+      "name": "亞泥",
+      "net": -4664359.0,
+      "trust_net": -264820.0,
+      "change": 0.71,
+      "industry": "水泥工業"
+    },
+    {
+      "code": "2408",
+      "name": "南亞科",
+      "net": 18152083.0,
+      "trust_net": -262325.0,
+      "change": 4.88,
       "industry": "半導體"
     },
     {
       "code": "5876",
       "name": "上海商銀",
-      "net": -2304033.0,
-      "trust_net": -30000.0,
-      "change": 0,
+      "net": -2577212.0,
+      "trust_net": -254255.0,
+      "change": 0.0,
       "industry": "金融保險"
     },
     {
-      "code": "3017",
-      "name": "奇鋐",
-      "net": -59861.0,
-      "trust_net": -29663.0,
-      "change": 0,
+      "code": "3005",
+      "name": "神基",
+      "net": -1387484.0,
+      "trust_net": -237000.0,
+      "change": 0.5,
       "industry": "電腦及週邊"
     },
     {
-      "code": "9945",
-      "name": "潤泰新",
-      "net": -320737.0,
-      "trust_net": -25000.0,
-      "change": 0,
+      "code": "9904",
+      "name": "寶成",
+      "net": -6094334.0,
+      "trust_net": -235774.0,
+      "change": 0.53,
       "industry": "其他"
     },
     {
-      "code": "3042",
-      "name": "晶技",
-      "net": 51000.0,
-      "trust_net": -14605.0,
-      "change": 0,
-      "industry": "電子零組件"
-    },
-    {
-      "code": "2834",
-      "name": "臺企銀",
-      "net": -3847641.0,
-      "trust_net": -11000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2855",
-      "name": "統一證",
-      "net": -1271970.0,
-      "trust_net": -8000.0,
-      "change": 0,
-      "industry": "金融保險"
-    },
-    {
-      "code": "2204",
-      "name": "中華",
-      "net": 439100.0,
-      "trust_net": -7000.0,
-      "change": 0,
-      "industry": "汽車工業"
-    },
-    {
-      "code": "1210",
-      "name": "大成",
-      "net": 89000.0,
-      "trust_net": -7000.0,
-      "change": 0,
-      "industry": "食品工業"
-    },
-    {
-      "code": "9907",
-      "name": "統一實",
-      "net": 2331000.0,
-      "trust_net": -5000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2062",
-      "name": "橋椿",
-      "net": 138000.0,
-      "trust_net": -5000.0,
-      "change": 0,
-      "industry": "其他"
-    },
-    {
-      "code": "2498",
-      "name": "宏達電",
-      "net": -441900.0,
-      "trust_net": -5000.0,
-      "change": 0,
+      "code": "2439",
+      "name": "美律",
+      "net": -175000.0,
+      "trust_net": -235469.0,
+      "change": 0.23,
       "industry": "通信網路"
     },
     {
-      "code": "2845",
-      "name": "遠東銀",
-      "net": 2003000.0,
-      "trust_net": -3000.0,
-      "change": 0,
-      "industry": "金融保險"
+      "code": "6415",
+      "name": "矽力*-KY",
+      "net": -531844.0,
+      "trust_net": -231000.0,
+      "change": 0.9,
+      "industry": "半導體"
     },
     {
-      "code": "2615",
-      "name": "萬海",
-      "net": 4449138.0,
-      "trust_net": -2000.0,
-      "change": 0,
+      "code": "2404",
+      "name": "漢唐",
+      "net": 163827.0,
+      "trust_net": -217906.0,
+      "change": 2.09,
+      "industry": "其他電子"
+    },
+    {
+      "code": "2481",
+      "name": "強茂",
+      "net": -1892750.0,
+      "trust_net": -216563.0,
+      "change": 0.5,
+      "industry": "半導體"
+    },
+    {
+      "code": "2606",
+      "name": "裕民",
+      "net": 300197.0,
+      "trust_net": -205547.0,
+      "change": 0.33,
       "industry": "航運業"
     },
     {
-      "code": "6412",
-      "name": "群電",
-      "net": -667500.0,
-      "trust_net": -2000.0,
-      "change": 0,
+      "code": "2002",
+      "name": "中鋼",
+      "net": 8475350.0,
+      "trust_net": -199000.0,
+      "change": 0.75,
+      "industry": "鋼鐵工業"
+    },
+    {
+      "code": "6805",
+      "name": "富世達",
+      "net": 233511.0,
+      "trust_net": -184936.0,
+      "change": 1.36,
       "industry": "電子零組件"
+    },
+    {
+      "code": "9938",
+      "name": "百和",
+      "net": -394000.0,
+      "trust_net": -177000.0,
+      "change": 0.0,
+      "industry": "其他"
+    },
+    {
+      "code": "2330",
+      "name": "台積電",
+      "net": 8159941.0,
+      "trust_net": -173389.0,
+      "change": 2.3,
+      "industry": "半導體"
+    },
+    {
+      "code": "2603",
+      "name": "長榮",
+      "net": 574099.0,
+      "trust_net": -171725.0,
+      "change": 0.25,
+      "industry": "航運業"
+    },
+    {
+      "code": "8422",
+      "name": "可寧衛*",
+      "net": -1072050.0,
+      "trust_net": -171000.0,
+      "change": 0.52,
+      "industry": "其他"
+    },
+    {
+      "code": "1504",
+      "name": "東元",
+      "net": -1076789.0,
+      "trust_net": -166707.0,
+      "change": 0.34,
+      "industry": "電機機械"
+    },
+    {
+      "code": "8114",
+      "name": "振樺電",
+      "net": -49800.0,
+      "trust_net": -158430.0,
+      "change": 0.6,
+      "industry": "電腦及週邊"
     }
   ]
 }

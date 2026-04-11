@@ -47,7 +47,7 @@ def get_all_foreign_net(date_str):
     return stock_net
 
 def main():
-    with open('data/industry_heatmap.json', 'r', encoding='utf-8') as f:
+    with open('data/industry_heatmap_raw.json', 'r', encoding='utf-8') as f:
         heatmap = json.load(f)
     
     with open('data/industry_foreign_flow.json', 'r', encoding='utf-8') as f:

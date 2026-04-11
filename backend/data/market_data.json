@@ -6,44 +6,50 @@
       "balance": 3927.09
     },
     "futures": {
-      "date": "20260330",
+      "date": "20260410",
       "ratio": 1.0,
-      "foreign_net": -37282,
-      "trust_net": 37470,
-      "dealer_net": 200,
-      "retail_long": 167362,
-      "retail_short": 167750,
-      "retail_net": -388,
-      "retail_ratio": -0.17,
+      "foreign_net": -34403,
+      "trust_net": 40546,
+      "dealer_net": -6295,
+      "retail_long": 184663,
+      "retail_short": 184511,
+      "retail_net": 152,
+      "retail_ratio": 0.06,
       "pcr_volume": null
     },
     "breadth": {
-      "date": "20260331",
-      "close": 32518.16,
-      "up_count": 130,
-      "down_count": 890,
-      "unchanged": 44,
-      "up_ratio": 12.2,
-      "up_limit": 9,
-      "down_limit": 16
+      "date": "20260410",
+      "close": 35417.83,
+      "up_count": 520,
+      "down_count": 452,
+      "unchanged": 94,
+      "up_ratio": 48.8,
+      "up_limit": 39,
+      "down_limit": 1
     }
   },
   "sentiment": {
     "taiwan": {
-      "score": 39,
-      "rating": "恐懼",
+      "score": 64,
+      "rating": "貪婪",
       "components": {
+        "momentum": {
+          "score": 90,
+          "weight": 0.2,
+          "desc": "價格動能",
+          "detail": "收盤35418 MA20=33120 乖離+6.9%"
+        },
         "breadth": {
-          "score": 15,
+          "score": 50,
           "weight": 0.15,
           "desc": "市場廣度",
-          "detail": "漲130 跌890 比率12.2%"
+          "detail": "漲520 跌452 比率48.8%"
         },
         "strength": {
-          "score": 30,
+          "score": 85,
           "weight": 0.1,
           "desc": "新高低比",
-          "detail": "漲停9 跌停16"
+          "detail": "漲停39 跌停1"
         },
         "margin": {
           "score": 75,
@@ -61,17 +67,17 @@
           "score": 15,
           "weight": 0.1,
           "desc": "外資淨部位",
-          "detail": "-37,282"
+          "detail": "-34,403"
         }
       },
-      "available_weight": 0.65
+      "available_weight": 0.85
     },
     "us": {
-      "score": 9,
-      "rating": "EXTREME FEAR",
-      "previous_close": 9,
-      "previous_week": 18,
-      "previous_month": 41
+      "score": 37,
+      "rating": "FEAR",
+      "previous_close": 36,
+      "previous_week": 24,
+      "previous_month": 20
     }
   },
   "history": {
@@ -154,51 +160,6 @@
     ],
     "futures": [
       {
-        "date": "20260310",
-        "ratio": 0.99,
-        "foreign_net": -36856
-      },
-      {
-        "date": "20260311",
-        "ratio": 1.01,
-        "foreign_net": -40958
-      },
-      {
-        "date": "20260312",
-        "ratio": 1.01,
-        "foreign_net": -43064
-      },
-      {
-        "date": "20260313",
-        "ratio": 0.99,
-        "foreign_net": -40347
-      },
-      {
-        "date": "20260316",
-        "ratio": 0.99,
-        "foreign_net": -38512
-      },
-      {
-        "date": "20260317",
-        "ratio": 0.98,
-        "foreign_net": -36158
-      },
-      {
-        "date": "20260318",
-        "ratio": 1.0,
-        "foreign_net": -34549
-      },
-      {
-        "date": "20260319",
-        "ratio": 1.02,
-        "foreign_net": -40825
-      },
-      {
-        "date": "20260320",
-        "ratio": 1.0,
-        "foreign_net": -36366
-      },
-      {
         "date": "20260323",
         "ratio": 1.0,
         "foreign_net": -37717
@@ -227,8 +188,53 @@
         "date": "20260330",
         "ratio": 1.0,
         "foreign_net": -37282
+      },
+      {
+        "date": "20260331",
+        "ratio": 0.99,
+        "foreign_net": -37214
+      },
+      {
+        "date": "20260401",
+        "ratio": 0.98,
+        "foreign_net": -31373
+      },
+      {
+        "date": "20260402",
+        "ratio": 0.99,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260403",
+        "ratio": 0.99,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260406",
+        "ratio": 0.99,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260407",
+        "ratio": 0.97,
+        "foreign_net": -31350
+      },
+      {
+        "date": "20260408",
+        "ratio": 0.99,
+        "foreign_net": -32478
+      },
+      {
+        "date": "20260409",
+        "ratio": 0.99,
+        "foreign_net": -33399
+      },
+      {
+        "date": "20260410",
+        "ratio": 1.0,
+        "foreign_net": -34403
       }
     ]
   },
-  "updated_at": "2026-03-31T14:45:57.155146"
+  "updated_at": "2026-04-10T20:39:15.417040"
 }

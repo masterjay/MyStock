@@ -252,7 +252,7 @@ try:
         print(f"  ✗ 錯誤: {e}")
 
     # 15. 周轉率分析
-    print("\n[15/15] 周轉率過熱分析...")
+    print("\n[15/16] 周轉率過熱分析...")
     try:
         result = subprocess.run(['python3', 'turnover_analyzer.py'],
                               capture_output=True, text=True, timeout=60)
@@ -263,6 +263,22 @@ try:
             print(f"  ✗ 失敗: {result.stderr[:200]}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
+
+    # 16. 內部人持股異動 (每月16日後執行)
+    if datetime.now().day >= 16:
+        print("\n[16/16] 內部人持股異動...")
+        try:
+            result = subprocess.run(['python3', 'insider_trading_collector.py'],
+                                  capture_output=True, text=True, timeout=1800)
+            if result.returncode == 0:
+                print(result.stdout.strip()[-200:])
+                print("  ✓ 完成")
+            else:
+                print(f"  ✗ 失敗: {result.stderr[:200]}")
+        except Exception as e:
+            print(f"  ✗ 錯誤: {e}")
+    else:
+        print("\n[16/16] 內部人持股異動: 每月16日後執行，跳過")
 
 except Exception as e:
     print(f"\n✗ 執行錯誤: {e}")

@@ -1,0 +1,198 @@
+{
+  "updated_at": "2026-04-06T20:38:01.845593",
+  "scan_date": "2026-04-06",
+  "total_scanned": 1086,
+  "signal_count": 8,
+  "signals": [
+    {
+      "code": "1341",
+      "name": "富林-KY",
+      "price": 59.400001525878906,
+      "ma20": 58.69,
+      "dif": -0.2313,
+      "macd": -0.2339,
+      "histogram": 0.0026,
+      "dif_pct": 0.3894,
+      "volume_ratio": 0.24,
+      "trade_type": "短線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 5,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1451",
+      "name": "年興",
+      "price": 18.149999618530273,
+      "ma20": 18.01,
+      "dif": 0.0128,
+      "macd": 0.0096,
+      "histogram": 0.0032,
+      "dif_pct": 0.0707,
+      "volume_ratio": 0.59,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 5,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2850",
+      "name": "新產",
+      "price": 118.0,
+      "ma20": 116.92,
+      "dif": 0.3174,
+      "macd": 0.2738,
+      "histogram": 0.0436,
+      "dif_pct": 0.269,
+      "volume_ratio": 0.58,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 4,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "6187",
+      "name": "萬潤",
+      "price": 895.0,
+      "ma20": 764.1,
+      "dif": 105.64,
+      "macd": 105.7646,
+      "histogram": -0.1246,
+      "dif_pct": 11.8034,
+      "volume_ratio": 0.52,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "即將金叉",
+      "signal_strength": 3,
+      "date": "2026/04/02",
+      "source": "自選股",
+      "concepts": [
+        {
+          "id": "cowos",
+          "label": "CoWoS / 先進封裝",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    {
+      "code": "1449",
+      "name": "佳和",
+      "price": 12.399999618530273,
+      "ma20": 11.48,
+      "dif": 0.1792,
+      "macd": 0.1735,
+      "histogram": 0.0057,
+      "dif_pct": 1.445,
+      "volume_ratio": 0.59,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 3,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1460",
+      "name": "宏遠",
+      "price": 7.099999904632568,
+      "ma20": 6.98,
+      "dif": 0.1103,
+      "macd": 0.112,
+      "histogram": -0.0017,
+      "dif_pct": 1.5542,
+      "volume_ratio": 0.63,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "即將金叉",
+      "signal_strength": 2,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "1720",
+      "name": "生達",
+      "price": 63.900001525878906,
+      "ma20": 63.28,
+      "dif": 0.2604,
+      "macd": 0.2321,
+      "histogram": 0.0283,
+      "dif_pct": 0.4075,
+      "volume_ratio": 0.8,
+      "trade_type": "長線",
+      "stage": 2,
+      "cross_status": "已金叉",
+      "signal_strength": 2,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    },
+    {
+      "code": "2851",
+      "name": "中再保",
+      "price": 30.399999618530273,
+      "ma20": 29.74,
+      "dif": 0.8476,
+      "macd": 0.8767,
+      "histogram": -0.0291,
+      "dif_pct": 2.7881,
+      "volume_ratio": 0.73,
+      "trade_type": "長線",
+      "stage": 1,
+      "cross_status": "柱體縮小中",
+      "signal_strength": 1,
+      "date": "2026/04/02",
+      "source": "產業外資",
+      "concepts": []
+    }
+  ],
+  "config": {
+    "macd_params": "12,26,9",
+    "volume_shrink_ratio": 0.85,
+    "macd_zero_threshold": 2.0,
+    "histogram_shrink_days": 3
+  },
+  "concepts_meta": {
+    "low_orbit_satellite": {
+      "label": "低軌衛星",
+      "color": "#3B82F6"
+    },
+    "ai_intelligence": {
+      "label": "AI 人工智慧",
+      "color": "#8B5CF6"
+    },
+    "robot": {
+      "label": "機器人 / 智慧機械",
+      "color": "#A855F7"
+    },
+    "cowos": {
+      "label": "CoWoS / 先進封裝",
+      "color": "#F59E0B"
+    },
+    "cpo": {
+      "label": "CPO 矽光子",
+      "color": "#10B981"
+    },
+    "hbm": {
+      "label": "HBM 高頻寬記憶體",
+      "color": "#EF4444"
+    },
+    "heavy_electric": {
+      "label": "重電",
+      "color": "#F97316"
+    },
+    "edge_ai": {
+      "label": "邊緣AI",
+      "color": "#06B6D4"
+    }
+  }
+}

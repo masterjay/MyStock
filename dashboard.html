@@ -3603,6 +3603,32 @@
                 </div>
             </section>
 
+
+            <!-- 內部人持股異動 -->
+            <div id="insider-section" class="disposal-section" style="margin-bottom:16px;">
+              <div class="disposal-header">
+                <div class="disposal-title-row">
+                  <span class="disposal-icon">🏛️</span>
+                  <span class="disposal-title">內部人持股異動</span>
+                  <span id="insider-count" class="disposal-badge">--</span>
+                </div>
+                <div class="disposal-actions">
+                  <span id="insider-updated" class="disposal-updated"></span>
+                  <span id="insider-month" style="color:#888;font-size:12px;"></span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
+                <button class="ctrl-btn" id="insider-tab-buy" onclick="switchInsiderTab('buy')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,82,82,0.4);background:rgba(255,82,82,0.12);color:#ff5252;cursor:pointer;font-size:12px;">🔴 買超</button>
+                <button class="ctrl-btn" id="insider-tab-sell" onclick="switchInsiderTab('sell')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#aaa;cursor:pointer;font-size:12px;">🟢 賣超</button>
+              </div>
+              <div id="insider-buy-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;"></div>
+              <div id="insider-sell-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;display:none;"></div>
+              <div style="display:flex;justify-content:space-between;padding:8px 4px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:#666;">
+                <span>資料來源: 公開資訊觀測站</span>
+                <span id="insider-footer-date"></span>
+              </div>
+            </div>
+
             <!-- 處置股監控 -->
             <div id="disposal-section" class="disposal-section">
               <div class="disposal-header">
@@ -7184,6 +7210,107 @@ document.addEventListener('DOMContentLoaded', loadMainstreamData);
     loadDisposalData();
   }
 })();
+
+
+// ========== 內部人持股異動 ==========
+function switchInsiderTab(tab) {
+    document.getElementById('insider-buy-panel').style.display = tab === 'buy' ? '' : 'none';
+    document.getElementById('insider-sell-panel').style.display = tab === 'sell' ? '' : 'none';
+    var buyBtn = document.getElementById('insider-tab-buy');
+    var sellBtn = document.getElementById('insider-tab-sell');
+    if (tab === 'buy') {
+        buyBtn.style.background = 'rgba(255,82,82,0.12)';
+        buyBtn.style.borderColor = 'rgba(255,82,82,0.4)';
+        buyBtn.style.color = '#ff5252';
+        sellBtn.style.background = 'transparent';
+        sellBtn.style.borderColor = 'rgba(255,255,255,0.15)';
+        sellBtn.style.color = '#aaa';
+    } else {
+        sellBtn.style.background = 'rgba(76,175,80,0.12)';
+        sellBtn.style.borderColor = 'rgba(76,175,80,0.4)';
+        sellBtn.style.color = '#4caf50';
+        buyBtn.style.background = 'transparent';
+        buyBtn.style.borderColor = 'rgba(255,255,255,0.15)';
+        buyBtn.style.color = '#aaa';
+    }
+}
+
+function getInsiderTitleStyle(title) {
+    if (title.indexOf('董事長') >= 0) return 'background:rgba(255,193,7,0.15);color:#ffc107;';
+    if (title.indexOf('董事') >= 0 || title.indexOf('監察') >= 0) return 'background:rgba(33,150,243,0.12);color:#64b5f6;';
+    if (title.indexOf('大股東') >= 0) return 'background:rgba(156,39,176,0.12);color:#ce93d8;';
+    if (title.indexOf('經理') >= 0 || title.indexOf('總經理') >= 0) return 'background:rgba(255,152,0,0.12);color:#ffb74d;';
+    return 'background:rgba(255,255,255,0.06);color:#bbb;';
+}
+
+function renderInsiderList(records, isBuy) {
+    if (!records || records.length === 0) {
+        return '<div style="text-align:center;color:#666;padding:24px 0;font-size:13px;">無' + (isBuy ? '買超' : '賣超') + '異動</div>';
+    }
+    var html = '<table style="width:100%;border-collapse:collapse;font-size:12px;">';
+    html += '<tr style="color:#666;border-bottom:1px solid rgba(255,255,255,0.08);">';
+    html += '<th style="text-align:left;padding:6px 4px;font-weight:normal;">代號</th>';
+    html += '<th style="text-align:left;padding:6px 4px;font-weight:normal;">名稱</th>';
+    html += '<th style="text-align:left;padding:6px 4px;font-weight:normal;">身分</th>';
+    html += '<th style="text-align:left;padding:6px 4px;font-weight:normal;">姓名</th>';
+    html += '<th style="text-align:right;padding:6px 4px;font-weight:normal;">異動張數</th>';
+    html += '</tr>';
+    // 去重：同公司同姓名只保留一筆（取張數絕對值最大者）
+    var seen = {};
+    var deduped = [];
+    for (var j = 0; j < records.length; j++) {
+        var key = records[j].stock_id + '_' + records[j].name;
+        if (!seen[key]) {
+            seen[key] = true;
+            deduped.push(records[j]);
+        }
+    }
+    records = deduped;
+    var max = Math.min(records.length, 30);
+    for (var i = 0; i < max; i++) {
+        var r = records[i];
+        var changeColor = isBuy ? '#ff5252' : '#4caf50';
+        var sign = r.change_lots > 0 ? '+' : '';
+        var titleStyle = getInsiderTitleStyle(r.title);
+        var shortTitle = r.title.replace('本人','').replace('之法人代表人','(法代)');
+        html += '<tr style="border-bottom:1px solid rgba(255,255,255,0.03);">';
+        html += '<td style="padding:7px 4px;color:#64b5f6;font-weight:600;">' + r.stock_id + '</td>';
+        html += '<td style="padding:7px 4px;color:#999;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + r.stock_name + '</td>';
+        html += '<td style="padding:7px 4px;"><span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;' + titleStyle + '">' + shortTitle + '</span></td>';
+        html += '<td style="padding:7px 4px;color:#ccc;">' + r.name + '</td>';
+        html += '<td style="padding:7px 4px;text-align:right;color:' + changeColor + ';font-weight:700;">' + sign + r.change_lots.toLocaleString() + '</td>';
+        html += '</tr>';
+    }
+    html += '</table>';
+    return html;
+}
+
+async function loadInsiderTrading() {
+    try {
+        var response = await fetch('./data/insider_trading.json?t=' + new Date().getTime());
+        if (!response.ok) { console.warn('insider json not found'); return; }
+        var data = await response.json();
+        var s = data.summary || {};
+
+        document.getElementById('insider-count').textContent = (s.total_changes || 0) + ' 筆';
+        document.getElementById('insider-month').textContent = (data.target_month || '') + ' vs ' + (data.compare_month || '');
+        document.getElementById('insider-updated').textContent = data.updated_at || '';
+        document.getElementById('insider-footer-date').textContent = '更新: ' + (data.updated_at || '');
+        document.getElementById('insider-tab-buy').textContent = '🔴 買超 (' + (s.total_buyers || 0) + ')';
+        document.getElementById('insider-tab-sell').textContent = '🟢 賣超 (' + (s.total_sellers || 0) + ')';
+
+        document.getElementById('insider-buy-panel').innerHTML = renderInsiderList(data.buyers, true);
+        document.getElementById('insider-sell-panel').innerHTML = renderInsiderList(data.sellers, false);
+
+        console.log('insider loaded:', s.total_changes, 'changes');
+    } catch(e) {
+        console.warn('insider load error:', e);
+        document.getElementById('insider-buy-panel').innerHTML = '<div style="text-align:center;color:#666;padding:24px;">尚無資料</div>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadInsiderTrading);
+
 
 </script>
 

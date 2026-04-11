@@ -1,19 +1,19 @@
 {
   "latest": {
     "mxf_futures": {
-      "date": "20260330",
+      "date": "20260410",
       "close_price": 0.0,
-      "total_oi": 101804,
-      "retail_long": 92653,
-      "retail_short": 60053,
-      "retail_net": 32600,
-      "retail_ratio": 32.02,
-      "foreign_net": 5315
+      "total_oi": 80108,
+      "retail_long": 55159,
+      "retail_short": 65003,
+      "retail_net": -9844,
+      "retail_ratio": -12.29,
+      "foreign_net": 14222
     },
     "tx_futures": {
-      "date": "20260330",
-      "retail_ratio": -388,
-      "foreign_net": -37282
+      "date": "20260410",
+      "retail_ratio": 152,
+      "foreign_net": -34403
     },
     "margin": {
       "date": "20260330",
@@ -23,87 +23,6 @@
   },
   "history": {
     "mxf": [
-      {
-        "date": "20260203",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260204",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260205",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260206",
-        "retail_ratio": -21.22,
-        "retail_long": 31553,
-        "retail_short": 41953,
-        "close_price": 0.0,
-        "total_oi": 49004,
-        "foreign_net": 3707
-      },
-      {
-        "date": "20260223",
-        "retail_ratio": 1.09,
-        "retail_long": 15041,
-        "retail_short": 14824,
-        "close_price": 0.0,
-        "total_oi": 19910,
-        "foreign_net": 707
-      },
-      {
-        "date": "20260224",
-        "retail_ratio": -34.39,
-        "retail_long": 25072,
-        "retail_short": 39989,
-        "close_price": 0.0,
-        "total_oi": 43374,
-        "foreign_net": 6040
-      },
-      {
-        "date": "20260225",
-        "retail_ratio": -22.28,
-        "retail_long": 19697,
-        "retail_short": 26569,
-        "close_price": 0.0,
-        "total_oi": 30844,
-        "foreign_net": 3779
-      },
-      {
-        "date": "20260226",
-        "retail_ratio": -21.78,
-        "retail_long": 18671,
-        "retail_short": 25015,
-        "close_price": 0.0,
-        "total_oi": 29124,
-        "foreign_net": 4988
-      },
-      {
-        "date": "20260227",
-        "retail_ratio": -21.78,
-        "retail_long": 18671,
-        "retail_short": 25015,
-        "close_price": 0.0,
-        "total_oi": 29124,
-        "foreign_net": 4988
-      },
       {
         "date": "20260302",
         "retail_ratio": 11.47,
@@ -292,54 +211,90 @@
         "close_price": 0.0,
         "total_oi": 101804,
         "foreign_net": 5315
+      },
+      {
+        "date": "20260331",
+        "retail_ratio": 35.35,
+        "retail_long": 115314,
+        "retail_short": 71331,
+        "close_price": 0.0,
+        "total_oi": 124430,
+        "foreign_net": 3942
+      },
+      {
+        "date": "20260401",
+        "retail_ratio": 7.47,
+        "retail_long": 69075,
+        "retail_short": 62523,
+        "close_price": 0.0,
+        "total_oi": 87732,
+        "foreign_net": 10867
+      },
+      {
+        "date": "20260402",
+        "retail_ratio": 26.64,
+        "retail_long": 117007,
+        "retail_short": 81710,
+        "close_price": 0.0,
+        "total_oi": 132478,
+        "foreign_net": 7627
+      },
+      {
+        "date": "20260403",
+        "retail_ratio": 26.64,
+        "retail_long": 117007,
+        "retail_short": 81710,
+        "close_price": 0.0,
+        "total_oi": 132478,
+        "foreign_net": 7627
+      },
+      {
+        "date": "20260406",
+        "retail_ratio": 26.64,
+        "retail_long": 117007,
+        "retail_short": 81710,
+        "close_price": 0.0,
+        "total_oi": 132478,
+        "foreign_net": 7627
+      },
+      {
+        "date": "20260407",
+        "retail_ratio": 14.87,
+        "retail_long": 84986,
+        "retail_short": 69655,
+        "close_price": 0.0,
+        "total_oi": 103094,
+        "foreign_net": 11526
+      },
+      {
+        "date": "20260408",
+        "retail_ratio": -1.39,
+        "retail_long": 78426,
+        "retail_short": 79890,
+        "close_price": 0.0,
+        "total_oi": 105544,
+        "foreign_net": 14953
+      },
+      {
+        "date": "20260409",
+        "retail_ratio": 14.48,
+        "retail_long": 84651,
+        "retail_short": 69747,
+        "close_price": 0.0,
+        "total_oi": 102932,
+        "foreign_net": 10902
+      },
+      {
+        "date": "20260410",
+        "retail_ratio": -12.29,
+        "retail_long": 55159,
+        "retail_short": 65003,
+        "close_price": 0.0,
+        "total_oi": 80108,
+        "foreign_net": 14222
       }
     ],
     "tx": [
-      {
-        "date": "20260129",
-        "retail_ratio": 0.88,
-        "foreign_net": -32702
-      },
-      {
-        "date": "20260130",
-        "retail_ratio": 0.88,
-        "foreign_net": -32670
-      },
-      {
-        "date": "20260202",
-        "retail_ratio": 0.97,
-        "foreign_net": -27673
-      },
-      {
-        "date": "20260203",
-        "retail_ratio": 0.98,
-        "foreign_net": -26496
-      },
-      {
-        "date": "20260204",
-        "retail_ratio": 1.01,
-        "foreign_net": -25699
-      },
-      {
-        "date": "20260205",
-        "retail_ratio": 1.03,
-        "foreign_net": -26743
-      },
-      {
-        "date": "20260206",
-        "retail_ratio": 1.03,
-        "foreign_net": -25102
-      },
-      {
-        "date": "20260209",
-        "retail_ratio": 1.04,
-        "foreign_net": -23585
-      },
-      {
-        "date": "20260210",
-        "retail_ratio": 1.01,
-        "foreign_net": -24884
-      },
       {
         "date": "20260211",
         "retail_ratio": 0.99,
@@ -444,8 +399,53 @@
         "date": "20260330",
         "retail_ratio": -0.17,
         "foreign_net": -37282
+      },
+      {
+        "date": "20260331",
+        "retail_ratio": -0.46,
+        "foreign_net": -37214
+      },
+      {
+        "date": "20260401",
+        "retail_ratio": -1.66,
+        "foreign_net": -31373
+      },
+      {
+        "date": "20260402",
+        "retail_ratio": -1.04,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260403",
+        "retail_ratio": -1.04,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260406",
+        "retail_ratio": -1.04,
+        "foreign_net": -34855
+      },
+      {
+        "date": "20260407",
+        "retail_ratio": -1.96,
+        "foreign_net": -31350
+      },
+      {
+        "date": "20260408",
+        "retail_ratio": -0.77,
+        "foreign_net": -32478
+      },
+      {
+        "date": "20260409",
+        "retail_ratio": -0.8,
+        "foreign_net": -33399
+      },
+      {
+        "date": "20260410",
+        "retail_ratio": 0.06,
+        "foreign_net": -34403
       }
     ]
   },
-  "updated_at": "2026-03-31T13:33:02.244492"
+  "updated_at": "2026-04-10T20:31:23.663615"
 }

@@ -232,7 +232,7 @@ def collect_industry_heatmap():
         'industries': result
     }
     
-    with open('data/industry_heatmap.json', 'w', encoding='utf-8') as f:
+    with open('data/industry_heatmap_raw.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
     total_stocks = sum(r['stock_count'] for r in result)
