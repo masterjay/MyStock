@@ -3510,6 +3510,13 @@
                 <span class="monitor">MARKET MONITOR</span>
             </div>
             <div class="status">
+                <div id="chain-dropdown" style="position:relative;display:inline-block;margin-right:8px;">
+                    <button id="chain-dropdown-btn" class="guide-btn" style="background:#2d8cf0;">
+                        <span class="guide-btn-icon">📡</span>
+                        <span class="guide-btn-text">產業鏈</span>
+                    </button>
+                    <div id="chain-dropdown-menu" style="display:none;position:absolute;top:100%;right:0;margin-top:6px;background:#1a2332;border:1px solid rgba(255,255,255,0.15);border-radius:8px;min-width:220px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,0.4);overflow:hidden;"></div>
+                </div>
                 <button id="monteCarloBtn" class="guide-btn" style="background:#f39c12;" onclick="window.open('monte_carlo.html', '_blank')">
                     <span class="guide-btn-icon">🎲</span>
                     <span class="guide-btn-text">蒙地卡羅</span>
@@ -7314,6 +7321,46 @@ document.addEventListener('DOMContentLoaded', loadInsiderTrading);
 
 </script>
 
+
+<script>
+(function(){
+    var btn=document.getElementById('chain-dropdown-btn');
+    var menu=document.getElementById('chain-dropdown-menu');
+    if(!btn||!menu)return;
+
+    btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        menu.style.display=menu.style.display==='none'?'block':'none';
+    });
+
+    document.addEventListener('click',function(){
+        menu.style.display='none';
+    });
+
+    menu.addEventListener('click',function(e){e.stopPropagation();});
+
+    fetch('/api/chains').then(function(r){return r.json();}).then(function(chains){
+        if(!Array.isArray(chains)||chains.length===0){
+            menu.innerHTML='<div style="padding:12px;color:#888;font-size:13px;">尚未設定產業鏈</div>';
+            return;
+        }
+        chains.forEach(function(ch){
+            var item=document.createElement('a');
+            item.href=ch.url;
+            item.target='_blank';
+            item.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 16px;color:#e0e0e0;text-decoration:none;font-size:14px;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.06);';
+            item.innerHTML='<span style="font-size:18px;">'+ch.icon+'</span><span>'+ch.name+'</span>';
+            item.addEventListener('mouseenter',function(){this.style.background='rgba(45,140,240,0.2)';});
+            item.addEventListener('mouseleave',function(){this.style.background='transparent';});
+            menu.appendChild(item);
+        });
+        var last=menu.lastChild;
+        if(last)last.style.borderBottom='none';
+    }).catch(function(){
+        menu.innerHTML='<div style="padding:12px;color:#c00;font-size:13px;">載入失敗</div>';
+    });
+})();
+</script>
 </body>
 </html>
 <style>
