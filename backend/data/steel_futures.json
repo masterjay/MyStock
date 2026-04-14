@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-04-10T20:30:35.883475",
+  "updated_at": "2026-04-13T20:30:24.722295",
   "symbol": "HRC=F",
   "name": "熱軋鋼捲期貨",
   "name_en": "Hot Rolled Coil Steel Futures",
   "unit": "USD/ton",
   "currency": "USD",
-  "current_price": 1076.0,
+  "current_price": 1055.0,
   "history": [
     {
       "date": "2025-10-17",
@@ -842,10 +842,10 @@
     },
     {
       "date": "2026-04-10",
-      "open": 1081.0,
-      "high": 1081.0,
-      "low": 1075.0,
-      "close": 1076.0
+      "open": 1048.0,
+      "high": 1048.0,
+      "low": 1046.0,
+      "close": 1046.0
     }
   ]
 }

@@ -1,31 +1,31 @@
 {
   "latest": {
     "margin": {
-      "date": "20260330",
-      "ratio": 65.45,
-      "balance": 3927.09
+      "date": "20260410",
+      "ratio": 66.87,
+      "balance": 4012.41
     },
     "futures": {
-      "date": "20260410",
-      "ratio": 1.0,
-      "foreign_net": -34403,
-      "trust_net": 40546,
-      "dealer_net": -6295,
-      "retail_long": 184663,
-      "retail_short": 184511,
-      "retail_net": 152,
-      "retail_ratio": 0.06,
+      "date": "20260413",
+      "ratio": 1.02,
+      "foreign_net": -35996,
+      "trust_net": 39733,
+      "dealer_net": -7324,
+      "retail_long": 195955,
+      "retail_short": 192368,
+      "retail_net": 3587,
+      "retail_ratio": 1.39,
       "pcr_volume": null
     },
     "breadth": {
-      "date": "20260410",
-      "close": 35417.83,
-      "up_count": 520,
-      "down_count": 452,
-      "unchanged": 94,
-      "up_ratio": 48.8,
-      "up_limit": 39,
-      "down_limit": 1
+      "date": "20260413",
+      "close": 35457.29,
+      "up_count": 586,
+      "down_count": 405,
+      "unchanged": 74,
+      "up_ratio": 55.0,
+      "up_limit": 63,
+      "down_limit": 2
     }
   },
   "sentiment": {
@@ -37,56 +37,51 @@
           "score": 90,
           "weight": 0.2,
           "desc": "價格動能",
-          "detail": "收盤35418 MA20=33120 乖離+6.9%"
+          "detail": "收盤35457 MA20=33582 乖離+5.6%"
         },
         "breadth": {
           "score": 50,
           "weight": 0.15,
           "desc": "市場廣度",
-          "detail": "漲520 跌452 比率48.8%"
+          "detail": "漲586 跌405 比率55.0%"
         },
         "strength": {
           "score": 85,
           "weight": 0.1,
           "desc": "新高低比",
-          "detail": "漲停39 跌停1"
+          "detail": "漲停63 跌停2"
         },
         "margin": {
           "score": 75,
           "weight": 0.15,
           "desc": "融資使用率",
-          "detail": "65.5%"
+          "detail": "66.9%"
         },
         "futures": {
           "score": 50,
           "weight": 0.15,
           "desc": "期貨多空比",
-          "detail": "1.00"
+          "detail": "1.02"
         },
         "foreign": {
           "score": 15,
           "weight": 0.1,
           "desc": "外資淨部位",
-          "detail": "-34,403"
+          "detail": "-35,996"
         }
       },
       "available_weight": 0.85
     },
     "us": {
-      "score": 37,
+      "score": 38,
       "rating": "FEAR",
-      "previous_close": 36,
-      "previous_week": 24,
-      "previous_month": 20
+      "previous_close": 38,
+      "previous_week": 23,
+      "previous_month": 21
     }
   },
   "history": {
     "margin": [
-      {
-        "date": "20260106",
-        "ratio": 59.09,
-        "balance": 3545.49
-      },
       {
         "date": "20260107",
         "ratio": 59.51,
@@ -156,14 +151,14 @@
         "date": "20260330",
         "ratio": 65.45,
         "balance": 3927.09
+      },
+      {
+        "date": "20260410",
+        "ratio": 66.87,
+        "balance": 4012.41
       }
     ],
     "futures": [
-      {
-        "date": "20260323",
-        "ratio": 1.0,
-        "foreign_net": -37717
-      },
       {
         "date": "20260324",
         "ratio": 0.98,
@@ -233,8 +228,13 @@
         "date": "20260410",
         "ratio": 1.0,
         "foreign_net": -34403
+      },
+      {
+        "date": "20260413",
+        "ratio": 1.02,
+        "foreign_net": -35996
       }
     ]
   },
-  "updated_at": "2026-04-10T20:39:15.417040"
+  "updated_at": "2026-04-13T20:38:24.581116"
 }

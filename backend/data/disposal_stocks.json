@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-10 20:39",
+  "updated_at": "2026-04-13 20:38",
   "active_disposals": [
     {
       "stock_id": "2231",
@@ -12,7 +12,7 @@
       "end_date": "2026/04/15",
       "measure": "第一次處置",
       "match_frequency": "5分盤",
-      "days_left": 4,
+      "days_left": 1,
       "end_date_str": "04/15"
     },
     {
@@ -26,7 +26,7 @@
       "end_date": "2026/04/16",
       "measure": "第一次處置",
       "match_frequency": "5分盤",
-      "days_left": 5,
+      "days_left": 2,
       "end_date_str": "04/16"
     },
     {
@@ -40,7 +40,7 @@
       "end_date": "2026/04/17",
       "measure": "第一次處置",
       "match_frequency": "5分盤",
-      "days_left": 6,
+      "days_left": 3,
       "end_date_str": "04/17"
     },
     {
@@ -54,22 +54,8 @@
       "end_date": "2026/04/17",
       "measure": "第一次處置",
       "match_frequency": "5分盤",
-      "days_left": 6,
+      "days_left": 3,
       "end_date_str": "04/17"
-    },
-    {
-      "stock_id": "6830",
-      "stock_name": "汎銓",
-      "market": "上市",
-      "announce_date": "115/04/08",
-      "condition": "連續三次",
-      "period": "115/04/09～115/04/22",
-      "start_date": "2026/04/09",
-      "end_date": "2026/04/22",
-      "measure": "第二次處置",
-      "match_frequency": "20分盤",
-      "days_left": 11,
-      "end_date_str": "04/22"
     },
     {
       "stock_id": "2455",
@@ -82,7 +68,7 @@
       "end_date": "2026/04/24",
       "measure": "第二次處置",
       "match_frequency": "20分盤",
-      "days_left": 13,
+      "days_left": 10,
       "end_date_str": "04/24"
     },
     {
@@ -96,7 +82,7 @@
       "end_date": "2026/04/24",
       "measure": "第二次處置",
       "match_frequency": "20分盤",
-      "days_left": 13,
+      "days_left": 10,
       "end_date_str": "04/24"
     },
     {
@@ -110,7 +96,7 @@
       "end_date": "2026/04/24",
       "measure": "第一次處置",
       "match_frequency": "5分盤",
-      "days_left": 13,
+      "days_left": 10,
       "end_date_str": "04/24"
     },
     {
@@ -124,8 +110,64 @@
       "end_date": "2026/04/24",
       "measure": "人工管制撮合",
       "match_frequency": "10分盤",
-      "days_left": 13,
+      "days_left": 10,
       "end_date_str": "04/24"
+    },
+    {
+      "stock_id": "3037",
+      "stock_name": "欣興",
+      "market": "上市",
+      "announce_date": "115/04/13",
+      "condition": "連續三次",
+      "period": "115/04/14～115/04/27",
+      "start_date": "2026/04/14",
+      "end_date": "2026/04/27",
+      "measure": "第二次處置",
+      "match_frequency": "20分盤",
+      "days_left": 13,
+      "end_date_str": "04/27"
+    },
+    {
+      "stock_id": "3583",
+      "stock_name": "辛耘",
+      "market": "上市",
+      "announce_date": "115/04/13",
+      "condition": "連續三次",
+      "period": "115/04/14～115/04/27",
+      "start_date": "2026/04/14",
+      "end_date": "2026/04/27",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 13,
+      "end_date_str": "04/27"
+    },
+    {
+      "stock_id": "6443",
+      "stock_name": "元晶",
+      "market": "上市",
+      "announce_date": "115/04/13",
+      "condition": "最近三十個營業日已有十二次",
+      "period": "115/04/14～115/04/27",
+      "start_date": "2026/04/14",
+      "end_date": "2026/04/27",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 13,
+      "end_date_str": "04/27"
+    },
+    {
+      "stock_id": "6830",
+      "stock_name": "汎銓",
+      "market": "上市",
+      "announce_date": "115/04/13",
+      "condition": "連續三次",
+      "period": "115/04/14～115/04/27",
+      "start_date": "2026/04/14",
+      "end_date": "2026/04/27",
+      "measure": "第二次處置",
+      "match_frequency": "20分盤",
+      "days_left": 13,
+      "end_date_str": "04/27"
     },
     {
       "stock_id": "3064",
@@ -272,18 +314,6 @@
       "match_frequency": ""
     },
     {
-      "stock_id": "5381",
-      "stock_name": "合正",
-      "market": "上櫃",
-      "announce_date": "",
-      "condition": "",
-      "period": "",
-      "start_date": "",
-      "end_date": "",
-      "measure": "",
-      "match_frequency": ""
-    },
-    {
       "stock_id": "5701",
       "stock_name": "劍湖山",
       "market": "上櫃",
@@ -354,30 +384,67 @@
       "end_date": "",
       "measure": "",
       "match_frequency": ""
-    },
-    {
-      "stock_id": "8937",
-      "stock_name": "合騏",
-      "market": "上櫃",
-      "announce_date": "",
-      "condition": "",
-      "period": "",
-      "start_date": "",
-      "end_date": "",
-      "measure": "",
-      "match_frequency": ""
     }
   ],
-  "upcoming_release": [],
-  "watchlist_alerts": [
+  "upcoming_release": [
     {
-      "stock_id": "4979",
-      "stock_name": "華星光",
-      "status": [
-        "注意股"
-      ],
-      "disposal_detail": null
+      "stock_id": "2231",
+      "stock_name": "為升",
+      "market": "上市",
+      "announce_date": "115/03/30",
+      "condition": "連續三次",
+      "period": "115/03/31～115/04/15",
+      "start_date": "2026/03/31",
+      "end_date": "2026/04/15",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 1,
+      "end_date_str": "04/15"
     },
+    {
+      "stock_id": "3135",
+      "stock_name": "凌航",
+      "market": "上市",
+      "announce_date": "115/03/31",
+      "condition": "最近十個營業日已有六次",
+      "period": "115/04/01～115/04/16",
+      "start_date": "2026/04/01",
+      "end_date": "2026/04/16",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 2,
+      "end_date_str": "04/16"
+    },
+    {
+      "stock_id": "1905",
+      "stock_name": "華紙",
+      "market": "上市",
+      "announce_date": "115/04/01",
+      "condition": "連續三次",
+      "period": "115/04/02～115/04/17",
+      "start_date": "2026/04/02",
+      "end_date": "2026/04/17",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 3,
+      "end_date_str": "04/17"
+    },
+    {
+      "stock_id": "7721",
+      "stock_name": "微程式",
+      "market": "上市",
+      "announce_date": "115/04/01",
+      "condition": "連續三次",
+      "period": "115/04/02～115/04/17",
+      "start_date": "2026/04/02",
+      "end_date": "2026/04/17",
+      "measure": "第一次處置",
+      "match_frequency": "5分盤",
+      "days_left": 3,
+      "end_date_str": "04/17"
+    }
+  ],
+  "watchlist_alerts": [
     {
       "stock_id": "3163",
       "stock_name": "波若威",
@@ -395,10 +462,16 @@
       "announce_date": "050503"
     },
     {
-      "stock_id": "佳和",
+      "stock_id": "金寶凱基57購05",
       "stock_name": "1",
       "market": "上市",
-      "announce_date": "1449"
+      "announce_date": "053481"
+    },
+    {
+      "stock_id": "宇瞻統一72購01",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "055842"
     },
     {
       "stock_id": "長興",
@@ -407,34 +480,10 @@
       "announce_date": "1717"
     },
     {
-      "stock_id": "華通",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "2313"
-    },
-    {
-      "stock_id": "台揚",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "2314"
-    },
-    {
       "stock_id": "敬鵬",
       "stock_name": "1",
       "market": "上市",
       "announce_date": "2355"
-    },
-    {
-      "stock_id": "燿華",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "2367"
-    },
-    {
-      "stock_id": "台光電",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "2383"
     },
     {
       "stock_id": "鼎元",
@@ -443,10 +492,10 @@
       "announce_date": "2426"
     },
     {
-      "stock_id": "全新",
+      "stock_id": "冠西電",
       "stock_name": "1",
       "market": "上市",
-      "announce_date": "2455"
+      "announce_date": "2466"
     },
     {
       "stock_id": "志聖",
@@ -467,10 +516,22 @@
       "announce_date": "2489"
     },
     {
+      "stock_id": "大立光",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "3008"
+    },
+    {
       "stock_id": "禾伸堂",
       "stock_name": "1",
       "market": "上市",
       "announce_date": "3026"
+    },
+    {
+      "stock_id": "佰鴻",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "3031"
     },
     {
       "stock_id": "欣興",
@@ -479,10 +540,10 @@
       "announce_date": "3037"
     },
     {
-      "stock_id": "建漢",
+      "stock_id": "晶技",
       "stock_name": "1",
       "market": "上市",
-      "announce_date": "3062"
+      "announce_date": "3042"
     },
     {
       "stock_id": "大量",
@@ -491,16 +552,10 @@
       "announce_date": "3167"
     },
     {
-      "stock_id": "晶彩科",
+      "stock_id": "台勝科",
       "stock_name": "1",
       "market": "上市",
-      "announce_date": "3535"
-    },
-    {
-      "stock_id": "牧德",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "3563"
+      "announce_date": "3532"
     },
     {
       "stock_id": "辛耘",
@@ -509,10 +564,28 @@
       "announce_date": "3583"
     },
     {
+      "stock_id": "六方科-KY",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "4569"
+    },
+    {
+      "stock_id": "大銀微系統",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "4576"
+    },
+    {
       "stock_id": "雙鍵",
       "stock_name": "1",
       "market": "上市",
       "announce_date": "4764"
+    },
+    {
+      "stock_id": "正文",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "4906"
     },
     {
       "stock_id": "有成精密",
@@ -521,40 +594,10 @@
       "announce_date": "4949"
     },
     {
-      "stock_id": "光鋐",
+      "stock_id": "啟碁",
       "stock_name": "1",
       "market": "上市",
-      "announce_date": "4956"
-    },
-    {
-      "stock_id": "十銓",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "4967"
-    },
-    {
-      "stock_id": "榮科",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "4989"
-    },
-    {
-      "stock_id": "乙盛-KY",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "5243"
-    },
-    {
-      "stock_id": "崇越",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "5434"
-    },
-    {
-      "stock_id": "聯茂",
-      "stock_name": "1",
-      "market": "上市",
-      "announce_date": "6213"
+      "announce_date": "6285"
     },
     {
       "stock_id": "統新",
@@ -567,8 +610,32 @@
       "stock_name": "1",
       "market": "上市",
       "announce_date": "6442"
+    },
+    {
+      "stock_id": "元晶",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "6443"
+    },
+    {
+      "stock_id": "訊芯-KY",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "6451"
+    },
+    {
+      "stock_id": "穎崴",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "6515"
+    },
+    {
+      "stock_id": "愛普*",
+      "stock_name": "1",
+      "market": "上市",
+      "announce_date": "6531"
     }
   ],
-  "total_disposal_count": 29,
+  "total_disposal_count": 30,
   "attstock_url": "https://attstock.tw/risk"
 }

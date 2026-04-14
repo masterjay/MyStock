@@ -1,18 +1,9 @@
 {
-  "updated_at": "2026-04-10T20:32:06.983211",
+  "updated_at": "2026-04-13T20:31:10.848874",
   "mxf": {
     "name": "微型台指期貨 (MXF)",
     "description": "散戶參與度高，更能反映散戶情緒",
     "history": [
-      {
-        "date": "20260302",
-        "retail_long": 48486,
-        "retail_short": 41595,
-        "retail_ratio": 11.47,
-        "total_oi": 60054,
-        "close_price": 0.0,
-        "foreign_net": 5714
-      },
       {
         "date": "20260303",
         "retail_long": 81142,
@@ -273,6 +264,15 @@
         "total_oi": 80108,
         "close_price": 0.0,
         "foreign_net": 14222
+      },
+      {
+        "date": "20260413",
+        "retail_long": 48899,
+        "retail_short": 56956,
+        "retail_ratio": -11.42,
+        "total_oi": 70570,
+        "close_price": 0.0,
+        "foreign_net": 12577
       }
     ]
   },
@@ -280,14 +280,6 @@
     "name": "台指期貨 (TX)",
     "description": "法人為主，反映機構態度",
     "history": [
-      {
-        "date": "20260211",
-        "retail_long": 37569,
-        "retail_short": 37903,
-        "retail_ratio": 0.99,
-        "open_interest": 140163,
-        "foreign_net": -27665
-      },
       {
         "date": "20260212",
         "retail_long": 37569,
@@ -519,6 +511,14 @@
         "retail_ratio": 0.06,
         "open_interest": 246116,
         "foreign_net": -34403
+      },
+      {
+        "date": "20260413",
+        "retail_long": 195955,
+        "retail_short": 192368,
+        "retail_ratio": 1.39,
+        "open_interest": 258882,
+        "foreign_net": -35996
       }
     ]
   }

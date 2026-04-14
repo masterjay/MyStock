@@ -1,37 +1,28 @@
 {
   "latest": {
     "mxf_futures": {
-      "date": "20260410",
+      "date": "20260413",
       "close_price": 0.0,
-      "total_oi": 80108,
-      "retail_long": 55159,
-      "retail_short": 65003,
-      "retail_net": -9844,
-      "retail_ratio": -12.29,
-      "foreign_net": 14222
+      "total_oi": 70570,
+      "retail_long": 48899,
+      "retail_short": 56956,
+      "retail_net": -8057,
+      "retail_ratio": -11.42,
+      "foreign_net": 12577
     },
     "tx_futures": {
-      "date": "20260410",
-      "retail_ratio": 152,
-      "foreign_net": -34403
+      "date": "20260413",
+      "retail_ratio": 3587,
+      "foreign_net": -35996
     },
     "margin": {
-      "date": "20260330",
-      "ratio": 65.45,
-      "balance": 3927.09
+      "date": "20260410",
+      "ratio": 66.87,
+      "balance": 4012.41
     }
   },
   "history": {
     "mxf": [
-      {
-        "date": "20260302",
-        "retail_ratio": 11.47,
-        "retail_long": 48486,
-        "retail_short": 41595,
-        "close_price": 0.0,
-        "total_oi": 60054,
-        "foreign_net": 5714
-      },
       {
         "date": "20260303",
         "retail_ratio": 30.12,
@@ -292,14 +283,18 @@
         "close_price": 0.0,
         "total_oi": 80108,
         "foreign_net": 14222
+      },
+      {
+        "date": "20260413",
+        "retail_ratio": -11.42,
+        "retail_long": 48899,
+        "retail_short": 56956,
+        "close_price": 0.0,
+        "total_oi": 70570,
+        "foreign_net": 12577
       }
     ],
     "tx": [
-      {
-        "date": "20260211",
-        "retail_ratio": 0.99,
-        "foreign_net": -27665
-      },
       {
         "date": "20260212",
         "retail_ratio": 0.99,
@@ -444,8 +439,13 @@
         "date": "20260410",
         "retail_ratio": 0.06,
         "foreign_net": -34403
+      },
+      {
+        "date": "20260413",
+        "retail_ratio": 1.39,
+        "foreign_net": -35996
       }
     ]
   },
-  "updated_at": "2026-04-10T20:31:23.663615"
+  "updated_at": "2026-04-13T20:30:29.477824"
 }
