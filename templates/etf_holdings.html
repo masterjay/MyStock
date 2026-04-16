@@ -15,13 +15,14 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;}
-  header{display:flex;align-items:center;gap:16px;padding:14px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  header{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .header-inner{max-width:1600px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;gap:16px;}
   .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:12px;transition:color .2s;}
   .back-btn:hover{color:var(--accent3);}
   .header-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;}
-  .header-badge{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto;}
+  .header-badge{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:8px;}
   .header-date{font-family:var(--mono);font-size:11px;color:var(--muted);padding:3px 10px;border:1px solid var(--border);border-radius:4px;}
-  .container{max-width:1100px;margin:0 auto;padding:24px 20px 60px;}
+  .container{max-width:1600px;margin:0 auto;padding:24px 40px 60px;}
   .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
   .section-title{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent3);}
   .section-sub{font-size:11px;color:var(--muted);font-family:var(--mono);}
@@ -77,10 +78,12 @@
 </head>
 <body>
 <header>
-  <a class="back-btn" href="/etf/">← 返回 ETF 列表</a>
-  <span class="header-title" id="headerTitle">ETF 持股追蹤</span>
-  <span class="header-badge" id="headerBadge"></span>
-  <span class="header-date" id="dataDate">載入中…</span>
+  <div class="header-inner">
+    <a class="back-btn" href="/etf/">← 返回 ETF 列表</a>
+    <span class="header-title" id="headerTitle">ETF 持股追蹤</span>
+    <span class="header-badge" id="headerBadge"></span>
+    <span class="header-date" id="dataDate">載入中…</span>
+  </div>
 </header>
 <div class="container">
   <div class="stats-row" id="statsRow" style="display:none!important"></div>
@@ -109,6 +112,7 @@
 </div>
 <script>
 const ETF_CODE = location.pathname.split('/').filter(Boolean).pop().toUpperCase() || '00981A';
+const ETF_NAMES = {"00981A":"主動統一台股增長","00992A":"主動群益科技創新","00991A":"主動復華未來50","00980A":"主動野村臺灣優選","0050":"元大台灣50","0052":"富邦科技"};
 let holdingsData=[];let maxRatio=0;
 async function loadHoldings(){
   try{
@@ -119,8 +123,8 @@ async function loadHoldings(){
     }
     holdingsData=d.holdings;maxRatio=Math.max(...holdingsData.map(h=>h.ratio));
     document.getElementById('dataDate').textContent=d.data_date||'—';
-    document.getElementById('headerTitle').textContent=ETF_CODE+' 持股追蹤';
-    document.getElementById('headerBadge').textContent=ETF_CODE;
+    document.getElementById('headerTitle').textContent=ETF_CODE+' '+( ETF_NAMES[ETF_CODE]||'');
+    document.getElementById('headerBadge').textContent='';
     document.getElementById('holdingsCount').textContent='共 '+holdingsData.length+' 檔';
     updateStats(d);renderTable(holdingsData);
   }catch(e){

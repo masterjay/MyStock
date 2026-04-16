@@ -11,6 +11,9 @@ DB_PATH = Path.home() / "MyStock" / "data" / "market_data.db"
 # 追蹤的 ETF 清單（代號: 中文名稱）
 ETF_LIST = {
     "00981A": "主動統一台股增長",
+    "00992A": "主動群益科技創新",
+    "00991A": "主動復華未來50",
+    "00980A": "主動野村臺灣優選",
     "0050":   "元大台灣50",
     "0052":   "富邦科技",
 }
@@ -47,7 +50,11 @@ def fetch_holdings(etf_code):
         try:
             ratio = float(ratio_td)
         except ValueError:
-            continue
+            # 部分 ETF 比例欄為 N/A，設為 0 仍保留持股資料
+            if ratio_td == 'N/A' or ratio_td == '':
+                ratio = 0.0
+            else:
+                continue
         code_m = re.search(r"\((\d{4,5})", name_td)
         stock_code = code_m.group(1) if code_m else ""
         stock_name = re.sub(r"\(.*", "", name_td).strip()

@@ -14,11 +14,12 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;}
-  header{display:flex;align-items:center;gap:16px;padding:14px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  header{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .header-inner{max-width:1600px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;gap:16px;}
   .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:12px;transition:color .2s;}
   .back-btn:hover{color:var(--accent3);}
   .header-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;}
-  .container{max-width:900px;margin:0 auto;padding:32px 20px 60px;}
+  .container{max-width:1600px;margin:0 auto;padding:32px 40px 60px;}
   .page-desc{font-size:12px;color:var(--muted);font-family:var(--mono);margin-bottom:28px;}
 
   .etf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
@@ -74,8 +75,10 @@
 </head>
 <body>
 <header>
-  <a class="back-btn" href="/">← 返回主頁</a>
-  <span class="header-title">ETF 持股追蹤</span>
+  <div class="header-inner">
+    <a class="back-btn" href="/">← 返回主頁</a>
+    <span class="header-title">ETF 持股追蹤</span>
+  </div>
 </header>
 <div class="container">
   <p class="page-desc">點擊卡片查看完整持股明細與異動紀錄</p>
@@ -84,6 +87,9 @@
 <script>
 const ETF_CONFIG = [
   { code:'00981A', name:'主動統一台股增長', type:'主動式', color:'#4ade80' },
+  { code:'00992A', name:'主動群益科技創新', type:'主動式', color:'#a78bfa' },
+  { code:'00991A', name:'主動復華未來50',   type:'主動式', color:'#fb923c' },
+  { code:'00980A', name:'主動野村臺灣優選', type:'主動式', color:'#f472b6' },
   { code:'0050',   name:'元大台灣50',       type:'被動式', color:'#60a5fa' },
   { code:'0052',   name:'富邦科技',         type:'被動式', color:'#f59e0b' },
 ];
