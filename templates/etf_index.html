@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETF 持股追蹤 | MyStock</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0e14;--bg2:#12151f;--bg3:#1a1e2e;--border:#252a3d;
+    --accent:#4ade80;--accent2:#f87171;--accent3:#60a5fa;
+    --text:#e2e8f0;--muted:#64748b;
+    --mono:'IBM Plex Mono',monospace;--sans:'Noto Sans TC',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;}
+  header{display:flex;align-items:center;gap:16px;padding:14px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:12px;transition:color .2s;}
+  .back-btn:hover{color:var(--accent3);}
+  .header-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;}
+  .container{max-width:900px;margin:0 auto;padding:32px 20px 60px;}
+  .page-desc{font-size:12px;color:var(--muted);font-family:var(--mono);margin-bottom:28px;}
+
+  .etf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;}
+
+  .etf-card{
+    background:var(--bg2);border:1px solid var(--border);border-radius:12px;
+    padding:20px;cursor:pointer;text-decoration:none;color:var(--text);
+    display:flex;flex-direction:column;gap:14px;
+    transition:border-color .2s,transform .15s,box-shadow .2s;
+    animation:fadeUp .35s ease both;
+    position:relative;overflow:hidden;
+  }
+  .etf-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:var(--card-color,var(--accent3));
+    opacity:.8;
+  }
+  .etf-card:hover{
+    border-color:var(--card-color,var(--accent3));
+    transform:translateY(-3px);
+    box-shadow:0 8px 24px rgba(0,0,0,.3);
+  }
+
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .card-code{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--card-color,var(--accent3));}
+  .card-type{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--bg3);padding:3px 8px;border-radius:4px;}
+  .card-name{font-size:13px;font-weight:500;color:var(--text);}
+  .card-stats{display:flex;flex-direction:column;gap:6px;}
+  .card-stat{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;}
+  .stat-label{color:var(--muted);}
+  .stat-value{color:var(--text);}
+  .stat-value.green{color:var(--accent);}
+  .stat-value.blue{color:var(--accent3);}
+
+  .card-footer{
+    display:flex;justify-content:flex-end;align-items:center;
+    font-family:var(--mono);font-size:11px;color:var(--accent3);
+    border-top:1px solid var(--border);padding-top:12px;margin-top:2px;
+  }
+  .card-arrow{transition:transform .2s;}
+  .etf-card:hover .card-arrow{transform:translateX(4px);}
+
+  .skeleton{
+    background:linear-gradient(90deg,var(--bg3) 25%,var(--border) 50%,var(--bg3) 75%);
+    background-size:200% 100%;
+    animation:shimmer 1.5s infinite;
+    border-radius:4px;height:12px;
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back-btn" href="/">← 返回主頁</a>
+  <span class="header-title">ETF 持股追蹤</span>
+</header>
+<div class="container">
+  <p class="page-desc">點擊卡片查看完整持股明細與異動紀錄</p>
+  <div class="etf-grid" id="etfGrid"></div>
+</div>
+<script>
+const ETF_CONFIG = [
+  { code:'00981A', name:'主動統一台股增長', type:'主動式', color:'#4ade80' },
+  { code:'0050',   name:'元大台灣50',       type:'被動式', color:'#60a5fa' },
+  { code:'0052',   name:'富邦科技',         type:'被動式', color:'#f59e0b' },
+];
+
+async function loadCard(cfg) {
+  try {
+    const r = await fetch(`/api/etf/${cfg.code}/holdings`);
+    const d = await r.json();
+    return d;
+  } catch(e) {
+    return null;
+  }
+}
+
+async function render() {
+  const grid = document.getElementById('etfGrid');
+
+  // 先渲染骨架
+  grid.innerHTML = ETF_CONFIG.map((cfg, i) => `
+    <div class="etf-card" style="--card-color:${cfg.color};animation-delay:${i*0.1}s" onclick="location.href='/etf/${cfg.code}'">
+      <div class="card-top">
+        <span class="card-code">${cfg.code}</span>
+        <span class="card-type">${cfg.type}</span>
+      </div>
+      <div class="card-name">${cfg.name}</div>
+      <div class="card-stats" id="stats-${cfg.code}">
+        <div class="skeleton" style="width:80%"></div>
+        <div class="skeleton" style="width:60%"></div>
+        <div class="skeleton" style="width:70%"></div>
+      </div>
+      <div class="card-footer">查看詳情 <span class="card-arrow" style="margin-left:6px">→</span></div>
+    </div>
+  `).join('');
+
+  // 非同步載入各卡片資料
+  ETF_CONFIG.forEach(async (cfg) => {
+    const d = await loadCard(cfg);
+    const el = document.getElementById(`stats-${cfg.code}`);
+    if (!el) return;
+
+    if (!d || !d.holdings || d.holdings.length === 0) {
+      el.innerHTML = `<div style="color:var(--muted);font-family:var(--mono);font-size:11px">尚無資料</div>`;
+      return;
+    }
+
+    const top1 = d.holdings[0];
+    const top10ratio = d.holdings.slice(0,10).reduce((s,h)=>s+h.ratio, 0);
+
+    el.innerHTML = `
+      <div class="card-stat">
+        <span class="stat-label">資料日期</span>
+        <span class="stat-value">${d.data_date}</span>
+      </div>
+      <div class="card-stat">
+        <span class="stat-label">持股檔數</span>
+        <span class="stat-value blue">${d.holdings.length} 檔</span>
+      </div>
+      <div class="card-stat">
+        <span class="stat-label">最大持股</span>
+        <span class="stat-value green">${top1.stock_name} ${top1.ratio.toFixed(1)}%</span>
+      </div>
+      <div class="card-stat">
+        <span class="stat-label">前10大集中度</span>
+        <span class="stat-value">${top10ratio.toFixed(1)}%</span>
+      </div>
+    `;
+  });
+}
+
+render();
+</script>
+</body>
+</html>

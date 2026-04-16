@@ -288,7 +288,7 @@ except Exception as e:
 
 print("\n[補充] 00981A 持股爬蟲...")
 import subprocess
-subprocess.run(['python3', '/home/s0971417/MyStock/fetch_00981a_holdings.py'], check=False)
+subprocess.run(['python3', '/home/s0971417/MyStock/fetch_etf_holdings.py'], check=False)
 
 print(f"\n{'='*60}")
 print(f"✓ 所有數據更新完成!")

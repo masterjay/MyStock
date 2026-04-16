@@ -77,9 +77,9 @@
 </head>
 <body>
 <header>
-  <a class="back-btn" href="/">← 返回主頁</a>
-  <span class="header-title">00981A 持股追蹤</span>
-  <span class="header-badge">主動統一台股增長 ETF</span>
+  <a class="back-btn" href="/etf/">← 返回 ETF 列表</a>
+  <span class="header-title" id="headerTitle">ETF 持股追蹤</span>
+  <span class="header-badge" id="headerBadge"></span>
   <span class="header-date" id="dataDate">載入中…</span>
 </header>
 <div class="container">
@@ -108,16 +108,19 @@
   </div>
 </div>
 <script>
+const ETF_CODE = location.pathname.split('/').filter(Boolean).pop().toUpperCase() || '00981A';
 let holdingsData=[];let maxRatio=0;
 async function loadHoldings(){
   try{
-    const r=await fetch('/api/etf/00981A/holdings');
+    const r=await fetch('/api/etf/'+ETF_CODE+'/holdings');
     const d=await r.json();
     if(!d.holdings||d.holdings.length===0){
       document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">📭</div>尚無資料，請先執行 fetch_00981a_holdings.py</div>';return;
     }
     holdingsData=d.holdings;maxRatio=Math.max(...holdingsData.map(h=>h.ratio));
     document.getElementById('dataDate').textContent=d.data_date||'—';
+    document.getElementById('headerTitle').textContent=ETF_CODE+' 持股追蹤';
+    document.getElementById('headerBadge').textContent=ETF_CODE;
     document.getElementById('holdingsCount').textContent='共 '+holdingsData.length+' 檔';
     updateStats(d);renderTable(holdingsData);
   }catch(e){
@@ -126,7 +129,7 @@ async function loadHoldings(){
 }
 async function loadChanges(){
   try{
-    const r=await fetch('/api/etf/00981A/changes');
+    const r=await fetch('/api/etf/'+ETF_CODE+'/changes');
     const d=await r.json();
     if(!d.changes||d.changes.length===0){
       document.getElementById('changesContent').innerHTML='<div class="empty-state"><div class="icon">📊</div>需要至少兩期資料才能比較異動</div>';return;
