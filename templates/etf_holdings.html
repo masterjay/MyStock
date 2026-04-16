@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>00981A 持股追蹤 | MyStock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0e14;--bg2:#12151f;--bg3:#1a1e2e;--border:#252a3d;
+    --accent:#4ade80;--accent2:#f87171;--accent3:#60a5fa;
+    --text:#e2e8f0;--muted:#64748b;
+    --mono:'IBM Plex Mono',monospace;--sans:'Noto Sans TC',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;}
+  header{display:flex;align-items:center;gap:16px;padding:14px 24px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:12px;transition:color .2s;}
+  .back-btn:hover{color:var(--accent3);}
+  .header-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;}
+  .header-badge{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:auto;}
+  .header-date{font-family:var(--mono);font-size:11px;color:var(--muted);padding:3px 10px;border:1px solid var(--border);border-radius:4px;}
+  .container{max-width:1100px;margin:0 auto;padding:24px 20px 60px;}
+  .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-title{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent3);}
+  .section-sub{font-size:11px;color:var(--muted);font-family:var(--mono);}
+  .changes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:32px;}
+  .change-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .15s;animation:fadeUp .35s ease both;}
+  .change-card:hover{border-color:var(--accent3);transform:translateY(-2px);}
+  .change-card.up{border-left:3px solid var(--accent);}
+  .change-card.down{border-left:3px solid var(--accent2);}
+  .cc-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .cc-name{font-size:13px;font-weight:500;color:var(--text);}
+  .cc-code{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--bg3);padding:2px 6px;border-radius:3px;}
+  .cc-delta{font-family:var(--mono);font-size:15px;font-weight:600;}
+  .cc-delta.up{color:var(--accent);}
+  .cc-delta.down{color:var(--accent2);}
+  .cc-detail{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .cc-arrow{color:var(--accent3);margin:0 4px;}
+  .table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:var(--bg3);}
+  th{padding:10px 14px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+  th.right{text-align:right;}
+  tbody tr{border-bottom:1px solid #1a1e2e;transition:background .15s;animation:fadeUp .3s ease both;}
+  tbody tr:hover{background:var(--bg2);}
+  tbody tr:last-child{border-bottom:none;}
+  td{padding:10px 14px;font-size:13px;white-space:nowrap;}
+  td.right{text-align:right;}
+  .td-name{font-weight:500;}
+  .td-code{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .td-ratio{font-family:var(--mono);font-size:12px;}
+  .td-shares{font-family:var(--mono);font-size:12px;color:var(--accent3);}
+  .ratio-cell{display:flex;align-items:center;gap:10px;justify-content:flex-end;}
+  .ratio-bar-wrap{width:70px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;}
+  .ratio-bar{height:100%;background:var(--accent3);border-radius:2px;transition:width .6s ease;}
+  .empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.05em;}
+  .empty-state .icon{font-size:32px;margin-bottom:12px;}
+  .loading{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;}
+  .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent3);border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite;}
+  .tabs{display:flex;gap:2px;margin-bottom:20px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:4px;width:fit-content;}
+  .tab{padding:7px 16px;border-radius:6px;border:none;background:transparent;color:var(--muted);font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s;}
+  .tab.active{background:var(--bg3);color:var(--accent3);}
+  .search-wrap{margin-bottom:14px;position:relative;}
+  .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;}
+  .search-input{width:100%;max-width:300px;padding:8px 12px 8px 34px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .2s;}
+  .search-input:focus{border-color:var(--accent3);}
+  .search-input::placeholder{color:var(--muted);}
+  .stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+  .stat-chip{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-family:var(--mono);font-size:11px;}
+  .stat-chip .sv{font-size:16px;font-weight:600;color:var(--accent3);display:block;}
+  .stat-chip .sk{color:var(--muted);font-size:10px;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<header>
+  <a class="back-btn" href="/">← 返回主頁</a>
+  <span class="header-title">00981A 持股追蹤</span>
+  <span class="header-badge">主動統一台股增長 ETF</span>
+  <span class="header-date" id="dataDate">載入中…</span>
+</header>
+<div class="container">
+  <div class="stats-row" id="statsRow" style="display:none!important"></div>
+  <div class="tabs">
+    <button class="tab active" id="tabHoldings" onclick="switchTab('holdings')">持股明細</button>
+    <button class="tab" id="tabChanges" onclick="switchTab('changes')">持股異動</button>
+  </div>
+  <div id="panelHoldings">
+    <div class="section-header">
+      <span class="section-title">Holdings</span>
+      <span class="section-sub" id="holdingsCount"></span>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" placeholder="搜尋股票名稱 / 代號…" oninput="filterTable()">
+    </div>
+    <div id="holdingsContent"><div class="loading"><div class="spinner"></div>載入中…</div></div>
+  </div>
+  <div id="panelChanges" style="display:none">
+    <div class="section-header">
+      <span class="section-title">Changes</span>
+      <span class="section-sub" id="changesDateRange"></span>
+    </div>
+    <div id="changesContent"><div class="loading"><div class="spinner"></div>載入中…</div></div>
+  </div>
+</div>
+<script>
+let holdingsData=[];let maxRatio=0;
+async function loadHoldings(){
+  try{
+    const r=await fetch('/api/etf/00981A/holdings');
+    const d=await r.json();
+    if(!d.holdings||d.holdings.length===0){
+      document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">📭</div>尚無資料，請先執行 fetch_00981a_holdings.py</div>';return;
+    }
+    holdingsData=d.holdings;maxRatio=Math.max(...holdingsData.map(h=>h.ratio));
+    document.getElementById('dataDate').textContent=d.data_date||'—';
+    document.getElementById('holdingsCount').textContent='共 '+holdingsData.length+' 檔';
+    updateStats(d);renderTable(holdingsData);
+  }catch(e){
+    document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">⚠️</div>API 連線失敗</div>';
+  }
+}
+async function loadChanges(){
+  try{
+    const r=await fetch('/api/etf/00981A/changes');
+    const d=await r.json();
+    if(!d.changes||d.changes.length===0){
+      document.getElementById('changesContent').innerHTML='<div class="empty-state"><div class="icon">📊</div>需要至少兩期資料才能比較異動</div>';return;
+    }
+    document.getElementById('changesDateRange').textContent=d.date_old+' → '+d.date_new;
+    renderChanges(d.changes);
+  }catch(e){
+    document.getElementById('changesContent').innerHTML='<div class="empty-state"><div class="icon">⚠️</div>API 連線失敗</div>';
+  }
+}
+function renderTable(data){
+  if(data.length===0){document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">🔍</div>無符合條件的個股</div>';return;}
+  const rows=data.map((h,i)=>{
+    const barW=maxRatio>0?Math.round((h.ratio/maxRatio)*100):0;
+    return '<tr style="animation-delay:'+(i*0.018)+'s"><td class="td-code">'+(i+1)+'</td><td class="td-name">'+h.stock_name+'<span style="color:#475569;font-size:11px;margin-left:6px">'+h.stock_code+'</span></td><td class="right"><div class="ratio-cell"><span class="td-ratio">'+h.ratio.toFixed(2)+'%</span><div class="ratio-bar-wrap"><div class="ratio-bar" style="width:'+barW+'%"></div></div></div></td><td class="td-shares right">'+Number(h.shares).toLocaleString()+'</td></tr>';
+  }).join('');
+  document.getElementById('holdingsContent').innerHTML='<div class="table-wrap"><table><thead><tr><th style="width:40px">#</th><th>個股</th><th class="right">比例</th><th class="right">持有股數</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function renderChanges(changes){
+  const cards=changes.map((c,i)=>{
+    const isUp=c.shares_delta>0;const cls=isUp?'up':'down';const sign=isUp?'+':'';
+    return '<div class="change-card '+cls+'" style="animation-delay:'+(i*0.04)+'s"><div class="cc-top"><span class="cc-name">'+c.stock_name+'</span><span class="cc-code">'+c.stock_code+'</span></div><span class="cc-delta '+cls+'">'+sign+Number(c.shares_delta).toLocaleString()+' 股</span><span class="cc-detail">'+(c.shares_old||0).toLocaleString()+' <span class="cc-arrow">→</span> '+c.shares_new.toLocaleString()+' &nbsp;·&nbsp; 比例 '+(c.ratio_new||0).toFixed(2)+'%</span></div>';
+  }).join('');
+  document.getElementById('changesContent').innerHTML='<div class="changes-grid">'+cards+'</div>';
+}
+function updateStats(d){
+  const total=d.holdings.reduce((s,h)=>s+h.ratio,0);
+  const top10=d.holdings.slice(0,10).reduce((s,h)=>s+h.ratio,0);
+  const el=document.getElementById('statsRow');
+  el.innerHTML='<div class="stat-chip"><span class="sv">'+d.holdings.length+'</span><span class="sk">持股檔數</span></div><div class="stat-chip"><span class="sv">'+total.toFixed(1)+'%</span><span class="sk">合計比例</span></div><div class="stat-chip"><span class="sv">'+top10.toFixed(1)+'%</span><span class="sk">前10大集中度</span></div><div class="stat-chip"><span class="sv">'+(d.holdings[0]?.stock_name||'—')+'</span><span class="sk">最大持股</span></div>';
+  el.style.removeProperty('display');
+}
+let changesLoaded=false;
+function switchTab(tab){
+  document.getElementById('panelHoldings').style.display=tab==='holdings'?'':'none';
+  document.getElementById('panelChanges').style.display=tab==='changes'?'':'none';
+  document.getElementById('tabHoldings').classList.toggle('active',tab==='holdings');
+  document.getElementById('tabChanges').classList.toggle('active',tab==='changes');
+  if(tab==='changes'&&!changesLoaded){changesLoaded=true;loadChanges();}
+}
+function filterTable(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  renderTable(holdingsData.filter(h=>h.stock_name.toLowerCase().includes(q)||h.stock_code.includes(q)));
+}
+loadHoldings();
+</script>
+</body>
+</html>

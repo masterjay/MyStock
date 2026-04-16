@@ -286,6 +286,10 @@ except Exception as e:
     traceback.print_exc()
     sys.exit(1)
 
+print("\n[補充] 00981A 持股爬蟲...")
+import subprocess
+subprocess.run(['python3', '/home/s0971417/MyStock/fetch_00981a_holdings.py'], check=False)
+
 print(f"\n{'='*60}")
 print(f"✓ 所有數據更新完成!")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

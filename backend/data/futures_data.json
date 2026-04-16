@@ -1,19 +1,19 @@
 {
   "latest": {
     "mxf_futures": {
-      "date": "20260413",
+      "date": "20260416",
       "close_price": 0.0,
-      "total_oi": 70570,
-      "retail_long": 48899,
-      "retail_short": 56956,
-      "retail_net": -8057,
-      "retail_ratio": -11.42,
-      "foreign_net": 12577
+      "total_oi": 22508,
+      "retail_long": 15409,
+      "retail_short": 18353,
+      "retail_net": -2944,
+      "retail_ratio": -13.08,
+      "foreign_net": 1651
     },
     "tx_futures": {
-      "date": "20260413",
-      "retail_ratio": 3587,
-      "foreign_net": -35996
+      "date": "20260416",
+      "retail_ratio": 3836,
+      "foreign_net": -39683
     },
     "margin": {
       "date": "20260410",
@@ -23,33 +23,6 @@
   },
   "history": {
     "mxf": [
-      {
-        "date": "20260303",
-        "retail_ratio": 30.12,
-        "retail_long": 81142,
-        "retail_short": 54005,
-        "close_price": 0.0,
-        "total_oi": 90098,
-        "foreign_net": 4124
-      },
-      {
-        "date": "20260304",
-        "retail_ratio": 34.07,
-        "retail_long": 110976,
-        "retail_short": 69894,
-        "close_price": 0.0,
-        "total_oi": 120580,
-        "foreign_net": 4284
-      },
-      {
-        "date": "20260305",
-        "retail_ratio": 22.53,
-        "retail_long": 87444,
-        "retail_short": 64605,
-        "close_price": 0.0,
-        "total_oi": 101366,
-        "foreign_net": 6294
-      },
       {
         "date": "20260306",
         "retail_ratio": 20.28,
@@ -292,24 +265,36 @@
         "close_price": 0.0,
         "total_oi": 70570,
         "foreign_net": 12577
+      },
+      {
+        "date": "20260414",
+        "retail_ratio": -24.21,
+        "retail_long": 51824,
+        "retail_short": 71776,
+        "close_price": 0.0,
+        "total_oi": 82400,
+        "foreign_net": 14010
+      },
+      {
+        "date": "20260415",
+        "retail_ratio": -9.02,
+        "retail_long": 12969,
+        "retail_short": 14628,
+        "close_price": 0.0,
+        "total_oi": 18398,
+        "foreign_net": 513
+      },
+      {
+        "date": "20260416",
+        "retail_ratio": -13.08,
+        "retail_long": 15409,
+        "retail_short": 18353,
+        "close_price": 0.0,
+        "total_oi": 22508,
+        "foreign_net": 1651
       }
     ],
     "tx": [
-      {
-        "date": "20260212",
-        "retail_ratio": 0.99,
-        "foreign_net": -27665
-      },
-      {
-        "date": "20260304",
-        "retail_ratio": 2.19,
-        "foreign_net": -41633
-      },
-      {
-        "date": "20260305",
-        "retail_ratio": 2.17,
-        "foreign_net": -41134
-      },
       {
         "date": "20260306",
         "retail_ratio": 1.4,
@@ -444,8 +429,23 @@
         "date": "20260413",
         "retail_ratio": 1.39,
         "foreign_net": -35996
+      },
+      {
+        "date": "20260414",
+        "retail_ratio": 1.74,
+        "foreign_net": -36664
+      },
+      {
+        "date": "20260415",
+        "retail_ratio": 0.73,
+        "foreign_net": -36783
+      },
+      {
+        "date": "20260416",
+        "retail_ratio": 1.39,
+        "foreign_net": -39683
       }
     ]
   },
-  "updated_at": "2026-04-13T20:30:29.477824"
+  "updated_at": "2026-04-16T20:30:21.910939"
 }
