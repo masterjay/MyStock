@@ -391,6 +391,62 @@
         }
 
         /* 數據解讀指南 */
+
+        /* ===== 台指期結算日倒數 ===== */
+        .futures-settlement {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #d4d4d4;
+            white-space: nowrap;
+            margin-right: 8px;
+            transition: all 0.3s ease;
+        }
+        .futures-settlement .fs-label {
+            color: #848e9c;
+            font-size: 12px;
+        }
+        .futures-settlement .fs-days {
+            font-weight: 700;
+            font-size: 14px;
+            color: #f0b90b;
+            letter-spacing: 0.5px;
+        }
+        .futures-settlement .fs-date {
+            color: #848e9c;
+            font-size: 12px;
+        }
+        .futures-settlement.fs-warning {
+            background: rgba(255,77,79,0.1);
+            border-color: rgba(255,77,79,0.4);
+        }
+        .futures-settlement.fs-warning .fs-days {
+            color: #ff4d4f;
+            animation: fs-pulse 1.5s ease-in-out infinite;
+        }
+        .futures-settlement.fs-today {
+            background: rgba(255,77,79,0.25);
+            border-color: #ff4d4f;
+        }
+        .futures-settlement.fs-today .fs-days {
+            color: #fff;
+            background: #ff4d4f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        @keyframes fs-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.55; }
+        }
+        /* ===== 台指期結算日倒數 END ===== */
+
         .guide-btn {
             display: flex;
             align-items: center;
@@ -3510,6 +3566,11 @@
                 <span class="monitor">MARKET MONITOR</span>
             </div>
             <div class="status">
+                <div id="futures-settlement" class="futures-settlement" title="台指期結算日 - 每月第三個星期三,遇假日延後">
+                    <span class="fs-label">📅 台指期結算</span>
+                    <span class="fs-days" id="fs-days">--</span>
+                    <span class="fs-date" id="fs-date">--</span>
+                </div>
                 <div id="chain-dropdown" style="position:relative;display:inline-block;margin-right:8px;">
                     <button id="chain-dropdown-btn" class="guide-btn" style="background:#2d8cf0;">
                         <span class="guide-btn-icon">📡</span>
@@ -7365,6 +7426,91 @@ document.addEventListener('DOMContentLoaded', loadInsiderTrading);
     });
 })();
 </script>
+
+<script>
+/* ===== 台指期結算日倒數 ===== */
+(function() {
+    'use strict';
+    // 結算日對照表 (依期交所官方公告)
+    // 每年 11-12 月記得到期交所更新次年資料: https://www.taifex.com.tw
+    var SETTLEMENT_DATES = {
+        2026: ['2026-01-21','2026-02-23','2026-03-18','2026-04-15',
+               '2026-05-20','2026-06-17','2026-07-15','2026-08-19',
+               '2026-09-16','2026-10-21','2026-11-18','2026-12-16'],
+        2027: [] // TODO: 期交所公告後補上
+    };
+
+    function getThirdWednesday(year, month) {
+        var first = new Date(year, month - 1, 1);
+        var dow = first.getDay();
+        var firstWed = dow <= 3 ? 4 - dow : 11 - dow;
+        return new Date(year, month - 1, firstWed + 14);
+    }
+
+    function getNextSettlement() {
+        var now = new Date();
+        now.setHours(0, 0, 0, 0);
+        var year = now.getFullYear();
+        var all = (SETTLEMENT_DATES[year] || []).concat(SETTLEMENT_DATES[year + 1] || []);
+        for (var i = 0; i < all.length; i++) {
+            var parts = all[i].split('-');
+            var d = new Date(+parts[0], parts[1] - 1, +parts[2]);
+            if (d >= now) return d;
+        }
+        // fallback: 純演算法 (無法處理假日延後)
+        console.warn('[台指期] 對照表已用完,改用演算法 (未考慮國定假日)');
+        for (var off = 0; off < 13; off++) {
+            var m = now.getMonth() + 1 + off;
+            var y = year + Math.floor((m - 1) / 12);
+            var mm = ((m - 1) % 12) + 1;
+            var c = getThirdWednesday(y, mm);
+            if (c >= now) return c;
+        }
+        return null;
+    }
+
+    function formatDate(d) {
+        var w = ['日','一','二','三','四','五','六'];
+        return (d.getMonth() + 1) + '/' + d.getDate() + ' (' + w[d.getDay()] + ')';
+    }
+
+    function render() {
+        var target = getNextSettlement();
+        var box = document.getElementById('futures-settlement');
+        var daysEl = document.getElementById('fs-days');
+        var dateEl = document.getElementById('fs-date');
+        if (!box || !daysEl || !dateEl) return;
+
+        if (!target) {
+            daysEl.textContent = 'N/A';
+            dateEl.textContent = '請更新結算日';
+            return;
+        }
+
+        var now = new Date();
+        now.setHours(0, 0, 0, 0);
+        var days = Math.round((target.getTime() - now.getTime()) / 86400000);
+
+        box.classList.remove('fs-warning', 'fs-today');
+        if (days === 0) {
+            box.classList.add('fs-today');
+            daysEl.textContent = '今日結算';
+        } else if (days <= 3) {
+            box.classList.add('fs-warning');
+            daysEl.textContent = '剩 ' + days + ' 天';
+        } else {
+            daysEl.textContent = '剩 ' + days + ' 天';
+        }
+        dateEl.textContent = formatDate(target);
+    }
+
+    render();
+    setInterval(render, 3600 * 1000); // 每小時更新一次
+    window.refreshFuturesSettlement = render;
+})();
+/* ===== 台指期結算日倒數 END ===== */
+</script>
+
 </body>
 </html>
 <style>

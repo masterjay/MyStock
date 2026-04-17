@@ -6,3 +6,6 @@ deprecated/
 .idea/
 *.xml
 backend/.env
+
+# dashboard 自動備份
+*.bak_*
