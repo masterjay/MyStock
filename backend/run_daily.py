@@ -31,6 +31,16 @@ print(f"台股監控 v3.0 - 每日自動執行")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"{'='*60}\n")
 
+# ========== 休市日守門 ==========
+from trading_day import is_trading_day
+from datetime import date as _today_date
+
+if not is_trading_day(_today_date.today()):
+    print("⏭  今日台股休市,跳過所有掃描任務")
+    print("=" * 60)
+    sys.exit(0)
+# ========== 休市日守門 END ==========
+
 try:
     # 1. 主要數據收集器
     print("[1/9] 收集主要數據 (TX + MXF)...")

@@ -9,3 +9,12 @@ backend/.env
 
 # dashboard 自動備份
 *.bak_*
+
+# Python venv
+venv/
+
+# Trading day cache
+cache/
+
+# Single .bak files
+*.bak
