@@ -26,36 +26,64 @@
   .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
   .section-title{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent3);}
   .section-sub{font-size:11px;color:var(--muted);font-family:var(--mono);}
-  .changes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:32px;}
-  .change-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,transform .15s;animation:fadeUp .35s ease both;}
-  .change-card:hover{border-color:var(--accent3);transform:translateY(-2px);}
-  .change-card.up{border-left:3px solid var(--accent);}
-  .change-card.down{border-left:3px solid var(--accent2);}
-  .cc-top{display:flex;justify-content:space-between;align-items:flex-start;}
-  .cc-name{font-size:13px;font-weight:500;color:var(--text);}
-  .cc-code{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--bg3);padding:2px 6px;border-radius:3px;}
-  .cc-delta{font-family:var(--mono);font-size:15px;font-weight:600;}
-  .cc-delta.up{color:var(--accent);}
-  .cc-delta.down{color:var(--accent2);}
-  .cc-detail{font-family:var(--mono);font-size:11px;color:var(--muted);}
-  .cc-arrow{color:var(--accent3);margin:0 4px;}
-  .table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
-  table{width:100%;border-collapse:collapse;}
-  thead tr{background:var(--bg3);}
-  th{padding:10px 14px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
-  th.right{text-align:right;}
-  tbody tr{border-bottom:1px solid #1a1e2e;transition:background .15s;animation:fadeUp .3s ease both;}
-  tbody tr:hover{background:var(--bg2);}
-  tbody tr:last-child{border-bottom:none;}
-  td{padding:10px 14px;font-size:13px;white-space:nowrap;}
-  td.right{text-align:right;}
+
+  /* ===== 共用股票連結樣式（對齊 dashboard） ===== */
+  .stock-link{color:var(--accent3);text-decoration:none;font-family:var(--mono);transition:color .15s;}
+  .stock-link:hover{color:#93c5fd;text-decoration:underline;}
+
+  /* ===== 持股明細表格（限制欄寬，讓資訊密度提升） ===== */
+  .holdings-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+  .holdings-table thead tr{background:var(--bg3);}
+  .holdings-table th{padding:10px 14px;text-align:left;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+  .holdings-table th.right{text-align:right;}
+  .holdings-table tbody tr{border-bottom:1px solid #1a1e2e;transition:background .15s;animation:fadeUp .3s ease both;}
+  .holdings-table tbody tr:hover{background:var(--bg2);}
+  .holdings-table tbody tr:last-child{border-bottom:none;}
+  .holdings-table td{padding:10px 14px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .holdings-table td.right{text-align:right;}
+  .holdings-table .col-num{width:48px;text-align:center;font-family:var(--mono);color:var(--muted);font-size:11px;}
+  .holdings-table .col-stock{width:140px;}
+  .holdings-table .col-code{width:80px;text-align:left;}
+  .holdings-table .col-ratio{width:36%;}
+  .holdings-table .col-shares{width:14%;}
+  .td-code-cell{font-family:var(--mono);font-size:12px;padding-left:0!important;}
   .td-name{font-weight:500;}
-  .td-code{font-family:var(--mono);font-size:11px;color:var(--muted);}
-  .td-ratio{font-family:var(--mono);font-size:12px;}
+  .td-code{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px;}
   .td-shares{font-family:var(--mono);font-size:12px;color:var(--accent3);}
-  .ratio-cell{display:flex;align-items:center;gap:10px;justify-content:flex-end;}
-  .ratio-bar-wrap{width:70px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;}
-  .ratio-bar{height:100%;background:var(--accent3);border-radius:2px;transition:width .6s ease;}
+  .ratio-cell{display:flex;align-items:center;gap:10px;}
+  .ratio-num{font-family:var(--mono);font-size:12px;font-weight:500;min-width:52px;text-align:right;}
+  .ratio-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+  .ratio-bar{height:100%;background:linear-gradient(90deg,var(--accent3) 0%,#818cf8 100%);border-radius:3px;transition:width .6s ease;}
+  .table-wrap{border-radius:8px;border:1px solid var(--border);overflow:hidden;}
+
+  /* ===== 持股異動：寬版條狀圖 ===== */
+  .changes-wrap{border-radius:8px;border:1px solid var(--border);overflow:hidden;}
+  .changes-header,.changes-row{
+    display:grid;
+    grid-template-columns: 48px 140px 80px 120px 1.4fr 200px 100px;
+    gap:12px;align-items:center;padding:10px 16px;
+  }
+  .ch-code{font-family:var(--mono);font-size:12px;}
+  .changes-header{background:var(--bg3);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .changes-row{border-bottom:1px solid #1a1e2e;font-size:13px;transition:background .15s;animation:fadeUp .3s ease both;}
+  .changes-row:hover{background:var(--bg2);}
+  .changes-row:last-child{border-bottom:none;}
+  .ch-num{text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .ch-stock-name{font-weight:500;}
+  .ch-delta{font-family:var(--mono);font-size:14px;font-weight:600;text-align:right;}
+  .ch-delta.up{color:var(--accent2);}
+  .ch-delta.down{color:var(--accent);}
+  .ch-detail{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:right;}
+  .ch-arrow{color:var(--accent3);margin:0 4px;}
+  .ch-ratio{font-family:var(--mono);font-size:12px;text-align:right;color:var(--accent3);}
+
+  /* 中央零軸條狀圖 */
+  .bar-container{position:relative;height:22px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+  .bar-zero{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--border);z-index:1;}
+  .bar-fill{position:absolute;top:3px;bottom:3px;border-radius:3px;display:flex;align-items:center;font-family:var(--mono);font-size:10px;font-weight:600;padding:0 6px;transition:width .5s ease;}
+  .bar-fill.up{left:50%;background:rgba(248,113,113,.15);border:1px solid rgba(248,113,113,.4);color:var(--accent2);justify-content:flex-end;}
+  .bar-fill.down{right:50%;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.4);color:var(--accent);justify-content:flex-start;}
+
   .empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.05em;}
   .empty-state .icon{font-size:32px;margin-bottom:12px;}
   .loading{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;}
@@ -72,8 +100,19 @@
   .stat-chip{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-family:var(--mono);font-size:11px;}
   .stat-chip .sv{font-size:16px;font-weight:600;color:var(--accent3);display:block;}
   .stat-chip .sk{color:var(--muted);font-size:10px;}
+
+  .changes-summary{display:flex;gap:16px;margin-bottom:14px;font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .changes-summary .pos{color:var(--accent2);}
+  .changes-summary .neg{color:var(--accent);}
+
   @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
   @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* 響應式：視窗太窄時隱藏次要欄位 */
+  @media (max-width:1100px){
+    .changes-header,.changes-row{grid-template-columns: 40px 120px 70px 100px 1fr 140px;}
+    .changes-header .col-ratio,.changes-row .ch-ratio{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -107,6 +146,7 @@
       <span class="section-title">Changes</span>
       <span class="section-sub" id="changesDateRange"></span>
     </div>
+    <div class="changes-summary" id="changesSummary"></div>
     <div id="changesContent"><div class="loading"><div class="spinner"></div>載入中…</div></div>
   </div>
 </div>
@@ -114,6 +154,15 @@
 const ETF_CODE = location.pathname.split('/').filter(Boolean).pop().toUpperCase() || '00981A';
 const ETF_NAMES = {"00981A":"主動統一台股增長","00992A":"主動群益科技創新","00991A":"主動復華未來50","00980A":"主動野村臺灣優選","0050":"元大台灣50","0052":"富邦科技"};
 let holdingsData=[];let maxRatio=0;
+
+// 統一的 Yahoo 連結（對齊 dashboard.html）
+function yahooUrl(code){
+  return 'https://tw.stock.yahoo.com/quote/'+code+'.TW/technical-analysis#main-1-QuoteTabs-Proxy';
+}
+function yahooLink(code){
+  return '<a href="'+yahooUrl(code)+'" target="_blank" rel="noopener" class="stock-link" onclick="event.stopPropagation()">'+code+'</a>';
+}
+
 async function loadHoldings(){
   try{
     const r=await fetch('/api/etf/'+ETF_CODE+'/holdings');
@@ -144,21 +193,80 @@ async function loadChanges(){
     document.getElementById('changesContent').innerHTML='<div class="empty-state"><div class="icon">⚠️</div>API 連線失敗</div>';
   }
 }
+
 function renderTable(data){
-  if(data.length===0){document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">🔍</div>無符合條件的個股</div>';return;}
+  if(data.length===0){
+    document.getElementById('holdingsContent').innerHTML='<div class="empty-state"><div class="icon">🔍</div>無符合條件的個股</div>';
+    return;
+  }
   const rows=data.map((h,i)=>{
     const barW=maxRatio>0?Math.round((h.ratio/maxRatio)*100):0;
-    return '<tr style="animation-delay:'+(i*0.018)+'s"><td class="td-code">'+(i+1)+'</td><td class="td-name">'+h.stock_name+'<span style="color:#475569;font-size:11px;margin-left:6px">'+h.stock_code+'</span></td><td class="right"><div class="ratio-cell"><span class="td-ratio">'+h.ratio.toFixed(2)+'%</span><div class="ratio-bar-wrap"><div class="ratio-bar" style="width:'+barW+'%"></div></div></div></td><td class="td-shares right">'+Number(h.shares).toLocaleString()+'</td></tr>';
+    return '<tr style="animation-delay:'+(i*0.018)+'s">'+
+      '<td class="col-num">'+(i+1)+'</td>'+
+      '<td class="col-stock"><span class="td-name">'+h.stock_name+'</span></td>'+
+      '<td class="col-code td-code-cell">'+yahooLink(h.stock_code)+'</td>'+
+      '<td class="col-ratio"><div class="ratio-cell"><span class="ratio-num">'+h.ratio.toFixed(2)+'%</span><div class="ratio-bar-wrap"><div class="ratio-bar" style="width:'+barW+'%"></div></div></div></td>'+
+      '<td class="col-shares right td-shares">'+Number(h.shares).toLocaleString()+'</td>'+
+    '</tr>';
   }).join('');
-  document.getElementById('holdingsContent').innerHTML='<div class="table-wrap"><table><thead><tr><th style="width:40px">#</th><th>個股</th><th class="right">比例</th><th class="right">持有股數</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  document.getElementById('holdingsContent').innerHTML=
+    '<div class="table-wrap"><table class="holdings-table"><thead><tr>'+
+      '<th class="col-num">#</th>'+
+      '<th class="col-stock">個股</th>'+
+      '<th class="col-code">代號</th>'+
+      '<th class="col-ratio">比例</th>'+
+      '<th class="col-shares right">持有股數</th>'+
+    '</tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
+
 function renderChanges(changes){
-  const cards=changes.map((c,i)=>{
-    const isUp=c.shares_delta>0;const cls=isUp?'up':'down';const sign=isUp?'+':'';
-    return '<div class="change-card '+cls+'" style="animation-delay:'+(i*0.04)+'s"><div class="cc-top"><span class="cc-name">'+c.stock_name+'</span><span class="cc-code">'+c.stock_code+'</span></div><span class="cc-delta '+cls+'">'+sign+Number(c.shares_delta).toLocaleString()+' 股</span><span class="cc-detail">'+(c.shares_old||0).toLocaleString()+' <span class="cc-arrow">→</span> '+c.shares_new.toLocaleString()+' &nbsp;·&nbsp; 比例 '+(c.ratio_new||0).toFixed(2)+'%</span></div>';
+  // 計算最大異動量做為 bar 寬度基準
+  const maxDelta=Math.max(...changes.map(c=>Math.abs(c.shares_delta)));
+  const ups=changes.filter(c=>c.shares_delta>0);
+  const downs=changes.filter(c=>c.shares_delta<0);
+  const totalUp=ups.reduce((s,c)=>s+c.shares_delta,0);
+  const totalDown=downs.reduce((s,c)=>s+c.shares_delta,0);
+
+  // 摘要列
+  document.getElementById('changesSummary').innerHTML=
+    '<span>加碼 <span class="pos">'+ups.length+'</span> 檔 ('+Number(totalUp).toLocaleString()+' 股)</span>'+
+    '<span>減碼 <span class="neg">'+downs.length+'</span> 檔 ('+Number(totalDown).toLocaleString()+' 股)</span>'+
+    '<span>依異動量排序</span>';
+
+  const header='<div class="changes-header">'+
+    '<span class="ch-num">#</span>'+
+    '<span>個股</span>'+
+    '<span>代號</span>'+
+    '<span class="right" style="text-align:right">異動</span>'+
+    '<span style="text-align:center">← 減倉 / 加倉 →</span>'+
+    '<span class="right" style="text-align:right">前 → 後</span>'+
+    '<span class="right col-ratio" style="text-align:right">占比</span>'+
+  '</div>';
+
+  const rows=changes.map((c,i)=>{
+    const isUp=c.shares_delta>0;
+    const cls=isUp?'up':'down';
+    const sign=isUp?'+':'';
+    const absD=Math.abs(c.shares_delta);
+    // 最長佔中央到邊緣的 95%
+    const barW=maxDelta>0?(absD/maxDelta)*48:0;
+    const barStyle='width:'+barW.toFixed(1)+'%';
+    const barText=sign+Number(c.shares_delta).toLocaleString();
+
+    return '<div class="changes-row" style="animation-delay:'+(i*0.025)+'s">'+
+      '<span class="ch-num">'+(i+1)+'</span>'+
+      '<span class="ch-stock-name">'+c.stock_name+'</span>'+
+      '<span class="ch-code">'+yahooLink(c.stock_code)+'</span>'+
+      '<span class="ch-delta '+cls+'">'+sign+Number(c.shares_delta).toLocaleString()+'</span>'+
+      '<div class="bar-container"><div class="bar-zero"></div><div class="bar-fill '+cls+'" style="'+barStyle+'">'+barText+'</div></div>'+
+      '<span class="ch-detail">'+(c.shares_old||0).toLocaleString()+'<span class="ch-arrow">→</span>'+c.shares_new.toLocaleString()+'</span>'+
+      '<span class="ch-ratio">'+(c.ratio_new||0).toFixed(2)+'%</span>'+
+    '</div>';
   }).join('');
-  document.getElementById('changesContent').innerHTML='<div class="changes-grid">'+cards+'</div>';
+
+  document.getElementById('changesContent').innerHTML='<div class="changes-wrap">'+header+rows+'</div>';
 }
+
 function updateStats(d){
   const total=d.holdings.reduce((s,h)=>s+h.ratio,0);
   const top10=d.holdings.slice(0,10).reduce((s,h)=>s+h.ratio,0);
