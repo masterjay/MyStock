@@ -18,3 +18,15 @@ cache/
 
 # Single .bak files
 *.bak
+
+# 本地備份檔（覆蓋時產生的）
+*.bak
+*.bak_*
+*.backup
+*.backup-*
+templates/*.bak_*
+
+# 每日自動更新的資料檔（cron 產生，不該追蹤）
+backend/data/*.json
+backend/data/*.db
+watchlist_notion.json
