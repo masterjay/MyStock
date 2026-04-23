@@ -3627,139 +3627,12 @@
             </div>
         </div>
 
-        <!-- Main Content -->
-            <!-- 主流股雷達 -->
-            <section class="mainstream-radar" id="mainstream-radar-section">
-                <div class="section-header">
-                    <div>
-                        <div class="section-title">
-                            🎯 主流股雷達
-                            <span class="badge" id="mainstream-count-badge">0 檔</span>
-                        </div>
-                        <div class="section-subtitle">成交金額 TOP 20 × 6條主流條件篩選</div>
-                    </div>
-                    <div class="update-time" id="mainstream-update-time">載入中...</div>
-                </div>
-                <div class="mainstream-controls">
-                    <span style="color:#484f58;font-size:12px;">顯示：</span>
-                    <button class="ctrl-btn active" onclick="filterMainstream('all')" id="filter-all">全部</button>
-                    <button class="ctrl-btn" onclick="filterMainstream('mainstream')" id="filter-mainstream">✅ 主流股</button>
-                    <button class="ctrl-btn" onclick="filterMainstream('watching')" id="filter-watching">👀 觀察中</button>
-                    <span style="color:#484f58;font-size:12px;margin-left:8px;">✏️ = 手動確認欄位</span>
-                </div>
-                <div class="mainstream-table-wrap">
-                    <table class="mainstream-table" id="mainstream-table">
-                        <thead>
-                            <tr>
-                                <th onclick="sortMainstream('rank')" style="cursor:pointer;user-select:none;" title="點擊回到初始排序">排 <span id="ms-sort-rank">⇅</span></th>
-                                <th>代號</th>
-                                <th>名稱</th>
-                                <th class="hide-mobile sortable-th" onclick="sortMainstream('price')" id="ms-th-price" style="cursor:pointer;user-select:none;">股價 <span id="ms-sort-price">⇅</span></th>
-                                <th class="hide-mobile sortable-th" onclick="sortMainstream('change_pct')" id="ms-th-change" style="cursor:pointer;user-select:none;">漲跌% <span id="ms-sort-change_pct">⇅</span></th>
-                                <th class="hide-mobile sortable-th" onclick="sortMainstream('amount_b')" id="ms-th-amount" style="cursor:pointer;user-select:none;">金額(億) <span id="ms-sort-amount_b">⇅</span></th>
-                                <th title="近5日是否連續出現在成交金額前30" class="cond-header">①連榜5日</th>
-                                <th title="均量20是否持續翻揚（非一日衝量）" class="cond-header">②均量翻揚</th>
-                                <th title="回檔時是否守住EMA10/EMA20" class="cond-header">③守EMA20</th>
-                                <th title="外資或投信近5日是否持續買超" class="cond-header">④法人買超</th>
-                                <th title="是否有明確基本面催化劑（非概念股）— 手動確認" class="cond-header">⑤基本面✏️</th>
-                                <th title="類股中是否為領漲股（非跟漲）— 手動確認" class="cond-header">⑥領漲股✏️</th>
-                                <th>分數</th>
-                                <th class="hide-mobile">判定</th>
-                                <th class="hide-mobile">備註</th>
-                            </tr>
-                        </thead>
-                        <tbody id="mainstream-tbody">
-                            <tr><td colspan="15" class="mainstream-empty">載入中...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
 
 
 
 
-        <div id="mainContent" style="display: none;">
-            <!-- 散戶對決區塊 -->
 
-                    &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
-        <div class="watchlist-section" id="watchlist-section">
-            <div class="watchlist-header">
-                <span class="watchlist-title">📋 自選股掃描清單</span>
-                <span class="watchlist-hint">列於此處的股票將強制納入每日 MACD 掃描</span>
-            </div>
 
-            <div class="watchlist-body">
-                <div class="watchlist-tags" id="watchlist-tags"></div>
-                <div class="watchlist-add">
-                    <input type="text" id="watchlist-code-input" placeholder="代碼 e.g. 8086" maxlength="6" />
-                    <input type="text" id="watchlist-name-input" placeholder="名稱 e.g. 宏捷科" maxlength="10" />
-                    <button id="watchlist-add-btn">＋ 加入</button>
-                    <button id="watchlist-scan-btn">🔍 立即掃描</button>
-                </div>
-            </div>
-        </div>
-        <div class="macd-signal-section" id="macd-signal-section">
-            <div class="macd-signal-header">
-                <div class="macd-signal-title">
-                    <span class="pulse-dot"></span>
-                    <button class="macd-info-btn" id="macd-info-btn" title="篩選條件說明">ℹ️</button>
-                </div>
-                <div>
-                    <span class="macd-signal-count" id="macd-signal-count">載入中...</span>
-                </div>
-            </div>
-            <div class="macd-signal-meta" id="macd-signal-meta"></div>
-            <div class="macd-date-tabs" id="macd-date-tabs"></div>
-            <div id="notion-theme-bar" class="concept-filter-bar" style="display:none;border-bottom:none;padding-bottom:0;margin-bottom:0;"></div>
-            <div id="concept-filter-bar" class="concept-filter-bar" style="display:none;"></div>
-            <div class="macd-controls" id="macd-controls">
-                <div class="macd-filter-group">
-                    <span class="macd-filter-label">星等:</span>
-                    <button class="macd-filter-btn active" data-filter="star" data-value="all">全部</button>
-                    <button class="macd-filter-btn" data-filter="star" data-value="5">5⭐</button>
-                    <button class="macd-filter-btn" data-filter="star" data-value="4">4⭐+</button>
-                    <button class="macd-filter-btn" data-filter="star" data-value="3">3⭐+</button>
-                </div>
-                <div class="macd-divider"></div>
-                <div class="macd-filter-group">
-                    <span class="macd-filter-label">類型:</span>
-                    <button class="macd-filter-btn active" data-filter="type" data-value="all">全部</button>
-                    <button class="macd-filter-btn" data-filter="type" data-value="長線">長線</button>
-                    <button class="macd-filter-btn" data-filter="type" data-value="短線">短線</button>
-                </div>
-                <div class="macd-divider"></div>
-                <div class="macd-filter-group">
-                    <span class="macd-filter-label">狀態:</span>
-                    <button class="macd-filter-btn active" data-filter="status" data-value="all">全部</button>
-                    <button class="macd-filter-btn" data-filter="status" data-value="已金叉">已金叉</button>
-                    <button class="macd-filter-btn" data-filter="status" data-value="即將金叉">即將金叉</button>
-                    <button class="macd-filter-btn" data-filter="status" data-value="柱體縮小中">柱體縮小</button>
-                </div>
-                <div class="macd-divider"></div>
-                <div class="macd-filter-group">
-                    <span class="macd-filter-label">來源:</span>
-                    <button class="macd-filter-btn active" data-filter="source" data-value="all">全部</button>
-                    <button class="macd-filter-btn" data-filter="source" data-value="外資買超">外資買超</button>
-                    <button class="macd-filter-btn" data-filter="source" data-value="週轉率">週轉率</button>
-                    <button class="macd-filter-btn" data-filter="source" data-value="產業外資">產業外資</button>
-                    <button class="macd-filter-btn" data-filter="source" data-value="投信買超">投信買超</button>
-                </div>
-                <div class="macd-divider"></div>
-                <div class="macd-filter-group">
-                    <span class="macd-filter-label">排序:</span>
-                    <select class="macd-sort-select" id="macd-sort-select">
-                        <option value="strength_desc">訊號強度 高→低</option>
-                        <option value="price_desc">股價 高→低</option>
-                        <option value="price_asc">股價 低→高</option>
-                        <option value="dif_asc">DIF距0軸 近→遠</option>
-                        <option value="vol_asc">量縮比 小→大</option>
-                    </select>
-                </div>
-            </div>
-            <div class="macd-signal-grid" id="macd-signal-grid">
-                <div class="macd-signal-empty">載入中...</div>
-            </div>
-        </div>
 
 <div class="retail-battle-section">
                 <div class="section-header">
@@ -6607,7 +6480,53 @@ function initMacdModal() {
         <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
 
-
+    <!-- Main Content -->
+    <!-- 主流股雷達 -->
+    <section class="mainstream-radar" id="mainstream-radar-section">
+        <div class="section-header">
+            <div>
+                <div class="section-title">
+                    🎯 主流股雷達
+                    <span class="badge" id="mainstream-count-badge">0 檔</span>
+                </div>
+                <div class="section-subtitle">成交金額 TOP 20 × 6條主流條件篩選</div>
+            </div>
+            <div class="update-time" id="mainstream-update-time">載入中...</div>
+        </div>
+        <div class="mainstream-controls">
+            <span style="color:#484f58;font-size:12px;">顯示：</span>
+            <button class="ctrl-btn active" onclick="filterMainstream('all')" id="filter-all">全部</button>
+            <button class="ctrl-btn" onclick="filterMainstream('mainstream')" id="filter-mainstream">✅ 主流股</button>
+            <button class="ctrl-btn" onclick="filterMainstream('watching')" id="filter-watching">👀 觀察中</button>
+            <span style="color:#484f58;font-size:12px;margin-left:8px;">✏️ = 手動確認欄位</span>
+        </div>
+        <div class="mainstream-table-wrap">
+            <table class="mainstream-table" id="mainstream-table">
+                <thead>
+                <tr>
+                    <th onclick="sortMainstream('rank')" style="cursor:pointer;user-select:none;" title="點擊回到初始排序">排 <span id="ms-sort-rank">⇅</span></th>
+                    <th>代號</th>
+                    <th>名稱</th>
+                    <th class="hide-mobile sortable-th" onclick="sortMainstream('price')" id="ms-th-price" style="cursor:pointer;user-select:none;">股價 <span id="ms-sort-price">⇅</span></th>
+                    <th class="hide-mobile sortable-th" onclick="sortMainstream('change_pct')" id="ms-th-change" style="cursor:pointer;user-select:none;">漲跌% <span id="ms-sort-change_pct">⇅</span></th>
+                    <th class="hide-mobile sortable-th" onclick="sortMainstream('amount_b')" id="ms-th-amount" style="cursor:pointer;user-select:none;">金額(億) <span id="ms-sort-amount_b">⇅</span></th>
+                    <th title="近5日是否連續出現在成交金額前30" class="cond-header">①連榜5日</th>
+                    <th title="均量20是否持續翻揚（非一日衝量）" class="cond-header">②均量翻揚</th>
+                    <th title="回檔時是否守住EMA10/EMA20" class="cond-header">③守EMA20</th>
+                    <th title="外資或投信近5日是否持續買超" class="cond-header">④法人買超</th>
+                    <th title="是否有明確基本面催化劑（非概念股）— 手動確認" class="cond-header">⑤基本面✏️</th>
+                    <th title="類股中是否為領漲股（非跟漲）— 手動確認" class="cond-header">⑥領漲股✏️</th>
+                    <th>分數</th>
+                    <th class="hide-mobile">判定</th>
+                    <th class="hide-mobile">備註</th>
+                </tr>
+                </thead>
+                <tbody id="mainstream-tbody">
+                <tr><td colspan="15" class="mainstream-empty">載入中...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
     <!-- 周轉率過熱監控 -->
     <div class="turnover-section">
         <div class="turnover-header">
@@ -6685,6 +6604,92 @@ function initMacdModal() {
         </div>
     </div>
 
+    <div/>
+
+        <div>
+            <div id="mainContent" style="display: none;">
+                <!-- 散戶對決區塊 -->
+
+                &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
+                <div class="watchlist-section" id="watchlist-section">
+                    <div class="watchlist-header">
+                        <span class="watchlist-title">📋 自選股掃描清單</span>
+                        <span class="watchlist-hint">列於此處的股票將強制納入每日 MACD 掃描</span>
+                    </div>
+
+                    <div class="watchlist-body">
+                        <div class="watchlist-tags" id="watchlist-tags"></div>
+                        <div class="watchlist-add">
+                            <input type="text" id="watchlist-code-input" placeholder="代碼 e.g. 8086" maxlength="6" />
+                            <input type="text" id="watchlist-name-input" placeholder="名稱 e.g. 宏捷科" maxlength="10" />
+                            <button id="watchlist-add-btn">＋ 加入</button>
+                            <button id="watchlist-scan-btn">🔍 立即掃描</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="macd-signal-section" id="macd-signal-section">
+                    <div class="macd-signal-header">
+                        <div class="macd-signal-title">
+                            <span class="pulse-dot"></span>
+                            <button class="macd-info-btn" id="macd-info-btn" title="篩選條件說明">ℹ️</button>
+                        </div>
+                        <div>
+                            <span class="macd-signal-count" id="macd-signal-count">載入中...</span>
+                        </div>
+                    </div>
+                    <div class="macd-signal-meta" id="macd-signal-meta"></div>
+                    <div class="macd-date-tabs" id="macd-date-tabs"></div>
+                    <div id="notion-theme-bar" class="concept-filter-bar" style="display:none;border-bottom:none;padding-bottom:0;margin-bottom:0;"></div>
+                    <div id="concept-filter-bar" class="concept-filter-bar" style="display:none;"></div>
+                    <div class="macd-controls" id="macd-controls">
+                        <div class="macd-filter-group">
+                            <span class="macd-filter-label">星等:</span>
+                            <button class="macd-filter-btn active" data-filter="star" data-value="all">全部</button>
+                            <button class="macd-filter-btn" data-filter="star" data-value="5">5⭐</button>
+                            <button class="macd-filter-btn" data-filter="star" data-value="4">4⭐+</button>
+                            <button class="macd-filter-btn" data-filter="star" data-value="3">3⭐+</button>
+                        </div>
+                        <div class="macd-divider"></div>
+                        <div class="macd-filter-group">
+                            <span class="macd-filter-label">類型:</span>
+                            <button class="macd-filter-btn active" data-filter="type" data-value="all">全部</button>
+                            <button class="macd-filter-btn" data-filter="type" data-value="長線">長線</button>
+                            <button class="macd-filter-btn" data-filter="type" data-value="短線">短線</button>
+                        </div>
+                        <div class="macd-divider"></div>
+                        <div class="macd-filter-group">
+                            <span class="macd-filter-label">狀態:</span>
+                            <button class="macd-filter-btn active" data-filter="status" data-value="all">全部</button>
+                            <button class="macd-filter-btn" data-filter="status" data-value="已金叉">已金叉</button>
+                            <button class="macd-filter-btn" data-filter="status" data-value="即將金叉">即將金叉</button>
+                            <button class="macd-filter-btn" data-filter="status" data-value="柱體縮小中">柱體縮小</button>
+                        </div>
+                        <div class="macd-divider"></div>
+                        <div class="macd-filter-group">
+                            <span class="macd-filter-label">來源:</span>
+                            <button class="macd-filter-btn active" data-filter="source" data-value="all">全部</button>
+                            <button class="macd-filter-btn" data-filter="source" data-value="外資買超">外資買超</button>
+                            <button class="macd-filter-btn" data-filter="source" data-value="週轉率">週轉率</button>
+                            <button class="macd-filter-btn" data-filter="source" data-value="產業外資">產業外資</button>
+                            <button class="macd-filter-btn" data-filter="source" data-value="投信買超">投信買超</button>
+                        </div>
+                        <div class="macd-divider"></div>
+                        <div class="macd-filter-group">
+                            <span class="macd-filter-label">排序:</span>
+                            <select class="macd-sort-select" id="macd-sort-select">
+                                <option value="strength_desc">訊號強度 高→低</option>
+                                <option value="price_desc">股價 高→低</option>
+                                <option value="price_asc">股價 低→高</option>
+                                <option value="dif_asc">DIF距0軸 近→遠</option>
+                                <option value="vol_asc">量縮比 小→大</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="macd-signal-grid" id="macd-signal-grid">
+                        <div class="macd-signal-empty">載入中...</div>
+                    </div>
+                </div>
+        </div>
 
 
     <!-- 處置股監控 -->
