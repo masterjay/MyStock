@@ -32,6 +32,10 @@ HEADERS = {
 # ─────────────────────────────────────────
 def fetch_goodinfo_top30():
     """爬取 Goodinfo 成交金額排行榜（今日 & 近幾日均值）"""
+    # 2026-04-23 停用: Goodinfo 欄位順序變動,change_pct 抓到錯誤欄位(變成 3.75 而非真實漲跌幅)
+        # 直接走 TWSE fallback 較穩定
+        # 若要重新啟用,需先確認 cols[3] 是否真的是漲跌幅,或改用「漲跌價反推」的算法
+        return fetch_twse_top30_fallback()
     url = 'https://goodinfo.tw/tw/StockList.asp?MARKET_CAT=上市&INDUSTRY_CAT=ALL&SHEET=交易&FILTER_COLUMN=TRADING_PRICE&FILTER_INFO=&FILTER_START=&FILTER_END=&ORDER_COL=AMOUNT&ORDER_TYPE=DESC&SHEET2=&MEMO='
     
     try:
