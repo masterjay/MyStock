@@ -33,9 +33,10 @@ HEADERS = {
 def fetch_goodinfo_top30():
     """爬取 Goodinfo 成交金額排行榜（今日 & 近幾日均值）"""
     # 2026-04-23 停用: Goodinfo 欄位順序變動,change_pct 抓到錯誤欄位(變成 3.75 而非真實漲跌幅)
-        # 直接走 TWSE fallback 較穩定
-        # 若要重新啟用,需先確認 cols[3] 是否真的是漲跌幅,或改用「漲跌價反推」的算法
-        return fetch_twse_top30_fallback()
+    # 直接走 TWSE fallback 較穩定
+    # 若要重新啟用,需先確認 cols[3] 是否真的是漲跌幅,或改用「漲跌價反推」的算法
+    return fetch_twse_top30_fallback()
+
     url = 'https://goodinfo.tw/tw/StockList.asp?MARKET_CAT=上市&INDUSTRY_CAT=ALL&SHEET=交易&FILTER_COLUMN=TRADING_PRICE&FILTER_INFO=&FILTER_START=&FILTER_END=&ORDER_COL=AMOUNT&ORDER_TYPE=DESC&SHEET2=&MEMO='
     
     try:
@@ -130,18 +131,25 @@ def fetch_twse_top30_fallback():
                 vol_str   = str(row[2]).replace(',', '')
                 amt_str   = str(row[4]).replace(',', '')   # 成交金額(元)
                 price_str = str(row[8]).replace(',', '').replace('--', '0')
+                chg_sign  = str(row[9]).strip()  if len(row) > 9  else ''   # 漲跌方向: '+', '-', ' ', 'X'
                 chg_str   = str(row[10]).replace(',', '') if len(row) > 10 else '0'
-                
+
                 if not re.match(r'^\d{4}', code):
                     continue
-                
+
                 vol   = float(vol_str)   if vol_str.replace('.','').isdigit()   else 0
                 amt   = float(amt_str)   if amt_str.replace('.','').isdigit()   else 0
                 price = float(price_str) if price_str.replace('.','').isdigit() else 0
                 amt_b = amt / 1e8
-                
+
                 # 漲跌價(元) → 漲跌幅(%)
-                chg_val = float(chg_str) if chg_str.replace('.','').replace('-','').isdigit() else 0
+                # TWSE MI_INDEX 回傳: row[9]=方向符號(+/-/X/空), row[10]=漲跌絕對值
+                chg_val = float(chg_str) if chg_str.replace('.','').isdigit() else 0
+                if 'X' in chg_sign:
+                    chg_val = 0  # 除權息,無前日比較基準
+                elif '-' in chg_sign or '▼' in chg_sign or '跌' in chg_sign:
+                    chg_val = -chg_val  # 跌
+                # '+', '▲', '漲', 或空白保持正值 (空白代表 0)
                 prev_price = price - chg_val
                 chg_pct = round(chg_val / prev_price * 100, 2) if prev_price > 0 else 0
                 
