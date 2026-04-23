@@ -3676,78 +3676,11 @@
             </section>
 
 
-            <!-- 內部人持股異動 -->
-            <div id="insider-section" class="disposal-section" style="margin-bottom:16px;">
-              <div class="disposal-header">
-                <div class="disposal-title-row">
-                  <span class="disposal-icon">🏛️</span>
-                  <span class="disposal-title">內部人持股異動</span>
-                  <span id="insider-count" class="disposal-badge">--</span>
-                </div>
-                <div class="disposal-actions">
-                  <span id="insider-updated" class="disposal-updated"></span>
-                  <span id="insider-month" style="color:#888;font-size:12px;"></span>
-                </div>
-              </div>
-              <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
-                <button class="ctrl-btn" id="insider-tab-buy" onclick="switchInsiderTab('buy')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,82,82,0.4);background:rgba(255,82,82,0.12);color:#ff5252;cursor:pointer;font-size:12px;">🔴 買超</button>
-                <button class="ctrl-btn" id="insider-tab-sell" onclick="switchInsiderTab('sell')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#aaa;cursor:pointer;font-size:12px;">🟢 賣超</button>
-              </div>
-              <div id="insider-buy-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;"></div>
-              <div id="insider-sell-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;display:none;"></div>
-              <div style="display:flex;justify-content:space-between;padding:8px 4px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:#666;">
-                <span>資料來源: 公開資訊觀測站</span>
-                <span id="insider-footer-date"></span>
-              </div>
-            </div>
 
-            <!-- 處置股監控 -->
-            <div id="disposal-section" class="disposal-section">
-              <div class="disposal-header">
-                <div class="disposal-title-row">
-                  <span class="disposal-icon">🚨</span>
-                  <span class="disposal-title">處置股監控</span>
-                  <span id="disposal-count" class="disposal-badge">--</span>
-                </div>
-                <div class="disposal-actions">
-                  <span id="disposal-updated" class="disposal-updated"></span>
-                  <a href="https://attstock.tw/risk" target="_blank" rel="noopener" class="disposal-link-btn">
-                    處置大師 ↗
-                  </a>
-                </div>
-              </div>
-              <div id="disposal-alerts" class="disposal-alerts" style="display:none;">
-                <div class="alert-banner">
-                  <span class="alert-icon">⚠️</span>
-                  <span class="alert-text">觀察名單中有股票被處置或列為注意股</span>
-                </div>
-                <div id="alert-list" class="alert-list"></div>
-              </div>
-              <div class="disposal-grid">
-                <div class="disposal-card disposal-card-release">
-                  <div class="card-label">📅 即將出關</div>
-                  <div id="release-list" class="disposal-list">
-                    <div class="loading-placeholder">載入中...</div>
-                  </div>
-                </div>
-                <div class="disposal-card disposal-card-active">
-                  <div class="card-label">🔒 處置中</div>
-                  <div id="active-list" class="disposal-list">
-                    <div class="loading-placeholder">載入中...</div>
-                  </div>
-                </div>
-              </div>
-              <div class="disposal-quick-links">
-                <a href="https://attstock.tw/risk" target="_blank" class="dqlink dqlink-risk">風險股預測</a>
-                <a href="https://www.twse.com.tw/zh/announcement/punish.html" target="_blank" class="dqlink dqlink-twse">證交所公告</a>
-                <a href="https://www.tpex.org.tw/web/bulletin/disposal/disposal_result.php?l=zh-tw" target="_blank" class="dqlink dqlink-tpex">櫃買中心公告</a>
-                <a href="https://www.twse.com.tw/zh/announcement/notice.html" target="_blank" class="dqlink dqlink-notice">注意股公告</a>
-              </div>
-            </div>
 
         <div id="mainContent" style="display: none;">
             <!-- 散戶對決區塊 -->
-            
+
                     &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
         <div class="watchlist-section" id="watchlist-section">
             <div class="watchlist-header">
@@ -3844,7 +3777,7 @@
                                 <p>Retail Investors</p>
                             </div>
                         </div>
-                        
+
                         <div class="battle-gauge">
                             <div class="gauge-visual">
                                 <svg class="gauge-circle" viewBox="0 0 120 120">
@@ -3857,11 +3790,11 @@
                                     <div class="gauge-label">多空比</div>
                                 </div>
                             </div>
-                            
+
                             <div class="battle-info">
                                 <div id="retail-sentiment" class="battle-sentiment">--</div>
                                 <div id="retail-signal" class="battle-signal">--</div>
-                                
+
                                 <div class="battle-positions">
                                     <div class="position-row">
                                         <span class="position-label">多單</span>
@@ -3878,7 +3811,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="battle-advice">
                             <div class="advice-icon">💡</div>
                             <div id="retail-advice" class="advice-text">等待數據...</div>
@@ -3900,7 +3833,7 @@
                                 <p>Institutional Investors</p>
                             </div>
                         </div>
-                        
+
                         <div class="battle-gauge">
                             <div class="gauge-visual">
                                 <svg class="gauge-circle" viewBox="0 0 120 120">
@@ -3913,7 +3846,7 @@
                                     <div class="gauge-label">多空比</div>
                                 </div>
                             </div>
-                            
+
                             <div class="battle-info">
                                 <div class="battle-positions">
                                     <div class="position-row">
@@ -3937,12 +3870,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 逆向指標說明 -->
                 <div class="inverse-indicator-note">
                     <div class="note-icon">⚠️</div>
                     <div class="note-content">
-                        <strong>逆向指標:</strong> 
+                        <strong>逆向指標:</strong>
                         散戶多空比 > 1.5 表示散戶過度樂觀,可能是高點訊號;
                         散戶多空比 < 0.6 表示散戶過度悲觀,可能是低點機會
                     </div>
@@ -6749,6 +6682,77 @@ function initMacdModal() {
                     <tr><td colspan="5" class="empty-state">載入中...</td></tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+
+
+    <!-- 處置股監控 -->
+    <div id="disposal-section" class="disposal-section">
+        <div class="disposal-header">
+            <div class="disposal-title-row">
+                <span class="disposal-icon">🚨</span>
+                <span class="disposal-title">處置股監控</span>
+                <span id="disposal-count" class="disposal-badge">--</span>
+            </div>
+            <div class="disposal-actions">
+                <span id="disposal-updated" class="disposal-updated"></span>
+                <a href="https://attstock.tw/risk" target="_blank" rel="noopener" class="disposal-link-btn">
+                    處置大師 ↗
+                </a>
+            </div>
+        </div>
+        <div id="disposal-alerts" class="disposal-alerts" style="display:none;">
+            <div class="alert-banner">
+                <span class="alert-icon">⚠️</span>
+                <span class="alert-text">觀察名單中有股票被處置或列為注意股</span>
+            </div>
+            <div id="alert-list" class="alert-list"></div>
+        </div>
+        <div class="disposal-grid">
+            <div class="disposal-card disposal-card-release">
+                <div class="card-label">📅 即將出關</div>
+                <div id="release-list" class="disposal-list">
+                    <div class="loading-placeholder">載入中...</div>
+                </div>
+            </div>
+            <div class="disposal-card disposal-card-active">
+                <div class="card-label">🔒 處置中</div>
+                <div id="active-list" class="disposal-list">
+                    <div class="loading-placeholder">載入中...</div>
+                </div>
+            </div>
+        </div>
+        <div class="disposal-quick-links">
+            <a href="https://attstock.tw/risk" target="_blank" class="dqlink dqlink-risk">風險股預測</a>
+            <a href="https://www.twse.com.tw/zh/announcement/punish.html" target="_blank" class="dqlink dqlink-twse">證交所公告</a>
+            <a href="https://www.tpex.org.tw/web/bulletin/disposal/disposal_result.php?l=zh-tw" target="_blank" class="dqlink dqlink-tpex">櫃買中心公告</a>
+            <a href="https://www.twse.com.tw/zh/announcement/notice.html" target="_blank" class="dqlink dqlink-notice">注意股公告</a>
+        </div>
+    </div>
+
+    <!-- 內部人持股異動 -->
+    <div id="insider-section" class="disposal-section" style="margin-bottom:16px;">
+        <div class="disposal-header">
+            <div class="disposal-title-row">
+                <span class="disposal-icon">🏛️</span>
+                <span class="disposal-title">內部人持股異動</span>
+                <span id="insider-count" class="disposal-badge">--</span>
+            </div>
+            <div class="disposal-actions">
+                <span id="insider-updated" class="disposal-updated"></span>
+                <span id="insider-month" style="color:#888;font-size:12px;"></span>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:10px;padding:0 4px;">
+            <button class="ctrl-btn" id="insider-tab-buy" onclick="switchInsiderTab('buy')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,82,82,0.4);background:rgba(255,82,82,0.12);color:#ff5252;cursor:pointer;font-size:12px;">🔴 買超</button>
+            <button class="ctrl-btn" id="insider-tab-sell" onclick="switchInsiderTab('sell')" style="padding:4px 14px;border-radius:16px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#aaa;cursor:pointer;font-size:12px;">🟢 賣超</button>
+        </div>
+        <div id="insider-buy-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;"></div>
+        <div id="insider-sell-panel" class="disposal-list" style="max-height:320px;overflow-y:auto;display:none;"></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 4px 0;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:#666;">
+            <span>資料來源: 公開資訊觀測站</span>
+            <span id="insider-footer-date"></span>
         </div>
     </div>
 
