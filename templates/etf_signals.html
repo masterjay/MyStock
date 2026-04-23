@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETF 共識訊號 | MyStock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0e14;--bg2:#12151f;--bg3:#1a1e2e;--border:#252a3d;
+    --accent:#4ade80;--accent2:#f87171;--accent3:#60a5fa;
+    --accent4:#fbbf24;
+    --text:#e2e8f0;--muted:#64748b;
+    --mono:'IBM Plex Mono',monospace;--sans:'Noto Sans TC',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;}
+  header{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .header-inner{max-width:1600px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;gap:16px;}
+  .back-btn{display:flex;align-items:center;gap:6px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:12px;transition:color .2s;}
+  .back-btn:hover{color:var(--accent3);}
+  .header-title{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;}
+  .header-badge{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:8px;}
+  .header-date{font-family:var(--mono);font-size:11px;color:var(--muted);padding:3px 10px;border:1px solid var(--border);border-radius:4px;margin-left:auto;}
+  .container{max-width:1600px;margin:0 auto;padding:24px 40px 60px;}
+
+  .intro{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:24px;font-size:12px;color:var(--muted);line-height:1.7;}
+  .intro strong{color:var(--accent3);font-family:var(--mono);font-weight:500;}
+
+  .stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;}
+  .stat-chip{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 16px;min-width:130px;}
+  .stat-chip .sv{font-size:20px;font-weight:600;display:block;margin-bottom:2px;font-family:var(--mono);}
+  .stat-chip .sk{color:var(--muted);font-size:11px;}
+  .stat-chip.new .sv{color:var(--accent4);}
+  .stat-chip.buy .sv{color:var(--accent2);}
+  .stat-chip.sell .sv{color:var(--accent);}
+
+  .section{margin-bottom:36px;}
+  .section-header{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .section-icon{font-size:18px;}
+  .section-title{font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+  .section-sub{font-size:11px;color:var(--muted);font-family:var(--sans);}
+  .section-count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);}
+
+  .sig-new .section-title{color:var(--accent4);}
+  .sig-buy .section-title{color:var(--accent2);}
+  .sig-sell .section-title{color:var(--accent);}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .15s;animation:fadeUp .35s ease both;}
+  .card:hover{transform:translateY(-2px);}
+  .card.new{border-left:3px solid var(--accent4);}
+  .card.new:hover{border-color:var(--accent4);}
+  .card.buy{border-left:3px solid var(--accent2);}
+  .card.buy:hover{border-color:var(--accent2);}
+  .card.sell{border-left:3px solid var(--accent);}
+  .card.sell:hover{border-color:var(--accent);}
+
+  .c-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .c-stock{display:flex;align-items:baseline;gap:8px;}
+  .c-name{font-size:15px;font-weight:500;color:var(--text);}
+  .c-code{font-family:var(--mono);font-size:11px;color:var(--accent3);text-decoration:none;background:var(--bg3);padding:2px 7px;border-radius:3px;}
+  .c-code:hover{background:var(--border);}
+  .c-badge{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:3px;font-weight:600;letter-spacing:.05em;white-space:nowrap;}
+  .c-badge.new{background:rgba(251,191,36,.15);color:var(--accent4);border:1px solid rgba(251,191,36,.3);}
+  .c-badge.buy{background:rgba(248,113,113,.15);color:var(--accent2);border:1px solid rgba(248,113,113,.3);}
+  .c-badge.sell{background:rgba(74,222,128,.15);color:var(--accent);border:1px solid rgba(74,222,128,.3);}
+
+  .c-highlight{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--bg3);border-radius:5px;}
+  .c-highlight .label{font-size:10px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;}
+  .c-highlight .value{font-family:var(--mono);font-size:14px;font-weight:600;}
+  .c-highlight .value.pos{color:var(--accent2);}
+  .c-highlight .value.neg{color:var(--accent);}
+
+  .c-etfs{display:flex;flex-wrap:wrap;gap:4px;}
+  .etf-tag{font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);color:var(--accent3);border:1px solid var(--border);}
+
+  .c-details{display:none;margin-top:4px;padding:8px 10px;background:var(--bg3);border-radius:5px;font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .c-details.show{display:block;}
+  .c-details table{width:100%;border-collapse:collapse;}
+  .c-details th,.c-details td{text-align:right;padding:3px 4px;}
+  .c-details th{font-weight:500;color:var(--muted);font-size:10px;border-bottom:1px solid var(--border);}
+  .c-details td:first-child,.c-details th:first-child{text-align:left;}
+  .c-details tr td.pos{color:var(--accent2);}
+  .c-details tr td.neg{color:var(--accent);}
+
+  .c-toggle{font-size:10px;color:var(--muted);cursor:pointer;font-family:var(--mono);text-align:center;padding:4px;border-top:1px dashed var(--border);}
+  .c-toggle:hover{color:var(--accent3);}
+
+  .empty{text-align:center;padding:30px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;background:var(--bg2);border:1px dashed var(--border);border-radius:8px;}
+  .loading{text-align:center;padding:60px 20px;color:var(--muted);font-family:var(--mono);font-size:12px;}
+  .spinner{width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--accent3);border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a class="back-btn" href="/etf/">← 返回 ETF 列表</a>
+    <span class="header-title">📊 ETF 共識訊號</span>
+    <span class="header-badge">主動型 ETF 共識監控</span>
+    <span class="header-date" id="dataDate">載入中…</span>
+  </div>
+</header>
+<div class="container">
+
+  <div class="intro">
+    追蹤 <strong>4 檔主動型 ETF</strong>（00980A、00981A、00991A、00992A）每日持股異動，從中找出 3 類訊號：
+    <strong>🔥 新建倉</strong>（經理人首次布局）、<strong>📈 強共識加碼</strong>（3+ 檔同日加碼）、
+    <strong>⚠️ 共識減碼</strong>（3+ 檔同日減碼）。此為選股濾網，進出場請依你的 K 線結構/關鍵區間策略。
+  </div>
+
+  <div id="loadingArea" class="loading"><div class="spinner"></div>載入中…</div>
+  <div id="contentArea" style="display:none;">
+    <div class="stats-row" id="statsRow"></div>
+
+    <div class="section sig-new">
+      <div class="section-header">
+        <span class="section-icon">🔥</span>
+        <span class="section-title">新建倉</span>
+        <span class="section-sub">某 ETF 今日首次持有（shares: 0 → N）</span>
+        <span class="section-count" id="newCount"></span>
+      </div>
+      <div id="newCards"></div>
+    </div>
+
+    <div class="section sig-buy">
+      <div class="section-header">
+        <span class="section-icon">📈</span>
+        <span class="section-title">強共識加碼</span>
+        <span class="section-sub">3+ 檔主動型 ETF 同日加碼同一股</span>
+        <span class="section-count" id="buyCount"></span>
+      </div>
+      <div id="buyCards"></div>
+    </div>
+
+    <div class="section sig-sell">
+      <div class="section-header">
+        <span class="section-icon">⚠️</span>
+        <span class="section-title">共識減碼</span>
+        <span class="section-sub">3+ 檔主動型 ETF 同日減碼，若持倉請留意</span>
+        <span class="section-count" id="sellCount"></span>
+      </div>
+      <div id="sellCards"></div>
+    </div>
+  </div>
+</div>
+<script>
+function yahooLink(code){
+  return 'https://tw.stock.yahoo.com/quote/'+code+'.TW/technical-analysis#main-1-QuoteTabs-Proxy';
+}
+function fmtNum(n){return Number(n).toLocaleString();}
+function fmtDelta(n){var sign=n>=0?'+':'';return sign+Number(n).toLocaleString();}
+
+async function loadSignals(){
+  try{
+    const r = await fetch('/api/etf/daily_signals');
+    const d = await r.json();
+    if(d.error && !d.signals){
+      document.getElementById('loadingArea').innerHTML = '<div class="empty">⚠️ '+d.error+'</div>';
+      return;
+    }
+    render(d);
+  }catch(e){
+    document.getElementById('loadingArea').innerHTML = '<div class="empty">⚠️ API 連線失敗: '+e.message+'</div>';
+  }
+}
+
+function render(d){
+  document.getElementById('dataDate').textContent = (d.date_old||'—')+' → '+(d.date_new||'—');
+  const s = d.signals.summary;
+
+  // 頂部統計
+  document.getElementById('statsRow').innerHTML =
+    '<div class="stat-chip new"><span class="sv">'+s.new_positions_count+'</span><span class="sk">🔥 新建倉</span></div>'+
+    '<div class="stat-chip buy"><span class="sv">'+s.consensus_buy_count+'</span><span class="sk">📈 強共識加碼</span></div>'+
+    '<div class="stat-chip sell"><span class="sv">'+s.consensus_sell_count+'</span><span class="sk">⚠️ 共識減碼</span></div>'+
+    '<div class="stat-chip"><span class="sv" style="font-size:13px;padding-top:4px;color:var(--accent3);">'+d.active_etfs.join(' · ')+'</span><span class="sk">監控 ETF</span></div>';
+
+  // 新建倉
+  document.getElementById('newCount').textContent = s.new_positions_count + ' 檔';
+  renderNewPositions(d.signals.new_positions);
+
+  // 加碼
+  document.getElementById('buyCount').textContent = s.consensus_buy_count + ' 檔';
+  renderConsensus(d.signals.consensus_buy, 'buyCards', 'buy');
+
+  // 減碼
+  document.getElementById('sellCount').textContent = s.consensus_sell_count + ' 檔';
+  renderConsensus(d.signals.consensus_sell, 'sellCards', 'sell');
+
+  document.getElementById('loadingArea').style.display='none';
+  document.getElementById('contentArea').style.display='';
+}
+
+function renderNewPositions(items){
+  if(!items||items.length===0){
+    document.getElementById('newCards').innerHTML = '<div class="empty">今日無新建倉訊號</div>';
+    return;
+  }
+  const html = items.map((it,i) =>
+    '<div class="card new" style="animation-delay:'+(i*0.04)+'s">'+
+      '<div class="c-top">'+
+        '<div class="c-stock">'+
+          '<span class="c-name">'+it.stock_name+'</span>'+
+          '<a class="c-code" href="'+yahooLink(it.stock_code)+'" target="_blank" rel="noopener">'+it.stock_code+'</a>'+
+        '</div>'+
+        '<span class="c-badge new">NEW</span>'+
+      '</div>'+
+      '<div class="c-highlight">'+
+        '<span class="label">'+it.etf+' 首次建倉</span>'+
+        '<span class="value pos">'+fmtNum(it.shares_new)+' 股</span>'+
+      '</div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:var(--mono);">'+
+        '<span>占該 ETF 比例</span><span>'+(it.ratio_new||0).toFixed(2)+'%</span>'+
+      '</div>'+
+    '</div>'
+  ).join('');
+  document.getElementById('newCards').innerHTML = '<div class="cards">'+html+'</div>';
+}
+
+function renderConsensus(items, containerId, type){
+  if(!items||items.length===0){
+    document.getElementById(containerId).innerHTML = '<div class="empty">今日無此訊號</div>';
+    return;
+  }
+  const html = items.map((it,i) => {
+    const sign = it.total_delta>=0?'pos':'neg';
+    const etfTags = it.etfs.map(e=>'<span class="etf-tag">'+e+'</span>').join('');
+    const detailRows = it.details.map(dt => {
+      const dSign = dt.delta>0?'pos':'neg';
+      return '<tr><td>'+dt.etf+'</td>'+
+        '<td class="'+dSign+'">'+fmtDelta(dt.delta)+'</td>'+
+        '<td>'+fmtNum(dt.shares_old)+' → '+fmtNum(dt.shares_new)+'</td>'+
+        '<td>'+dt.ratio_new.toFixed(2)+'%</td></tr>';
+    }).join('');
+    return '<div class="card '+type+'" style="animation-delay:'+(i*0.04)+'s">'+
+      '<div class="c-top">'+
+        '<div class="c-stock">'+
+          '<span class="c-name">'+it.stock_name+'</span>'+
+          '<a class="c-code" href="'+yahooLink(it.stock_code)+'" target="_blank" rel="noopener">'+it.stock_code+'</a>'+
+        '</div>'+
+        '<span class="c-badge '+type+'">'+it.etf_count+'/4 共識</span>'+
+      '</div>'+
+      '<div class="c-highlight">'+
+        '<span class="label">合計異動</span>'+
+        '<span class="value '+sign+'">'+fmtDelta(it.total_delta)+' 股</span>'+
+      '</div>'+
+      '<div class="c-etfs">'+etfTags+'</div>'+
+      '<div class="c-toggle" onclick="this.nextElementSibling.classList.toggle(\'show\');this.textContent=this.nextElementSibling.classList.contains(\'show\')?\'▲ 收起明細\':\'▼ 展開明細\'">▼ 展開明細</div>'+
+      '<div class="c-details">'+
+        '<table><thead><tr><th>ETF</th><th>異動</th><th>前 → 後</th><th>占比</th></tr></thead>'+
+        '<tbody>'+detailRows+'</tbody></table>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  document.getElementById(containerId).innerHTML = '<div class="cards">'+html+'</div>';
+}
+
+loadSignals();
+</script>
+</body>
+</html>

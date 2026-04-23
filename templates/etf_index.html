@@ -62,7 +62,48 @@
   .card-arrow{transition:transform .2s;}
   .etf-card:hover .card-arrow{transform:translateX(4px);}
 
-  .skeleton{
+  /* ===== 共識訊號橫幅 ===== */
+  .signals-banner{
+    background:linear-gradient(135deg, var(--bg2) 0%, #1a1e2e 100%);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 22px;
+    margin-bottom:20px;
+    text-decoration:none;color:var(--text);
+    display:block;
+    transition:border-color .2s,transform .15s,box-shadow .2s;
+    position:relative;overflow:hidden;
+  }
+  .signals-banner::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg, #fbbf24 0%, #f87171 50%, #4ade80 100%);
+  }
+  .signals-banner:hover{
+    border-color:var(--accent3);
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(96,165,250,.15);
+  }
+  .sb-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:12px;padding-bottom:10px;
+    border-bottom:1px solid var(--border);
+  }
+  .sb-title{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent3);}
+  .sb-date{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .sb-stats{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  .sb-stat{display:flex;align-items:baseline;gap:6px;font-family:var(--mono);font-size:12px;}
+  .sb-stat .count{font-size:18px;font-weight:600;}
+  .sb-stat .label{color:var(--muted);}
+  .sb-stat.new .count{color:#fbbf24;}
+  .sb-stat.buy .count{color:var(--accent2);}
+  .sb-stat.sell .count{color:var(--accent);}
+  .sb-preview{flex:1;color:var(--muted);font-size:12px;text-align:right;padding-left:12px;}
+  .sb-preview .stock{color:var(--text);margin:0 4px;}
+  .sb-preview .arrow{color:var(--accent3);margin-left:8px;transition:transform .2s;}
+  .signals-banner:hover .sb-preview .arrow{transform:translateX(4px);}
+  .sb-loading{color:var(--muted);font-family:var(--mono);font-size:11px;}
+
+    .skeleton{
     background:linear-gradient(90deg,var(--bg3) 25%,var(--border) 50%,var(--bg3) 75%);
     background-size:200% 100%;
     animation:shimmer 1.5s infinite;
@@ -81,6 +122,18 @@
   </div>
 </header>
 <div class="container">
+  <a href="/etf/signals" class="signals-banner" id="signalsBanner">
+    <div class="sb-header">
+      <span class="sb-title">📊 今日跨 ETF 共識訊號</span>
+      <span class="sb-date" id="sbDate">載入中…</span>
+    </div>
+    <div class="sb-stats">
+      <div class="sb-stat new"><span class="count" id="sbNew">–</span><span class="label">🔥 新建倉</span></div>
+      <div class="sb-stat buy"><span class="count" id="sbBuy">–</span><span class="label">📈 強共識加碼</span></div>
+      <div class="sb-stat sell"><span class="count" id="sbSell">–</span><span class="label">⚠️ 共識減碼</span></div>
+      <div class="sb-preview" id="sbPreview"><span class="sb-loading">載入訊號中…</span></div>
+    </div>
+  </a>
   <p class="page-desc">點擊卡片查看完整持股明細與異動紀錄</p>
   <div class="etf-grid" id="etfGrid"></div>
 </div>
@@ -160,6 +213,43 @@ async function render() {
 }
 
 render();
+
+async function loadSignalsBanner(){
+  try{
+    const r = await fetch('/api/etf/daily_signals');
+    const d = await r.json();
+    if(!d.signals){
+      document.getElementById('sbPreview').innerHTML = '<span class="sb-loading">無法載入</span><span class="arrow">→</span>';
+      return;
+    }
+    const s = d.signals.summary;
+    document.getElementById('sbDate').textContent = (d.date_old||'—')+' → '+(d.date_new||'—');
+    document.getElementById('sbNew').textContent = s.new_positions_count;
+    document.getElementById('sbBuy').textContent = s.consensus_buy_count;
+    document.getElementById('sbSell').textContent = s.consensus_sell_count;
+
+    // 預覽最重要的訊號：優先顯示強共識加碼，其次新建倉
+    let preview = [];
+    if(d.signals.consensus_buy && d.signals.consensus_buy.length > 0){
+      preview = d.signals.consensus_buy.slice(0,3).map(it =>
+        `<span class="stock">${it.stock_name}(${it.stock_code})</span>`
+      );
+    } else if(d.signals.new_positions && d.signals.new_positions.length > 0){
+      preview = d.signals.new_positions.slice(0,3).map(it =>
+        `<span class="stock">${it.stock_name}(${it.stock_code})</span>`
+      );
+    }
+
+    const previewHtml = preview.length > 0
+      ? '最新訊號: ' + preview.join(' · ') + '<span class="arrow">查看完整 →</span>'
+      : '今日無訊號 <span class="arrow">→</span>';
+
+    document.getElementById('sbPreview').innerHTML = previewHtml;
+  }catch(e){
+    document.getElementById('sbPreview').innerHTML = '<span class="sb-loading">載入失敗</span><span class="arrow">→</span>';
+  }
+}
+loadSignalsBanner();
 </script>
 </body>
 </html>

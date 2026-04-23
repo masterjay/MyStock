@@ -47,6 +47,9 @@ class WatchlistHandler(BaseHTTPRequestHandler):
         if self.path == "/etf/" or self.path == "/etf":
             self._serve_etf_index()
             return
+        if self.path == "/etf/signals":
+            self._serve_etf_signals_page()
+            return
         if self.path.startswith("/etf/") and not self.path.startswith("/etf/api"):
             self._serve_etf_page()
             return
@@ -57,6 +60,9 @@ class WatchlistHandler(BaseHTTPRequestHandler):
         if self.path.startswith("/api/etf/") and self.path.endswith("/changes"):
             etf_code = self.path.split("/")[3].upper()
             self._handle_etf_changes(etf_code)
+            return
+        if self.path == "/api/etf/daily_signals" or self.path.startswith("/api/etf/daily_signals?"):
+            self._handle_etf_daily_signals()
             return
         if self.path != "/api/watchlist":
             self._set_headers(404)
@@ -199,6 +205,174 @@ class WatchlistHandler(BaseHTTPRequestHandler):
         except Exception as e:
             self._set_headers(500)
             self.wfile.write(json.dumps({'error': str(e)}).encode())
+
+    def _handle_etf_daily_signals(self):
+        """ETF 共識訊號 API：新建倉、強共識加碼、共識減碼"""
+        import sqlite3
+        ACTIVE_ETFS = ('00980A', '00981A', '00991A', '00992A')
+        CONSENSUS_THRESHOLD = 3
+        db_path = Path(__file__).parent.parent / 'data' / 'market_data.db'
+        try:
+            conn = sqlite3.connect(db_path)
+            conn.row_factory = sqlite3.Row
+            placeholders = ','.join('?' * len(ACTIVE_ETFS))
+
+            common_dates = conn.execute(
+                f"""
+                SELECT data_date, COUNT(DISTINCT etf_code) AS c
+                FROM etf_holdings_history
+                WHERE etf_code IN ({placeholders})
+                GROUP BY data_date
+                HAVING c >= 3
+                ORDER BY data_date DESC LIMIT 2
+                """,
+                ACTIVE_ETFS
+            ).fetchall()
+
+            if len(common_dates) < 2:
+                conn.close()
+                self._send_json({
+                    "error": "資料不足，至少需要兩個共同日期",
+                    "signals": {"new_positions": [], "consensus_buy": [], "consensus_sell": [],
+                                "summary": {"new_positions_count": 0, "consensus_buy_count": 0, "consensus_sell_count": 0}}
+                })
+                return
+
+            d_new = common_dates[0]['data_date']
+            d_old = common_dates[1]['data_date']
+
+            new_positions_rows = conn.execute(
+                f"""
+                SELECT n.etf_code, n.stock_code, n.stock_name,
+                       n.shares AS shares_new, n.ratio AS ratio_new
+                FROM etf_holdings_history n
+                LEFT JOIN etf_holdings_history o
+                  ON n.etf_code = o.etf_code
+                 AND n.stock_code = o.stock_code
+                 AND o.data_date = ?
+                WHERE n.data_date = ?
+                  AND n.etf_code IN ({placeholders})
+                  AND o.shares IS NULL
+                  AND n.shares > 0
+                ORDER BY n.ratio DESC
+                """,
+                (d_old, d_new, *ACTIVE_ETFS)
+            ).fetchall()
+
+            changes_rows = conn.execute(
+                f"""
+                SELECT n.etf_code, n.stock_code, n.stock_name,
+                       n.shares AS shares_new, COALESCE(o.shares, 0) AS shares_old,
+                       (n.shares - COALESCE(o.shares, 0)) AS delta,
+                       n.ratio AS ratio_new
+                FROM etf_holdings_history n
+                LEFT JOIN etf_holdings_history o
+                  ON n.etf_code = o.etf_code
+                 AND n.stock_code = o.stock_code
+                 AND o.data_date = ?
+                WHERE n.data_date = ?
+                  AND n.etf_code IN ({placeholders})
+                  AND (n.shares - COALESCE(o.shares, 0)) != 0
+                """,
+                (d_old, d_new, *ACTIVE_ETFS)
+            ).fetchall()
+
+            stock_groups = {}
+            for r in changes_rows:
+                code = r['stock_code']
+                if code not in stock_groups:
+                    stock_groups[code] = {
+                        'stock_name': r['stock_name'],
+                        'buy_etfs': [],
+                        'sell_etfs': [],
+                    }
+                entry = {
+                    'etf': r['etf_code'],
+                    'delta': r['delta'],
+                    'shares_old': r['shares_old'],
+                    'shares_new': r['shares_new'],
+                    'ratio_new': r['ratio_new'],
+                }
+                if r['delta'] > 0:
+                    stock_groups[code]['buy_etfs'].append(entry)
+                else:
+                    stock_groups[code]['sell_etfs'].append(entry)
+
+            consensus_buy = []
+            consensus_sell = []
+            for code, g in stock_groups.items():
+                if len(g['buy_etfs']) >= CONSENSUS_THRESHOLD:
+                    consensus_buy.append({
+                        'stock_code': code,
+                        'stock_name': g['stock_name'],
+                        'etf_count': len(g['buy_etfs']),
+                        'total_delta': sum(e['delta'] for e in g['buy_etfs']),
+                        'etfs': sorted([e['etf'] for e in g['buy_etfs']]),
+                        'details': g['buy_etfs'],
+                    })
+                if len(g['sell_etfs']) >= CONSENSUS_THRESHOLD:
+                    consensus_sell.append({
+                        'stock_code': code,
+                        'stock_name': g['stock_name'],
+                        'etf_count': len(g['sell_etfs']),
+                        'total_delta': sum(e['delta'] for e in g['sell_etfs']),
+                        'etfs': sorted([e['etf'] for e in g['sell_etfs']]),
+                        'details': g['sell_etfs'],
+                    })
+
+            consensus_buy.sort(key=lambda x: (-x['etf_count'], -x['total_delta']))
+            consensus_sell.sort(key=lambda x: (-x['etf_count'], x['total_delta']))
+
+            new_pos_list = [{
+                'stock_code': r['stock_code'],
+                'stock_name': r['stock_name'],
+                'etf': r['etf_code'],
+                'shares_new': r['shares_new'],
+                'ratio_new': r['ratio_new'],
+            } for r in new_positions_rows]
+
+            conn.close()
+            self._send_json({
+                'date_new': d_new,
+                'date_old': d_old,
+                'active_etfs': list(ACTIVE_ETFS),
+                'signals': {
+                    'new_positions': new_pos_list,
+                    'consensus_buy': consensus_buy,
+                    'consensus_sell': consensus_sell,
+                    'summary': {
+                        'new_positions_count': len(new_pos_list),
+                        'consensus_buy_count': len(consensus_buy),
+                        'consensus_sell_count': len(consensus_sell),
+                    },
+                },
+            })
+        except Exception as e:
+            import traceback
+            self._send_json({'error': str(e), 'trace': traceback.format_exc()}, status=500)
+
+    def _serve_etf_signals_page(self):
+        """提供 ETF 共識訊號儀表板頁面"""
+        template_path = Path(__file__).parent.parent / 'templates' / 'etf_signals.html'
+        if template_path.exists():
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.end_headers()
+            self.wfile.write(template_path.read_bytes())
+        else:
+            self.send_response(404)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.end_headers()
+            self.wfile.write('<h1>etf_signals.html 尚未建立</h1>'.encode('utf-8'))
+
+    def _send_json(self, data, status=200):
+        """統一 JSON 回傳"""
+        self.send_response(status)
+        self.send_header('Content-Type', 'application/json; charset=utf-8')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+
 
 if __name__ == '__main__':
     server = HTTPServer(('0.0.0.0', 5001), WatchlistHandler)
