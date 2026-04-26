@@ -30,3 +30,8 @@ templates/*.bak_*
 backend/data/*.json
 backend/data/*.db
 watchlist_notion.json
+
+# Anthropic API key
+.env
+ai_summary/__pycache__/
+**/__pycache__/

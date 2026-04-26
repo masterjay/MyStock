@@ -300,6 +300,18 @@ print("\n[補充] 00981A 持股爬蟲...")
 import subprocess
 subprocess.run(['python3', '/home/s0971417/MyStock/fetch_etf_holdings.py'], check=False)
 
+# 17. AI 大盤摘要
+print("\n[17/17] AI 大盤摘要生成...")
+try:
+    from ai_summary.generate_ai_summary import generate_and_save
+    result = generate_and_save()
+    if result:
+        print("  ✓ 完成")
+    else:
+        print("  ✗ 摘要生成失敗(資料不足或 API 異常)")
+except Exception as e:
+    print(f"  ✗ 錯誤: {e}")
+
 print(f"\n{'='*60}")
 print(f"✓ 所有數據更新完成!")
 print(f"執行時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
