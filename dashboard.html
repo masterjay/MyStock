@@ -5691,6 +5691,65 @@
 .dqlink-notice { color: var(--accent-orange); border-color: rgba(255,149,0,0.3); background: rgba(255,149,0,0.05); }
 .dqlink-notice:hover { background: rgba(255,149,0,0.15); }
 
+
+/* === AI Market Summary === */
+.ai-summary-card {
+    background: linear-gradient(135deg, #1a2235 0%, #1f2940 100%);
+    border: 1px solid rgba(99, 179, 237, 0.3);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.ai-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ai-summary-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #63b3ed;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ai-summary-meta {
+    font-size: 12px;
+    color: #8896a6;
+    font-family: 'JetBrains Mono', monospace;
+}
+.ai-summary-content {
+    color: #d6dde6;
+    font-size: 14px;
+    line-height: 1.75;
+}
+.ai-summary-content strong {
+    color: #ffd166;
+    font-weight: 600;
+}
+.ai-summary-content p {
+    margin: 8px 0;
+}
+.ai-summary-content p:first-child {
+    margin-top: 0;
+}
+.ai-summary-loading {
+    color: #8896a6;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+.ai-summary-error {
+    color: #f85149;
+    font-size: 13px;
+    text-align: center;
+    padding: 12px;
+}
+
 </style>
 </head>
 <body>
@@ -5745,7 +5804,23 @@
                 </div>
             </div>
         </div>
-
+        <!-- AI Market Summary -->
+        <div id="aiSummaryCard" class="ai-summary-card" style="display:none;">
+            <div class="ai-summary-header">
+                <div class="ai-summary-title">
+                    <span>🤖</span>
+                    <span>AI 大盤摘要</span>
+                </div>
+                <div class="ai-summary-meta">
+                    <span id="aiSummaryDate">--</span>
+                    <span style="margin: 0 6px;">·</span>
+                    <span id="aiSummaryGenerated">--</span>
+                </div>
+            </div>
+            <div class="ai-summary-content" id="aiSummaryContent">
+                <div class="ai-summary-loading">載入中...</div>
+            </div>
+        </div>
         <!-- Loading -->
         <div id="loadingScreen" class="loading">
             初始化系統
@@ -9655,6 +9730,52 @@ document.addEventListener('DOMContentLoaded', loadInsiderTrading);
 })();
 /* ===== 台指期結算日倒數 END ===== */
 </script>
+            <!-- AI 大盤摘要 -->
+            <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+            <script>
+                async function loadAiSummary() {
+                    const card = document.getElementById('aiSummaryCard');
+                    const contentEl = document.getElementById('aiSummaryContent');
+                    const dateEl = document.getElementById('aiSummaryDate');
+                    const generatedEl = document.getElementById('aiSummaryGenerated');
 
+                    try {
+                        const response = await fetch('./data/ai_summary.json?t=' + Date.now());
+                        if (!response.ok) {
+                            throw new Error('HTTP ' + response.status);
+                        }
+                        const data = await response.json();
+
+                        // 顯示卡片
+                        card.style.display = 'block';
+
+                        // 日期 + 生成時間
+                        dateEl.textContent = data.date || '';
+                        const gen = data.generated_at ? new Date(data.generated_at) : null;
+                        generatedEl.textContent = gen
+                            ? `Generated ${gen.toLocaleString('zh-TW', { hour: '2-digit', minute: '2-digit' })}`
+                            : '';
+
+                        // 渲染 markdown
+                        if (typeof marked !== 'undefined') {
+                            contentEl.innerHTML = marked.parse(data.summary || '');
+                        } else {
+                            // marked.js 沒載入時的 fallback:純文字 + 換行
+                            contentEl.innerHTML = (data.summary || '').replace(/\n/g, '<br>');
+                        }
+                    } catch (err) {
+                        console.warn('[AI Summary] 載入失敗:', err);
+                        // 載入失敗就直接隱藏卡片,不打擾使用者
+                        card.style.display = 'none';
+                    }
+                }
+
+                // 頁面載入後觸發
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', loadAiSummary);
+                } else {
+                    loadAiSummary();
+                }
+            </script>
 </body>
 </html>
