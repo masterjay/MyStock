@@ -3399,162 +3399,187 @@
 }
 
 /* ── 題材輪動雷達 ── */
-.theme-radar-section {
-    margin: 16px 0 24px;
+.theme-radar {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
 }
-.theme-radar-section .tr-header {
+.theme-radar .section-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
+    justify-content: space-between;
+    margin-bottom: 16px;
     flex-wrap: wrap;
+    gap: 8px;
 }
-.theme-radar-section .tr-title {
+.theme-radar .section-title {
     font-size: 18px;
-    font-weight: 500;
-    margin: 0;
+    font-weight: 700;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.theme-radar-section .tr-subtitle {
+.theme-radar .section-title .badge {
+    background: #1f6feb;
+    color: #fff;
     font-size: 12px;
-    color: #666;
-}
-.theme-radar-section .tr-stats {
-    margin-left: auto;
-    font-size: 12px;
-    color: #666;
-}
-.theme-radar-section .tr-table-wrap {
-    background: #fff;
-    border: 1px solid #e5e5e5;
+    padding: 2px 8px;
     border-radius: 12px;
-    overflow: hidden;
+    font-weight: 600;
 }
-.theme-radar-section table.tr-table {
+.theme-radar .section-subtitle { color: #8b949e; font-size: 13px; }
+.theme-radar .update-time { color: #484f58; font-size: 12px; }
+
+.theme-radar-table-wrap { overflow-x: auto; }
+.theme-radar-table {
     width: 100%;
-    font-size: 13px;
     border-collapse: collapse;
+    font-size: 13px;
 }
-.theme-radar-section .tr-table thead {
-    background: #f7f7f5;
-    font-size: 12px;
-    color: #666;
+.theme-radar-table th {
+    background: #161b22;
+    color: #8b949e;
+    padding: 8px 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid #21262d;
+    white-space: nowrap;
 }
-.theme-radar-section .tr-table th {
-    padding: 10px 8px;
-    font-weight: 500;
+.theme-radar-table th.left { text-align: left; }
+.theme-radar-table th.right { text-align: right; }
+
+.theme-radar-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #161b22;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.theme-radar-table tr.tr-row { cursor: pointer; transition: background 0.15s; }
+.theme-radar-table tr.tr-row:hover td { background: #161b22; }
+.theme-radar-table tr.tr-row.expanded td { background: #161b22; }
+
+.theme-radar-table .rank-col { color: #484f58; font-size: 12px; text-align: center; width: 32px; }
+.theme-radar-table .caret-col { width: 24px; text-align: center; }
+.theme-radar-table .theme-col {
+    color: #e6edf3;
+    font-weight: 600;
     text-align: left;
-    white-space: nowrap;
-}
-.theme-radar-section .tr-table th.right { text-align: right; }
-.theme-radar-section .tr-table th.center { text-align: center; }
-.theme-radar-section .tr-table tbody tr.tr-row {
-    border-top: 1px solid #eee;
-    cursor: pointer;
-    transition: background 0.1s;
-}
-.theme-radar-section .tr-table tbody tr.tr-row:hover {
-    background: #f9f9f7;
-}
-.theme-radar-section .tr-table tbody tr.tr-row.expanded {
-    background: #f9f9f7;
-}
-.theme-radar-section .tr-table td {
-    padding: 9px 8px;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-.theme-radar-section .tr-table td.right { text-align: right; }
-.theme-radar-section .tr-table td.center { text-align: center; }
-.theme-radar-section .tr-table td.theme-name {
-    font-weight: 500;
-    max-width: 140px;
+    max-width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.theme-radar-section .tr-caret {
+
+.tr-caret {
     display: inline-block;
-    width: 16px;
+    color: #484f58;
     font-size: 10px;
-    color: #999;
     transition: transform 0.2s;
 }
-.theme-radar-section .tr-row.expanded .tr-caret {
-    transform: rotate(90deg);
-}
-.theme-radar-section .tr-status-pill {
+.tr-row.expanded .tr-caret { transform: rotate(90deg); color: #58a6ff; }
+
+/* 狀態徽章 (深色配色) */
+.tr-status-pill {
     display: inline-block;
-    padding: 2px 8px;
-    border-radius: 6px;
+    padding: 3px 10px;
+    border-radius: 12px;
     font-size: 11px;
+    font-weight: 600;
     white-space: nowrap;
 }
-.theme-radar-section .tr-status-main { background: #fef0f0; color: #b03a3a; }
-.theme-radar-section .tr-status-warn { background: #fdf6e3; color: #8a6d1c; }
-.theme-radar-section .tr-status-catchup { background: #faeeda; color: #854f0b; }
-.theme-radar-section .tr-status-strong { background: #eaf6e8; color: #2d6f1c; }
-.theme-radar-section .tr-status-watch { background: #f1efeb; color: #666; }
-.theme-radar-section .tr-status-fade { background: #eaf1fb; color: #1c4f8a; }
-.theme-radar-section .tr-pct-strong-up { color: #c0392b; }
-.theme-radar-section .tr-pct-up { color: #2d8d4a; }
-.theme-radar-section .tr-pct-down { color: #b08020; }
-.theme-radar-section .tr-pct-strong-down { color: #1c5f9d; }
-.theme-radar-section tr.tr-detail-row {
-    display: none;
-    background: #fafaf8;
-}
-.theme-radar-section tr.tr-detail-row.show {
-    display: table-row;
-}
-.theme-radar-section .tr-detail-cell {
-    padding: 8px 16px 12px !important;
-}
-.theme-radar-section .tr-detail-table {
-    width: 100%;
-    font-size: 12px;
-    border-collapse: collapse;
-}
-.theme-radar-section .tr-detail-table td {
-    padding: 4px 6px;
-    border: none;
-}
-.theme-radar-section .tr-arrow-up { color: #2d8d4a; font-size: 10px; }
-.theme-radar-section .tr-arrow-down { color: #c0392b; font-size: 10px; }
-.theme-radar-section .tr-double-buy {
-    display: inline-block;
-    margin-left: 4px;
-    padding: 1px 5px;
-    background: #eaf1fb;
-    color: #1c4f8a;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 500;
-}
-.theme-radar-section .tr-stock-link {
-    color: #1c4f8a;
-    text-decoration: none;
-}
-.theme-radar-section .tr-stock-link:hover {
-    text-decoration: underline;
-}
-.theme-radar-section .tr-loading,
-.theme-radar-section .tr-error {
-    padding: 32px 16px;
+.tr-status-main    { background: rgba(248,81,73,0.15);  color: #f85149; border: 1px solid rgba(248,81,73,0.3); }
+.tr-status-warn    { background: rgba(210,153,34,0.15); color: #d29922; border: 1px solid rgba(210,153,34,0.3); }
+.tr-status-catchup { background: rgba(255,140,40,0.15); color: #ff9947; border: 1px solid rgba(255,140,40,0.3); }
+.tr-status-strong  { background: rgba(63,185,80,0.15);  color: #3fb950; border: 1px solid rgba(63,185,80,0.3); }
+.tr-status-watch   { background: rgba(139,148,158,0.1); color: #8b949e; border: 1px solid rgba(139,148,158,0.25); }
+.tr-status-fade    { background: rgba(56,139,253,0.12); color: #58a6ff; border: 1px solid rgba(56,139,253,0.3); }
+
+/* 漲跌幅顏色 (台股配色: 紅漲綠跌, 對齊主流股雷達 .change-up/.change-down) */
+.tr-pct-strong-up   { color: #ff7b72; font-weight: 600; text-align: right; }  /* >=+5% */
+.tr-pct-up          { color: #f85149; text-align: right; }                     /* 0~+5% */
+.tr-pct-down        { color: #3fb950; text-align: right; }                     /* -5~0% */
+.tr-pct-strong-down { color: #56d364; font-weight: 600; text-align: right; }   /* <=-5% */
+.tr-pct-flat        { color: #8b949e; text-align: right; }
+
+.tr-breadth-cell {
+    color: #8b949e;
     text-align: center;
-    color: #999;
-    font-size: 13px;
+    font-variant-numeric: tabular-nums;
 }
-.theme-radar-section .tr-error {
-    color: #b03a3a;
+.tr-foreign-cell {
+    color: #8b949e;
+    text-align: center;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+.tr-foreign-cell .has-double {
+    color: #d29922;
+    font-weight: 700;
 }
 
+/* 展開區塊 - 個股細節 */
+tr.tr-detail-row { display: none; }
+tr.tr-detail-row.show { display: table-row; }
+tr.tr-detail-row td {
+    background: #0a0d12 !important;
+    padding: 8px 16px 14px !important;
+    border-bottom: 1px solid #21262d;
+}
+.tr-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.tr-detail-table td {
+    padding: 5px 6px !important;
+    border: none !important;
+    background: transparent !important;
+    color: #8b949e;
+}
+.tr-detail-table tr:hover td { background: rgba(56,139,253,0.05) !important; }
+.tr-detail-table .tr-arrow-up   { color: #f85149; }
+.tr-detail-table .tr-arrow-down { color: #3fb950; }
+.tr-detail-table .stock-code-link {
+    color: #58a6ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.tr-detail-table .stock-code-link:hover { text-decoration: underline; color: #79c0ff; }
+.tr-detail-table .stock-name-cell { color: #e6edf3; }
+
+/* 雙買 / 法人徽章 */
+.tr-buy-tag {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+.tr-buy-double  { background: rgba(210,153,34,0.2); color: #d29922; border: 1px solid rgba(210,153,34,0.3); }
+.tr-buy-foreign { background: rgba(63,185,80,0.15); color: #3fb950; }
+.tr-buy-trust   { background: rgba(56,139,253,0.15); color: #58a6ff; }
+
+.tr-loading, .tr-error {
+    text-align: center;
+    color: #484f58;
+    padding: 40px;
+    font-size: 14px;
+}
+.tr-error { color: #f85149; }
+
 @media (max-width: 768px) {
-    .theme-radar-section .tr-table { font-size: 12px; }
-    .theme-radar-section .tr-table td,
-    .theme-radar-section .tr-table th { padding: 8px 6px; }
-    .theme-radar-section .tr-status-pill { font-size: 10px; padding: 1px 6px; }
-    /* 手機隱藏「加速」「寬度」欄,保留最關鍵資訊 */
-    .theme-radar-section .tr-col-accel,
-    .theme-radar-section .tr-col-breadth { display: none; }
+    .theme-radar { padding: 14px; }
+    .theme-radar-table { font-size: 12px; }
+    .theme-radar-table th,
+    .theme-radar-table td { padding: 7px 6px; }
+    .tr-status-pill { font-size: 10px; padding: 2px 7px; }
+    /* 手機隱藏「加速」「寬度」, 保留最關鍵 */
+    .theme-radar-table .tr-col-accel,
+    .theme-radar-table .tr-col-breadth { display: none; }
 }
 
 /* ── 主流股雷達 ── */
@@ -8851,25 +8876,30 @@ function initMacdModal() {
     </div>
 
     <!-- 題材輪動雷達 -->
-    <section class="theme-radar-section" id="themeRadarSection">
-        <div class="tr-header">
-            <h2 class="tr-title">📡 題材輪動雷達</h2>
-            <span class="tr-subtitle">點擊任一題材展開個股細節</span>
-            <span class="tr-stats" id="trStats"></span>
+    <section class="theme-radar" id="themeRadarSection">
+        <div class="section-header">
+            <div class="section-title">
+                📡 題材輪動雷達
+                <span class="badge" id="trBadge">—</span>
+            </div>
+            <div>
+                <span class="section-subtitle">點擊任一題材展開個股細節</span>
+                <span class="update-time" id="trUpdateTime" style="margin-left:12px;"></span>
+            </div>
         </div>
-        <div class="tr-table-wrap">
-            <table class="tr-table">
+        <div class="theme-radar-table-wrap">
+            <table class="theme-radar-table">
                 <thead>
                 <tr>
-                    <th style="width: 24px;"></th>
-                    <th style="width: 32px;" class="center">#</th>
-                    <th>題材</th>
-                    <th style="width: 100px;">狀態</th>
-                    <th class="right" style="width: 70px;">今日%</th>
-                    <th class="right" style="width: 70px;">5日%</th>
+                    <th class="caret-col"></th>
+                    <th style="width: 32px;">#</th>
+                    <th class="left">題材</th>
+                    <th style="width: 110px;">狀態</th>
+                    <th class="right" style="width: 75px;">今日%</th>
+                    <th class="right" style="width: 75px;">5日%</th>
                     <th class="right tr-col-accel" style="width: 70px;">加速</th>
-                    <th class="center tr-col-breadth" style="width: 65px;">寬度</th>
-                    <th class="center" style="width: 80px;" title="外資/投信/雙買 檔數">外/投/雙</th>
+                    <th class="tr-col-breadth" style="width: 65px;">寬度</th>
+                    <th style="width: 80px;" title="外資/投信/雙買 檔數">外/投/雙</th>
                 </tr>
                 </thead>
                 <tbody id="themeRadarBody">
@@ -8878,6 +8908,7 @@ function initMacdModal() {
             </table>
         </div>
     </section>
+
     <!-- 主流股雷達 -->
     <section class="mainstream-radar industry-heatmap-section" id="mainstream-radar-section" >
         <div class="section-header">
@@ -9419,7 +9450,8 @@ function initMacdModal() {
     // ── 題材輪動雷達 ──
     async function loadThemeRadar() {
         const tbody = document.getElementById('themeRadarBody');
-        const stats = document.getElementById('trStats');
+        const badge = document.getElementById('trBadge');
+        const ts = document.getElementById('trUpdateTime');
         if (!tbody) return;
 
         try {
@@ -9432,15 +9464,12 @@ function initMacdModal() {
                 return;
             }
 
-            // 顯示更新時間與來源
-            if (stats) {
-                const ts = data.updated_at ? data.updated_at.replace(/^\d{4}-/, '') : '';
-                stats.textContent = `${data.themes.length} 題材 · 更新 ${ts}`;
+            if (badge) badge.textContent = data.themes.length + ' 題材';
+            if (ts && data.updated_at) {
+                ts.textContent = '更新：' + data.updated_at;
             }
 
-            // 渲染每一列
-            const rows = data.themes.map((r, idx) => trRenderRow(r, idx)).join('');
-            tbody.innerHTML = rows;
+            tbody.innerHTML = data.themes.map((r, idx) => trRenderRow(r, idx)).join('');
         } catch (e) {
             console.error('題材輪動雷達載入失敗:', e);
             tbody.innerHTML = '<tr><td colspan="9" class="tr-error">載入失敗: ' + e.message + '</td></tr>';
@@ -9448,6 +9477,7 @@ function initMacdModal() {
     }
 
     function trStatusClass(status) {
+        if (!status) return { cls: 'tr-status-watch', emoji: '😐' };
         if (status.includes('主流')) return { cls: 'tr-status-main', emoji: '🔥' };
         if (status.includes('高位')) return { cls: 'tr-status-warn', emoji: '⚠️' };
         if (status.includes('接棒')) return { cls: 'tr-status-catchup', emoji: '🚀' };
@@ -9458,35 +9488,33 @@ function initMacdModal() {
 
     function trPctClass(v) {
         if (v >= 5) return 'tr-pct-strong-up';
-        if (v >= 0) return 'tr-pct-up';
+        if (v > 0) return 'tr-pct-up';
+        if (v === 0) return 'tr-pct-flat';
         if (v >= -5) return 'tr-pct-down';
         return 'tr-pct-strong-down';
     }
 
-    function trFmtPct(v) {
-        return (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
-    }
-
-    function trFmtNum(v) {
-        return (v >= 0 ? '+' : '') + v.toFixed(2);
-    }
+    function trFmtPct(v) { return (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; }
+    function trFmtNum(v) { return (v >= 0 ? '+' : '') + v.toFixed(2); }
 
     function trRenderRow(r, idx) {
+        // 從 status 字串提取純文字部分(去掉前面的 emoji)
         const statusText = (r.status || '').replace(/^[^\u4e00-\u9fff]+/, '').trim() || '觀望';
         const { cls, emoji } = trStatusClass(r.status || '');
         const hasDetail = (r.leaders && r.leaders.length) || (r.laggards && r.laggards.length);
+        const doubleHighlight = r.both_buy_count > 0 ? ' has-double' : '';
 
         const mainRow = `
         <tr class="tr-row" data-idx="${idx}" onclick="trToggle(${idx})">
-            <td class="center"><span class="tr-caret">${hasDetail ? '▶' : ''}</span></td>
-            <td class="center" style="color:#999;">${idx + 1}</td>
-            <td class="theme-name">${r.theme}</td>
+            <td class="caret-col"><span class="tr-caret">${hasDetail ? '▶' : ''}</span></td>
+            <td class="rank-col">${idx + 1}</td>
+            <td class="theme-col">${r.theme}</td>
             <td><span class="tr-status-pill ${cls}">${emoji} ${statusText}</span></td>
-            <td class="right ${trPctClass(r.avg_today_change_pct)}">${trFmtPct(r.avg_today_change_pct)}</td>
-            <td class="right ${trPctClass(r.avg_5d_change_pct)}">${trFmtPct(r.avg_5d_change_pct)}</td>
-            <td class="right tr-col-accel ${trPctClass(r.acceleration)}">${trFmtNum(r.acceleration)}</td>
-            <td class="center tr-col-breadth" style="color:#666;">${r.breadth_pct.toFixed(0)}%</td>
-            <td class="center" style="color:#666; font-size:11px;">${r.foreign_buy_count}/${r.trust_buy_count}/${r.both_buy_count}</td>
+            <td class="${trPctClass(r.avg_today_change_pct)}">${trFmtPct(r.avg_today_change_pct)}</td>
+            <td class="${trPctClass(r.avg_5d_change_pct)}">${trFmtPct(r.avg_5d_change_pct)}</td>
+            <td class="${trPctClass(r.acceleration)} tr-col-accel">${trFmtNum(r.acceleration)}</td>
+            <td class="tr-breadth-cell tr-col-breadth">${r.breadth_pct.toFixed(0)}%</td>
+            <td class="tr-foreign-cell"><span class="${doubleHighlight}">${r.foreign_buy_count}/${r.trust_buy_count}/${r.both_buy_count}</span></td>
         </tr>`;
 
         const leaders = (r.leaders || []).map(s => trRenderStockRow(s, 'up')).join('');
@@ -9494,11 +9522,8 @@ function initMacdModal() {
 
         const detailRow = hasDetail ? `
         <tr class="tr-detail-row" id="trDetail${idx}">
-            <td colspan="9" class="tr-detail-cell">
-                <table class="tr-detail-table">
-                    ${leaders}
-                    ${laggards}
-                </table>
+            <td colspan="9">
+                <table class="tr-detail-table">${leaders}${laggards}</table>
             </td>
         </tr>` : '';
 
@@ -9506,19 +9531,21 @@ function initMacdModal() {
     }
 
     function trRenderStockRow(s, dir) {
-        const arrow = dir === 'up' ? '<span class="tr-arrow-up">▲</span>' : '<span class="tr-arrow-down">▼</span>';
-        const doubleBuy = s.both_buy ? '<span class="tr-double-buy">★雙買</span>' :
-            s.foreign_buy && s.trust_buy ? '<span class="tr-double-buy">★雙買</span>' :
-                s.foreign_buy ? '<span class="tr-double-buy" style="background:#eaf6e8;color:#2d6f1c;">外資買</span>' :
-                    s.trust_buy ? '<span class="tr-double-buy" style="background:#faeeda;color:#854f0b;">投信買</span>' : '';
+        const arrow = dir === 'up'
+            ? '<span class="tr-arrow-up">▲</span>'
+            : '<span class="tr-arrow-down">▼</span>';
+        let buyTag = '';
+        if (s.both_buy) buyTag = '<span class="tr-buy-tag tr-buy-double">★ 雙買</span>';
+        else if (s.foreign_buy) buyTag = '<span class="tr-buy-tag tr-buy-foreign">外資買</span>';
+        else if (s.trust_buy) buyTag = '<span class="tr-buy-tag tr-buy-trust">投信買</span>';
         const url = `https://tw.stock.yahoo.com/quote/${s.code}/technical-analysis`;
         return `<tr>
         <td style="width:20px;">${arrow}</td>
-        <td style="width:50px;"><a href="${url}" target="_blank" class="tr-stock-link">${s.code}</a></td>
-        <td>${s.name || ''}${doubleBuy}</td>
-        <td class="right" style="width:60px;">${(s.price || 0).toFixed(2)}</td>
-        <td class="right ${trPctClass(s.change_pct)}" style="width:65px;">${trFmtPct(s.change_pct)}</td>
-        <td class="right ${trPctClass(s.five_day_pct)}" style="width:65px; color:#999;">5日 ${trFmtPct(s.five_day_pct)}</td>
+        <td style="width:55px;"><a href="${url}" target="_blank" class="stock-code-link">${s.code}</a></td>
+        <td class="stock-name-cell">${s.name || ''}${buyTag}</td>
+        <td style="text-align:right; width:65px; color:#e6edf3;">${(s.price || 0).toFixed(2)}</td>
+        <td class="${trPctClass(s.change_pct)}" style="width:70px;">${trFmtPct(s.change_pct)}</td>
+        <td class="${trPctClass(s.five_day_pct)}" style="width:90px; opacity:0.7;">5日 ${trFmtPct(s.five_day_pct)}</td>
     </tr>`;
     }
 
@@ -9526,7 +9553,6 @@ function initMacdModal() {
         const row = document.querySelector(`.tr-row[data-idx="${idx}"]`);
         const detail = document.getElementById(`trDetail${idx}`);
         if (!detail) return;
-        const isOpen = detail.classList.contains('show');
         detail.classList.toggle('show');
         row.classList.toggle('expanded');
     }
