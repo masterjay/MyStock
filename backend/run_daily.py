@@ -300,6 +300,23 @@ print("\n[補充] 00981A 持股爬蟲...")
 import subprocess
 subprocess.run(['python3', '/home/s0971417/MyStock/fetch_etf_holdings.py'], check=False)
 
+# 補充: 題材輪動雷達 (CMoney 來源, 每日盤後計算)
+print("\n[補充] 題材輪動雷達...")
+try:
+    result = subprocess.run(
+        ['python3', '/home/s0971417/MyStock/3v2_calc_theme_radar.py'],
+        capture_output=True, text=True, timeout=300,
+        cwd='/home/s0971417/MyStock'
+    )
+    if result.returncode == 0:
+        out = result.stdout.strip().split('\n')
+        print('\n'.join(out[-25:]))
+        print("  ✓ 完成")
+    else:
+        print(f"  ✗ 失敗: {result.stderr[:300]}")
+except Exception as e:
+    print(f"  ✗ 錯誤: {e}")
+
 # 17. AI 大盤摘要
 print("\n[17/17] AI 大盤摘要生成...")
 try:
