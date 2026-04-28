@@ -3405,6 +3405,8 @@
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 24px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 .theme-radar .section-header {
     display: flex;
@@ -3433,7 +3435,10 @@
 .theme-radar .section-subtitle { color: #8b949e; font-size: 13px; }
 .theme-radar .update-time { color: #484f58; font-size: 12px; }
 
-.theme-radar-table-wrap { overflow-x: auto; }
+.theme-radar-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
 .theme-radar-table {
     width: 100%;
     border-collapse: collapse;
@@ -3467,7 +3472,7 @@
     color: #e6edf3;
     font-weight: 600;
     text-align: left;
-    max-width: 160px;
+    max-width: 180px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -8892,14 +8897,14 @@ function initMacdModal() {
                 <thead>
                 <tr>
                     <th class="caret-col"></th>
-                    <th style="width: 32px;">#</th>
+                    <th>#</th>
                     <th class="left">題材</th>
-                    <th style="width: 110px;">狀態</th>
-                    <th class="right" style="width: 75px;">今日%</th>
-                    <th class="right" style="width: 75px;">5日%</th>
-                    <th class="right tr-col-accel" style="width: 70px;">加速</th>
-                    <th class="tr-col-breadth" style="width: 65px;">寬度</th>
-                    <th style="width: 80px;" title="外資/投信/雙買 檔數">外/投/雙</th>
+                    <th>狀態</th>
+                    <th class="right">今日%</th>
+                    <th class="right">5日%</th>
+                    <th class="right tr-col-accel">加速</th>
+                    <th class="tr-col-breadth">寬度</th>
+                    <th title="外資/投信/雙買 檔數">外/投/雙</th>
                 </tr>
                 </thead>
                 <tbody id="themeRadarBody">
