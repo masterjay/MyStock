@@ -1,37 +1,76 @@
-*.backup*
-__pycache__/
-*.pyc
+cd ~/MyStock
+
+# 如果已經有 .gitignore 先備份
+[ -f .gitignore ] && cp .gitignore .gitignore.bak_$(date +%Y%m%d_%H%M%S)
+
+# 寫入完整的 .gitignore
+cat > .gitignore << 'EOF'
+# ════════════════════════════════════════════════════
+# TSWE .gitignore - 嚴格模式
+# ════════════════════════════════════════════════════
+
+# ─── 資料檔（敏感、每日更新）─────────
+data/
+backend/data/
+*.json
+*.csv
+*.db
+*.sqlite
+*.sqlite3
+
+# 但允許這些 .json（如果有）
+!package.json
+!package-lock.json
+!tsconfig.json
+
+# ─── Logs / PIDs ─────────
 *.log
-deprecated/
-.idea/
-*.xml
-backend/.env
+*.pid
+logs/
+debug/
 
-# dashboard 自動備份
-*.bak_*
-
-# Python venv
-venv/
-
-# Trading day cache
-cache/
-
-# Single .bak files
-*.bak
-
-# 本地備份檔（覆蓋時產生的）
+# ─── 備份檔 ─────────
 *.bak
 *.bak_*
 *.backup
-*.backup-*
-templates/*.bak_*
+*.OLD*
+*.OLD_DELETE_LATER
 
-# 每日自動更新的資料檔（cron 產生，不該追蹤）
-backend/data/*.json
-backend/data/*.db
-watchlist_notion.json
+# ─── Python ─────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
 
-# Anthropic API key
+# ─── 機密設定 ─────────
 .env
-ai_summary/__pycache__/
-**/__pycache__/
+.env.*
+config/
+secrets.py
+*_secret.py
+*_credentials.py
+api_keys.txt
+
+# ─── IDE / 系統 ─────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── 個人筆記 / 暫存 ─────────
+notes/
+TODO.md
+*.draft.md
+EOF
+
+echo "✓ .gitignore 已建立"
+echo ""
+echo "=== .gitignore 預覽 ==="
+cat .gitignore
