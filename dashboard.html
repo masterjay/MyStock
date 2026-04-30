@@ -3587,6 +3587,153 @@ tr.tr-detail-row td {
     .theme-radar-table .tr-col-breadth { display: none; }
 }
 
+/* ───── 新高雷達 ───── */
+.new-high-radar {
+    background: linear-gradient(135deg, #fff8e7 0%, #fef0d4 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #ff9800;
+}
+.new-high-radar .radar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.new-high-radar h2 {
+    margin: 0;
+    color: #e65100;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.new-high-radar .meta {
+    font-size: 13px;
+    color: #666;
+}
+.new-high-radar .meta span {
+    margin-right: 10px;
+}
+.new-high-radar .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.new-high-radar .filter-btn {
+    padding: 5px 12px;
+    border: 1px solid #ff9800;
+    background: white;
+    color: #e65100;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+.new-high-radar .filter-btn:hover { background: #fff3e0; }
+.new-high-radar .filter-btn.active {
+    background: #ff9800;
+    color: white;
+}
+.new-high-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 13px;
+}
+.new-high-table th {
+    background: #ffb74d;
+    color: white;
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.new-high-table td {
+    padding: 7px 6px;
+    text-align: center;
+    border-bottom: 1px solid #fff3e0;
+}
+.new-high-table tr:hover { background: #fffaf0; }
+.new-high-table .stock-code a {
+    color: #1976d2;
+    font-weight: 600;
+    text-decoration: none;
+}
+.new-high-table .stock-code a:hover { text-decoration: underline; }
+.new-high-table .stock-name {
+    text-align: left;
+    font-weight: 500;
+    color: #333;
+}
+.new-high-table .level-cell {
+    font-size: 11px;
+    font-weight: 700;
+}
+.new-high-table .level-yes { color: #d32f2f; }
+.new-high-table .level-no  { color: #ccc; }
+.new-high-table .strength-stars {
+    color: #ff6f00;
+    font-size: 14px;
+    letter-spacing: -2px;
+}
+.new-high-table .vol-breakout {
+    background: #ffebee;
+    color: #c62828;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+}
+.new-high-table .vol-normal {
+    color: #999;
+    font-size: 11px;
+}
+.new-high-table .all-time-high {
+    background: linear-gradient(90deg, #ffd700, #ff8c00);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    animation: pulse-gold 2s infinite;
+}
+@keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,140,0,0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(255,140,0,0); }
+}
+.new-high-empty {
+    text-align: center;
+    padding: 30px;
+    color: #999;
+    font-size: 14px;
+}
+.new-high-summary {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.new-high-summary .stat {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    border: 1px solid #ffe0b2;
+}
+.new-high-summary .stat strong {
+    color: #e65100;
+    font-size: 16px;
+    margin-right: 4px;
+}
+
 /* ── 主流股雷達 ── */
 .mainstream-radar {
     background: #0d1117;
@@ -8914,6 +9061,55 @@ function initMacdModal() {
         </div>
     </section>
 
+    <!-- ───── HTML 區塊（插在主流股雷達 div 之後） ───── -->
+    <div class="new-high-radar" id="new-high-radar">
+        <div class="radar-header">
+            <h2>🚀 新高雷達</h2>
+            <div class="meta">
+                <span id="nh-updated">載入中…</span>
+                <span id="nh-pool"></span>
+            </div>
+        </div>
+
+        <div class="new-high-summary" id="nh-summary"></div>
+
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="high_all">歷史新高</button>
+            <button class="filter-btn" data-filter="high_240">240日新高</button>
+            <button class="filter-btn" data-filter="high_120">120日新高</button>
+            <button class="filter-btn" data-filter="high_60">60日新高</button>
+            <button class="filter-btn" data-filter="high_20">20日新高</button>
+            <button class="filter-btn" data-filter="volume_breakout">🔥爆量突破</button>
+            <button class="filter-btn" data-filter="strength4">★★★★以上</button>
+        </div>
+
+        <div id="nh-table-wrapper">
+            <table class="new-high-table">
+                <thead>
+                <tr>
+                    <th>排名</th>
+                    <th>代號</th>
+                    <th>名稱</th>
+                    <th>收盤</th>
+                    <th>強度</th>
+                    <th>20日</th>
+                    <th>60日</th>
+                    <th>120日</th>
+                    <th>240日</th>
+                    <th>歷史</th>
+                    <th>量比</th>
+                    <th>突破</th>
+                    <th>成交額(億)</th>
+                </tr>
+                </thead>
+                <tbody id="nh-tbody">
+                <tr><td colspan="13" class="new-high-empty">載入中…</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- 主流股雷達 -->
     <section class="mainstream-radar industry-heatmap-section" id="mainstream-radar-section" >
         <div class="section-header">
@@ -9450,7 +9646,110 @@ function initMacdModal() {
 
 
 <script>
+    (function() {
+        let nhAllStocks = [];
+        let nhCurrentFilter = 'all';
 
+        function loadNewHighData() {
+            fetch('data/new_high_stocks.json?t=' + Date.now())
+                .then(r => r.json())
+                .then(data => {
+                    nhAllStocks = data.stocks || [];
+                    document.getElementById('nh-updated').textContent = '更新: ' + (data.updated_at || '-');
+                    document.getElementById('nh-pool').textContent =
+                        `篩選池 ${data.pool_size || 0} 檔｜創新高 ${data.new_high_count || 0} 檔`;
+
+                    // 摘要統計
+                    const bd = data.breakdown || {};
+                    document.getElementById('nh-summary').innerHTML = `
+          <div class="stat"><strong>${bd.high_all || 0}</strong>歷史新高</div>
+          <div class="stat"><strong>${bd.high_240 || 0}</strong>240日</div>
+          <div class="stat"><strong>${bd.high_120 || 0}</strong>120日</div>
+          <div class="stat"><strong>${bd.high_60 || 0}</strong>60日</div>
+          <div class="stat"><strong>${bd.high_20 || 0}</strong>20日</div>
+          <div class="stat"><strong>${bd.volume_breakout || 0}</strong>🔥爆量</div>
+        `;
+
+                    renderTable();
+                })
+                .catch(err => {
+                    console.error('載入新高資料失敗:', err);
+                    document.getElementById('nh-tbody').innerHTML =
+                        '<tr><td colspan="13" class="new-high-empty">資料載入失敗，請執行 run_daily.py</td></tr>';
+                });
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('nh-tbody');
+            let stocks = nhAllStocks;
+
+            // 套用篩選
+            if (nhCurrentFilter !== 'all') {
+                if (nhCurrentFilter === 'strength4') {
+                    stocks = stocks.filter(s => s.strength >= 4);
+                } else {
+                    stocks = stocks.filter(s => s[nhCurrentFilter] === true);
+                }
+            }
+
+            if (stocks.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="13" class="new-high-empty">無符合條件的股票</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = stocks.map((s, idx) => {
+                const stars = '★'.repeat(s.strength || 0);
+                const cell = (passed) => passed
+                    ? '<span class="level-yes">✓</span>'
+                    : '<span class="level-no">·</span>';
+
+                const allTimeBadge = s.high_all
+                    ? '<span class="all-time-high">歷史</span>'
+                    : cell(false);
+
+                const volCell = s.volume_breakout
+                    ? `<span class="vol-breakout">🔥${s.volume_ratio}x</span>`
+                    : `<span class="vol-normal">${s.volume_ratio}x</span>`;
+
+                return `
+        <tr>
+          <td>${idx + 1}</td>
+          <td class="stock-code">
+            <a href="https://tw.stock.yahoo.com/quote/${s.code}/technical-analysis"
+               target="_blank" rel="noopener">${s.code}</a>
+          </td>
+          <td class="stock-name">${s.name}</td>
+          <td>${s.today_close}</td>
+          <td><span class="strength-stars">${stars}</span></td>
+          <td class="level-cell">${cell(s.high_20)}</td>
+          <td class="level-cell">${cell(s.high_60)}</td>
+          <td class="level-cell">${cell(s.high_120)}</td>
+          <td class="level-cell">${cell(s.high_240)}</td>
+          <td class="level-cell">${allTimeBadge}</td>
+          <td>${volCell}</td>
+          <td>${s.volume_breakout ? '<span class="vol-breakout">爆量</span>' : '-'}</td>
+          <td>${s.amount_e}</td>
+        </tr>
+      `;
+            }).join('');
+        }
+
+        // 篩選按鈕
+        document.querySelectorAll('.new-high-radar .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.new-high-radar .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                nhCurrentFilter = btn.dataset.filter;
+                renderTable();
+            });
+        });
+
+        // 初始載入
+        loadNewHighData();
+
+        // 暴露重新載入函數（如果你有「重新整理」按鈕）
+        window.reloadNewHighData = loadNewHighData;
+    })();
 
     // ── 題材輪動雷達 ──
     async function loadThemeRadar() {
