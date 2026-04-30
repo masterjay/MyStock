@@ -9312,8 +9312,9 @@ function initMacdModal() {
         </div>
     </section>
 
+
     <!-- 新高觀察清單 -->
-    <section class="nh-watchlist" id="nh-watchlist-section">
+    <section class="nh-watchlist industry-heatmap-section" id="nh-watchlist-section">
         <div class="section-header">
             <div>
                 <div class="section-title">
@@ -9352,101 +9353,7 @@ function initMacdModal() {
 
 
     <!-- 新高雷達 -->
-    <section class="new-high-radar" id="new-high-radar-section">
-        <div class="section-header">
-            <div>
-                <div class="section-title">
-                    🚀 新高雷達
-                    <span class="badge" id="nh-count-badge">0 檔</span>
-                </div>
-                <div class="section-subtitle">成交量 TOP 200 × 創新高分級篩選 (20/60/120/240/歷史)</div>
-            </div>
-            <div class="update-time" id="nh-update-time">載入中...</div>
-        </div>
-
-        <!-- 摘要統計 -->
-        <div class="new-high-summary" id="nh-summary"></div>
-
-        <!-- 篩選控制 -->
-        <div class="new-high-controls">
-            <span style="color:#484f58;font-size:12px;">篩選：</span>
-            <button class="ctrl-btn active" onclick="nhFilter('all')" id="nh-filter-all">全部</button>
-            <button class="ctrl-btn" onclick="nhFilter('high_all')">🏆 歷史新高</button>
-            <button class="ctrl-btn" onclick="nhFilter('high_240')">240日</button>
-            <button class="ctrl-btn" onclick="nhFilter('high_120')">120日</button>
-            <button class="ctrl-btn" onclick="nhFilter('high_60')">60日</button>
-            <button class="ctrl-btn" onclick="nhFilter('high_20')">20日</button>
-            <button class="ctrl-btn" onclick="nhFilter('volume_breakout')">🔥 爆量突破</button>
-            <button class="ctrl-btn" onclick="nhFilter('strength4')">★★★★以上</button>
-        </div>
-
-        <div class="new-high-table-wrap">
-            <table class="new-high-table" id="nh-table">
-                <thead>
-                <tr>
-                    <th class="star-col"></th>
-                    <th>排</th>
-                    <th>代號</th>
-                    <th>名稱</th>
-                    <th class="hide-mobile">收盤</th>
-                    <th>強度</th>
-                    <th>20日</th>
-                    <th>60日</th>
-                    <th class="hide-mobile">120日</th>
-                    <th class="hide-mobile">240日</th>
-                    <th>歷史</th>
-                    <th class="hide-mobile">量比</th>
-                    <th class="hide-mobile">突破</th>
-                    <th class="hide-mobile">金額(億)</th>
-                </tr>
-                </thead>
-                <tbody id="nh-tbody">
-                <tr><td colspan="14" class="new-high-empty">載入中...</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <!-- 新高觀察清單 -->
-    <section class="nh-watchlist" id="nh-watchlist-section">
-        <div class="section-header">
-            <div>
-                <div class="section-title">
-                    ⭐ 新高觀察清單
-                    <span class="badge" id="nh-wl-count-badge">0 檔</span>
-                </div>
-                <div class="section-subtitle">從新高雷達 ⭐ 收藏的標的，每日追蹤狀態</div>
-            </div>
-            <div class="update-time" id="nh-wl-update-time">－</div>
-        </div>
-        <div class="nh-wl-table-wrap">
-            <table class="nh-wl-table">
-                <thead>
-                <tr>
-                    <th>代號</th>
-                    <th>名稱</th>
-                    <th class="hide-mobile">加入日</th>
-                    <th class="hide-mobile">加入價</th>
-                    <th>當前價</th>
-                    <th>漲跌幅</th>
-                    <th class="hide-mobile">加入後最高</th>
-                    <th class="hide-mobile">回檔</th>
-                    <th>仍創新高?</th>
-                    <th class="hide-mobile">觸發條件</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody id="nh-wl-tbody">
-                <tr><td colspan="11" class="nh-wl-empty">
-                    觀察清單是空的<span class="hint">點擊新高雷達裡的 ☆ 加入觀察</span>
-                </td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-
-    <!-- 新高雷達 -->
-    <section class="new-high-radar" id="new-high-radar-section">
+    <section class="new-high-radar industry-heatmap-section" id="new-high-radar-section">
         <div class="section-header">
             <div>
                 <div class="section-title">
