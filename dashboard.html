@@ -9562,7 +9562,7 @@ function initMacdModal() {
     <div/>
 
         <div>
-            <div id="mainContent" class="industry-heatmap-section" style="display: none;">
+            <div id="mainContent" style="display: none;">
                 <!-- 散戶對決區塊 -->
 
                 &#x1F3AF; MACD 訊號股 <span class="data-update-date" id="date-macd"></span>
@@ -10346,6 +10346,7 @@ function initMacdModal() {
                     .then(function() {
                         setTimeout(function() {
                             loadMacdSignals();
+                            loadWatchlist()
                             scanBtn.disabled = false;
                             scanBtn.textContent = '🔍 立即掃描';
                         }, 90000);
