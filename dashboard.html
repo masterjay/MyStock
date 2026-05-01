@@ -3712,6 +3712,55 @@ tr.tr-detail-row td {
 .new-high-table .price-col { color: #e6edf3; text-align: right; }
 .new-high-table .amount-col { color: #d29922; text-align: right; }
 
+/* 研究報告按鈕 — 沿用 ctrl-btn 風格 */
+.research-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+}
+.research-btn:hover,
+.research-btn:focus {
+    border-color: #388bfd;
+    color: #388bfd;
+    background: #1c2d42;
+    text-decoration: none;
+}
+.research-btn-icon { font-size: 13px; line-height: 1; }
+.research-btn-text { font-weight: 600; }
+
+/* 模式徽章（daily=灰、detail=藍漸層） */
+.research-btn-mode {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+.research-btn-mode.mode-daily {
+    background: rgba(139,148,158,0.2);
+    color: #8b949e;
+}
+.research-btn-mode.mode-detail {
+    background: linear-gradient(135deg, #1f6feb, #388bfd);
+    color: #fff;
+}
+.research-btn-mode.mode-stale {
+    background: rgba(210,153,34,0.15);
+    color: #d29922;
+}
+
 /* 強度星等 */
 .nh-strength {
     color: #d29922;
@@ -4975,6 +5024,8 @@ tr.tr-detail-row td {
             .chart-container {
                 height: 200px;
             }
+
+            .research-btn-text { display: none; }
         }
         
         /* 通用修正 - 防止所有元素超出螢幕 */
@@ -7232,9 +7283,59 @@ function saveWatchlist() {
     });
 }
 
+// 研究報告按鈕載入器
+async function loadResearchReport() {
+    const btn = document.getElementById('nh-research-btn');
+    if (!btn) return;
+
+    try {
+        // 加 cache-buster，確保拿最新
+        const r = await fetch('/data/new_high_research_latest.json?_=' + Date.now());
+        if (!r.ok) {
+            // 沒有檔案就靜默隱藏（首次部署或產生失敗都會走這裡）
+            btn.style.display = 'none';
+            return;
+        }
+        const data = await r.json();
+        if (!data.url) {
+            btn.style.display = 'none';
+            return;
+        }
+
+        btn.href = data.url;
+
+        // 模式徽章
+        const modeEl = document.getElementById('nh-research-mode');
+        if (modeEl) {
+            modeEl.textContent = data.mode === 'detail' ? '詳細' : '每日';
+            modeEl.classList.remove('mode-daily', 'mode-detail', 'mode-stale');
+
+            // 判斷新鮮度（>26 小時視為過期）
+            const updated = new Date(data.updated_at);
+            const ageHours = (Date.now() - updated.getTime()) / (1000 * 60 * 60);
+            if (ageHours > 26) {
+                modeEl.classList.add('mode-stale');
+                modeEl.textContent += ' ⚠️';
+            } else {
+                modeEl.classList.add(`mode-${data.mode}`);
+            }
+        }
+
+        // tooltip
+        const updatedStr = new Date(data.updated_at).toLocaleString('zh-TW');
+        btn.title = `${data.title}\n更新：${updatedStr}\n模式：${data.mode}\n檔數：${data.stock_count}\n本次成本：$${(data.cost_usd || 0).toFixed(4)}`;
+
+        btn.style.display = 'inline-flex';
+    } catch (e) {
+        console.warn('[research-report] 載入失敗:', e);
+        btn.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     loadWatchlist();
     loadNotionThemes();
+    loadResearchReport();
 
     var scanBtn = document.getElementById('watchlist-scan-btn');
     if (scanBtn) {
@@ -9358,11 +9459,25 @@ function initMacdModal() {
             <div>
                 <div class="section-title">
                     🚀 新高雷達
-                    <span class="badge" id="nh-count-badge">0 檔</span>
+                    <span class="badge" id="new-high-count">0 檔</span>
                 </div>
-                <div class="section-subtitle">成交量 TOP 200 × 創新高分級篩選 (20/60/120/240/歷史)</div>
+                <div class="section-subtitle">成交量前 200 大中創 20/60/120/240 日新高</div>
             </div>
-            <div class="update-time" id="nh-update-time">載入中...</div>
+            <!-- 右側：研究報告按鈕 + 更新時間 -->
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <a id="nh-research-btn"
+                   href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="research-btn"
+                   style="display: none;"
+                   title="點擊在新分頁開啟 Notion 研究報告">
+                    <span class="research-btn-icon">📄</span>
+                    <span class="research-btn-text">研究報告</span>
+                    <span class="research-btn-mode" id="nh-research-mode"></span>
+                </a>
+                <div class="update-time" id="new-high-update-time">－</div>
+            </div>
         </div>
 
         <!-- 摘要統計 -->
