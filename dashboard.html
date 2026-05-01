@@ -7335,7 +7335,10 @@ async function loadResearchReport() {
 document.addEventListener('DOMContentLoaded', function() {
     loadWatchlist();
     loadNotionThemes();
-    loadResearchReport();
+    setTimeout(function() {
+        loadResearchReport();
+    },2000)
+
 
     var scanBtn = document.getElementById('watchlist-scan-btn');
     if (scanBtn) {
