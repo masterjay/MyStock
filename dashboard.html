@@ -9974,7 +9974,7 @@ function initMacdModal() {
 <script>
     (function() {
         // API 位址：port 5002（避開舊 watchlist_server.py 的 5001）
-        const API_BASE = window.NH_WATCHLIST_API || `${location.protocol}//${location.hostname}:5002`;
+        const API_BASE = window.NH_WATCHLIST_API || '';
 
         // ───── 全域狀態 ─────
         let nhAllStocks    = [];     // 新高雷達原始資料
