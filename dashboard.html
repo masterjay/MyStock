@@ -10250,6 +10250,7 @@ function initMacdModal() {
             loadNotionThemes();
             loadNewHighData();
             loadWatchlist();
+            loadMACDWatchlist()
             addWatchListButton();
             loadResearchReport();
             loadAiSummary();
@@ -10346,7 +10347,6 @@ function initMacdModal() {
                     .then(function() {
                         setTimeout(function() {
                             loadMacdSignals();
-                            loadMACDWatchlist()
                             scanBtn.disabled = false;
                             scanBtn.textContent = '🔍 立即掃描';
                         }, 90000);
