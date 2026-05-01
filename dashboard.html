@@ -7332,56 +7332,7 @@ async function loadResearchReport() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadWatchlist();
-    loadNotionThemes();
-    setTimeout(function() {
-        loadResearchReport();
-    },2000)
 
-
-    var scanBtn = document.getElementById('watchlist-scan-btn');
-    if (scanBtn) {
-        scanBtn.addEventListener('click', function() {
-            scanBtn.disabled = true;
-            scanBtn.textContent = '⏳ 掃描中...';
-            fetch('/api/scan', { method: 'POST' })
-                .then(function(res) { return res.json(); })
-                .then(function() {
-                    setTimeout(function() {
-                        loadMacdSignals();
-                        scanBtn.disabled = false;
-                        scanBtn.textContent = '🔍 立即掃描';
-                    }, 90000);
-                })
-                .catch(function() {
-                    alert('無法啟動掃描');
-                    scanBtn.disabled = false;
-                    scanBtn.textContent = '🔍 立即掃描';
-                });
-        });
-    }
-
-    var addBtn = document.getElementById('watchlist-add-btn');
-    if (addBtn) {
-        addBtn.addEventListener('click', function() {
-            var code = document.getElementById('watchlist-code-input').value.trim();
-            var name = document.getElementById('watchlist-name-input').value.trim();
-            if (!code) return;
-            var exists = _watchlistData.some(function(item) {
-                return (typeof item === 'object' ? item.code : item) === code;
-            });
-            if (exists) { alert(code + ' 已在清單中'); return; }
-            _watchlistData.push({code: code, name: name});
-            document.getElementById('watchlist-code-input').value = '';
-            document.getElementById('watchlist-name-input').value = '';
-            saveWatchlist();
-        });
-    }
-});
-
-</script>
-    <script>
 
         // 更新區塊日期顯示
         function setUpdateDate(elementId, dateStr) {
@@ -10294,8 +10245,11 @@ function initMacdModal() {
         // 初始化
         // ═══════════════════════════════════════════════
         function nhInit() {
+            loadNotionThemes();
             loadNewHighData();
             loadWatchlist();
+            addWatchListButton();
+            loadResearchReport();
         }
 
         if (document.readyState === 'loading') {
@@ -10335,6 +10289,47 @@ function initMacdModal() {
         } catch (e) {
             console.error('題材輪動雷達載入失敗:', e);
             tbody.innerHTML = '<tr><td colspan="9" class="tr-error">載入失敗: ' + e.message + '</td></tr>';
+        }
+    }
+
+    function addWatchListButton(){
+        var scanBtn = document.getElementById('watchlist-scan-btn');
+        if (scanBtn) {
+            scanBtn.addEventListener('click', function() {
+                scanBtn.disabled = true;
+                scanBtn.textContent = '⏳ 掃描中...';
+                fetch('/api/scan', { method: 'POST' })
+                    .then(function(res) { return res.json(); })
+                    .then(function() {
+                        setTimeout(function() {
+                            loadMacdSignals();
+                            scanBtn.disabled = false;
+                            scanBtn.textContent = '🔍 立即掃描';
+                        }, 90000);
+                    })
+                    .catch(function() {
+                        alert('無法啟動掃描');
+                        scanBtn.disabled = false;
+                        scanBtn.textContent = '🔍 立即掃描';
+                    });
+            });
+        }
+
+        var addBtn = document.getElementById('watchlist-add-btn');
+        if (addBtn) {
+            addBtn.addEventListener('click', function() {
+                var code = document.getElementById('watchlist-code-input').value.trim();
+                var name = document.getElementById('watchlist-name-input').value.trim();
+                if (!code) return;
+                var exists = _watchlistData.some(function(item) {
+                    return (typeof item === 'object' ? item.code : item) === code;
+                });
+                if (exists) { alert(code + ' 已在清單中'); return; }
+                _watchlistData.push({code: code, name: name});
+                document.getElementById('watchlist-code-input').value = '';
+                document.getElementById('watchlist-name-input').value = '';
+                saveWatchlist();
+            });
         }
     }
 
