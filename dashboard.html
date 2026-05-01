@@ -7232,7 +7232,7 @@ function clearNotionTheme() {
 // ============================================================
 var _watchlistData = [];
 
-async function loadWatchlist() {
+async function loadMACDWatchlist() {
     try {
         var res = await fetch('/api/watchlist');
         if (res.ok) {
@@ -10346,7 +10346,7 @@ function initMacdModal() {
                     .then(function() {
                         setTimeout(function() {
                             loadMacdSignals();
-                            loadWatchlist()
+                            loadMACDWatchlist()
                             scanBtn.disabled = false;
                             scanBtn.textContent = '🔍 立即掃描';
                         }, 90000);
