@@ -7186,6 +7186,7 @@ tr.tr-detail-row td {
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
     <script>
 // ============================================================
 // Notion 主題自選股
@@ -10245,11 +10246,14 @@ function initMacdModal() {
         // 初始化
         // ═══════════════════════════════════════════════
         function nhInit() {
+            loadMainstreamData();
             loadNotionThemes();
             loadNewHighData();
             loadWatchlist();
             addWatchListButton();
             loadResearchReport();
+            loadAiSummary();
+            loadInsiderTrading();
         }
 
         if (document.readyState === 'loading') {
@@ -10262,6 +10266,45 @@ function initMacdModal() {
         window.reloadNewHighData = loadNewHighData;
         window.reloadNhWatchlist = loadWatchlist;
     })();
+
+
+    <!-- AI 大盤摘要 -->
+    async function loadAiSummary() {
+        const card = document.getElementById('aiSummaryCard');
+        const contentEl = document.getElementById('aiSummaryContent');
+        const dateEl = document.getElementById('aiSummaryDate');
+        const generatedEl = document.getElementById('aiSummaryGenerated');
+
+        try {
+            const response = await fetch('./data/ai_summary.json?t=' + Date.now());
+            if (!response.ok) {
+                throw new Error('HTTP ' + response.status);
+            }
+            const data = await response.json();
+
+            // 顯示卡片
+            card.style.display = 'block';
+
+            // 日期 + 生成時間
+            dateEl.textContent = data.date || '';
+            const gen = data.generated_at ? new Date(data.generated_at) : null;
+            generatedEl.textContent = gen
+                ? `Generated ${gen.toLocaleString('zh-TW', { hour: '2-digit', minute: '2-digit' })}`
+                : '';
+
+            // 渲染 markdown
+            if (typeof marked !== 'undefined') {
+                contentEl.innerHTML = marked.parse(data.summary || '');
+            } else {
+                // marked.js 沒載入時的 fallback:純文字 + 換行
+                contentEl.innerHTML = (data.summary || '').replace(/\n/g, '<br>');
+            }
+        } catch (err) {
+            console.warn('[AI Summary] 載入失敗:', err);
+            // 載入失敗就直接隱藏卡片,不打擾使用者
+            card.style.display = 'none';
+        }
+    }
 
     // ── 題材輪動雷達 ──
     async function loadThemeRadar() {
@@ -10590,8 +10633,6 @@ function escHtml(str) {
     return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-document.addEventListener('DOMContentLoaded', loadMainstreamData);
-
 // ==================== 處置股監控 JS ====================
 (function() {
   var DISPOSAL_URL = './data/disposal_stocks.json';
@@ -10789,7 +10830,6 @@ async function loadInsiderTrading() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadInsiderTrading);
 
 
 </script>
@@ -10918,52 +10958,6 @@ document.addEventListener('DOMContentLoaded', loadInsiderTrading);
 })();
 /* ===== 台指期結算日倒數 END ===== */
 </script>
-            <!-- AI 大盤摘要 -->
-            <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
-            <script>
-                async function loadAiSummary() {
-                    const card = document.getElementById('aiSummaryCard');
-                    const contentEl = document.getElementById('aiSummaryContent');
-                    const dateEl = document.getElementById('aiSummaryDate');
-                    const generatedEl = document.getElementById('aiSummaryGenerated');
 
-                    try {
-                        const response = await fetch('./data/ai_summary.json?t=' + Date.now());
-                        if (!response.ok) {
-                            throw new Error('HTTP ' + response.status);
-                        }
-                        const data = await response.json();
-
-                        // 顯示卡片
-                        card.style.display = 'block';
-
-                        // 日期 + 生成時間
-                        dateEl.textContent = data.date || '';
-                        const gen = data.generated_at ? new Date(data.generated_at) : null;
-                        generatedEl.textContent = gen
-                            ? `Generated ${gen.toLocaleString('zh-TW', { hour: '2-digit', minute: '2-digit' })}`
-                            : '';
-
-                        // 渲染 markdown
-                        if (typeof marked !== 'undefined') {
-                            contentEl.innerHTML = marked.parse(data.summary || '');
-                        } else {
-                            // marked.js 沒載入時的 fallback:純文字 + 換行
-                            contentEl.innerHTML = (data.summary || '').replace(/\n/g, '<br>');
-                        }
-                    } catch (err) {
-                        console.warn('[AI Summary] 載入失敗:', err);
-                        // 載入失敗就直接隱藏卡片,不打擾使用者
-                        card.style.display = 'none';
-                    }
-                }
-
-                // 頁面載入後觸發
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', loadAiSummary);
-                } else {
-                    loadAiSummary();
-                }
-            </script>
 </body>
 </html>
