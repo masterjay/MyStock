@@ -9999,9 +9999,9 @@ function initMacdModal() {
                 .then(r => r.json())
                 .then(data => {
                     nhAllStocks = data.stocks || [];
-                    document.getElementById('nh-update-time').textContent =
+                    document.getElementById('new-high-update-time').textContent =
                         data.updated_at ? '更新：' + data.updated_at : '－';
-                    document.getElementById('nh-count-badge').textContent =
+                    document.getElementById('new-high-count').textContent =
                         `${data.new_high_count || 0} 檔`;
 
                     // 摘要統計
