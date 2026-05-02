@@ -3526,6 +3526,43 @@
     font-size: 12px;
 }
 
+.pullback-table th.center { text-align: center; }
+.pullback-table td.center { text-align: center; }
+
+/* D-tag（持續天數標籤） */
+.pullback-d-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    min-width: 32px;
+    text-align: center;
+}
+.pullback-d-tag.d-new {
+    background: rgba(255,149,0,0.18);
+    color: #ff9500;
+    border: 1px solid rgba(255,149,0,0.4);
+    /* 輕微脈動，提示是新的 */
+    animation: pullback-d-pulse 2s ease-in-out infinite;
+}
+.pullback-d-tag.d-active {
+    background: rgba(56,139,253,0.15);
+    color: #58a6ff;
+    border: 1px solid rgba(56,139,253,0.3);
+}
+.pullback-d-tag.d-mature {
+    background: rgba(139,148,158,0.1);
+    color: #8b949e;
+    border: 1px solid rgba(139,148,158,0.25);
+}
+
+@keyframes pullback-d-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,149,0,0.4); }
+    50%      { box-shadow: 0 0 0 4px rgba(255,149,0,0); }
+}
+
 /* 來源徽章群 */
 .pullback-source-tags {
     display: flex;
@@ -9498,6 +9535,7 @@ function initMacdModal() {
                 <tr>
                     <th>代號</th>
                     <th>名稱</th>
+                    <th class="center">持續</th>
                     <th class="right">收盤</th>
                     <th class="right hide-mobile">MACD</th>
                     <th class="right hide-mobile">K</th>
@@ -9506,7 +9544,7 @@ function initMacdModal() {
                 </tr>
                 </thead>
                 <tbody id="pullback-tbody">
-                <tr><td colspan="7" class="pullback-empty">載入中...</td></tr>
+                <tr><td colspan="8" class="pullback-empty">載入中...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -10575,9 +10613,18 @@ function initMacdModal() {
         // 1. 標題徽章
         const countEl = document.getElementById('pullback-count');
         if (countEl) {
-            countEl.textContent = `${signals.length} 檔`;
-            // 0 訊號時用灰色徽章、有訊號用金色
-            countEl.style.background = signals.length > 0 ? '#d29922' : '#30363d';
+            // 統計 D1 vs D2+ 數量
+            const newCount = signals.filter(s => (s.day_count || 0) === 1).length;
+            if (signals.length === 0) {
+                countEl.textContent = '0 檔';
+                countEl.style.background = '#30363d';
+            } else if (newCount > 0) {
+                countEl.textContent = `${newCount} 新 / ${signals.length} 檔`;
+                countEl.style.background = '#d29922';
+            } else {
+                countEl.textContent = `${signals.length} 檔`;
+                countEl.style.background = '#1f6feb';
+            }
         }
 
         const strategyEl = document.getElementById('pullback-strategy');
@@ -10598,6 +10645,8 @@ function initMacdModal() {
             const marketClass = market.bullish ? 'bullish' : 'bearish';
             const marketIcon = market.bullish ? '📈' : '📉';
             const marketText = market.bullish ? '多頭 ✓' : '空頭 ✗';
+            const newCount = signals.filter(s => (s.day_count || 0) === 1).length;
+
             summaryEl.innerHTML = `
             <div class="stat-pill ${marketClass}">
                 ${marketIcon} 加權 <strong>${market.close.toFixed(0)}</strong>
@@ -10609,7 +10658,7 @@ function initMacdModal() {
                 <strong>${marketText}</strong>
             </div>
             <div class="stat-pill signal">
-                ✅ 觸發 <strong>${signals.length}</strong> 檔 / 掃描 ${data.scanned_count || 0} 檔
+                ✅ 觸發 <strong>${signals.length}</strong> 檔（<strong>${newCount}</strong> 新）/ 掃描 ${data.scanned_count || 0}
             </div>
         `;
         }
@@ -10619,51 +10668,25 @@ function initMacdModal() {
         if (!tbody) return;
 
         if (signals.length === 0) {
-            // 0 訊號時的友善訊息
             const reason = market.bullish === false
                 ? '大盤目前為空頭、本策略暫不採用訊號'
                 : '今日無觸發訊號（這是正常的、平均一個月只有 5-8 個訊號日）';
             tbody.innerHTML = `
-            <tr><td colspan="7" class="pullback-empty">
+            <tr><td colspan="8" class="pullback-empty">
                 💤 ${reason}
                 <span class="hint">下次掃描可能會有訊號</span>
             </td></tr>`;
             return;
         }
 
-        tbody.innerHTML = signals.map(sig => {
-            const change5d = sig.change_5d_pct;
-            let changeHtml = '－';
-            if (change5d !== null && change5d !== undefined) {
-                const cls = change5d > 0 ? 'change-up' : change5d < 0 ? 'change-down' : 'change-flat';
-                const sign = change5d > 0 ? '+' : '';
-                changeHtml = `<span class="${cls}">${sign}${change5d.toFixed(2)}%</span>`;
-            }
+        // 排序：D1 在最前、其次 D2-4、最後 D5+
+        const sortedSignals = [...signals].sort((a, b) => {
+            const dca = a.day_count || 999;
+            const dcb = b.day_count || 999;
+            return dca - dcb;
+        });
 
-            const sources = (sig.sources || []).slice(0, 3);
-            const sourceHtml = sources.map(s =>
-                `<span class="pullback-source-tag">${s.replace('_top', '').replace('_signal', '')}</span>`
-            ).join('') + (sig.sources && sig.sources.length > 3 ? `<span class="pullback-source-tag">+${sig.sources.length - 3}</span>` : '');
-
-            // 連結到 Yahoo 技術分析（依用戶慣例）
-            const yahooUrl = `https://tw.stock.yahoo.com/quote/${sig.code}/technical-analysis`;
-
-            return `
-            <tr>
-                <td>
-                    <a href="${yahooUrl}" target="_blank" rel="noopener" class="stock-code">${sig.code}</a>
-                </td>
-                <td><span class="stock-name">${sig.name || '－'}</span></td>
-                <td class="right price-col">${sig.close.toFixed(2)}</td>
-                <td class="right hide-mobile indicator-val">${sig.osc >= 0 ? '+' : ''}${sig.osc.toFixed(2)}</td>
-                <td class="right hide-mobile indicator-val">${sig.k.toFixed(0)}</td>
-                <td class="right hide-mobile">${changeHtml}</td>
-                <td class="hide-mobile">
-                    <div class="pullback-source-tags">${sourceHtml}</div>
-                </td>
-            </tr>
-        `;
-        }).join('');
+        tbody.innerHTML = sortedSignals.map(renderPullbackRow_with_dayCount).join('');
     }
 
     // ── 題材輪動雷達 ──
