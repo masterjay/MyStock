@@ -197,6 +197,21 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
+    # 10.4 ETF 持股爬蟲（移自下方 [補充] 區段，需在 enrich_etf_pool 前完成）
+    # 抓 6 檔 ETF: 00981A / 00992A / 00991A / 00980A / 0050 / 0052
+    print("\n[ETF 持股] 6 檔 ETF 持股爬蟲...")
+    try:
+        result = subprocess.run(
+            ['python3', '/home/s0971417/MyStock/fetch_etf_holdings.py'],
+            capture_output=True, text=True, timeout=180
+        )
+        if result.returncode == 0:
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
     # 10.5 新高雷達篩選（成交金額 Top 200 中創新高的股票）
     print("\n[新高雷達] 新高雷達篩選...")
     try:
@@ -243,6 +258,24 @@ try:
             print("  ✓ 完成")
         else:
             print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 10.8 ETF 池長期高點 enrich（涵蓋 6 檔 ETF + watchlist + 新高觀察清單）
+    # 必須跑在 fetch_etf_holdings.py 之後（已於 [10.4] 跑過、SQLite 為當日資料）
+    print("\n[ETF 池] 長期高點 + 機構共識 enrich...")
+    try:
+        result = subprocess.run(['python3', 'enrich_etf_pool.py'],
+                                capture_output=True, text=True, timeout=900)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+            # 印出最後幾行摘要
+            tail = result.stdout.strip().split('\n')[-15:]
+            for line in tail:
+                if line.strip():
+                    print(f"    {line}")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:300]}")
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
@@ -345,9 +378,7 @@ except Exception as e:
     traceback.print_exc()
     sys.exit(1)
 
-print("\n[補充] 00981A 持股爬蟲...")
-import subprocess
-subprocess.run(['python3', '/home/s0971417/MyStock/fetch_etf_holdings.py'], check=False)
+print("\n[補充] (00981A 持股爬蟲已移至前段 [10.4]，避免與 enrich_etf_pool 順序問題)")
 
 # 補充: 題材輪動雷達 (CMoney 來源, 每日盤後計算)
 print("\n[補充] 題材輪動雷達...")
