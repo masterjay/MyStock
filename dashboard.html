@@ -3398,6 +3398,193 @@
     font-size: 12px;
 }
 
+/* ───── 回檔買點雷達 ───── */
+.pullback-radar {
+    background: #0d1117;
+    border: 1px solid #21262d;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+.pullback-radar .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.pullback-radar .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e6edf3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.pullback-radar .section-title .badge {
+    background: #1f6feb;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+.pullback-radar .strategy-tag {
+    background: rgba(88,166,255,0.12);
+    color: #58a6ff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid rgba(88,166,255,0.25);
+    font-family: 'JetBrains Mono', monospace;
+}
+.pullback-radar .section-subtitle {
+    color: #8b949e;
+    font-size: 13px;
+}
+.pullback-radar .update-time {
+    color: #484f58;
+    font-size: 12px;
+}
+
+/* 大盤狀態列 */
+.pullback-summary {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+.pullback-summary .stat-pill {
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.pullback-summary .stat-pill strong {
+    color: #e6edf3;
+    font-size: 14px;
+    font-weight: 700;
+}
+.pullback-summary .stat-pill.bullish strong { color: #f85149; }   /* 台股紅漲 */
+.pullback-summary .stat-pill.bearish strong { color: #3fb950; }   /* 台股綠跌 */
+.pullback-summary .stat-pill.signal strong  { color: #d29922; }
+
+/* 表格 */
+.pullback-table-wrap { overflow-x: auto; }
+.pullback-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', 'Noto Sans TC', monospace;
+}
+.pullback-table th {
+    text-align: left;
+    color: #8b949e;
+    padding: 8px 10px;
+    border-bottom: 1px solid #21262d;
+    font-weight: 600;
+    font-size: 12px;
+    background: #0d1117;
+    position: sticky;
+    top: 0;
+}
+.pullback-table th.right { text-align: right; }
+.pullback-table td {
+    padding: 10px;
+    border-bottom: 1px solid #161b22;
+    color: #e6edf3;
+    vertical-align: middle;
+}
+.pullback-table td.right { text-align: right; }
+.pullback-table tr:hover { background: #161b22; }
+.pullback-table .stock-code {
+    color: #58a6ff;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+.pullback-table .stock-code:hover { text-decoration: underline; cursor: pointer; }
+.pullback-table .stock-name { color: #e6edf3; }
+.pullback-table .price-col { color: #e6edf3; }
+
+/* 漲跌色（台股紅漲綠跌）*/
+.pullback-table .change-up    { color: #f85149; font-weight: 700; }
+.pullback-table .change-down  { color: #3fb950; font-weight: 700; }
+.pullback-table .change-flat  { color: #8b949e; }
+
+/* MACD/K 數值 */
+.pullback-table .indicator-val {
+    font-family: 'JetBrains Mono', monospace;
+    color: #8b949e;
+    font-size: 12px;
+}
+
+/* 來源徽章群 */
+.pullback-source-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.pullback-source-tag {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 10px;
+    background: rgba(56,139,253,0.1);
+    color: #58a6ff;
+    border-radius: 4px;
+    border: 1px solid rgba(56,139,253,0.2);
+    font-weight: 500;
+}
+
+/* 空狀態 */
+.pullback-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #484f58;
+    font-size: 13px;
+}
+.pullback-empty .hint {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #484f58;
+}
+
+/* 警語列 */
+.pullback-disclaimer {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(210,153,34,0.08);
+    border: 1px solid rgba(210,153,34,0.2);
+    border-radius: 8px;
+    color: #d29922;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+}
+.pullback-disclaimer-icon {
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+/* RWD */
+@media (max-width: 768px) {
+    .pullback-radar { padding: 14px; }
+    .pullback-table .hide-mobile { display: none; }
+    .pullback-table { font-size: 12px; }
+    .pullback-table th,
+    .pullback-table td { padding: 8px 6px; }
+}
+
 /* ── 題材輪動雷達 ── */
 .theme-radar {
     background: #0d1117;
@@ -8748,7 +8935,8 @@ async function loadResearchReport() {
                 
                 loadVIX();
                 document.getElementById('loadingScreen').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
+               //隱藏macd訊號股
+                // document.getElementById('mainContent').style.display = 'block';
                 
                 const mockWarningClose = document.getElementById('mockWarningClose');
                 if (mockWarningClose) {
@@ -9286,6 +9474,49 @@ function initMacdModal() {
         <div class="heatmap-title">💰 產業外資動向 - 買賣超排序 <span class="data-update-date" id="date-heatmap"></span></div>
         <div class="heatmap-grid" id="heatmap-grid"></div>
     </div>
+    <!-- 回檔買點雷達 -->
+    <section class="pullback-radar" id="pullback-radar-section">
+        <div class="section-header">
+            <div>
+                <div class="section-title">
+                    📍 回檔買點雷達
+                    <span class="badge" id="pullback-count">0 檔</span>
+                    <span class="strategy-tag" id="pullback-strategy">v2_F</span>
+                </div>
+                <div class="section-subtitle">多頭強勢股回檔止穩、MACD 綠柱縮小 + KD 低檔金叉</div>
+            </div>
+            <div class="update-time" id="pullback-update-time">－</div>
+        </div>
+
+        <!-- 大盤狀態列 -->
+        <div class="pullback-summary" id="pullback-summary"></div>
+
+        <!-- 表格 -->
+        <div class="pullback-table-wrap">
+            <table class="pullback-table" id="pullback-table">
+                <thead>
+                <tr>
+                    <th>代號</th>
+                    <th>名稱</th>
+                    <th class="right">收盤</th>
+                    <th class="right hide-mobile">MACD</th>
+                    <th class="right hide-mobile">K</th>
+                    <th class="right hide-mobile">5日%</th>
+                    <th class="hide-mobile">來源</th>
+                </tr>
+                </thead>
+                <tbody id="pullback-tbody">
+                <tr><td colspan="7" class="pullback-empty">載入中...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 預期表現提示（永遠顯示）-->
+        <div class="pullback-disclaimer" id="pullback-disclaimer">
+            <span class="pullback-disclaimer-icon">⚠️</span>
+            <span>回測勝率 55-60%、平均 +2~4%、最差可能 -20%。建議持有 20 天、單筆 ≤ 8% 部位。</span>
+        </div>
+    </section>
 
     <!-- 題材輪動雷達 -->
     <section class="theme-radar industry-heatmap-section" id="themeRadarSection">
@@ -10245,7 +10476,7 @@ function initMacdModal() {
         // ═══════════════════════════════════════════════
         // 初始化
         // ═══════════════════════════════════════════════
-        function nhInit() {
+        function init() {
             loadMainstreamData();
             loadNotionThemes();
             loadNewHighData();
@@ -10255,12 +10486,13 @@ function initMacdModal() {
             loadResearchReport();
             loadAiSummary();
             loadInsiderTrading();
+            loadPullbackRadar();
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', nhInit);
+            document.addEventListener('DOMContentLoaded', init);
         } else {
-            nhInit();
+            init();
         }
 
         // 對外
@@ -10305,6 +10537,133 @@ function initMacdModal() {
             // 載入失敗就直接隱藏卡片,不打擾使用者
             card.style.display = 'none';
         }
+    }
+
+    function loadPullbackRadar() {
+        fetch('data/pullback_signal_latest.json?t=' + Date.now())
+            .then(r => {
+                if (!r.ok) throw new Error('資料尚未產生（明天 cron 跑完才會有）');
+                return r.json();
+            })
+            .then(data => {
+                renderPullbackRadar(data);
+            })
+            .catch(err => {
+                console.warn('[pullback] 載入失敗:', err.message);
+                // 顯示「資料尚未產生」狀態、不影響整頁
+                const tbody = document.getElementById('pullback-tbody');
+                if (tbody) {
+                    tbody.innerHTML = `
+                    <tr><td colspan="7" class="pullback-empty">
+                        資料尚未產生
+                        <span class="hint">每日 cron 跑完 pullback_signal_scanner.py 後才會有</span>
+                    </td></tr>`;
+                }
+            });
+    }
+
+    function renderPullbackRadar(data) {
+        const signals = data.signals || [];
+        const updateTime = data.updated_at || data.date || '';
+        const market = {
+            bullish: data.market_bullish,
+            close: data.market_close,
+            ma60: data.market_ma60,
+        };
+        const strategy = data.strategy || 'v2_F';
+
+        // 1. 標題徽章
+        const countEl = document.getElementById('pullback-count');
+        if (countEl) {
+            countEl.textContent = `${signals.length} 檔`;
+            // 0 訊號時用灰色徽章、有訊號用金色
+            countEl.style.background = signals.length > 0 ? '#d29922' : '#30363d';
+        }
+
+        const strategyEl = document.getElementById('pullback-strategy');
+        if (strategyEl) strategyEl.textContent = strategy;
+
+        // 2. 更新時間
+        const timeEl = document.getElementById('pullback-update-time');
+        if (timeEl) {
+            const display = updateTime.includes('T')
+                ? '更新：' + updateTime.replace('T', ' ').slice(0, 16)
+                : '更新：' + updateTime;
+            timeEl.textContent = display;
+        }
+
+        // 3. 大盤摘要
+        const summaryEl = document.getElementById('pullback-summary');
+        if (summaryEl && market.close) {
+            const marketClass = market.bullish ? 'bullish' : 'bearish';
+            const marketIcon = market.bullish ? '📈' : '📉';
+            const marketText = market.bullish ? '多頭 ✓' : '空頭 ✗';
+            summaryEl.innerHTML = `
+            <div class="stat-pill ${marketClass}">
+                ${marketIcon} 加權 <strong>${market.close.toFixed(0)}</strong>
+            </div>
+            <div class="stat-pill">
+                MA60 <strong>${market.ma60.toFixed(0)}</strong>
+            </div>
+            <div class="stat-pill ${marketClass}">
+                <strong>${marketText}</strong>
+            </div>
+            <div class="stat-pill signal">
+                ✅ 觸發 <strong>${signals.length}</strong> 檔 / 掃描 ${data.scanned_count || 0} 檔
+            </div>
+        `;
+        }
+
+        // 4. 表格內容
+        const tbody = document.getElementById('pullback-tbody');
+        if (!tbody) return;
+
+        if (signals.length === 0) {
+            // 0 訊號時的友善訊息
+            const reason = market.bullish === false
+                ? '大盤目前為空頭、本策略暫不採用訊號'
+                : '今日無觸發訊號（這是正常的、平均一個月只有 5-8 個訊號日）';
+            tbody.innerHTML = `
+            <tr><td colspan="7" class="pullback-empty">
+                💤 ${reason}
+                <span class="hint">下次掃描可能會有訊號</span>
+            </td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = signals.map(sig => {
+            const change5d = sig.change_5d_pct;
+            let changeHtml = '－';
+            if (change5d !== null && change5d !== undefined) {
+                const cls = change5d > 0 ? 'change-up' : change5d < 0 ? 'change-down' : 'change-flat';
+                const sign = change5d > 0 ? '+' : '';
+                changeHtml = `<span class="${cls}">${sign}${change5d.toFixed(2)}%</span>`;
+            }
+
+            const sources = (sig.sources || []).slice(0, 3);
+            const sourceHtml = sources.map(s =>
+                `<span class="pullback-source-tag">${s.replace('_top', '').replace('_signal', '')}</span>`
+            ).join('') + (sig.sources && sig.sources.length > 3 ? `<span class="pullback-source-tag">+${sig.sources.length - 3}</span>` : '');
+
+            // 連結到 Yahoo 技術分析（依用戶慣例）
+            const yahooUrl = `https://tw.stock.yahoo.com/quote/${sig.code}/technical-analysis`;
+
+            return `
+            <tr>
+                <td>
+                    <a href="${yahooUrl}" target="_blank" rel="noopener" class="stock-code">${sig.code}</a>
+                </td>
+                <td><span class="stock-name">${sig.name || '－'}</span></td>
+                <td class="right price-col">${sig.close.toFixed(2)}</td>
+                <td class="right hide-mobile indicator-val">${sig.osc >= 0 ? '+' : ''}${sig.osc.toFixed(2)}</td>
+                <td class="right hide-mobile indicator-val">${sig.k.toFixed(0)}</td>
+                <td class="right hide-mobile">${changeHtml}</td>
+                <td class="hide-mobile">
+                    <div class="pullback-source-tags">${sourceHtml}</div>
+                </td>
+            </tr>
+        `;
+        }).join('');
     }
 
     // ── 題材輪動雷達 ──
