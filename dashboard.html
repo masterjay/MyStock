@@ -4035,6 +4035,49 @@ tr.tr-detail-row td {
     font-weight: 700;
 }
 
+/* 大週期突破徽章（1y/3y/5y/10y） */
+.nh-lt-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+}
+.nh-lt-badge.nh-lt-1y {
+    background: rgba(139,148,158,0.15);
+    color: #8b949e;
+}
+.nh-lt-badge.nh-lt-3y {
+    background: rgba(88,166,255,0.18);
+    color: #58a6ff;
+}
+.nh-lt-badge.nh-lt-5y {
+    background: linear-gradient(135deg, #1f6feb, #388bfd);
+    color: #fff;
+}
+.nh-lt-badge.nh-lt-10y {
+    background: linear-gradient(135deg, #d29922, #ff9500);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(255,149,0,0.3);
+}
+
+/* 盤整天數欄 */
+.nh-consol {
+    color: #8b949e;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+}
+.nh-consol.mid {
+    color: #d29922;
+    font-weight: 600;
+}
+.nh-consol.long {
+    color: #ff9500;
+    font-weight: 700;
+}
+
 /* 星號收藏按鈕 */
 .nh-star-btn {
     background: transparent;
@@ -9718,6 +9761,10 @@ function initMacdModal() {
             <button class="ctrl-btn" onclick="nhFilter('high_20')">20日</button>
             <button class="ctrl-btn" onclick="nhFilter('volume_breakout')">🔥 爆量突破</button>
             <button class="ctrl-btn" onclick="nhFilter('strength4')">★★★★以上</button>
+            <button class="ctrl-btn" onclick="nhFilter('lt_breakout_3y')" title="突破近 3 年高點">🚀 3年新高</button>
+            <button class="ctrl-btn" onclick="nhFilter('lt_breakout_5y')" title="突破近 5 年高點">🚀 5年新高</button>
+            <button class="ctrl-btn" onclick="nhFilter('lt_breakout_10y')" title="突破近 10 年高點">🚀 10年新高</button>
+            <button class="ctrl-btn" onclick="nhFilter('lt_fake_breakout_alert')" title="突破日後 5 日內跌破突破日最低">⚠️ 假突破</button>
         </div>
 
         <div class="new-high-table-wrap">
@@ -9735,13 +9782,15 @@ function initMacdModal() {
                     <th class="hide-mobile">120日</th>
                     <th class="hide-mobile">240日</th>
                     <th>歷史</th>
+                    <th title="1/3/5/10年新高，取最遠尺度顯示">大週期</th>
+                    <th class="hide-mobile" title="收盤位於長期高點 ×0.85 ~ 1.0 之間的天數">盤整(天)</th>
                     <th class="hide-mobile">量比</th>
                     <th class="hide-mobile">突破</th>
                     <th class="hide-mobile">金額(億)</th>
                 </tr>
                 </thead>
                 <tbody id="nh-tbody">
-                <tr><td colspan="14" class="new-high-empty">載入中...</td></tr>
+                <tr><td colspan="16" class="new-high-empty">載入中...</td></tr>
                 </tbody>
             </table>
         </div>
@@ -10275,6 +10324,15 @@ function initMacdModal() {
 
                     // 摘要統計
                     const bd = data.breakdown || {};
+                    // 從 stocks 即時統計大週期欄位（避免改後端 schema）
+                    const ltStats = (data.stocks || []).reduce((acc, s) => {
+                        if (s.lt_breakout_10y) acc.lt10y++;
+                        else if (s.lt_breakout_5y) acc.lt5y++;
+                        else if (s.lt_breakout_3y) acc.lt3y++;
+                        if (s.lt_fake_breakout_alert) acc.fake++;
+                        return acc;
+                    }, {lt10y: 0, lt5y: 0, lt3y: 0, fake: 0});
+
                     document.getElementById('nh-summary').innerHTML = `
                     <div class="stat-pill gold"><strong>${bd.high_all || 0}</strong>歷史新高</div>
                     <div class="stat-pill"><strong>${bd.high_240 || 0}</strong>240日</div>
@@ -10282,13 +10340,17 @@ function initMacdModal() {
                     <div class="stat-pill"><strong>${bd.high_60 || 0}</strong>60日</div>
                     <div class="stat-pill"><strong>${bd.high_20 || 0}</strong>20日</div>
                     <div class="stat-pill fire"><strong>${bd.volume_breakout || 0}</strong>🔥爆量</div>
+                    <div class="stat-pill gold"><strong>${ltStats.lt10y}</strong>🚀10年</div>
+                    <div class="stat-pill"><strong>${ltStats.lt5y}</strong>🚀5年</div>
+                    <div class="stat-pill"><strong>${ltStats.lt3y}</strong>🚀3年</div>
+                    ${ltStats.fake > 0 ? `<div class="stat-pill fire"><strong>${ltStats.fake}</strong>⚠️假突破</div>` : ''}
                 `;
                     renderNewHighTable();
                 })
                 .catch(err => {
                     console.error('新高資料載入失敗:', err);
                     document.getElementById('nh-tbody').innerHTML =
-                        '<tr><td colspan="14" class="new-high-empty">資料載入失敗，請執行 run_daily.py</td></tr>';
+                        '<tr><td colspan="16" class="new-high-empty">資料載入失敗，請執行 run_daily.py</td></tr>';
                 });
         }
 
@@ -10306,13 +10368,43 @@ function initMacdModal() {
             }
 
             if (stocks.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="14" class="new-high-empty">無符合條件的股票</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="16" class="new-high-empty">無符合條件的股票</td></tr>';
                 return;
             }
 
             const dot = (passed) => passed
                 ? '<span class="nh-level-dot pass">✓</span>'
                 : '<span class="nh-level-dot fail">·</span>';
+
+            // 大週期徽章渲染：farthest_breakout 是 '10y'/'5y'/'3y'/'1y' 之一或 null
+            // 同時偵測假突破，alert 時加 ⚠️
+            const farthestBadge = (s) => {
+                const farthest = s.lt_farthest_breakout;
+                if (!farthest) return '<span class="nh-level-dot fail">·</span>';
+                const fakeAlert = s.lt_fake_breakout_alert;
+                const cls = farthest === '10y' ? 'nh-lt-10y'
+                          : farthest === '5y'  ? 'nh-lt-5y'
+                          : farthest === '3y'  ? 'nh-lt-3y'
+                          : 'nh-lt-1y';
+                const alertIcon = fakeAlert ? ' ⚠️' : '';
+                const tipParts = [
+                    `突破${farthest}高點`,
+                    s.lt_breakout_day ? `突破日: ${s.lt_breakout_day}` : '',
+                    fakeAlert ? `⚠️ 假突破警示（${s.lt_fake_breakout_days_after}日內跌破突破日低點）` : '',
+                ].filter(Boolean).join(' / ');
+                return `<span class="nh-lt-badge ${cls}" title="${tipParts}">${farthest}${alertIcon}</span>`;
+            };
+
+            // 盤整天數: 越長越值得關注，但 null 顯示 -
+            const consolCell = (s) => {
+                const days = s.lt_consolidation_days;
+                if (days == null) return '<span style="color:#484f58;">-</span>';
+                let cls = 'nh-consol';
+                if (days >= 500) cls += ' long';
+                else if (days >= 200) cls += ' mid';
+                const ref = s.lt_consolidation_ref ? `（基準:${s.lt_consolidation_ref}）` : '';
+                return `<span class="${cls}" title="盤整天數${ref}">${days}</span>`;
+            };
 
             tbody.innerHTML = stocks.map((s, idx) => {
                 const stars = '★'.repeat(s.strength || 0);
@@ -10347,6 +10439,8 @@ function initMacdModal() {
                     <td class="nh-level-cell hide-mobile">${dot(s.high_120)}</td>
                     <td class="nh-level-cell hide-mobile">${dot(s.high_240)}</td>
                     <td class="nh-level-cell">${allTimeBadge}</td>
+                    <td class="nh-level-cell">${farthestBadge(s)}</td>
+                    <td class="hide-mobile" style="text-align:right">${consolCell(s)}</td>
                     <td class="${volRatioCls} hide-mobile">${s.volume_ratio}x</td>
                     <td class="hide-mobile" style="text-align:center">${volBreakoutTag}</td>
                     <td class="amount-col hide-mobile">${s.amount_e}</td>
