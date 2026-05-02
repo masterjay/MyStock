@@ -197,6 +197,55 @@ try:
     except Exception as e:
         print(f"  ✗ 錯誤: {e}")
 
+    # 10.5 新高雷達篩選（成交金額 Top 200 中創新高的股票）
+    print("\n[新高雷達] 新高雷達篩選...")
+    try:
+        result = subprocess.run(['python3', 'new_high_screener.py'],
+                                capture_output=True, text=True, timeout=600)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+            try:
+                import json
+                with open('data/new_high_stocks.json', 'r') as f:
+                    nh_data = json.load(f)
+                print(f"  → 創新高 {nh_data.get('new_high_count', 0)} 檔 / 篩選池 {nh_data.get('pool_size', 0)} 檔")
+            except:
+                pass
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:300]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 10.6 長期高點 enrich (1/3/5/10 年新高 + 盤整天數 + 假突破偵測)
+    # 必須跑在 new_high_screener.py 之後（讀其產出的 new_high_stocks.json）
+    print("\n[長期高點] 1/3/5/10 年新高 enrich...")
+    try:
+        result = subprocess.run(['python3', 'enrich_long_term_high.py'],
+                                capture_output=True, text=True, timeout=900)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+            # 印出最後幾行摘要 (突破分佈)
+            tail = result.stdout.strip().split('\n')[-10:]
+            for line in tail:
+                if line.strip():
+                    print(f"    {line}")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:300]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
+    # 10.7 更新新高觀察清單狀態（檢查觀察清單裡的股票今天有無突破/假突破）
+    print("\n[觀察清單] 更新新高觀察清單狀態...")
+    try:
+        result = subprocess.run(['python3', 'update_new_high_watchlist_status.py'],
+                                capture_output=True, text=True, timeout=300)
+        if result.returncode == 0:
+            print("  ✓ 完成")
+        else:
+            print(f"  ✗ 失敗: {result.stderr[:200]}")
+    except Exception as e:
+        print(f"  ✗ 錯誤: {e}")
+
     # 11. 主流股雷達
     print("\n[11/11] 主流股雷達篩選...")
     try:
