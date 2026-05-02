@@ -1,0 +1,10 @@
+{
+  "_comment": "ETF 持股中已知非台股的代號（從 MoneyDJ 抓回但 Yahoo 找不到 .TW/.TWO）",
+  "_usage": "etf_pool_helper.py 會讀此檔，在 source 端 skip 這些代號，不會進入 enrich 流程",
+  "_format": "{ stock_code: 描述 }",
+  "_last_updated": "2026-05-03",
+
+  "blacklist": {
+    "6061": "Universal Engeisha Co., Ltd. (日本上市，非台股 4979 華星光)"
+  }
+}
