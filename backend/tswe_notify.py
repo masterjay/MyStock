@@ -186,6 +186,61 @@ def notify_empty_after_filter(original: int, min_strength: int) -> bool:
     )
 
 
+def notify_success(
+    mode: str,
+    title: str,
+    notion_url: str,
+    stock_count: int,
+    cost_usd: float,
+    added_stocks: Optional[list] = None,
+    removed_stocks: Optional[list] = None,
+) -> bool:
+    """
+    正常完成的成功通知。
+    - 模式徽章用 emoji 區分（每日 / 詳細）
+    - 詳細模式時列出名單異動，含股名
+
+    added_stocks / removed_stocks 格式：[(code, name), ...]
+    """
+    mode_label = "🔬 詳細研究" if mode == "detail" else "📊 每日狀態"
+
+    details = {
+        "📋 模式": mode_label,
+        "📈 檔數": f"{stock_count} 檔",
+        "💵 本次成本": f"${cost_usd:.4f} USD (~NT${cost_usd * 32:.1f})",
+        "🔗 Notion 報告": notion_url,
+    }
+
+    def _format_stocks(stocks: list, max_show: int = 8) -> str:
+        """格式化 [(code, name), ...] 成 '2059 友信, 4912 聯發, ...'"""
+        formatted = []
+        for code, name in stocks[:max_show]:
+            if name:
+                formatted.append(f"{code} {name}")
+            else:
+                formatted.append(code)
+        result = ", ".join(formatted)
+        if len(stocks) > max_show:
+            result += f"... (+{len(stocks) - max_show})"
+        return result
+
+    # 詳細模式時加上名單異動資訊
+    if mode == "detail" and (added_stocks or removed_stocks):
+        diff_parts = []
+        if added_stocks:
+            diff_parts.append(f"➕ 新增 ({len(added_stocks)})：{_format_stocks(added_stocks)}")
+        if removed_stocks:
+            diff_parts.append(f"➖ 移除 ({len(removed_stocks)})：{_format_stocks(removed_stocks)}")
+        details["📊 名單異動"] = "\n".join(diff_parts)
+
+    return notify_discord(
+        title=title,
+        message=f"今日研究報告已完成，點上方連結查看 Notion 內容。",
+        level=NotifyLevel.SUCCESS,
+        details=details,
+    )
+
+
 # ─── 自我測試（直接跑這檔可以發測試訊息）─────────────────────
 if __name__ == "__main__":
     try:

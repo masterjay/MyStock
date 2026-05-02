@@ -74,3 +74,15 @@ echo "✓ .gitignore 已建立"
 echo ""
 echo "=== .gitignore 預覽 ==="
 cat .gitignore
+# Pullback 訊號系統 log
+backend/pullback_signal.log
+backend/pullback_cron.log
+backend/pullback_review_weekly.log
+
+# 備份檔（永遠不 commit）
+*.backup_*
+*.bak_*
+
+# 廢棄程式與探勘測試（不追蹤）
+deprecated/
+test_*.py
