@@ -49,6 +49,7 @@ try:
         notify_api_failed,
         notify_cost_threshold,
         notify_empty_after_filter,
+        notify_success,
     )
     NOTIFY_AVAILABLE = True
 except ImportError:
@@ -58,6 +59,7 @@ except ImportError:
     def notify_api_failed(*args, **kwargs): pass
     def notify_cost_threshold(*args, **kwargs): pass
     def notify_empty_after_filter(*args, **kwargs): pass
+    def notify_success(*args, **kwargs): pass
 
 # ═══════════════════════════════════════════════════════════
 # 路徑設定
@@ -920,6 +922,9 @@ def main():
             with open(STATE_FILE, 'w', encoding='utf-8') as f:
                 json.dump({
                     "codes": sorted(today_codes),
+                    # code → name 對照表（升級欄位，舊版只有 codes）
+                    # 用於成功通知顯示「2059 友信」而不只是「2059」
+                    "code_name_map": {s["code"]: s.get("name", "") for s in today_list},
                     "updated_at": now_iso,
                     "mode": mode,
                 }, f, ensure_ascii=False, indent=2)
@@ -949,6 +954,36 @@ def main():
             }, ensure_ascii=False) + '\n')
 
         update_cost_monitor(today_str, mode, total_cost, len(analyses))
+
+        # 8.5 成功通知（不在 dry-run、不在中斷、且 Notion 寫入成功時才送）
+        if (not interrupted
+                and page_url
+                and page_id != "notion-failed"):
+            # 計算名單異動（只在 detail 模式有意義）
+            added_stocks = []   # [(code, name), ...]
+            removed_stocks = [] # [(code, name), ...]
+            if mode == "detail" and yesterday_state:
+                yesterday_codes = set(yesterday_state.get("codes", []))
+                yesterday_map = yesterday_state.get("code_name_map", {})
+                today_map = {s["code"]: s.get("name", "") for s in today_list}
+
+                # 新增：從今日 map 拿名稱
+                for code in sorted(today_codes - yesterday_codes):
+                    added_stocks.append((code, today_map.get(code, "")))
+
+                # 移除：從昨日 map 拿名稱（舊版 state 沒這欄會顯示空字串）
+                for code in sorted(yesterday_codes - today_codes):
+                    removed_stocks.append((code, yesterday_map.get(code, "")))
+
+            notify_success(
+                mode=mode,
+                title=title,
+                notion_url=page_url,
+                stock_count=len(analyses),
+                cost_usd=total_cost,
+                added_stocks=added_stocks,
+                removed_stocks=removed_stocks,
+            )
 
     log.info("✓ 完成" if not interrupted else "✓ 已中斷儲存")
     return 0 if not interrupted else 130  # 130 是被 SIGINT 中斷的慣例 exit code
