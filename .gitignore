@@ -82,3 +82,7 @@ backend/pullback_review_weekly.log
 # 備份檔（永遠不 commit）
 *.backup_*
 *.bak_*
+
+# 廢棄程式與探勘測試（不追蹤）
+deprecated/
+test_*.py
